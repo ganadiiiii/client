@@ -82,7 +82,7 @@ const LoginForm: React.FC = () => {
           <div className="flex gap-4 pt-4">
             {/* Sign in 버튼 */}
             <button
-                type="button"
+                type="submit"
                 className="flex-1 py-4 pl-[50px] pr-[50px] rounded bg-[#EDEDED] text-black text-[24px] font-bold hover:bg-gray-300 transition-colors"
                 style={{ fontFamily: 'NEXON Lv1 Gothic OTF' }}
               >

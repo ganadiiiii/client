@@ -28,13 +28,7 @@ const LoginForm: React.FC = () => {
           </div>
           
           {/* 로그인 제목 */}
-          <h1 className="px-8 text-nowrap" style={{
-            color: '#C69FD4',
-            fontFamily: 'BagelFatOne-Regular',
-            fontSize: '36px',
-            fontWeight: '400',
-            lineHeight: 'normal'
-          }}>
+          <h1 className="px-8 text-[36px] text-nowrap text-[#C69FD4] font-normal" style={{ fontFamily: 'BagelFatOne-Regular' }}>
             CUSTOMER LOGIN
           </h1>
           
@@ -115,23 +109,13 @@ const LoginForm: React.FC = () => {
                 />
             </div>
           
-          {/* 버튼들 */}
           <div className="text-center pt-4">
-            {/* Sign in 버튼 */}
+            {/* Create 버튼 */}
             <button
-              type="submit"
-              className="flex-1 py-4 rounded hover:bg-gray-300 transition-colors"
-              style={{
-                paddingLeft: '50px',
-                paddingRight: '50px',
-                backgroundColor: '#EDEDED',
-                color: '#999999',
-                fontFamily: 'NEXON Lv1 Gothic OTF',
-                fontSize: '24px',
-                fontWeight: '700',
-                lineHeight: 'normal'
-              }}
-            >
+                type="submit"
+                className="flex-1 py-4 pl-[50px] pr-[50px] rounded bg-[#EDEDED] text-#999999 text-[24px] font-bold hover:bg-gray-300 transition-colors"
+                style={{ fontFamily: 'NEXON Lv1 Gothic OTF' }}
+              >
               Create
             </button>
           </div>

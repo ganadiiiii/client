@@ -13,8 +13,9 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="flex items-start justify-center min-h-screen px-4 pt-[100px]">
-      <div className="w-full max-w-6xl">
+    <div className="flex items-start flex-col min-h-screen pt-[680px] bg-[#FCFBF6]">
+      <div className="flex justify-center px-4 w-full">
+      <div className="w-full max-w-6xl h-[1000px]">
         {/* 로그인 제목과 데코레이션 라인 */}
         <div className="flex items-center justify-center mb-12">
           {/* 왼쪽 분홍색 파선 */}
@@ -113,6 +114,8 @@ const LoginForm: React.FC = () => {
           </form>
         </div>
       </div>
+      </div>
+      <footer className="w-full h-[200px] bg-[#EDEDED] mt-auto" />
     </div>
   );
 };

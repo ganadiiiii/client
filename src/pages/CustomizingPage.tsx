@@ -42,7 +42,7 @@ const CustomizingPage: React.FC = () => {
     } else {
       // 마지막 질문 완료 시 결과 페이지로 이동하거나 다른 처리
       console.log('설문 완료:', answers);
-      // navigate('/customizing/result');
+      navigate('/customizing/result');
     }
   };
 

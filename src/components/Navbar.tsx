@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,14 +19,17 @@ const Navbar: React.FC = () => {
 
   return (
     <nav>
-      {/* 배경 이미지 영역: 항상 보이도록 */}
-      <div className="absolute top-0 left-0 w-full h-[579px] z-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('./src/assets/nav_bg.png')" }} />
+      {/* 배경 이미지 영역: 로그인/회원가입/메인/온보딩에서만 보이도록 */}
+      {isAuthPage && (
+        <div className="absolute top-0 left-0 w-full h-[579px] z-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: "url('./src/assets/nav_bg.png')" }} 
+        />
+      )}
 
       {/* 상단 바만 배경색이 변경되도록 분리 */}
       <div className={`fixed top-0 left-0 w-full z-10 transition-all duration-300 ease-in-out
-        ${isScrolled ? 'bg-[#FCFBF6] h-[102px]' : 'bg-transparent h-[102px]'}
-        flex items-center justify-between px-8
+        ${isScrolled ? 'bg-[#FCFBF6]' : isAuthPage ? 'bg-transparent' : 'bg-[#FCFBF6]'}
+        h-[102px] flex items-center justify-between px-8
       `}>
       
           {/* 로고 영역 - 좌우 300px 간격 */}

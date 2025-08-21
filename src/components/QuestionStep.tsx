@@ -16,6 +16,35 @@ interface QuestionStepProps {
 	isMultipleChoice?: boolean;
 }
 
+const HIGHLIGHT_MAP: Record<number, string> = {
+	1: "선물하시나요?",
+	2: "함께 나누고 싶으신가요?",
+	3: "어떤 감정을 담고 싶으신가요?",
+	4: "특별히 담고 싶은 꽃",
+	5: "꽃다발의 크기",
+};
+
+function renderHighlighted(title: string, phrase?: string) {
+	if (!phrase || !title.includes(phrase)) return title;
+
+	const [before, after] = title.split(phrase);
+	return (
+		<>
+			{before}
+			<span
+				className="inline-flex items-center bg-[#FFD1D4] rounded-full px-4 h-16"
+				style={{
+					boxDecorationBreak: "clone",
+					WebkitBoxDecorationBreak: "clone",
+				}}
+			>
+				{phrase}
+			</span>
+			{after}
+		</>
+	);
+}
+
 const QuestionStep: React.FC<QuestionStepProps> = ({
 	questionNumber,
 	title,
@@ -53,18 +82,17 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 				</div>
 				{/* 질문 제목 */}
 				<div className="relative">
-					<div className="bg-[#FFD1D4] rounded-full px-16 py-4 mb-4 inline-block">
-						<h1
-							className="text-black text-center font-bold whitespace-nowrap text-xl sm:text-2xl md:text-3xl"
-							style={{
-								fontFamily: "NEXON Lv1 Gothic OTF",
-								fontWeight: "700",
-								lineHeight: "1.39",
-							}}
-						>
-							{title}
-						</h1>
-					</div>
+					{/* <div className="bg-[#FFD1D4] rounded-full px-16 py-4 mb-4 inline-block"> */}
+					<h1
+						className="text-black text-center font-bold whitespace-nowrap text-xl sm:text-2xl md:text-3xl mb-4"
+						style={{
+							fontFamily: "NEXON Lv1 Gothic OTF",
+							fontWeight: "700",
+							lineHeight: "1.39",
+						}}
+					>
+						{renderHighlighted(title, HIGHLIGHT_MAP[questionNumber])}
+					</h1>
 
 					{/* 복수선택 문구 */}
 					{isMultipleChoice && (

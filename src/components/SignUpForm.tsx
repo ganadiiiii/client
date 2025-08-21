@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import { useId, useState } from "react";
 
 const LoginForm: React.FC = () => {
+	const firstNameId = useId();
+	const lastNameId = useId();
+	const emailId = useId();
+	const passwordId = useId();
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -64,7 +68,7 @@ const LoginForm: React.FC = () => {
 								</label>
 								<input
 									type="text"
-									id="firstName"
+									id={firstNameId}
 									value={firstName}
 									onChange={(e) => setFirstName(e.target.value)}
 									required
@@ -84,7 +88,7 @@ const LoginForm: React.FC = () => {
 								</label>
 								<input
 									type="text"
-									id="lastName"
+									id={lastNameId}
 									value={lastName}
 									onChange={(e) => setLastName(e.target.value)}
 									required
@@ -103,7 +107,7 @@ const LoginForm: React.FC = () => {
 								</label>
 								<input
 									type="email"
-									id="email"
+									id={emailId}
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									required
@@ -123,7 +127,7 @@ const LoginForm: React.FC = () => {
 								</label>
 								<input
 									type="password"
-									id="password"
+									id={passwordId}
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
 									required

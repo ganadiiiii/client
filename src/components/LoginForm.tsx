@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import { useId, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const LoginForm: React.FC = () => {
 	const navigate = useNavigate();
+	const emailId = useId();
+	const passwordId = useId();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -64,7 +66,7 @@ const LoginForm: React.FC = () => {
 								</label>
 								<input
 									type="email"
-									id="email"
+									id={emailId}
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									required
@@ -84,7 +86,7 @@ const LoginForm: React.FC = () => {
 								</label>
 								<input
 									type="password"
-									id="password"
+									id={passwordId}
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
 									required

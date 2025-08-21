@@ -64,7 +64,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 			}}
 		>
 			{/* 메인 콘텐츠 */}
-			<div className="flex-1 flex flex-col items-center justify-center px-8 gap-y-12">
+			<div className="flex-1 flex flex-col items-center justify-center px-8 gap-y-10">
 				{/* 질문 번호 표시 */}
 				<div className="flex justify-center">
 					<div className="bg-white rounded-full border-[3px] border-[#FF9BAF] px-10 py-2 sm:px-12 sm:py-3">
@@ -110,18 +110,20 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 				</div>
 				{questionNumber === 4 ? (
 					// 꽃 종류 카드 컴포넌트 렌더링
-					<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+					<div className="flex flex-wrap gap-4 justify-center max-w-[1089px]">
 						{flowerCardData.map((card) => (
-							<FlowerTypeOptionCard
-								key={card.id}
-								number={card.number}
-								name={card.name}
-								engName={card.engName}
-								colorMeanings={card.colorMeanings}
-								flowerImg={card.flowerImg}
-								isSelected={selectedOptions.includes(card.id)}
-								onClick={() => onOptionSelect(card.id)}
-							/>
+							<div key={card.id} className="w-[205px]">
+								<FlowerTypeOptionCard
+									key={card.id}
+									number={card.number}
+									name={card.name}
+									engName={card.engName}
+									colorMeanings={card.colorMeanings}
+									flowerImg={card.flowerImg}
+									isSelected={selectedOptions.includes(card.id)}
+									onClick={() => onOptionSelect(card.id)}
+								/>
+							</div>
 						))}
 					</div>
 				) : questionNumber === 5 ? (

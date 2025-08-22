@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface FlowerTypeOptionCardProps {
 	number: string;
@@ -19,17 +19,35 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 	isSelected,
 	onClick,
 }) => {
+	const [rotation, setRotation] = useState(0);
+	const [isHovered, setIsHovered] = useState(false);
+
+	const handleMouseEnter = () => {
+		const rotationList = [-2, -1, 1, 2];
+		const randomIndex = Math.floor(Math.random() * 4);
+		const randomRotation = rotationList[randomIndex];
+		setRotation(randomRotation);
+		setIsHovered(true);
+	};
+
+	const handleMouseLeave = () => {
+		setIsHovered(false);
+	};
+
 	return (
 		<div
-			className="relative w-[205px] h-[320px] cursor-pointer transition-all duration-200"
+			className="relative w-[205px] h-[320px] transition-all duration-300 hover:scale-105"
 			onClick={onClick}
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
 			style={{
 				filter: isSelected ? "none" : "none",
+				transform: isHovered ? `rotate(${rotation}deg)` : "rotate(0deg)",
 			}}
 		>
 			{/* 카드 배경 */}
 			<div
-				className={`absolute inset-0 rounded-[21px] shadow-sm z-0 ${
+				className={`absolute inset-0 rounded-[21px] shadow-sm z-0 transition-colors duration-300 ${
 					isSelected ? "bg-[#FFD1D4]" : "bg-white"
 				}`}
 				style={{

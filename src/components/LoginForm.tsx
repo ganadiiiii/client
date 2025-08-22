@@ -100,7 +100,7 @@ const LoginForm: React.FC = () => {
 								{/* Sign in 버튼 */}
 								<button
 									type="submit"
-									className="flex-1 py-4 pl-[50px] pr-[50px] rounded bg-[#EDEDED] text-black text-[24px] font-bold hover:bg-gray-300 transition-colors"
+									className="flex-1 py-4 pl-[50px] pr-[50px] rounded bg-[#EDEDED] text-black text-[24px] font-bold hover:bg-[#FFD1D4] transition-colors"
 									style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
 								>
 									Sign in
@@ -110,7 +110,7 @@ const LoginForm: React.FC = () => {
 								<button
 									type="button"
 									onClick={() => navigate("/signup")}
-									className="flex-1 py-4 pl-[50px] pr-[50px] rounded bg-[#FFD1D4] text-black text-[24px] font-bold hover:bg-pink-300 transition-colors"
+									className="flex-1 py-4 pl-[50px] pr-[50px] rounded bg-[#EDEDED] text-black text-[24px] font-bold hover:bg-[#FFD1D4] transition-colors"
 									style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
 								>
 									Create Account
@@ -124,7 +124,7 @@ const LoginForm: React.FC = () => {
 									className="hover:text-gray-700 transition-colors text-[24px] font-light text-[#999999]"
 									style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
 								>
-									Forgot your password
+									Forgot password?
 								</Link>
 							</div>
 						</form>

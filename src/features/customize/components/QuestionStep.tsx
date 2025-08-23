@@ -1,7 +1,7 @@
 import React from "react";
-import { sampleFlowerData as flowerCardData } from "../data/flowerData";
-import FlowerSizeOptionCard from "./FlowerSizeOptionCard";
-import FlowerTypeOptionCard from "./FlowerTypeOptionCard";
+import { sampleFlowerData as flowerCardData } from "../../../data/flowerData";
+import FlowerSizeOptionCard from "../components/FlowerSizeOptionCard";
+import FlowerTypeOptionCard from "../components/FlowerTypeOptionCard";
 import OptionButton from "./OptionButton";
 import NavigationButton from "./NavigationButton";
 

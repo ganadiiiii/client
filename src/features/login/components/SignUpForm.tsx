@@ -1,4 +1,5 @@
 import { useId, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm: React.FC = () => {
 	const firstNameId = useId();
@@ -9,6 +10,7 @@ const LoginForm: React.FC = () => {
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -138,13 +140,26 @@ const LoginForm: React.FC = () => {
 
 							<div className="text-center pt-4">
 								{/* Create 버튼 */}
+								<div className="flex gap-4 pt-4">
+								{/* Sign in 버튼 */}
 								<button
 									type="submit"
-									className="flex-1 py-4 pl-[50px] pr-[50px] rounded bg-[#EDEDED] text-#999999 text-[24px] font-bold hover:bg-gray-300 transition-colors"
+									className="flex-1 py-4 pl-[50px] pr-[50px] rounded bg-[#EDEDED] text-black text-[24px] font-bold hover:bg-[#FFD1D4] transition-colors"
 									style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
 								>
-									Create
+									Create Account
 								</button>
+
+								{/* Create Account 버튼 */}
+								<button
+									type="button"
+									onClick={() => navigate("/login")}
+									className="flex-1 py-4 pl-[50px] pr-[50px] rounded bg-[#EDEDED] text-black text-[24px] font-bold hover:bg-[#FFD1D4] transition-colors"
+									style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
+								>
+									Back to Login
+								</button>
+							</div>
 							</div>
 						</form>
 					</div>

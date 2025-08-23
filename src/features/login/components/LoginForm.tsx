@@ -121,7 +121,7 @@ const LoginForm: React.FC = () => {
 							<div className="text-center pt-4">
 								<Link
 									to="/forgot-password"
-									className="hover:text-gray-700 transition-colors text-[24px] font-light text-[#999999]"
+									className="hover:text-gray-700 transition-colors hover:underline text-[24px] font-light text-[#999999]"
 									style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
 								>
 									Forgot password?

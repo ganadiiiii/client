@@ -36,7 +36,7 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 
 	return (
 		<div
-			className="relative w-[205px] h-[320px] transition-all duration-300 hover:scale-105"
+			className="relative w-[205px] h-[320px] transition-all rounded-[21px] duration-100 shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] hover:shadow-[3px_3px_6px_0px_rgba(0,0,0,0.15)] hover:scale-105"
 			onClick={onClick}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}

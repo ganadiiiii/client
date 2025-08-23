@@ -36,7 +36,7 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 
 	return (
 		<div
-			className="relative w-[335px] h-[431px] transition-all duration-300 hover:scale-105"
+			className="relative w-[335px] h-[431px] rounded-[21px] transition-all duration-100 shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] hover:shadow-[3px_3px_6px_0px_rgba(0,0,0,0.15)] hover:scale-105"
 			onClick={onClick}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
@@ -47,12 +47,9 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 		>
 			{/* 카드 배경 */}
 			<div
-				className={`absolute inset-0 rounded-[21px] shadow-sm z-0 transition-colors duration-300 ${
+				className={`absolute inset-0 rounded-[21px] z-0 transition-colors duration-300 ${
 					isSelected ? "bg-[#FFD1D4]" : "bg-white"
 				}`}
-				style={{
-					boxShadow: "1.9px 1.9px 3.2px 0px rgba(0, 0, 0, 0.1)",
-				}}
 			/>
 
 			{/* 그라데이션 영역 */}

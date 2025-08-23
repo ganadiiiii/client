@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import bg from "../assets/generate/result_bg.svg";
+import bg from "../../assets/generate/result_bg.svg";
 
 const CustomizingResultPage: React.FC = () => {
 	const [leftPanelOpen, setLeftPanelOpen] = useState(false);

@@ -9,13 +9,13 @@ export const customizingQuestions: Question[] = [
 	{
 		id: 1,
 		title: "누구에게 이 꽃다발을 선물하시나요?",
-		options: ["스승", "연인", "본인", "가족", "친구", "그 외"],
+		options: ["스승", "연인", "본인", "가족", "친구"],
 		isMultipleChoice: false,
 	},
 	{
 		id: 2,
 		title: "어떤 순간을 함께 나누고 싶으신가요?",
-		options: ["응원", "고백", "생일", "기념일", "위로", "그 외"],
+		options: ["응원", "고백", "생일", "기념일", "위로"],
 		isMultipleChoice: false,
 	},
 	{
@@ -33,7 +33,6 @@ export const customizingQuestions: Question[] = [
 			"우정",
 			"다짐",
 			"사과",
-			"그 외",
 		],
 		isMultipleChoice: true,
 	},

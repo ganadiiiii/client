@@ -18,7 +18,7 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
 			type="button"
 			onClick={onClick}
 			disabled={disabled}
-			className={`w-[68px] h-[68px] relative rounded-full flex items-center justify-center ${className} ${disabled ? "" : "transition-all duration-300"}`}
+			className={`w-[68px] h-[68px] relative rounded-full flex items-center justify-center ${className} ${disabled ? "" : "transition-all duration-100 hover:scale-95 cursor-pointer"}`}
 		>
 			{/* Pink background for enabled state, only for right button */}
 			{direction === "right" && (
@@ -29,7 +29,7 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
 
 			{/* Circular background with gradient and shadow effects */}
 			<div
-				className="absolute inset-0 rounded-full shadow-md z-10 transition-colors duration-400 drop-shadow-[0px 4px 7.7px rgba(0, 0, 0, 0.15)] bg-linear-135 from-white/10 to-white/100 hover:from-white/80 hover:to-white/40"
+				className="absolute inset-0 rounded-full shadow-md z-10 transition-colors duration-300 drop-shadow-[0px 4px 7.7px rgba(0, 0, 0, 0.15)] bg-linear-135 from-white/10 to-white/100 hover:from-white/10 hover:to-white/80"
 			/>
 
 			{/* Arrow icon */}

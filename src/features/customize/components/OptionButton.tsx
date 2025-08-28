@@ -14,10 +14,10 @@ const OptionButton: React.FC<OptionButtonProps> = ({
 	return (
 		<button
 			onClick={onClick}
-			className={`px-8 py-4 rounded-full border transition-all duration-200 min-w-[144px] h-[61px] flex items-center justify-center ${
+			className={`px-8 py-4 rounded-full border cursor-pointer transition-all duration-100 min-w-[144px] h-[61px] flex items-center justify-center ${
 				isSelected
 					? "bg-[#FFD1D4] border-[#FF6E77] border-2 text-[#FF6E77] font-bold"
-					: "bg-white border-[#868686] border-1 text-[#000000] font-normal"
+					: "bg-white border-[#c3c3c3] border-[1.5px] text-[#5e5e5e] font-normal hover:bg-[#f3f3f3]"
 			}`}
 			style={{
 				fontFamily: "NEXON Lv1 Gothic OTF",

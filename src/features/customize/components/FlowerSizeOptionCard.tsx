@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 
 interface FlowerSizeOptionCardProps {
@@ -20,30 +21,39 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 	onClick,
 }) => {
 	const [rotation, setRotation] = useState(0);
-	const [isHovered, setIsHovered] = useState(false);
+	// const [isHovered, setIsHovered] = useState(false);
 
 	const handleMouseEnter = () => {
 		const rotationList = [-2, -1, 1, 2];
 		const randomIndex = Math.floor(Math.random() * 4);
 		const randomRotation = rotationList[randomIndex];
 		setRotation(randomRotation);
-		setIsHovered(true);
+		// setIsHovered(true);
 	};
 
 	const handleMouseLeave = () => {
-		setIsHovered(false);
+		// setIsHovered(false);
 	};
 
 	return (
-		<div
-			className="relative w-[335px] h-[431px] rounded-[21px] transition-all duration-100 shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] hover:shadow-[3px_3px_6px_0px_rgba(0,0,0,0.15)] hover:scale-105"
+		<motion.div
+			className="relative w-[335px] h-[431px] cursor-pointer shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] rounded-[21px]"
 			onClick={onClick}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
-			style={{
-				filter: isSelected ? "none" : "none",
-				transform: isHovered ? `rotate(${rotation}deg)` : "rotate(0deg)",
+			whileHover={{
+				rotate: rotation,
+				scale: 1.05,
+				boxShadow: "3px 3px 6px 0px rgba(0,0,0,0.15)",
 			}}
+			transition={{
+				rotate: { type: "spring", bounce: 0.6 },
+				scale: { type: "tween", duration: 0.1 },
+			}}
+			// style={{
+			// 	filter: isSelected ? "none" : "none",
+			// 	transform: isHovered ? `rotate(${rotation}deg)` : "rotate(0deg)",
+			// }}
 		>
 			{/* 카드 배경 */}
 			<div
@@ -122,7 +132,7 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 					borderWidth: "1.07px",
 				}}
 			/>
-		</div>
+		</motion.div>
 	);
 };
 

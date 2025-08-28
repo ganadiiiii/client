@@ -33,7 +33,7 @@ function renderHighlighted(title: string, phrase?: string) {
 		<>
 			{before}
 			<span
-				className="inline-flex items-center bg-[#FFD1D4] rounded-full px-4 h-16"
+				className="inline-flex items-center bg-[#FFD1D4] rounded-3xl px-3 pb-1 pt-2"
 				style={{
 					boxDecorationBreak: "clone",
 					WebkitBoxDecorationBreak: "clone",
@@ -65,7 +65,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 			}}
 		>
 			{/* 메인 콘텐츠 */}
-			<div className="flex-1 flex flex-col items-center justify-center px-8 gap-y-10">
+			<div className="flex-1 flex flex-col items-center justify-center gap-y-10">
 				{/* 질문 번호 표시 */}
 				<div className="flex justify-center">
 					<div className="bg-white rounded-full border-[3px] border-[#FF9BAF] px-10 py-2 sm:px-12 sm:py-3">
@@ -85,7 +85,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 				<div className="relative">
 					{/* <div className="bg-[#FFD1D4] rounded-full px-16 py-4 mb-4 inline-block"> */}
 					<h1
-						className="text-black text-center font-bold whitespace-nowrap text-xl sm:text-2xl md:text-3xl mb-4"
+						className="text-black text-center font-bold whitespace-nowrap text-xl sm:text-2xl md:text-3xl"
 						style={{
 							fontFamily: "NEXON Lv1 Gothic OTF",
 							fontWeight: "700",
@@ -97,8 +97,8 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 
 					{/* 복수선택 문구 */}
 					{isMultipleChoice && (
-						<div
-							className="absolute right-0 h-12 text-right text-[#999999] font-medium text-base"
+						<p
+							className="absolute right-0 text-right text-[#999999] font-medium text-base"
 							style={{
 								fontFamily: "NEXON Lv1 Gothic OTF",
 								fontWeight: "400",
@@ -106,7 +106,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 							}}
 						>
 							복수 선택 가능
-						</div>
+						</p>
 					)}
 				</div>
 				{questionNumber === 4 ? (
@@ -156,14 +156,14 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 					</div>
 				) : (
 					// 기본 옵션 버튼 렌더링
-					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 max-w-[480px] w-full">
-						{options.map((option, index) => (
-							<OptionButton
-								key={index}
-								option={option}
-								isSelected={selectedOptions.includes(option)}
-								onClick={() => onOptionSelect(option)}
-							/>
+						<div className="grid grid-cols-5 gap-x-3 gap-y-4 place-items-center">
+							{options.map((option, index) => (
+								<OptionButton
+									key={index}
+									option={option}
+									isSelected={selectedOptions.includes(option)}
+									onClick={() => onOptionSelect(option)}
+								/>
 						))}
 					</div>
 				)}
@@ -173,10 +173,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 			<div className="absolute bottom-17 left-25 right-25 flex justify-between items-center">
 				{/* 이전 버튼 (첫 번째 질문이 아닐 때만) */}
 				{onPrevious && questionNumber > 1 && (
-					<NavigationButton
-						direction="left"
-						onClick={onPrevious}
-					/>
+					<NavigationButton direction="left" onClick={onPrevious} />
 				)}
 
 				<div className="flex-1"></div>

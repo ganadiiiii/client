@@ -53,13 +53,13 @@ const LoginForm: React.FC = () => {
 					<div className="flex justify-center">
 						<form
 							onSubmit={handleSubmit}
-							className="space-y-6 w-full max-w-3xl"
+							className="space-y-4 w-full max-w-3xl"
 						>
 							{/* Email 입력 */}
 							<div>
 								<label
 									htmlFor="email"
-									className="block text-2xl font-bold text-[#000000] mb-3"
+									className="block text-2xl font-bold text-[#000000] mb-2"
 									style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
 								>
 									Email
@@ -70,7 +70,7 @@ const LoginForm: React.FC = () => {
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									required
-									className="w-full px-4 py-4 border-2 border-gray-300/60 rounded bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									className="w-full px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
 									style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
 								/>
 							</div>
@@ -79,7 +79,7 @@ const LoginForm: React.FC = () => {
 							<div>
 								<label
 									htmlFor="password"
-									className="block text-2xl font-bold text-[#000000] mb-3"
+									className="block text-2xl font-bold text-[#000000] mb-2"
 									style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
 								>
 									Password
@@ -90,17 +90,17 @@ const LoginForm: React.FC = () => {
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
 									required
-									className="w-full px-4 py-4 border-2 border-gray-300/60 rounded bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									className="w-full px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
 									style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
 								/>
 							</div>
 
 							{/* 버튼들 */}
-							<div className="flex gap-4 pt-4">
+							<div className="flex gap-4 pt-12 justify-center">
 								{/* Sign in 버튼 */}
 								<button
 									type="submit"
-									className="flex-1 py-4 pl-[50px] pr-[50px] rounded bg-[#EDEDED] text-black text-[24px] font-bold hover:bg-[#FFD1D4] transition-colors"
+									className="flex py-4 pl-[50px] pr-[50px] rounded-full bg-[#EDEDED] text-black text-[24px] font-bold hover:bg-[#FFD1D4] transition-colors"
 									style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
 								>
 									Sign in
@@ -110,7 +110,7 @@ const LoginForm: React.FC = () => {
 								<button
 									type="button"
 									onClick={() => navigate("/signup")}
-									className="flex-1 py-4 pl-[50px] pr-[50px] rounded bg-[#EDEDED] text-black text-[24px] font-bold hover:bg-[#FFD1D4] transition-colors"
+									className="flex py-4 pl-[50px] pr-[50px] rounded-full bg-[#EDEDED] text-black text-[24px] font-bold hover:bg-[#FFD1D4] transition-colors"
 									style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
 								>
 									Create Account

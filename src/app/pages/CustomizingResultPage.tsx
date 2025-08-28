@@ -254,7 +254,7 @@ const CustomizingResultPage: React.FC = () => {
 									<input
 										type="text"
 										// onChange={(e) => setDesignName(e.target.value)}
-										className="w-[154px] h-[29px] px-2 border text-sm border-[#D9D9D9] rounded-sm"
+										className="w-[154px] h-[29px] px-2 border text-sm border-[#D9D9D9] rounded-sm bg-white"
 										style={{ fontFamily: "Pretendard-Regular" }}
 									/>
 									<button
@@ -435,7 +435,7 @@ const CustomizingResultPage: React.FC = () => {
 							</button>
 						</div>
 						<textarea
-							className="w-[341px] h-[70px] p-2 border border-[#D9D9D9] text-sm rounded-sm resize-none"
+							className="w-[341px] h-[70px] p-2 border border-[#D9D9D9] text-sm rounded-sm resize-none bg-white"
 							style={{ fontFamily: "Pretendard-Regular", fontSize: "13.1px" }}
 						/>
 					</div>

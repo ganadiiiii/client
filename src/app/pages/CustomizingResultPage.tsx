@@ -97,21 +97,52 @@ const CustomizingResultPage: React.FC = () => {
 							디자인 새로 생성
 						</p>
 
-						{/* 다운로드 버튼 */}
-						<button className="absolute -left-16 top-3/4 -translate-y-1/2 w-11 h-11 bg-[#FFDE87] rounded-full flex items-center justify-center hover:scale-105 transition-all duration-200">
-							<img
-								src="/src/assets/generate/share.svg"
-								alt="Left Button"
-							/>
-						</button>
+						<div className="relative group">
+							{/* 공유하기 버튼 */}
+							<button
+								className="absolute -left-16 top-[-24px] -translate-y-1/2 w-11 h-11 bg-[#FFDE87] rounded-full flex items-center justify-center hover:scale-105 transition-all duration-200"
+								onClick={() => navigate("/customizing/card")}
+							>
+								<img src="/src/assets/generate/share.svg" alt="Left Button" />
+							</button>
+							{/* 레이블 */}
+							<div className="absolute -left-[66px] top-[-95px] -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+								<div
+									className="bg-white text-black text-sm py-5 px-7 rounded-[18px_18px_18px_0] border border-[#D9D9D9]"
+									style={{
+										fontFamily: "Pretendard-Regular",
+										fontSize: "20px",
+										fontWeight: "500",
+									}}
+								>
+									공유하기
+								</div>
+							</div>
+						</div>
 
-						{/* 업로드 버튼 */}
-						<button className="absolute -right-16 top-3/4 -translate-y-1/2 w-11 h-11 bg-[#FFDE87] rounded-full flex items-center justify-center hover:scale-105 transition-all duration-200">
-							<img
-								src="/src/assets/generate/save.svg"
-								alt="Right Button"
-							/>
-						</button>
+						<div className="relative group">
+							{/* 저장 버튼 */}
+							<button
+								className="absolute -right-16 top-[-24px] -translate-y-1/2 w-11 h-11 bg-[#FFDE87] rounded-full flex items-center justify-center hover:scale-105 transition-all duration-200"
+								onClick={handleSave}
+								disabled={isSaving}
+							>
+								<img src="/src/assets/generate/save.svg" alt="Right Button" />
+							</button>
+							{/* 레이블 */}
+							<div className="absolute -right-[220px] top-[-95px] w-50 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+								<div
+									className="bg-white text-black text-sm py-5 px-6 rounded-[18px_18px_18px_0] border border-[#D9D9D9]"
+									style={{
+										fontFamily: "Pretendard-Regular",
+										fontSize: "20px",
+										fontWeight: "500",
+									}}
+								>
+									내 아카이빙에 저장
+								</div>
+							</div>
+						</div>
 					</div>
 					<button
 						className="px-26 py-4 rounded-full bg-[#FF9BAF] text-white text-5 font-bold"

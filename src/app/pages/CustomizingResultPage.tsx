@@ -5,8 +5,25 @@ import bg from "../../assets/generate/result_bg.svg";
 const CustomizingResultPage: React.FC = () => {
 	const [leftPanelOpen, setLeftPanelOpen] = useState(false);
 	const [rightPanelOpen, setRightPanelOpen] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isSaving, setIsSaving] = useState(false);
 	const anyOpen = leftPanelOpen || rightPanelOpen;
 	const navigate = useNavigate();
+
+	const handleSave = async () => {
+		try {
+			setIsSaving(true); // 저장 중 상태
+			// 저장 로직 추가
+
+			// 저장 성공
+			setIsModalOpen(true);
+		} catch (err) {
+			console.error("저장 오류:", err);
+			alert("저장에 실패했습니다.");
+		} finally {
+			setIsSaving(false);
+		}
+	};
 
 	return (
 		<div
@@ -134,6 +151,33 @@ const CustomizingResultPage: React.FC = () => {
 					</div>
 				</button>
 			</div>
+			{isModalOpen && (
+				<div
+					className="fixed inset-0 z-[60] flex items-center justify-center"
+					onClick={() => setIsModalOpen(false)}
+				>
+					<div
+						className="w-[388px] h-[405px] bg-white/85 rounded-xl flex flex-col items-center justify-center relative mb-8"
+						onClick={(e) => e.stopPropagation()}
+					>
+						<img
+							src="/src/assets/generate/success.svg"
+							alt="Success"
+							className="w-24 h-24"
+						/>
+						<p
+							className="text-xl text-black"
+							style={{
+								fontFamily: "NEXON Lv1 Gothic OTF",
+								fontSize: "20px",
+								fontWeight: "700",
+							}}
+						>
+							저장되었습니다
+						</p>
+					</div>
+				</div>
+			)}
 			{/* === Overlay: 열렸을 때만 클릭 가능 === */}
 			<div
 				className={`fixed inset-0 z-20 backdrop-blur-sm transition-opacity

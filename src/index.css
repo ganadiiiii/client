@@ -31,3 +31,17 @@
 	font-weight: 400;
 	font-style: normal;
 }
+
+@font-face {
+    font-family: 'Yidstreet';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/YdestreetL.woff2') format('woff2');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Yidstreet';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/YdestreetB.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}

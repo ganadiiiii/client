@@ -2,8 +2,8 @@ import React from "react";
 import { sampleFlowerData as flowerCardData } from "../../../data/flowerData";
 import FlowerSizeOptionCard from "../components/FlowerSizeOptionCard";
 import FlowerTypeOptionCard from "../components/FlowerTypeOptionCard";
-import OptionButton from "./OptionButton";
 import NavigationButton from "./NavigationButton";
+import OptionButton from "./OptionButton";
 
 interface QuestionStepProps {
 	questionNumber: number;
@@ -85,9 +85,9 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 				<div className="relative">
 					{/* <div className="bg-[#FFD1D4] rounded-full px-16 py-4 mb-4 inline-block"> */}
 					<h1
-						className="text-black text-center font-bold whitespace-nowrap text-xl sm:text-2xl md:text-3xl"
+						className="text-black text-center mb-2 font-bold whitespace-nowrap text-xl sm:text-2xl md:text-3xl"
 						style={{
-							fontFamily: "NEXON Lv1 Gothic OTF",
+							fontFamily: "NexonLv1Gothic",
 							fontWeight: "700",
 							lineHeight: "1.39",
 						}}
@@ -100,7 +100,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 						<p
 							className="absolute right-0 text-right text-[#999999] font-medium text-base"
 							style={{
-								fontFamily: "NEXON Lv1 Gothic OTF",
+								fontFamily: "NexonLv1GothicF",
 								fontWeight: "400",
 								lineHeight: "1.39",
 							}}
@@ -156,14 +156,14 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 					</div>
 				) : (
 					// 기본 옵션 버튼 렌더링
-						<div className="grid grid-cols-5 gap-x-3 gap-y-4 place-items-center">
-							{options.map((option, index) => (
-								<OptionButton
-									key={index}
-									option={option}
-									isSelected={selectedOptions.includes(option)}
-									onClick={() => onOptionSelect(option)}
-								/>
+					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-4 place-items-center">
+						{options.map((option, index) => (
+							<OptionButton
+								key={index}
+								option={option}
+								isSelected={selectedOptions.includes(option)}
+								onClick={() => onOptionSelect(option)}
+							/>
 						))}
 					</div>
 				)}

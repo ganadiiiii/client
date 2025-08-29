@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import QuestionStep from "../../features/customize/components/QuestionStep";
 import { customizingQuestions } from "../../data/customizingQuestions";
+import QuestionStep from "../../features/customize/components/QuestionStep";
 
 const CustomizingPage: React.FC = () => {
 	const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 
 interface NavigationButtonProps {
 	direction: "left" | "right";
@@ -28,9 +28,7 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
 			)}
 
 			{/* Circular background with gradient and shadow effects */}
-			<div
-				className="absolute inset-0 rounded-full shadow-md z-10 transition-colors duration-300 drop-shadow-[0px 4px 7.7px rgba(0, 0, 0, 0.15)] bg-linear-135 from-white/10 to-white/100 hover:from-white/10 hover:to-white/80"
-			/>
+			<div className="absolute inset-0 rounded-full shadow-md z-10 transition-colors duration-300 drop-shadow-[0px 4px 7.7px rgba(0, 0, 0, 0.15)] bg-linear-135 from-white/10 to-white/100 hover:from-white/10 hover:to-white/80" />
 
 			{/* Arrow icon */}
 			{direction === "left" ? (

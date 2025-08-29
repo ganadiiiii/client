@@ -39,7 +39,7 @@ const CustomizingResultPage: React.FC = () => {
 				{/* 제목 */}
 				<h1
 					className="text-[27.5px] font-bold text-black/80 mb-5 mt-20 z-40"
-					style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
+					style={{ fontFamily: "NexonLv1Gothic" }}
 				>
 					커스텀 결과물
 				</h1>
@@ -92,7 +92,7 @@ const CustomizingResultPage: React.FC = () => {
 						</button>
 						<p
 							className="text-xs text-black mt-2 text-center text-3 text-normal"
-							style={{ fontFamily: "Pretendard-Regular" }}
+							style={{ fontFamily: "Pretendard" }}
 						>
 							디자인 새로 생성
 						</p>
@@ -110,7 +110,7 @@ const CustomizingResultPage: React.FC = () => {
 								<div
 									className="bg-white text-black text-sm py-5 px-7 rounded-[18px_18px_18px_0] border border-[#D9D9D9]"
 									style={{
-										fontFamily: "Pretendard-Regular",
+										fontFamily: "Pretendard",
 										fontSize: "20px",
 										fontWeight: "500",
 									}}
@@ -134,7 +134,7 @@ const CustomizingResultPage: React.FC = () => {
 								<div
 									className="bg-white text-black text-sm py-5 px-6 rounded-[18px_18px_18px_0] border border-[#D9D9D9]"
 									style={{
-										fontFamily: "Pretendard-Regular",
+										fontFamily: "Pretendard",
 										fontSize: "20px",
 										fontWeight: "500",
 									}}
@@ -146,7 +146,7 @@ const CustomizingResultPage: React.FC = () => {
 					</div>
 					<button
 						className="px-26 py-4 rounded-full bg-[#FF9BAF] text-white text-5 font-bold"
-						style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
+						style={{ fontFamily: "NexonLv1Gothic" }}
 						onClick={() => navigate("/order")}
 					>
 						주문하기
@@ -199,7 +199,7 @@ const CustomizingResultPage: React.FC = () => {
 						<p
 							className="text-xl text-black"
 							style={{
-								fontFamily: "NEXON Lv1 Gothic OTF",
+								fontFamily: "NexonLv1Gothic",
 								fontSize: "20px",
 								fontWeight: "700",
 							}}
@@ -246,7 +246,7 @@ const CustomizingResultPage: React.FC = () => {
 							<div>
 								<label
 									className="block mb-2 font-medium text-black text-[15.5px]"
-									style={{ fontFamily: "Pretendard-Regular" }}
+									style={{ fontFamily: "Pretendard" }}
 								>
 									디자인 이름
 								</label>
@@ -255,11 +255,11 @@ const CustomizingResultPage: React.FC = () => {
 										type="text"
 										// onChange={(e) => setDesignName(e.target.value)}
 										className="w-[154px] h-[29px] px-2 border text-sm border-[#D9D9D9] rounded-sm bg-white"
-										style={{ fontFamily: "Pretendard-Regular" }}
+										style={{ fontFamily: "Pretendard" }}
 									/>
 									<button
 										className="w-[54px] h-[29px] bg-[#FFD1D4] rounded-sm text-sm"
-										style={{ fontFamily: "Pretendard-Regular" }}
+										style={{ fontFamily: "Pretendard" }}
 									>
 										변경
 									</button>
@@ -270,7 +270,7 @@ const CustomizingResultPage: React.FC = () => {
 								<label
 									className="block mb-2 text-black"
 									style={{
-										fontFamily: "Pretendard-Regular",
+										fontFamily: "Pretendard",
 										fontSize: "15.5px",
 										fontWeight: "500",
 										lineHeight: "1.19",
@@ -288,7 +288,7 @@ const CustomizingResultPage: React.FC = () => {
 									<span
 										className="text-black"
 										style={{
-											fontFamily: "Pretendard-Regular",
+											fontFamily: "Pretendard",
 											fontSize: "13.1px",
 											fontWeight: "400",
 											lineHeight: "1.19",
@@ -306,7 +306,7 @@ const CustomizingResultPage: React.FC = () => {
 						<label
 							className="block mb-2 text-black"
 							style={{
-								fontFamily: "Pretendard-Regular",
+								fontFamily: "Pretendard",
 								fontSize: "15.5px",
 								fontWeight: "500",
 								lineHeight: "1.19",
@@ -318,7 +318,7 @@ const CustomizingResultPage: React.FC = () => {
 							<span
 								className="text-black text-opacity-60 mr-3"
 								style={{
-									fontFamily: "Pretendard-Regular",
+									fontFamily: "Pretendard",
 									fontSize: "14px",
 									fontWeight: "500",
 									lineHeight: "1.19",
@@ -336,7 +336,7 @@ const CustomizingResultPage: React.FC = () => {
 								<span
 									className="text-black"
 									style={{
-										fontFamily: "Pretendard-Regular",
+										fontFamily: "Pretendard",
 										fontSize: "13.1px",
 										fontWeight: "400",
 										lineHeight: "normal",
@@ -350,7 +350,7 @@ const CustomizingResultPage: React.FC = () => {
 							<span
 								className="text-black text-opacity-60 mr-3"
 								style={{
-									fontFamily: "Pretendard-Regular",
+									fontFamily: "Pretendard",
 									fontSize: "14px",
 									fontWeight: "500",
 									lineHeight: "1.19",
@@ -368,7 +368,7 @@ const CustomizingResultPage: React.FC = () => {
 								<span
 									className="text-black"
 									style={{
-										fontFamily: "Pretendard-Regular",
+										fontFamily: "Pretendard",
 										fontSize: "13.1px",
 										fontWeight: "400",
 										lineHeight: "1.19",
@@ -384,7 +384,7 @@ const CustomizingResultPage: React.FC = () => {
 						<label
 							className="block mb-2 text-black"
 							style={{
-								fontFamily: "Pretendard-Regular",
+								fontFamily: "Pretendard",
 								fontSize: "15.5px",
 								fontWeight: "500",
 								lineHeight: "1.19",
@@ -405,7 +405,7 @@ const CustomizingResultPage: React.FC = () => {
 									<span
 										className="text-black"
 										style={{
-											fontFamily: "Pretendard-Regular",
+											fontFamily: "Pretendard",
 											fontSize: "13.1px",
 											fontWeight: "400",
 											lineHeight: "1.19",
@@ -423,20 +423,20 @@ const CustomizingResultPage: React.FC = () => {
 						<div className="flex items-center justify-between w-[341px] mb-2">
 							<label
 								className="block font-medium text-black text-[15.5px] items-center"
-								style={{ fontFamily: "Pretendard-Regular" }}
+								style={{ fontFamily: "Pretendard" }}
 							>
 								메시지
 							</label>
 							<button
 								className=" w-[54px] h-[29px] bg-[#FFD1D4] rounded-sm text-sm"
-								style={{ fontFamily: "Pretendard-Regular" }}
+								style={{ fontFamily: "Pretendard" }}
 							>
 								저장
 							</button>
 						</div>
 						<textarea
 							className="w-[341px] h-[70px] p-2 border border-[#D9D9D9] text-sm rounded-sm resize-none bg-white"
-							style={{ fontFamily: "Pretendard-Regular", fontSize: "13.1px" }}
+							style={{ fontFamily: "Pretendard", fontSize: "13.1px" }}
 						/>
 					</div>
 				</div>

@@ -94,9 +94,9 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 			<div
 				className="absolute left-[31px] top-[376px] text-black z-20"
 				style={{
-					fontFamily: "Pretendard",
+					fontFamily: "Yidstreet",
 					fontSize: "14px",
-					fontWeight: "400",
+					fontWeight: "700",
 					lineHeight: "1.18",
 					letterSpacing: "6%",
 				}}

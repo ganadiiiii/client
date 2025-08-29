@@ -30,18 +30,14 @@ const Navbar: React.FC = () => {
 			{/* 상단 바만 배경색이 변경되도록 분리 */}
 			<div
 				className={`fixed top-0 left-0 w-full z-10 transition-all duration-300 ease-in-out
-        ${isScrolled ? "bg-[#FCFBF6]" : isAuthPage ? "bg-transparent" : "bg-[#FCFBF6]"}
+        ${isScrolled ? "bg-[#FCFBF6]" : "bg-transparent"}
         h-[102px] flex items-center justify-between px-[300px]
       `}
 			>
 				{/* 로고 영역 - 좌우 300px 간격 */}
 				<div>
 					<Link to="/">
-						<img
-							src="./src/assets/logo.png"
-							alt="Logo"
-							className="h-12"
-						/>
+						<img src="./src/assets/logo.png" alt="Logo" className="h-12" />
 					</Link>
 				</div>
 
@@ -86,9 +82,7 @@ const Navbar: React.FC = () => {
 				</div>
 
 				{/* 우측 메뉴 - 300px 간격 */}
-				<div
-					className="flex items-center gap-[50px]"
-				>
+				<div className="flex items-center gap-[50px]">
 					<Link
 						to="/login"
 						className="text-[#5A5A5A] hover:text-black transition-colors text-[17px] font-bold"

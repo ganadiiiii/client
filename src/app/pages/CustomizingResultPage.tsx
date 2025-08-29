@@ -5,8 +5,25 @@ import bg from "../../assets/generate/result_bg.svg";
 const CustomizingResultPage: React.FC = () => {
 	const [leftPanelOpen, setLeftPanelOpen] = useState(false);
 	const [rightPanelOpen, setRightPanelOpen] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isSaving, setIsSaving] = useState(false);
 	const anyOpen = leftPanelOpen || rightPanelOpen;
 	const navigate = useNavigate();
+
+	const handleSave = async () => {
+		try {
+			setIsSaving(true); // 저장 중 상태
+			// 저장 로직 추가
+
+			// 저장 성공
+			setIsModalOpen(true);
+		} catch (err) {
+			console.error("저장 오류:", err);
+			alert("저장에 실패했습니다.");
+		} finally {
+			setIsSaving(false);
+		}
+	};
 
 	return (
 		<div
@@ -22,7 +39,7 @@ const CustomizingResultPage: React.FC = () => {
 				{/* 제목 */}
 				<h1
 					className="text-[27.5px] font-bold text-black/80 mb-5 mt-20 z-40"
-					style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
+					style={{ fontFamily: "NexonLv1Gothic" }}
 				>
 					커스텀 결과물
 				</h1>
@@ -75,50 +92,61 @@ const CustomizingResultPage: React.FC = () => {
 						</button>
 						<p
 							className="text-xs text-black mt-2 text-center text-3 text-normal"
-							style={{ fontFamily: "Pretendard-Regular" }}
+							style={{ fontFamily: "Pretendard" }}
 						>
 							디자인 새로 생성
 						</p>
 
-						{/* 다운로드 버튼 */}
-						<button className="absolute -left-16 top-3/4 -translate-y-1/2 w-11 h-11 bg-[#FFDE87] rounded-full flex items-center justify-center hover:scale-105 transition-all duration-200">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								strokeWidth={1.5}
-								stroke="currentColor"
-								className="w-6 h-6"
+						<div className="relative group">
+							{/* 공유하기 버튼 */}
+							<button
+								className="absolute -left-16 top-[-24px] -translate-y-1/2 w-11 h-11 bg-[#FFDE87] rounded-full flex items-center justify-center hover:scale-105 transition-all duration-200"
+								onClick={() => navigate("/customizing/card")}
 							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
-								/>
-							</svg>
-						</button>
+								<img src="/src/assets/generate/share.svg" alt="Left Button" />
+							</button>
+							{/* 레이블 */}
+							<div className="absolute -left-[66px] top-[-95px] -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+								<div
+									className="bg-white text-black text-sm py-5 px-7 rounded-[18px_18px_18px_0] border border-[#D9D9D9]"
+									style={{
+										fontFamily: "Pretendard",
+										fontSize: "20px",
+										fontWeight: "500",
+									}}
+								>
+									공유하기
+								</div>
+							</div>
+						</div>
 
-						{/* 업로드 버튼 */}
-						<button className="absolute -right-16 top-3/4 -translate-y-1/2 w-11 h-11 bg-[#FFDE87] rounded-full flex items-center justify-center hover:scale-105 transition-all duration-200">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								strokeWidth={1.5}
-								stroke="currentColor"
-								className="w-6 h-6"
+						<div className="relative group">
+							{/* 저장 버튼 */}
+							<button
+								className="absolute -right-16 top-[-24px] -translate-y-1/2 w-11 h-11 bg-[#FFDE87] rounded-full flex items-center justify-center hover:scale-105 transition-all duration-200"
+								onClick={handleSave}
+								disabled={isSaving}
 							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
-								/>
-							</svg>
-						</button>
+								<img src="/src/assets/generate/save.svg" alt="Right Button" />
+							</button>
+							{/* 레이블 */}
+							<div className="absolute -right-[220px] top-[-95px] w-50 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+								<div
+									className="bg-white text-black text-sm py-5 px-6 rounded-[18px_18px_18px_0] border border-[#D9D9D9]"
+									style={{
+										fontFamily: "Pretendard",
+										fontSize: "20px",
+										fontWeight: "500",
+									}}
+								>
+									내 아카이빙에 저장
+								</div>
+							</div>
+						</div>
 					</div>
 					<button
 						className="px-26 py-4 rounded-full bg-[#FF9BAF] text-white text-5 font-bold"
-						style={{ fontFamily: "NEXON Lv1 Gothic OTF" }}
+						style={{ fontFamily: "NexonLv1Gothic" }}
 						onClick={() => navigate("/order")}
 					>
 						주문하기
@@ -154,6 +182,33 @@ const CustomizingResultPage: React.FC = () => {
 					</div>
 				</button>
 			</div>
+			{isModalOpen && (
+				<div
+					className="fixed inset-0 z-[60] flex items-center justify-center"
+					onClick={() => setIsModalOpen(false)}
+				>
+					<div
+						className="w-[388px] h-[405px] bg-white/85 rounded-xl flex flex-col items-center justify-center relative mb-8"
+						onClick={(e) => e.stopPropagation()}
+					>
+						<img
+							src="/src/assets/generate/success.svg"
+							alt="Success"
+							className="w-24 h-24"
+						/>
+						<p
+							className="text-xl text-black"
+							style={{
+								fontFamily: "NexonLv1Gothic",
+								fontSize: "20px",
+								fontWeight: "700",
+							}}
+						>
+							저장되었습니다
+						</p>
+					</div>
+				</div>
+			)}
 			{/* === Overlay: 열렸을 때만 클릭 가능 === */}
 			<div
 				className={`fixed inset-0 z-20 backdrop-blur-sm transition-opacity
@@ -191,7 +246,7 @@ const CustomizingResultPage: React.FC = () => {
 							<div>
 								<label
 									className="block mb-2 font-medium text-black text-[15.5px]"
-									style={{ fontFamily: "Pretendard-Regular" }}
+									style={{ fontFamily: "Pretendard" }}
 								>
 									디자인 이름
 								</label>
@@ -199,12 +254,12 @@ const CustomizingResultPage: React.FC = () => {
 									<input
 										type="text"
 										// onChange={(e) => setDesignName(e.target.value)}
-										className="w-[154px] h-[29px] px-2 border text-sm border-[#D9D9D9] rounded-sm"
-										style={{ fontFamily: "Pretendard-Regular" }}
+										className="w-[154px] h-[29px] px-2 border text-sm border-[#D9D9D9] rounded-sm bg-white"
+										style={{ fontFamily: "Pretendard" }}
 									/>
 									<button
 										className="w-[54px] h-[29px] bg-[#FFD1D4] rounded-sm text-sm"
-										style={{ fontFamily: "Pretendard-Regular" }}
+										style={{ fontFamily: "Pretendard" }}
 									>
 										변경
 									</button>
@@ -215,7 +270,7 @@ const CustomizingResultPage: React.FC = () => {
 								<label
 									className="block mb-2 text-black"
 									style={{
-										fontFamily: "Pretendard-Regular",
+										fontFamily: "Pretendard",
 										fontSize: "15.5px",
 										fontWeight: "500",
 										lineHeight: "1.19",
@@ -233,7 +288,7 @@ const CustomizingResultPage: React.FC = () => {
 									<span
 										className="text-black"
 										style={{
-											fontFamily: "Pretendard-Regular",
+											fontFamily: "Pretendard",
 											fontSize: "13.1px",
 											fontWeight: "400",
 											lineHeight: "1.19",
@@ -251,7 +306,7 @@ const CustomizingResultPage: React.FC = () => {
 						<label
 							className="block mb-2 text-black"
 							style={{
-								fontFamily: "Pretendard-Regular",
+								fontFamily: "Pretendard",
 								fontSize: "15.5px",
 								fontWeight: "500",
 								lineHeight: "1.19",
@@ -263,7 +318,7 @@ const CustomizingResultPage: React.FC = () => {
 							<span
 								className="text-black text-opacity-60 mr-3"
 								style={{
-									fontFamily: "Pretendard-Regular",
+									fontFamily: "Pretendard",
 									fontSize: "14px",
 									fontWeight: "500",
 									lineHeight: "1.19",
@@ -281,7 +336,7 @@ const CustomizingResultPage: React.FC = () => {
 								<span
 									className="text-black"
 									style={{
-										fontFamily: "Pretendard-Regular",
+										fontFamily: "Pretendard",
 										fontSize: "13.1px",
 										fontWeight: "400",
 										lineHeight: "normal",
@@ -295,7 +350,7 @@ const CustomizingResultPage: React.FC = () => {
 							<span
 								className="text-black text-opacity-60 mr-3"
 								style={{
-									fontFamily: "Pretendard-Regular",
+									fontFamily: "Pretendard",
 									fontSize: "14px",
 									fontWeight: "500",
 									lineHeight: "1.19",
@@ -313,7 +368,7 @@ const CustomizingResultPage: React.FC = () => {
 								<span
 									className="text-black"
 									style={{
-										fontFamily: "Pretendard-Regular",
+										fontFamily: "Pretendard",
 										fontSize: "13.1px",
 										fontWeight: "400",
 										lineHeight: "1.19",
@@ -329,7 +384,7 @@ const CustomizingResultPage: React.FC = () => {
 						<label
 							className="block mb-2 text-black"
 							style={{
-								fontFamily: "Pretendard-Regular",
+								fontFamily: "Pretendard",
 								fontSize: "15.5px",
 								fontWeight: "500",
 								lineHeight: "1.19",
@@ -350,7 +405,7 @@ const CustomizingResultPage: React.FC = () => {
 									<span
 										className="text-black"
 										style={{
-											fontFamily: "Pretendard-Regular",
+											fontFamily: "Pretendard",
 											fontSize: "13.1px",
 											fontWeight: "400",
 											lineHeight: "1.19",
@@ -368,20 +423,20 @@ const CustomizingResultPage: React.FC = () => {
 						<div className="flex items-center justify-between w-[341px] mb-2">
 							<label
 								className="block font-medium text-black text-[15.5px] items-center"
-								style={{ fontFamily: "Pretendard-Regular" }}
+								style={{ fontFamily: "Pretendard" }}
 							>
 								메시지
 							</label>
 							<button
 								className=" w-[54px] h-[29px] bg-[#FFD1D4] rounded-sm text-sm"
-								style={{ fontFamily: "Pretendard-Regular" }}
+								style={{ fontFamily: "Pretendard" }}
 							>
 								저장
 							</button>
 						</div>
 						<textarea
-							className="w-[341px] h-[70px] p-2 border border-[#D9D9D9] text-sm rounded-sm resize-none"
-							style={{ fontFamily: "Pretendard-Regular", fontSize: "13.1px" }}
+							className="w-[341px] h-[70px] p-2 border border-[#D9D9D9] text-sm rounded-sm resize-none bg-white"
+							style={{ fontFamily: "Pretendard", fontSize: "13.1px" }}
 						/>
 					</div>
 				</div>

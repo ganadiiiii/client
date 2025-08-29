@@ -20,7 +20,7 @@ const OptionButton: React.FC<OptionButtonProps> = ({
 					: "bg-white border-[#c3c3c3] border-[1.5px] text-[#5e5e5e] font-normal hover:bg-[#f3f3f3]"
 			}`}
 			style={{
-				fontFamily: "NEXON Lv1 Gothic OTF",
+				fontFamily: "NexonLv1Gothic",
 				fontSize: "24px",
 			}}
 		>

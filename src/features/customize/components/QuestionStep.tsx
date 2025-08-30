@@ -100,7 +100,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 						<p
 							className="absolute right-0 text-right text-[#999999] font-medium text-base"
 							style={{
-								fontFamily: "NexonLv1GothicF",
+								fontFamily: "NexonLv1Gothic",
 								fontWeight: "400",
 								lineHeight: "1.39",
 							}}

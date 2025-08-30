@@ -4,12 +4,14 @@ import SignUpForm from "../features/login/components/SignUpForm";
 import CustomizingCardPage from "./pages/CustomizingCardPage";
 import CustomizingPage from "./pages/CustomizingPage";
 import CustomizingResultPage from "./pages/CustomizingResultPage";
+import ArchivePage from "./pages/ArchivePage";
 
 export const AppRoutes = () => {
 	return (
 		<Routes>
 			<Route path="/customizing" element={<CustomizingPage />} />
 			<Route path="/customizing/result" element={<CustomizingResultPage />} />
+			<Route path="/archive" element={<ArchivePage />} />
 			<Route path="/customizing/card" element={<CustomizingCardPage />} />
 			<Route path="/login" element={<LoginForm />} />
 			<Route path="/signup" element={<SignUpForm />} />

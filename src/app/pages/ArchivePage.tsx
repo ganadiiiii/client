@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Mailbox from "../../features/archive/components/mailbox";
+import PageButton from "../../features/archive/components/PageButton";
 
 const FlowerCard = ({ flower }: { flower: { id: number; name: string } }) => {
 	return (
@@ -11,7 +12,7 @@ const FlowerCard = ({ flower }: { flower: { id: number; name: string } }) => {
 	);
 };
 
-const mockFlowerData = Array.from({ length: 25 }, (_, i) => ({
+const mockFlowerData = Array.from({ length: 50 }, (_, i) => ({
 	id: i + 1,
 	name: `꽃 #${i + 1}`,
 }));
@@ -89,28 +90,13 @@ const ArchivePage = () => {
 							))}
 						</div>
 
-						<div className="flex items-center justify-center gap-4 mt-[110px]">
+						<div className="flex items-center justify-center gap-[160px] mt-[110px]">
 							{/* 왼쪽 화살표 버튼 */}
-							<button
+							<PageButton
+								direction="left"
 								onClick={goToPreviousPage}
 								disabled={currentPage === 0}
-								className="p-3 bg-white/60 rounded-full shadow-lg hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="h-6 w-6 text-gray-700"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M15 19l-7-7 7-7"
-									/>
-								</svg>
-							</button>
+							/>
 
 							{/* 페이지 번호 레이블 */}
 							<span
@@ -121,26 +107,11 @@ const ArchivePage = () => {
 							</span>
 
 							{/* 오른쪽 화살표 버튼 */}
-							<button
+							<PageButton
+								direction="right"
 								onClick={goToNextPage}
 								disabled={currentPage >= totalPages - 1}
-								className="p-3 bg-white/60 rounded-full shadow-lg hover:bg-white disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="h-6 w-6 text-gray-700"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M9 5l7 7-7 7"
-									/>
-								</svg>
-							</button>
+							/>
 						</div>
 					</div>
 				</div>

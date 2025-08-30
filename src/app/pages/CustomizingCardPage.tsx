@@ -19,43 +19,43 @@ const CustomizingCardPage: React.FC = () => {
 
 	return (
 		<div
-			className="relative flex flex-col items-center justify-center w-screen h-screen bg-[#FCFBF6] bg-cover bg-center bg-no-repeat bg-top"
+			className="relative flex flex-col items-center justify-center w-screen h-screen bg-[#FCFBF6] bg-cover bg-no-repeat bg-top"
 			style={{
 				backgroundImage: `url(${bg})`,
 			}}
 		>
-			<div className="relative flex flex-col items-center justify-center mt-[102px] gap-10">
-			{/* 제목 */}
-			<h1
-				className="text-[28px] font-bold text-black/80 z-40"
-				style={{ fontFamily: "NexonLv1Gothic", fontWeight: "700" }}
-			>
-				공유하기
-			</h1>
-			<div className="relative flex flex-col">
-				<Card
-					date={cardData.date}
-					title={cardData.title}
-					flowerImg={cardData.flowerImg}
-					mainFlowers={cardData.mainFlowers}
-					subFlowers={cardData.subFlowers}
-					floriography={cardData.floriography}
-					to={cardData.to}
-					from={cardData.from}
-				/>
-			</div>
-			<div className="relative">
-				<button
-					className="w-21 h-21 rounded-full flex items-center justify-center"
-					onClick={() => setIsModalOpen(true)}
+			<div className="relative flex flex-col items-center justify-center mt-[248px] gap-10">
+				{/* 제목 */}
+				{/* <h1
+					className="text-[28px] font-bold text-black/80 z-40"
+					style={{ fontFamily: "NexonLv1Gothic", fontWeight: "700" }}
 				>
-					<img
-						src="/src/assets/generate/sns.svg"
-						alt="SNS"
-						className="w-21 h-21"
+					공유하기
+				</h1> */}
+				<div className="relative flex flex-col">
+					<Card
+						date={cardData.date}
+						title={cardData.title}
+						flowerImg={cardData.flowerImg}
+						mainFlowers={cardData.mainFlowers}
+						subFlowers={cardData.subFlowers}
+						floriography={cardData.floriography}
+						to={cardData.to}
+						from={cardData.from}
 					/>
-				</button>
-			</div>
+				</div>
+				<div className="relative">
+					<button
+						className="w-21 h-21 rounded-full flex items-center justify-center"
+						onClick={() => setIsModalOpen(true)}
+					>
+						<img
+							src="/src/assets/generate/sns.svg"
+							alt="SNS"
+							className="w-21 h-21"
+						/>
+					</button>
+				</div>
 			</div>
 			{/* 모달 */}
 			{isModalOpen && (

@@ -1,34 +1,24 @@
-import React from "react";
-
-interface NavigationButtonProps {
+interface PageButtonProps {
 	direction: "left" | "right";
 	onClick: () => void;
 	disabled?: boolean;
-	className?: string;
 }
 
-const NavigationButton: React.FC<NavigationButtonProps> = ({
+export default function PageButton({
 	direction,
 	onClick,
-	disabled = false,
-	className = "",
-}) => {
+	disabled,
+}: PageButtonProps) {
 	return (
 		<button
-			type="button"
 			onClick={onClick}
 			disabled={disabled}
-			className={`w-[68px] h-[68px] relative rounded-full flex items-center justify-center ${className} ${disabled ? "" : "transition-all duration-100 hover:scale-95 cursor-pointer"}`}
+			className={`w-[68px] h-[68px] relative rounded-full flex items-center justify-center enabled:transition-all enabled:duration-100 enabled:hover:scale-95 enabled:cursor-pointer`}
 		>
-			{/* Pink background for enabled state, only for right button */}
-			{direction === "right" && (
-				<div className={`absolute inset-0 rounded-full bg-[#FF9BAF] z-0 transition-opacity duration-300 ${!disabled ? "opacity-100" : "opacity-0"}`} />
-			)}
-
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				width="85"
-				height="85"
+				width="68"
+				height="68"
 				viewBox="0 0 85 85"
 				fill="none"
 				className="absolute top-9/16 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none"
@@ -104,8 +94,6 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
 					</linearGradient>
 				</defs>
 			</svg>
-
-			{/* Arrow icon */}
 			{direction === "left" ? (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +101,7 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
 					viewBox="0 0 24 24"
 					strokeWidth={1.5}
 					stroke="currentColor"
-					className="w-6 h-6 z-20 relative"
+					className={`w-6 h-6 z-20 relative transition-all duration-200 pointer-events-none ${!disabled ? "text-[#5e5e5e]" : "text-[#c3c3c3]"}`}
 				>
 					<path
 						strokeLinecap="round"
@@ -128,7 +116,7 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
 					viewBox="0 0 24 24"
 					strokeWidth={1.5}
 					stroke="currentColor"
-					className={`w-6 h-6 z-20 relative transition-all duration-200 pointer-events-none ${!disabled ? "text-[#FF6E77]" : "text-black"}`}
+					className={`w-6 h-6 z-20 relative transition-all duration-200 pointer-events-none ${!disabled ? "text-[#5e5e5e]" : "text-[#c3c3c3]"}`}
 				>
 					<path
 						strokeLinecap="round"
@@ -139,6 +127,4 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
 			)}
 		</button>
 	);
-};
-
-export default NavigationButton;
+}

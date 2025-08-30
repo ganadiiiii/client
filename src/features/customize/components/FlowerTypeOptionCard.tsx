@@ -74,9 +74,9 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 			<div
 				className="absolute left-[20px] top-[16px] text-black z-20"
 				style={{
-					fontFamily: "Pretendard",
+					fontFamily: "Yidstreet",
 					fontSize: "8.7px",
-					fontWeight: "400",
+					fontWeight: "700",
 					lineHeight: "1.18",
 					letterSpacing: "5%",
 				}}
@@ -88,9 +88,9 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 			<div
 				className="absolute left-[20px] top-[229px] text-black z-20"
 				style={{
-					fontFamily: "Pretendard",
+					fontFamily: "Yidstreet",
 					fontSize: "11.4px",
-					fontWeight: "400",
+					fontWeight: "700",
 					lineHeight: "1.18",
 					letterSpacing: "5%",
 				}}
@@ -127,9 +127,9 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 						<div
 							className="text-black"
 							style={{
-								fontFamily: "Pretendard",
+								fontFamily: "Yidstreet",
 								fontSize: "8.7px",
-								fontWeight: "400",
+								fontWeight: "300",
 								lineHeight: "1.18",
 								letterSpacing: "5%",
 							}}

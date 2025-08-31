@@ -1,21 +1,6 @@
 import { useState } from "react";
-import Mailbox from "../../features/archive/components/mailbox";
-import PageButton from "../../features/archive/components/PageButton";
-
-const FlowerCard = ({ flower }: { flower: { id: number; name: string } }) => {
-	return (
-		<div className="h-[140px] aspect-[4/5] bg-white/60 hover:bg-white rounded-lg flex flex-col items-center justify-center border-2 border-[#FFD1D4] shadow-md p-2 hover:shadow-xl hover:border-[#FF6E77] transition-all cursor-pointer">
-			<p className="text-sm font-bold text-[#FF6E77] text-center">
-				{flower.name}
-			</p>
-		</div>
-	);
-};
-
-const mockFlowerData = Array.from({ length: 50 }, (_, i) => ({
-	id: i + 1,
-	name: `꽃 #${i + 1}`,
-}));
+import Mailbox from "../../features/archive/components/Mailbox";
+import FlowerGrid from "../../features/archive/FlowerGrid";
 
 const ArchivePage = () => {
 	const [isLightOn, setIsLightOn] = useState(true);
@@ -23,22 +8,6 @@ const ArchivePage = () => {
 
 	const toggleLight = () => {
 		setIsLightOn((isLightOn) => !isLightOn);
-	};
-	const [currentPage, setCurrentPage] = useState(0);
-
-	const CARDS_PER_PAGE = 15;
-	const totalPages = Math.ceil(mockFlowerData.length / CARDS_PER_PAGE);
-
-	const startIndex = currentPage * CARDS_PER_PAGE;
-	const endIndex = startIndex + CARDS_PER_PAGE;
-	const currentCards = mockFlowerData.slice(startIndex, endIndex);
-
-	const goToNextPage = () => {
-		setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
-	};
-
-	const goToPreviousPage = () => {
-		setCurrentPage((prev) => Math.max(prev - 1, 0));
 	};
 
 	return (
@@ -80,43 +49,10 @@ const ArchivePage = () => {
 							/>
 						)}
 					</div>
-
-					{/* --- 그리드 및 네비게이션을 포함하는 오버레이 컨테이너 --- */}
-					<div className="absolute top-1/2 left-1/2 w-full max-w-3xl px-14 pt-46 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center gap-4">
-						{/* 5x3 그리드 */}
-						<div className="flex-1 h-full mx-4 grid grid-cols-5 grid-rows-3 gap-x-6 gap-y-4 w-full">
-							{currentCards.map((card) => (
-								<FlowerCard key={card.id} flower={card} />
-							))}
-						</div>
-
-						<div className="flex items-center justify-center gap-[160px] mt-[110px]">
-							{/* 왼쪽 화살표 버튼 */}
-							<PageButton
-								direction="left"
-								onClick={goToPreviousPage}
-								disabled={currentPage === 0}
-							/>
-
-							{/* 페이지 번호 레이블 */}
-							<span
-								className="font-bold text-[#868686] text-lg w-12 text-center"
-								style={{ fontFamily: "NEXONLv1Gothic" }}
-							>
-								{currentPage + 1} / {totalPages}
-							</span>
-
-							{/* 오른쪽 화살표 버튼 */}
-							<PageButton
-								direction="right"
-								onClick={goToNextPage}
-								disabled={currentPage >= totalPages - 1}
-							/>
-						</div>
-					</div>
+					{/* --- 그리드 및 네비게이션을 포함하는 컨테이너 --- */}
+					<FlowerGrid />
 				</div>
 			</div>
-
 			<Mailbox />
 			<div
 				className="absolute top-1/2 left-1/2 z-10 w-[400px] h-[400px]"

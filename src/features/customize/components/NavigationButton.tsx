@@ -18,7 +18,7 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
 			type="button"
 			onClick={onClick}
 			disabled={disabled}
-			className={`w-[68px] h-[68px] relative rounded-full flex items-center justify-center ${className} ${disabled ? "" : "transition-all duration-100 hover:scale-95 cursor-pointer"}`}
+			className={`w-17 h-17 relative rounded-full flex items-center justify-center ${className} ${disabled ? "" : "transition-all duration-100 hover:scale-95 cursor-pointer"}`}
 		>
 			{/* Pink background for enabled state, only for right button */}
 			{direction === "right" && (
@@ -27,11 +27,9 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
 
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				width="85"
-				height="85"
 				viewBox="0 0 85 85"
 				fill="none"
-				className="absolute top-9/16 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none"
+				className="absolute top-9/16 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none w-21 h-21"
 			>
 				<g filter="url(#filter0_di)">
 					<circle
@@ -113,7 +111,7 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
 					viewBox="0 0 24 24"
 					strokeWidth={1.5}
 					stroke="currentColor"
-					className="w-6 h-6 z-20 relative"
+					className="w-7 h-7 z-20 relative"
 				>
 					<path
 						strokeLinecap="round"

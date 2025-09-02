@@ -87,7 +87,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 			}}
 		>
 			{/* question content with slide transition */}
-			<div className="flex-1 flex flex-col items-center justify-center gap-y-10 w-full overflow-hidden">
+			<div className="flex-1 flex flex-col items-center justify-center gap-y-4 md:gap-y-6 2xl:gap-y-10 w-full overflow-hidden">
 				<AnimatePresence mode="wait" initial={false} custom={direction}>
 					<motion.div
 						key={questionNumber}
@@ -101,9 +101,9 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 					>
 						{/* question number */}
 						<div className="flex justify-center">
-							<div className="bg-white rounded-full border-[3px] border-primary/40 px-10 py-2 sm:px-12 sm:py-3">
+							<div className="bg-transparent rounded-full border-[3px] border-primary/40 px-14 py-2">
 								<span
-									className="text-primary/40 text-lg sm:text-xl"
+									className="text-primary/40 text-xl"
 									style={{
 										fontFamily: "BagelFatOne-Regular",
 										fontWeight: "400",
@@ -118,7 +118,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 						<div className="relative">
 							{/* <div className="bg-[#FFD1D4] rounded-full px-16 py-4 mb-4 inline-block"> */}
 							<h1
-								className="text-black text-center mb-2 font-bold whitespace-nowrap text-[28px] sm:text-2xl md:text-3xl"
+								className="text-black text-center mb-2 font-bold whitespace-nowrap text-3xl"
 								style={{
 									fontFamily: "NexonLv1Gothic",
 									fontWeight: "700",
@@ -127,11 +127,10 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 							>
 								{renderHighlighted(title, HIGHLIGHT_MAP[questionNumber])}
 							</h1>
-
 							{/* 복수선택 문구 */}
 							{isMultipleChoice && (
 								<p
-									className="absolute right-0 text-right text-gray font-medium text-base"
+									className="absolute right-0 text-right text-gray font-medium text-xs"
 									style={{
 										fontFamily: "NexonLv1Gothic",
 										fontWeight: "400",
@@ -144,9 +143,9 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 						</div>
 						{questionNumber === 4 ? (
 							// 꽃 종류 카드 컴포넌트 렌더링
-							<div className="flex flex-wrap gap-4 justify-center max-w-[1089px]">
+							<div className="flex flex-wrap gap-4 justify-center md:max-w-[800px] lg:max-w-[900px] 2xl:max-w-[1089px]">
 								{flowerCardData.map((card) => (
-									<div key={card.id} className="w-[205px]">
+									<div key={card.id} style={{ width: "12.8em" }}>
 										<FlowerTypeOptionCard
 											key={card.id}
 											number={card.number}
@@ -185,7 +184,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 							</div>
 						) : (
 							// 기본 옵션 버튼 렌더링
-							<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-4 place-items-center">
+							<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-1.5 gap-y-4 place-items-center">
 								{options.map((option, index) => (
 									<OptionButton
 										key={index}

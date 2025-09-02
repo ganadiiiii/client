@@ -35,18 +35,17 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 			whileHover={{
 				rotate: rotation,
 				scale: 1.05,
-				boxShadow: "3px 3px 6px 0px rgba(0,0,0,0.15)",
+				boxShadow: "0.2em 0.2em 0.4em rgba(0, 0, 0, 0.15)",
 			}}
 			transition={{
 				rotate: { type: "spring", bounce: 0.6 },
 				scale: { type: "tween", duration: 0.1 },
 			}}
 		>
-
 			{/* 그라데이션 영역 */}
 			<div>
 				<div
-					className="absolute left-[20px] top-[23px] w-[297px] h-[329px] rounded-[27px] z-10"
+					className="absolute left-[20px] top-[23px] w-[297px] h-[329px] rounded-[1.7em] z-10"
 					style={{
 						backgroundImage: "url('./src/assets/generate/size.svg')",
 					}}
@@ -74,10 +73,12 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 			</div>
 			{/* 사이즈 */}
 			<div
-				className="absolute left-[31px] top-[376px] text-black z-20"
+				className="absolute text-black z-20"
 				style={{
+					left: "2.1em",
+					top: "26.9em",
 					fontFamily: "Yidstreet",
-					fontSize: "14px",
+					fontSize: "0.875em",
 					fontWeight: "700",
 					lineHeight: "1.18",
 					letterSpacing: "6%",
@@ -88,18 +89,24 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 
 			{/* 점선 */}
 			<div
-				className="absolute left-[29px] top-[365px] w-[286px] h-0 border-t border-dashed border-[#D9D9D9] z-20"
+				className="absolute border-t border-dashed border-[#D9D9D9] z-20"
 				style={{
+					left: "1.81em",
+					top: "22.8em",
+					width: "17.87em",
+					height: "0em",
 					borderWidth: "1.07px",
 				}}
 			/>
 
 			{/* 설명 */}
 			<div
-				className="absolute right-[17px] top-[376px] text-black text-right z-20"
+				className="absolute text-black text-right z-20"
 				style={{
+					right: "1.5em",
+					top: "27em",
 					fontFamily: "Pretendard",
-					fontSize: "14px",
+					fontSize: "0.875em",
 					fontWeight: "400",
 					lineHeight: "1.18",
 					letterSpacing: "6%",
@@ -109,8 +116,12 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 			</div>
 			{/* 점선 */}
 			<div
-				className="absolute left-[29px] top-[405px] w-[286px] h-0 border-t border-dashed border-[#D9D9D9] z-20"
+				className="absolute border-t border-dashed border-[#D9D9D9] z-20"
 				style={{
+					left: "1.81em",
+					top: "25.2em",
+					width: "17.87em",
+					height: "0em",
 					borderWidth: "1.07px",
 				}}
 			/>

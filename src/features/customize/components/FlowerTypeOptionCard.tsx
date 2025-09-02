@@ -29,13 +29,14 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 
 	return (
 		<motion.div
-			className={`relative w-[205px] p-12 h-[320px] cursor-pointer shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] rounded-[21px] rounded-[21px] shadow-sm transition-colors duration-300 ${isSelected ? "bg-primary/40" : "bg-white"}`}
+			className={`relative p-12 cursor-pointer shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] rounded-[1.3em] shadow-sm transition-colors duration-300 ${isSelected ? "bg-primary/40" : "bg-white"}`}
+			style={{ width: "12.8em", height: "20em" }}
 			onClick={onClick}
 			onMouseEnter={handleMouseEnter}
 			whileHover={{
 				rotate: rotation,
 				scale: 1.05,
-				boxShadow: "3px 3px 6px 0px rgba(0,0,0,0.15)",
+				boxShadow: "0.2em 0.2em 0.4em rgba(0, 0, 0, 0.15)",
 			}}
 			transition={{
 				rotate: { type: "spring", bounce: 0.6 },
@@ -45,28 +46,39 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 			<div>
 				{/* gradation */}
 				<div
-					className="absolute left-[12px] top-[14px] w-[181px] h-[201px] rounded-[17px] z-10"
+					className="absolute rounded-[1.1em] z-10"
 					style={{
+						left: "0.75em",
+						top: "0.9em",
+						width: "11.3em",
+						height: "12.6em",
 						backgroundImage: `url('./src/assets/generate/bg-${number}.svg')`,
 						backgroundRepeat: "no-repeat",
 						backgroundSize: "100% 100%",
 						backgroundPosition: "center",
 					}}
 				/>
-
 				{/* flower image */}
 				<img
 					src={`./src/assets/generate/flower-${number}.png`}
 					alt={name}
-					className="absolute h-[160px] object-cover rounded-sm z-20"
+					className="absolute object-cover rounded-sm z-20"
+					style={{
+						left: "2.9em",
+						top: "2.9em",
+						width: "6.3em",
+						height: "10.8em",
+					}}
 				/>
 			</div>
 			{/* NO. 텍스트 */}
 			<div
-				className="absolute left-[20px] top-[16px] text-black z-10"
+				className="absolute text-black z-10"
 				style={{
+					left: "2em",
+					top: "1.75em",
 					fontFamily: "Yidstreet",
-					fontSize: "8.7px",
+					fontSize: "0.54rem",
 					fontWeight: "700",
 					lineHeight: "1.18",
 					letterSpacing: "5%",
@@ -77,10 +89,12 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 
 			{/* 영문명 */}
 			<div
-				className="absolute left-[20px] top-[229px] text-black z-20"
+				className="absolute text-black z-20"
 				style={{
+					left: "2em",
+					top: "20em",
 					fontFamily: "Yidstreet",
-					fontSize: "11.4px",
+					fontSize: "0.71em",
 					fontWeight: "700",
 					lineHeight: "1.18",
 					letterSpacing: "5%",
@@ -91,18 +105,24 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 
 			{/* 점선 */}
 			<div
-				className="absolute left-[18px] top-[248px] w-[175px] h-0 border-t border-dashed border-[#D9D9D9] z-20"
+				className="absolute border-t border-dashed border-[#D9D9D9] z-20"
 				style={{
+					left: "1.2em",
+					top: "15.4em",
+					width: "10.9em",
+					height: "0em",
 					borderWidth: "0.67px",
 				}}
 			/>
 
 			{/* 한글명 */}
 			<div
-				className="absolute right-[12px] top-[231px] text-black text-right z-20"
+				className="absolute text-black text-right z-20"
 				style={{
+					right: "1.5em",
+					top: "26.5em",
 					fontFamily: "Pretendard",
-					fontSize: "8.7px",
+					fontSize: "0.54rem",
 					fontWeight: "600",
 					lineHeight: "1.19",
 					letterSpacing: "5%",
@@ -112,14 +132,21 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 			</div>
 
 			{/* 색상별 의미 */}
-			<div className="absolute left-[18px] top-[256px] space-y-[4px] w-[175px] z-20">
+			<div 
+				className="absolute space-y-[0.25em] z-20"
+				style={{
+					left: "1.1em",
+					top: "16em",
+					width: "10.9em",
+				}}
+			>
 				{colorMeanings.map((item, idx) => (
 					<div key={idx} className="flex justify-between">
 						<div
 							className="text-black"
 							style={{
 								fontFamily: "Yidstreet",
-								fontSize: "8.7px",
+								fontSize: "0.54rem",
 								fontWeight: "300",
 								lineHeight: "1.18",
 								letterSpacing: "5%",
@@ -131,7 +158,7 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 							className="text-black"
 							style={{
 								fontFamily: "Pretendard",
-								fontSize: "8.7px",
+								fontSize: "0.54rem",
 								fontWeight: "400",
 								lineHeight: "1.19",
 								letterSpacing: "5%",

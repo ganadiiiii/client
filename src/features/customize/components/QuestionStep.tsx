@@ -33,7 +33,7 @@ function renderHighlighted(title: string, phrase?: string) {
 		<>
 			{before}
 			<span
-				className="inline-flex items-center bg-primary/40 rounded-3xl px-2 pb-1 pt-2"
+				className="inline-flex items-center bg-primary/40 rounded-3xl px-3 pb-1 pt-2"
 				style={{
 					boxDecorationBreak: "clone",
 					WebkitBoxDecorationBreak: "clone",

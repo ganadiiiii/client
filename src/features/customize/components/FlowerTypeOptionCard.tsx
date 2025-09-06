@@ -56,7 +56,7 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 
 				{/* flower image */}
 				<img
-					src={`./src/assets/generate/flower-${number}.svg`}
+					src={`./src/assets/generate/flower-${number}.png`}
 					alt={name}
 					className="absolute h-[160px] object-cover rounded-sm z-20"
 				/>

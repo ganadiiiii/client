@@ -92,8 +92,8 @@ export const sampleFlowerData: FlowerData[] = [
 		id: "9",
 		number: "9",
 		name: "은방울꽃",
-		engName: "Lily of the valley",
-		colorMeanings: [{ color: "은방울꽃", meaning: "순결, 존경, 축복" }],
+		engName: "Muguet",
+		colorMeanings: [{ color: "은방울꽃", meaning: "틀림없이 행복해진다" }],
 		flowerImg: "/src/assets/generate/image180.png",
 	},
 ];

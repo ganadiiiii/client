@@ -26,13 +26,13 @@ const LoginForm: React.FC = () => {
 							style={{ width: "450px" }}
 						>
 							{Array.from({ length: 30 }, (_, i) => (
-								<div key={i} className="w-2 h-2 bg-[#FFD1D4] rounded-full" />
+								<div key={i} className="w-2 h-2 bg-primary/40 rounded-full" />
 							))}
 						</div>
 
 						{/* 로그인 제목 */}
 						<h1
-							className="px-8 text-[36px] text-nowrap text-[#C69FD4] font-normal"
+							className="px-8 text-[28px] text-nowrap text-purple font-normal"
 							style={{ fontFamily: "BagelFatOne-Regular" }}
 						>
 							CUSTOMER LOGIN
@@ -44,7 +44,7 @@ const LoginForm: React.FC = () => {
 							style={{ width: "450px" }}
 						>
 							{Array.from({ length: 30 }, (_, i) => (
-								<div key={i} className="w-2 h-2 bg-[#FFD1D4] rounded-full" />
+								<div key={i} className="w-2 h-2 bg-primary/40 rounded-full" />
 							))}
 						</div>
 					</div>
@@ -53,13 +53,13 @@ const LoginForm: React.FC = () => {
 					<div className="flex justify-center">
 						<form
 							onSubmit={handleSubmit}
-							className="space-y-4 w-full max-w-3xl"
+							className="space-y-6 w-full max-w-3xl"
 						>
 							{/* Email 입력 */}
 							<div>
 								<label
 									htmlFor="email"
-									className="block text-2xl font-bold text-[#000000] mb-2"
+									className="block text-[18px] font-bold text-gray mb-2"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Email
@@ -70,7 +70,7 @@ const LoginForm: React.FC = () => {
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									required
-									className="w-full px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									className="w-full px-4 py-4 border-2 border-gray/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								/>
 							</div>
@@ -79,7 +79,7 @@ const LoginForm: React.FC = () => {
 							<div>
 								<label
 									htmlFor="password"
-									className="block text-2xl font-bold text-[#000000] mb-2"
+									className="block text-[18px] font-bold text-gray mb-2"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Password
@@ -90,7 +90,7 @@ const LoginForm: React.FC = () => {
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
 									required
-									className="w-full px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									className="w-full px-4 py-4 border-2 border-gray/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								/>
 							</div>
@@ -100,7 +100,7 @@ const LoginForm: React.FC = () => {
 								{/* Sign in 버튼 */}
 								<button
 									type="submit"
-									className="flex py-4 pl-[50px] pr-[50px] rounded-full bg-[#EDEDED] text-black text-[24px] font-bold hover:bg-[#FFD1D4] transition-colors"
+									className="flex py-4 pl-[50px] pr-[50px] rounded-full bg-gray/20 text-gray text-[18px] font-bold hover:bg-primary/40 hover:text-white transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Sign in
@@ -110,18 +110,18 @@ const LoginForm: React.FC = () => {
 								<button
 									type="button"
 									onClick={() => navigate("/signup")}
-									className="flex py-4 pl-[50px] pr-[50px] rounded-full bg-[#EDEDED] text-black text-[24px] font-bold hover:bg-[#FFD1D4] transition-colors"
+									className="flex py-4 pl-[50px] pr-[50px] rounded-full bg-gray/20 text-gray text-[18px] font-bold hover:bg-primary/40 hover:text-white transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic" }}
-								>
+								> 
 									Create Account
 								</button>
 							</div>
 
 							{/* Reset password 링크 */}
-							<div className="text-center pt-4">
+							<div className="text-center">
 								<Link
 									to="/forgot-password"
-									className="hover:text-gray-700 transition-colors hover:underline text-[24px] font-light text-[#999999]"
+									className="hover:text-gray-700 transition-colors hover:underline text-[18px] font-light text-gray"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Forgot password?

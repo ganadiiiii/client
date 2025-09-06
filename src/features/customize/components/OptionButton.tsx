@@ -16,8 +16,8 @@ const OptionButton: React.FC<OptionButtonProps> = ({
 			onClick={onClick}
 			className={`px-8 py-4 rounded-full border cursor-pointer transition-all duration-100 min-w-[144px] h-[61px] flex items-center justify-center ${
 				isSelected
-					? "bg-[#FFD1D4] border-[#FF6E77] border-2 text-[#FF6E77] font-bold"
-					: "bg-white border-[#c3c3c3] border-[1.5px] text-[#5e5e5e] font-normal hover:bg-[#f3f3f3]"
+					? "bg-primary/40 border-primary border-2 text-primary font-bold"
+					: "bg-white border-gray/60 border-[1.5px] text-dark-gray font-normal hover:bg-gray/20"
 			}`}
 			style={{
 				fontFamily: "NexonLv1Gothic",

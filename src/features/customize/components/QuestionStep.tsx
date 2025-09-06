@@ -18,8 +18,8 @@ interface QuestionStepProps {
 }
 
 const HIGHLIGHT_MAP: Record<number, string> = {
-	1: "선물하시나요?",
-	2: "함께 나누고 싶으신가요?",
+	1: "누구에게",
+	2: "어떤 순간을",
 	3: "어떤 감정을 담고 싶으신가요?",
 	4: "특별히 담고 싶은 꽃",
 	5: "꽃다발의 크기",
@@ -33,7 +33,7 @@ function renderHighlighted(title: string, phrase?: string) {
 		<>
 			{before}
 			<span
-				className="inline-flex items-center bg-[#FFD1D4] rounded-3xl px-3 pb-1 pt-2"
+				className="inline-flex items-center bg-primary/40 rounded-3xl px-2 pb-1 pt-2"
 				style={{
 					boxDecorationBreak: "clone",
 					WebkitBoxDecorationBreak: "clone",
@@ -68,9 +68,9 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 			<div className="flex-1 flex flex-col items-center justify-center gap-y-10">
 				{/* 질문 번호 표시 */}
 				<div className="flex justify-center">
-					<div className="bg-white rounded-full border-[3px] border-[#FF9BAF] px-10 py-2 sm:px-12 sm:py-3">
+					<div className="bg-white rounded-full border-[3px] border-primary/40 px-10 py-2 sm:px-12 sm:py-3">
 						<span
-							className="text-[#FF9BAF] text-lg sm:text-xl"
+							className="text-primary/40 text-lg sm:text-xl"
 							style={{
 								fontFamily: "BagelFatOne-Regular",
 								fontWeight: "400",
@@ -85,7 +85,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 				<div className="relative">
 					{/* <div className="bg-[#FFD1D4] rounded-full px-16 py-4 mb-4 inline-block"> */}
 					<h1
-						className="text-black text-center mb-2 font-bold whitespace-nowrap text-xl sm:text-2xl md:text-3xl"
+						className="text-black text-center mb-2 font-bold whitespace-nowrap text-[28px] sm:text-2xl md:text-3xl"
 						style={{
 							fontFamily: "NexonLv1Gothic",
 							fontWeight: "700",
@@ -98,7 +98,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 					{/* 복수선택 문구 */}
 					{isMultipleChoice && (
 						<p
-							className="absolute right-0 text-right text-[#999999] font-medium text-base"
+							className="absolute right-0 text-right text-gray font-medium text-base"
 							style={{
 								fontFamily: "NexonLv1Gothic",
 								fontWeight: "400",
@@ -120,7 +120,6 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 									name={card.name}
 									engName={card.engName}
 									colorMeanings={card.colorMeanings}
-									flowerImg={card.flowerImg}
 									isSelected={selectedOptions.includes(card.id)}
 									onClick={() => onOptionSelect(card.id)}
 								/>
@@ -133,7 +132,6 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 							number={1}
 							size="S = One flower"
 							description="한 송이의 마음"
-							flowerImg="/src/assets/generate/image179.png"
 							isSelected={selectedOptions.includes("S")}
 							onClick={() => onOptionSelect("S")}
 						/>
@@ -141,7 +139,6 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 							number={2}
 							size="M = Mini bouquets"
 							description="조화로운 중간 크기"
-							flowerImg="/src/assets/generate/image179.png"
 							isSelected={selectedOptions.includes("M")}
 							onClick={() => onOptionSelect("M")}
 						/>
@@ -149,7 +146,6 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 							number={3}
 							size="L = Lush bouquet"
 							description="풍성한 부케"
-							flowerImg="/src/assets/generate/image179.png"
 							isSelected={selectedOptions.includes("L")}
 							onClick={() => onOptionSelect("L")}
 						/>

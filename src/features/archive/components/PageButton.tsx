@@ -101,7 +101,7 @@ export default function PageButton({
 					viewBox="0 0 24 24"
 					strokeWidth={1.5}
 					stroke="currentColor"
-					className={`w-6 h-6 z-20 relative transition-all duration-200 pointer-events-none ${!disabled ? "text-[#5e5e5e]" : "text-[#c3c3c3]"}`}
+					className={`w-6 h-6 z-20 relative transition-all duration-200 pointer-events-none ${!disabled ? "text-dark-gray" : "text-gray/60"}`}
 				>
 					<path
 						strokeLinecap="round"

@@ -6,7 +6,6 @@ interface FlowerTypeOptionCardProps {
 	name: string;
 	engName: string;
 	colorMeanings: { color: string; meaning: string }[];
-	flowerImg: string;
 	isSelected: boolean;
 	onClick: () => void;
 }
@@ -16,7 +15,6 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 	name,
 	engName,
 	colorMeanings,
-	flowerImg,
 	isSelected,
 	onClick,
 }) => {
@@ -31,7 +29,7 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 
 	return (
 		<motion.div
-			className="relative w-[205px] h-[320px] cursor-pointer shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] rounded-[21px]"
+			className={`relative w-[205px] p-12 h-[320px] cursor-pointer shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] rounded-[21px] rounded-[21px] shadow-sm transition-colors duration-300 ${isSelected ? "bg-primary/40" : "bg-white"}`}
 			onClick={onClick}
 			onMouseEnter={handleMouseEnter}
 			whileHover={{
@@ -44,34 +42,28 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 				scale: { type: "tween", duration: 0.1 },
 			}}
 		>
-			{/* 카드 배경 */}
-			<div
-				className={`absolute inset-0 rounded-[21px] shadow-sm z-0 transition-colors duration-300 ${
-					isSelected ? "bg-[#FFD1D4]" : "bg-white"
-				}`}
-				style={{
-					boxShadow: "1.9px 1.9px 3.2px 0px rgba(0, 0, 0, 0.1)",
-				}}
-			/>
+			<div>
+				{/* gradation */}
+				<div
+					className="absolute left-[12px] top-[14px] w-[181px] h-[201px] rounded-[17px] z-10"
+					style={{
+						backgroundImage: `url('./src/assets/generate/bg-${number}.svg')`,
+						backgroundRepeat: "no-repeat",
+						backgroundSize: "100% 100%",
+						backgroundPosition: "center",
+					}}
+				/>
 
-			{/* 그라데이션 영역 */}
-			<div
-				className="absolute left-[12px] top-[14px] w-[181px] h-[201px] rounded-[17px] z-10"
-				style={{
-					backgroundImage: "url('./src/assets/generate/type.svg')",
-				}}
-			/>
-
-			{/* 꽃 이미지 */}
-			<img
-				src={flowerImg}
-				alt={name}
-				className="absolute left-[46px] top-[47px] w-[101px] h-[172px] object-cover rounded-sm z-30"
-			/>
-
+				{/* flower image */}
+				<img
+					src={`./src/assets/generate/flower-${number}.svg`}
+					alt={name}
+					className="absolute h-[160px] object-cover rounded-sm z-20"
+				/>
+			</div>
 			{/* NO. 텍스트 */}
 			<div
-				className="absolute left-[20px] top-[16px] text-black z-20"
+				className="absolute left-[20px] top-[16px] text-black z-10"
 				style={{
 					fontFamily: "Yidstreet",
 					fontSize: "8.7px",

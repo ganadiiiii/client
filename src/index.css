@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+	--color-primary: #FF9BAF;
+	--color-purple: #C69FD4;
+	--color-gray: #999999;
+	--color-dark-gray: #5E5E5E;
+}
+
 @font-face {
 	font-family: "SUIT-Regular";
 	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")

@@ -128,7 +128,7 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
 					viewBox="0 0 24 24"
 					strokeWidth={1.5}
 					stroke="currentColor"
-					className={`w-6 h-6 z-20 relative transition-all duration-200 pointer-events-none ${!disabled ? "text-[#FF6E77]" : "text-black"}`}
+					className={`w-6 h-6 z-20 relative transition-all duration-200 pointer-events-none ${!disabled ? "text-primary" : "text-black"}`}
 				>
 					<path
 						strokeLinecap="round"

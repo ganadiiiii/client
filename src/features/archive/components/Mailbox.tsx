@@ -13,7 +13,7 @@ export default function Mailbox() {
             onMouseLeave={() => setIsHovered(false)}
         >
             <motion.img
-                src="/src/assets/archive/callout.svg"
+                src="/src/assets/archive/callout.png"
                 alt="Callout"
                 // style의 transform을 제거하고, animate 속성으로 위치를 제어합니다.
                 // x는 고정된 왼쪽 위치, y는 아래에서 위아래로 움직이는 애니메이션입니다.

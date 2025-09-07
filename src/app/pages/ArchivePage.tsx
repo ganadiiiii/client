@@ -12,12 +12,24 @@ const ArchivePage = () => {
 
 	return (
 		<main className="overflow-hidden">
-			<div
-				className="relative w-full h-screen bg-cover bg-center bg-no-repeat flex justify-center pt-[139px]"
-				style={{
-					backgroundImage: `url(/src/assets/archive/${isLightOn ? "bg" : "bg-dark"}.svg)`,
-				}}
-			>
+			{/* background image with smooth crossfade */}
+			<div className="relative w-full h-screen flex justify-center pt-[139px] overflow-hidden">
+				{/* Light background layer */}
+				<div
+					className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-400 ease-in-out pointer-events-none"
+					style={{
+						backgroundImage: "url(/src/assets/archive/bg.svg)",
+						opacity: isLightOn ? 1 : 0,
+					}}
+				/>
+				{/* Dark background layer */}
+				<div
+					className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-400 ease-in-out pointer-events-none"
+					style={{
+						backgroundImage: "url(/src/assets/archive/bg-dark.svg)",
+						opacity: isLightOn ? 0 : 1,
+					}}
+				/>
 				{/* 배경 역할을 하는 home 이미지 */}
 				<div className="relative">
 					<img

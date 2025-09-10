@@ -34,7 +34,7 @@ const CustomizingResultPage: React.FC = () => {
 		>
 			{/* 메인 컨텐츠 */}
 			<div
-				className={`flex flex-col items-center justify-center min-h-screen px-8 transition-all duration-300`}
+				className={`relative flex flex-col items-center justify-center min-h-screen px-8 transition-all duration-300 w-full max-w-[1728px] scale-[100%] md:scale-[60%] lg:scale-[70%] xl:scale-[80%] 2xl:scale-[90%] z-40`}
 			>
 				{/* 제목 */}
 				<h1
@@ -184,7 +184,7 @@ const CustomizingResultPage: React.FC = () => {
 			</div>
 			{isModalOpen && (
 				<div
-					className="fixed inset-0 z-[60] flex items-center justify-center"
+					className="fixed inset-0 z-60 flex items-center justify-center"
 					onClick={() => setIsModalOpen(false)}
 				>
 					<div

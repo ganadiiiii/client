@@ -19,7 +19,7 @@ const LoginForm: React.FC = () => {
 	};
 
 	return (
-		<div className="flex items-start flex-col min-h-screen pt-[680px] bg-[#FCFBF6]">
+		<div className="flex items-start flex-col min-h-screen pt-[680px] bg-background">
 			<div className="flex justify-center px-4 w-full">
 				<div className="w-full max-w-6xl h-[1000px]">
 					{/* 로그인 제목과 데코레이션 라인 */}

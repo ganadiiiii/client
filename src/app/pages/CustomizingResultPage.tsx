@@ -27,7 +27,7 @@ const CustomizingResultPage: React.FC = () => {
 
 	return (
 		<div
-			className="relative w-full max-h-[1117px] bg-[#FCFBF6] bg-cover bg-center bg-no-repeat"
+			className="relative w-full max-h-[1117px] bg-background bg-cover bg-center bg-no-repeat"
 			style={{
 				backgroundImage: `url(${bg})`,
 			}}

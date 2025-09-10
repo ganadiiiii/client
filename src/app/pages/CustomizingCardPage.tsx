@@ -19,7 +19,7 @@ const CustomizingCardPage: React.FC = () => {
 
 	return (
 		<div
-			className="relative flex flex-col items-center justify-center w-screen h-screen bg-[#FCFBF6] bg-cover bg-no-repeat bg-top"
+			className="relative flex flex-col items-center justify-center w-screen h-screen bg-background bg-cover bg-no-repeat bg-top"
 			style={{
 				backgroundImage: `url(${bg})`,
 			}}

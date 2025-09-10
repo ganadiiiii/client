@@ -81,7 +81,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 	};
 	return (
 		<div
-			className="min-h-screen flex flex-col items-center justify-center relative bg-[#FCFBF6] bg-cover bg-center text-center"
+			className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center"
 			style={{
 				backgroundImage: "url('./src/assets/generate/bg.svg')",
 			}}

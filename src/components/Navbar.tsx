@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
 			{/* 배경 이미지 영역: 로그인/회원가입/메인/온보딩에서만 보이도록 */}
 			{isAuthPage && (
 				<div
-					className="absolute top-0 left-0 w-screen h-[482px] z-0 bg-cover bg-center bg-no-repeat"
+					className="absolute top-0 left-0 w-screen h-[579px] z-0 bg-cover bg-center bg-no-repeat"
 					style={{ backgroundImage: "url('./src/assets/nav_bg.svg')" }}
 				/>
 			)}
@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
 			{/* 상단 바만 배경색이 변경되도록 분리 */}
 			<div
 				className={`fixed top-0 left-0 w-full z-10 transition-all duration-300 ease-in-out
-        ${isScrolled ? "bg-[#FCFBF6]" : "bg-transparent"}
+        ${isScrolled ? "bg-background" : "bg-transparent"}
         h-[102px] flex items-center justify-between px-[300px]
       `}
 			>

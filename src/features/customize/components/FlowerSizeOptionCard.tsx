@@ -29,7 +29,11 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 
 	return (
 		<motion.div
-			className={`relative w-[335px] h-[431px] cursor-pointer shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] rounded-[32px] rounded-[21px] z-0 transition-colors duration-300 ${isSelected ? "bg-[#FFD1D4]" : "bg-white"}`}
+			className={`relative cursor-pointer shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] rounded-[32px] rounded-[21px] z-0 transition-colors duration-300 ${isSelected ? "bg-[#FFD1D4]" : "bg-white"}`}
+			style={{
+				width: "21em",
+				height: "26.9em",
+			}}
 			onClick={onClick}
 			onMouseEnter={handleMouseEnter}
 			whileHover={{
@@ -45,8 +49,12 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 			{/* 그라데이션 영역 */}
 			<div>
 				<div
-					className="absolute left-[20px] top-[23px] w-[297px] h-[329px] rounded-[1.7em] z-10"
+					className="absolute rounded-[1.7em] z-10"
 					style={{
+						left: "1.25em",
+						top: "1.44em",
+						width: "18.5em",
+						height: "20.5em",
 						backgroundImage: "url('./src/assets/generate/size.svg')",
 					}}
 				/>
@@ -55,15 +63,21 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 				<img
 					src={`./src/assets/generate/size-${number}.png`}
 					alt={description}
-					className="absolute left-[90px] top-[80px] h-[220px] object-cover rounded-sm z-30"
+					className="absolute object-cover rounded-sm z-30"
+					style={{
+						left: "50%",
+						transform: "translateX(-50%)",
+						top: "5em",
+						height: "13.75em",
+					}}
 				/>
 
 				{/* 원들 표시 */}
-				<div className="absolute top-[24px] left-[34px] flex gap-[13px] z-20">
+				<div className="absolute top-[1.5em] left-[2.125em] flex gap-[1.5em] 2xl:gap-[0.81em] z-20">
 					{Array.from({ length: number }).map((_, idx) => (
 						<div
 							key={idx}
-							className="w-[18px] h-[18px] rounded-full"
+							className="w-4 h-4 rounded-full"
 							style={{
 								backgroundColor: dotColors[idx],
 							}}

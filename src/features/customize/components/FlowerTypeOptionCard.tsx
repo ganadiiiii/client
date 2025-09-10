@@ -64,9 +64,9 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 					alt={name}
 					className="absolute object-cover rounded-sm z-20"
 					style={{
-						left: "2.9em",
-						top: "2.9em",
-						width: "6.3em",
+						left: "50%",
+						transform: "translateX(-50%)",
+						top: "2em",
 						height: "10.8em",
 					}}
 				/>

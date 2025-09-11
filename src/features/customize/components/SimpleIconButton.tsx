@@ -35,14 +35,14 @@ const SimpleIconButton: React.FC<SimpleIconButtonProps> = ({
 			>
 				<div className="flex items-center justify-center w-full h-full">
 					<img
-						src={(hoverIcon && isHovered) ? hoverIcon : icon}
+						src={hoverIcon && isHovered ? hoverIcon : icon}
 						className="w-6 h-6 text-dark-gray stroke-[5px]"
 					/>
 				</div>
 			</button>
 			<label
-				className="text-dark-gray"
-				style={{ fontFamily: "NexonLv1Gothic", fontSize: "14px" }}
+				className="text-dark-gray text-base"
+				style={{ fontFamily: "NexonLv1Gothic" }}
 			>
 				{label}
 			</label>

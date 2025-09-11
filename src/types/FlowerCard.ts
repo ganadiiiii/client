@@ -8,7 +8,7 @@ export interface FlowerCard {
 	floriography: string;
 	size: string;
 	price: number;
-	
+
 	// 메시지 관련 (Phase 2, 3에서 사용)
 	message?: string;
 	sender?: string;

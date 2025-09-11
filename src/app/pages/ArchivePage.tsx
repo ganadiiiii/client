@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Mailbox from "../../features/archive/components/Mailbox";
-import FlowerGrid from "../../features/archive/FlowerGrid";
-import FriendsListModal from "../../features/archive/components/FriendsListModal";
 import DeleteConfirmModal from "../../features/archive/components/DeleteConfirmModal";
+import FriendsListModal from "../../features/archive/components/FriendsListModal";
+import Mailbox from "../../features/archive/components/Mailbox";
 import SuccessModal from "../../features/archive/components/SuccessModal";
+import FlowerGrid from "../../features/archive/FlowerGrid";
 
 interface Friend {
 	id: number;
@@ -15,7 +15,7 @@ interface Friend {
 const ArchivePage = () => {
 	const [isLightOn, setIsLightOn] = useState(true);
 	const [isLampHovered, setIsLampHovered] = useState(false);
-	
+
 	// 모달 상태 관리
 	const [isFriendsModalOpen, setIsFriendsModalOpen] = useState(false);
 	const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);

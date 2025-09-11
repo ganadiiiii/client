@@ -41,8 +41,8 @@ const GradientIconButton: React.FC<GradientIconButtonProps> = ({
 				</div>
 			</button>
 			<label
-				className="text-dark-gray"
-				style={{ fontFamily: "NexonLv1Gothic", fontSize: "14px" }}
+				className="text-dark-gray text-base"
+				style={{ fontFamily: "NexonLv1Gothic" }}
 			>
 				{label}
 			</label>

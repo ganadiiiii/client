@@ -22,7 +22,9 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
 		>
 			{/* Pink background for enabled state, only for right button */}
 			{direction === "right" && (
-				<div className={`absolute inset-0 rounded-full bg-[#FF9BAF] z-0 transition-opacity duration-300 ${!disabled ? "opacity-100" : "opacity-0"}`} />
+				<div
+					className={`absolute inset-0 rounded-full bg-[#FF9BAF] z-0 transition-opacity duration-300 ${!disabled ? "opacity-100" : "opacity-0"}`}
+				/>
 			)}
 
 			<svg

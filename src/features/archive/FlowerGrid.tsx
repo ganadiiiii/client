@@ -24,7 +24,6 @@ const mockFlowerData = Array.from({ length: 50 }, (_, i) => ({
 	url: `/src/assets/generate/size-3.png`,
 }));
 
-
 export default function FlowerGrid() {
 	const [currentPage, setCurrentPage] = useState(0);
 
@@ -48,10 +47,7 @@ export default function FlowerGrid() {
 			{/* 5x3 그리드 */}
 			<div className="flex flex-col gap-12 items-center">
 				{[0, 1, 2].map((rowIdx) => (
-					<div
-						key={rowIdx}
-						className="grid grid-cols-5 gap-6"
-					>
+					<div key={rowIdx} className="grid grid-cols-5 gap-6">
 						{currentCards.slice(rowIdx * 5, rowIdx * 5 + 5).map((card, i) => (
 							<FlowerCard
 								key={card.id}

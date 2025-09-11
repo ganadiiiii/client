@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import checkIcon from "../assets/icon-check.svg"
+import checkIcon from "../assets/icon-check.svg";
 
 interface AlertDialogProps {
 	text: string;
@@ -22,7 +22,7 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
 			// Show immediately
 			setShow(true);
 			console.log("AlertDialog showing");
-			
+
 			// Auto-dismiss after duration
 			const timer = setTimeout(() => {
 				console.log("AlertDialog auto-dismissing");
@@ -51,9 +51,9 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
 				className={`bg-white rounded-[19px] w-[320px] px-8 py-6 shadow-lg transform transition-all duration-300 ${
 					show ? "scale-100 translate-y-0" : "scale-95 translate-y-2"
 				}`}
-				style={{ 
+				style={{
 					boxShadow: "5px 10px 41.6px rgba(0, 0, 0, 0.17)",
-					fontFamily: "NexonLv1Gothic"
+					fontFamily: "NexonLv1Gothic",
 				}}
 			>
 				<img src={checkIcon} className="mx-auto mb-3" />

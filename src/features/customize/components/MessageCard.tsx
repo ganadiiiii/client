@@ -16,9 +16,9 @@ const MessageCard: React.FC<MessageCardProps> = ({
 	const ref = useRef<HTMLDivElement>(null);
 
 	return (
-		<div ref={ref} className="w-[384px] h-[593px]">
+		<div ref={ref} className="w-[24em] h-[37.0625em]">
 			<div
-				className="relative w-full h-full rounded-[40px]"
+				className="relative w-full h-full rounded-5xl"
 				style={{
 					backgroundImage: `url(${cardBg})`,
 					backgroundRepeat: "no-repeat",
@@ -29,18 +29,16 @@ const MessageCard: React.FC<MessageCardProps> = ({
 				<div>
 					{/* Message title */}
 					<div
-						className="absolute left-[40px] top-[40px] text-black z-20"
+						className="absolute left-[2.75em] top-[2.75em] text-black z-20 font-semibold text-sm"
 						style={{
 							fontFamily: "Yidstreet",
-							fontSize: "14px",
-							fontWeight: "400",
 						}}
 					>
 						Message
 					</div>
 
 					{/* Message input area */}
-					<div className="absolute left-[40px] top-[80px] right-[40px] bottom-[120px] text-black">
+					<div className="absolute left-[2.5em] top-[5em] right-[2.5em] bottom-[7.5em] text-black">
 						<textarea
 							value={message || ""}
 							onChange={(e) => onMessageChange(e.target.value)}
@@ -53,12 +51,11 @@ const MessageCard: React.FC<MessageCardProps> = ({
 					</div>
 
 					{/* To & From at bottom */}
-					<div className="absolute left-[40px] bottom-[45px] flex flex-row gap-20 text-black">
+					<div className="absolute left-[3em] bottom-[3.25em] flex flex-row gap-20 text-black font-medium text-sm">
 						<div className="flex gap-3 items-baseline">
 							<span
 								style={{
 									fontFamily: "Yidstreet",
-									fontSize: "14px",
 									fontWeight: "600",
 								}}
 							>
@@ -67,7 +64,6 @@ const MessageCard: React.FC<MessageCardProps> = ({
 							<span
 								style={{
 									fontFamily: "NexonLv1Gothic",
-									fontSize: "14px",
 									fontWeight: "400",
 								}}
 							>
@@ -78,7 +74,6 @@ const MessageCard: React.FC<MessageCardProps> = ({
 							<span
 								style={{
 									fontFamily: "Yidstreet",
-									fontSize: "14px",
 									fontWeight: "600",
 								}}
 							>
@@ -87,7 +82,6 @@ const MessageCard: React.FC<MessageCardProps> = ({
 							<span
 								style={{
 									fontFamily: "NexonLv1Gothic",
-									fontSize: "14px",
 									fontWeight: "400",
 								}}
 							>

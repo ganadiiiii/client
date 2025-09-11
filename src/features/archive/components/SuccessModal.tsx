@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface SuccessModalProps {
 	isOpen: boolean;
@@ -33,9 +33,14 @@ const SuccessModal = ({ isOpen, message, onClose }: SuccessModalProps) => {
 						onClick={(e) => e.stopPropagation()}
 					>
 						<div className="flex flex-col items-center justify-center gap-y-2">
-							<img src="/src/assets/archive/complete.svg" alt="Success" className="w-9.5 h-9.5" />
-							<p className="text-black text-center text-lg font-light whitespace-pre-line"
-							style={{fontFamily: "NexonLv1Gothic"}}
+							<img
+								src="/src/assets/archive/complete.svg"
+								alt="Success"
+								className="w-9.5 h-9.5"
+							/>
+							<p
+								className="text-black text-center text-lg font-light whitespace-pre-line"
+								style={{ fontFamily: "NexonLv1Gothic" }}
 							>
 								{message}
 							</p>

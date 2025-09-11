@@ -1,0 +1,104 @@
+import React, { useRef } from "react";
+
+import cardBg from "../../../assets/generate/result/card-message.png";
+import type { FlowerCard } from "../../../types/FlowerCard";
+
+type MessageCardProps = {
+	flowerCard: FlowerCard;
+	onMessageChange: (message: string) => void;
+};
+
+const MessageCard: React.FC<MessageCardProps> = ({
+	flowerCard,
+	onMessageChange,
+}) => {
+	const { message, sender, receiver } = flowerCard;
+	const ref = useRef<HTMLDivElement>(null);
+
+	return (
+		<div ref={ref} className="w-[384px] h-[593px]">
+			<div
+				className="relative w-full h-full rounded-[40px]"
+				style={{
+					backgroundImage: `url(${cardBg})`,
+					backgroundRepeat: "no-repeat",
+					backgroundSize: "100% 100%",
+					backgroundPosition: "center",
+				}}
+			>
+				<div>
+					{/* Message title */}
+					<div
+						className="absolute left-[40px] top-[40px] text-black z-20"
+						style={{
+							fontFamily: "Yidstreet",
+							fontSize: "14px",
+							fontWeight: "400",
+						}}
+					>
+						Message
+					</div>
+
+					{/* Message input area */}
+					<div className="absolute left-[40px] top-[80px] right-[40px] bottom-[120px] text-black">
+						<textarea
+							value={message || ""}
+							onChange={(e) => onMessageChange(e.target.value)}
+							placeholder="전하고 싶은 말을 입력해주세요"
+							className="w-full h-full p-4 text-sm/7.5 focus:outline-none resize-none bg-transparent border-none"
+							style={{
+								fontFamily: "NexonLv1Gothic",
+							}}
+						/>
+					</div>
+
+					{/* To & From at bottom */}
+					<div className="absolute left-[40px] bottom-[45px] flex flex-row gap-20 text-black">
+						<div className="flex gap-3 items-baseline">
+							<span
+								style={{
+									fontFamily: "Yidstreet",
+									fontSize: "14px",
+									fontWeight: "600",
+								}}
+							>
+								To
+							</span>
+							<span
+								style={{
+									fontFamily: "NexonLv1Gothic",
+									fontSize: "14px",
+									fontWeight: "400",
+								}}
+							>
+								{receiver}
+							</span>
+						</div>
+						<div className="flex gap-3 items-baseline">
+							<span
+								style={{
+									fontFamily: "Yidstreet",
+									fontSize: "14px",
+									fontWeight: "600",
+								}}
+							>
+								From
+							</span>
+							<span
+								style={{
+									fontFamily: "NexonLv1Gothic",
+									fontSize: "14px",
+									fontWeight: "400",
+								}}
+							>
+								{sender}
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default MessageCard;

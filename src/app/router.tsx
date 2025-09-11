@@ -4,6 +4,7 @@ import SignUpForm from "../features/login/components/SignUpForm";
 import CustomizingCardPage from "./pages/CustomizingCardPage";
 import CustomizingPage from "./pages/CustomizingPage";
 import CustomizingResultPage from "./pages/CustomizingResultPage";
+import ResultSentPage from "./pages/ResultSentPage";
 import ArchivePage from "./pages/ArchivePage";
 
 export const AppRoutes = () => {
@@ -11,6 +12,7 @@ export const AppRoutes = () => {
 		<Routes>
 			<Route path="/customizing" element={<CustomizingPage />} />
 			<Route path="/customizing/result" element={<CustomizingResultPage />} />
+			<Route path="/customizing/result/sent" element={<ResultSentPage />} />
 			<Route path="/archive" element={<ArchivePage />} />
 			<Route path="/customizing/card" element={<CustomizingCardPage />} />
 			<Route path="/login" element={<LoginForm />} />

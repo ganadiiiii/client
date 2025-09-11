@@ -7,10 +7,10 @@ import type { FlowerCard } from "../../types/FlowerCard";
 const ResultSentPage: React.FC = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	
+
 	// Get flower card data from navigation state
 	const flowerCard = location.state?.flowerCard as FlowerCard;
-	
+
 	// If no flower card data, redirect back to customizing
 	if (!flowerCard) {
 		navigate("/customizing");

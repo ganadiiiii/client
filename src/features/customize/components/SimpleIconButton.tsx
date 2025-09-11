@@ -35,7 +35,7 @@ const SimpleIconButton: React.FC<SimpleIconButtonProps> = ({
 			>
 				<div className="flex items-center justify-center w-full h-full">
 					<img
-						src={(hoverIcon && isHovered) ? hoverIcon : icon}
+						src={hoverIcon && isHovered ? hoverIcon : icon}
 						className="w-6 h-6 text-dark-gray stroke-[5px]"
 					/>
 				</div>

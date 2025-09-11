@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import { motion } from "framer-motion";
+import React, { useState } from "react";
 
 interface FlowerTypeOptionCardProps {
 	number: string;
@@ -132,7 +132,7 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 			</div>
 
 			{/* 색상별 의미 */}
-			<div 
+			<div
 				className="absolute space-y-[0.25em] z-20"
 				style={{
 					left: "1.1em",

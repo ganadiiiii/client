@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import LoginForm from "../features/login/components/LoginForm";
 import SignUpForm from "../features/login/components/SignUpForm";
+import ArchivePage from "./pages/ArchivePage";
 import CustomizingCardPage from "./pages/CustomizingCardPage";
 import CustomizingPage from "./pages/CustomizingPage";
 import CustomizingResultPage from "./pages/CustomizingResultPage";
 import ResultSentPage from "./pages/ResultSentPage";
-import ArchivePage from "./pages/ArchivePage";
 
 export const AppRoutes = () => {
 	return (

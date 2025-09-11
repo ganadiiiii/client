@@ -75,7 +75,7 @@ const LoginForm: React.FC = () => {
 								<label
 									htmlFor="password"
 									className="block font-bold text-gray text-lg mb-2 w-140"
-									style={{ fontFamily: "NexonLv1Gothic"}}
+									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Password
 								</label>
@@ -86,7 +86,7 @@ const LoginForm: React.FC = () => {
 									onChange={(e) => setPassword(e.target.value)}
 									required
 									className="w-140 h-11.5 px-4 py-4 border-2 border-gray/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
-									style={{ fontFamily: "NexonLv1Gothic"}}
+									style={{ fontFamily: "NexonLv1Gothic" }}
 								/>
 							</div>
 
@@ -96,7 +96,7 @@ const LoginForm: React.FC = () => {
 								<button
 									type="submit"
 									className="flex py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
-									style={{ fontFamily: "NexonLv1Gothic"}}
+									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Sign in
 								</button>
@@ -106,7 +106,7 @@ const LoginForm: React.FC = () => {
 									type="button"
 									onClick={() => navigate("/signup")}
 									className="flex py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
-									style={{ fontFamily: "NexonLv1Gothic"}}
+									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Create Account
 								</button>
@@ -117,7 +117,7 @@ const LoginForm: React.FC = () => {
 								<Link
 									to="/forgot-password"
 									className="hover:text-gray-700 transition-colors hover:underline text-lg font-light text-gray"
-									style={{ fontFamily: "NexonLv1Gothic"}}
+									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Forgot password?
 								</Link>

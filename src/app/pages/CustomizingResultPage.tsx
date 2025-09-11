@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bg from "../../assets/generate/result/bg.png";
 import AlertDialog from "../../components/AlertDialog";
+import ConfirmDialog from "../../components/ConfirmDialog";
 import CustomizeResultSection from "../../features/customize/sections/CustomizeResultSection";
 import MessageSection from "../../features/customize/sections/MessageSection";
 import type {
 	FlowerCard,
 	Friend,
-	UIState,
 	ResultPhase,
+	UIState,
 } from "../../types/FlowerCard";
 import { ResultPhase as ResultPhaseConst } from "../../types/FlowerCard";
-import ConfirmDialog from "../../components/ConfirmDialog";
 
 // Mock friends data - replace with actual data source later
 const mockFriends: Friend[] = [

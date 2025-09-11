@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import React, { useEffect, useState } from "react";
 import { sampleFlowerData as flowerCardData } from "../../../data/flowerData";
 import FlowerSizeOptionCard from "../components/FlowerSizeOptionCard";
 import FlowerTypeOptionCard from "../components/FlowerTypeOptionCard";
@@ -96,7 +96,12 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 						initial={hasMounted ? "enter" : false}
 						animate="center"
 						exit="exit"
-						transition={{ type: "spring", stiffness: 300, damping: 20, mass: 0.5 }}
+						transition={{
+							type: "spring",
+							stiffness: 300,
+							damping: 20,
+							mass: 0.5,
+						}}
 						className="flex flex-col items-center justify-center gap-y-10"
 					>
 						{/* question number */}

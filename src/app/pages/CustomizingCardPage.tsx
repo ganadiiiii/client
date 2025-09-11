@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import bg from "../../assets/generate/card_bg.svg";
-import Card from "../../features/archive/components/Card";
 import phone from "../../assets/generate/card_bg_phone.svg";
+import Card from "../../features/archive/components/Card";
 
 //임시
 const cardData = {
@@ -25,14 +25,14 @@ const CustomizingCardPage: React.FC = () => {
 				backgroundImage: `url(${bg})`,
 			}}
 		>
-			<div className="relative flex flex-col items-center justify-center bg-cover bg-no-repeat bg-top w-[621px] h-[1091px] scale-[100%] md:scale-[60%] lg:scale-[70%] xl:scale-[80%] 2xl:scale-[90%]"
+			<div
+				className="relative flex flex-col items-center justify-center bg-cover bg-no-repeat bg-top w-[621px] h-[1091px] scale-[100%] md:scale-[60%] lg:scale-[70%] xl:scale-[80%] 2xl:scale-[90%]"
 				style={{
 					backgroundImage: `url(${phone})`,
-					backgroundColor: "#ccc"
+					backgroundColor: "#ccc",
 				}}
 			>
-				<div 
-					className="relative flex flex-col items-center justify-center mt-[102px] gap-10 w-full max-w-[1728px]">
+				<div className="relative flex flex-col items-center justify-center mt-[102px] gap-10 w-full max-w-[1728px]">
 					{/* 제목 */}
 					<h1
 						className="text-3xl font-bold text-black/80 z-40"

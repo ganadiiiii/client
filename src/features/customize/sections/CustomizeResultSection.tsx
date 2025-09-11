@@ -1,17 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import ResultCard from "../components/ResultCard";
-import SimpleIconButton from "../components/SimpleIconButton";
-import GradientIconButton from "../components/GradientIconButton";
+import iconOrder from "../../../assets/generate/result/icon-order.svg";
+import iconOrderHover from "../../../assets/generate/result/icon-order-hover.svg";
 import iconRestart from "../../../assets/generate/result/icon-restart.svg";
 import iconSave from "../../../assets/generate/result/icon-save.svg";
-import iconSend from "../../../assets/generate/result/icon-send.svg";
-import iconOrder from "../../../assets/generate/result/icon-order.svg";
-import iconSendHover from "../../../assets/generate/result/icon-send-hover.svg";
 import iconSaveHover from "../../../assets/generate/result/icon-save-hover.svg";
-import iconOrderHover from "../../../assets/generate/result/icon-order-hover.svg";
+import iconSend from "../../../assets/generate/result/icon-send.svg";
+import iconSendHover from "../../../assets/generate/result/icon-send-hover.svg";
 import type { FlowerCard, Friend, UIState } from "../../../types/FlowerCard";
+import GradientIconButton from "../components/GradientIconButton";
+import ResultCard from "../components/ResultCard";
 import SelectFriendPopup from "../components/SelectFriendPopup";
+import SimpleIconButton from "../components/SimpleIconButton";
 
 interface CustomizeResultSectionProps {
 	flowerCard: FlowerCard;

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import { motion } from "framer-motion";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface FlowerCardProps {
@@ -9,7 +9,6 @@ interface FlowerCardProps {
 	};
 	style?: React.CSSProperties;
 }
-
 
 const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 	const navigate = useNavigate();
@@ -70,7 +69,7 @@ const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 			>
 				NO. {flower.id}
 			</div>
-            <img
+			<img
 				src={flower.url}
 				alt={`Flower ${flower.id}`}
 				className="absolute object-cover rounded-sm z-20"

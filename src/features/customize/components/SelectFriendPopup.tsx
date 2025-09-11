@@ -1,5 +1,5 @@
-import type { Friend, UIState } from "../../../types/FlowerCard";
 import iconClose from "../../../assets/generate/result/icon-close.svg";
+import type { Friend, UIState } from "../../../types/FlowerCard";
 import SimpleIconButton from "./SimpleIconButton";
 
 interface SelectFriendPopupProps {

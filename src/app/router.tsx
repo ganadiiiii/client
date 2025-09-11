@@ -6,6 +6,7 @@ import CustomizingCardPage from "./pages/CustomizingCardPage";
 import CustomizingPage from "./pages/CustomizingPage";
 import CustomizingResultPage from "./pages/CustomizingResultPage";
 import ResultSentPage from "./pages/ResultSentPage";
+import OrderPage from "./pages/OrderPage";
 
 export const AppRoutes = () => {
 	return (
@@ -17,6 +18,7 @@ export const AppRoutes = () => {
 			<Route path="/customizing/card" element={<CustomizingCardPage />} />
 			<Route path="/login" element={<LoginForm />} />
 			<Route path="/signup" element={<SignUpForm />} />
+			<Route path="/shop" element={<OrderPage />} />
 		</Routes>
 	);
 };

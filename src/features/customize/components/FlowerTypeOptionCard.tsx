@@ -92,7 +92,7 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 				className="absolute text-black z-20"
 				style={{
 					left: "2em",
-					top: "20em",
+					top: "19.5em",
 					fontFamily: "Yidstreet",
 					fontSize: "0.71em",
 					fontWeight: "700",
@@ -108,7 +108,7 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 				className="absolute border-t border-dashed border-[#D9D9D9] z-20"
 				style={{
 					left: "1.2em",
-					top: "15.4em",
+					top: "15em",
 					width: "10.9em",
 					height: "0em",
 					borderWidth: "0.67px",
@@ -120,7 +120,7 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 				className="absolute text-black text-right z-20"
 				style={{
 					right: "1.5em",
-					top: "26.5em",
+					top: "26em",
 					fontFamily: "Pretendard",
 					fontSize: "0.54rem",
 					fontWeight: "600",
@@ -136,7 +136,7 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 				className="absolute space-y-[0.25em] z-20"
 				style={{
 					left: "1.1em",
-					top: "16em",
+					top: "15.5em",
 					width: "10.9em",
 				}}
 			>
@@ -146,7 +146,7 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 							className="text-black"
 							style={{
 								fontFamily: "Yidstreet",
-								fontSize: "0.54rem",
+								fontSize: "0.65rem",
 								fontWeight: "300",
 								lineHeight: "1.18",
 								letterSpacing: "5%",
@@ -158,7 +158,7 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 							className="text-black"
 							style={{
 								fontFamily: "Pretendard",
-								fontSize: "0.54rem",
+								fontSize: "0.65rem",
 								fontWeight: "400",
 								lineHeight: "1.19",
 								letterSpacing: "5%",

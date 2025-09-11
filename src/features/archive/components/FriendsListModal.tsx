@@ -65,14 +65,21 @@ const FriendsListModal = ({
 		<AnimatePresence>
 			{isOpen && (
 				<motion.div
-					className="fixed inset-0 z-50 flex items-center justify-center bg-modal-bg/60"
+					className="fixed inset-0 z-10 flex items-center justify-center bg-modal-bg/60"
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 					onClick={handleBackdropClick}
 				>
+					<div className="fixed inset-0 flex items-end justify-center pointer-events-none z-20">
+						<img 
+							src="/src/assets/archive/letter_up.png" 
+							alt="letter_up" 
+							className="absolute bottom-[13.5em] w-[52em] h-[32em]"
+						/>
+					</div>
 					<motion.div
-						className="flex flex-col items-center w-161 h-204 bg-white rounded-[2.25em] shadow-[0_0_10px_0_rgba(0,0,0,0.15)] overflow-hidden py-10 px-18 gap-y-7"
+						className="flex flex-col items-center w-161 h-204 bg-white rounded-[2.25em] shadow-[0_0_10px_0_rgba(0,0,0,0.15)] overflow-hidden py-10 px-18 gap-y-7 z-30"
 						initial={{ y: "100%" }}
 						animate={{ y: 0 }}
 						exit={{ y: "100%" }}
@@ -213,6 +220,13 @@ const FriendsListModal = ({
 								</div>
 							)}
 					</motion.div>
+					<div className="fixed inset-0 flex items-end justify-center pointer-events-none z-40">
+						<img 
+							src="/src/assets/archive/letter.png" 
+							alt="letter" 
+							className="absolute bottom-0 w-[52em] h-[28em]"
+						/>
+					</div>
 				</motion.div>
 			)}
 		</AnimatePresence>

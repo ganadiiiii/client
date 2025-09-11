@@ -1,7 +1,7 @@
 import { useId, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LoginForm: React.FC = () => {
+const SignUpForm: React.FC = () => {
 	const firstNameId = useId();
 	const lastNameId = useId();
 	const emailId = useId();
@@ -19,18 +19,15 @@ const LoginForm: React.FC = () => {
 	};
 
 	return (
-		<div className="flex items-start flex-col min-h-screen pt-[680px] bg-[#FCFBF6]">
+		<div className="flex items-start flex-col min-h-screen pt-[600px] 2xl:pt-[700px] bg-background">
 			<div className="flex justify-center px-4 w-full">
 				<div className="w-full max-w-6xl h-[1000px]">
 					{/* 로그인 제목과 데코레이션 라인 */}
 					<div className="flex items-center justify-center mb-12">
 						{/* 왼쪽 분홍색 파선 */}
-						<div
-							className="flex items-center space-x-2"
-							style={{ width: "450px" }}
-						>
-							{Array.from({ length: 30 }, (_, i) => (
-								<div key={i} className="w-2 h-2 bg-primary/40 rounded-full" />
+						<div className="flex items-center space-x-2 w-65.1">
+							{Array.from({ length: 14 }, (_, i) => (
+								<div key={i} className="w-2 h-2 bg-[#FFD1D4] rounded-full" />
 							))}
 						</div>
 
@@ -43,12 +40,9 @@ const LoginForm: React.FC = () => {
 						</h1>
 
 						{/* 오른쪽 분홍색 파선 */}
-						<div
-							className="flex items-center space-x-2"
-							style={{ width: "450px" }}
-						>
-							{Array.from({ length: 30 }, (_, i) => (
-								<div key={i} className="w-2 h-2 bg-primary/40 rounded-full" />
+						<div className="flex items-center space-x-2 w-65.1">
+							{Array.from({ length: 14 }, (_, i) => (
+								<div key={i} className="w-2 h-2 bg-[#FFD1D4] rounded-full" />
 							))}
 						</div>
 					</div>
@@ -57,13 +51,13 @@ const LoginForm: React.FC = () => {
 					<div className="flex justify-center">
 						<form
 							onSubmit={handleSubmit}
-							className="space-y-6 w-full max-w-3xl"
+							className="flex flex-col items-center space-y-4 w-full max-w-3xl"
 						>
 							{/* First Name 입력 */}
-							<div>
+							<div className="flex-col justify-center">
 								<label
 									htmlFor="firstName"
-									className="block text-[18px] font-bold text-gray mb-2"
+									className="block text-[18px] font-bold text-gray mb-2 text-start w-140"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									First Name
@@ -74,16 +68,16 @@ const LoginForm: React.FC = () => {
 									value={firstName}
 									onChange={(e) => setFirstName(e.target.value)}
 									required
-									className="w-full px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
-									style={{ fontFamily: "NexonLv1Gothic" }}
+									className="w-full h-11.5 px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									style={{ fontFamily: "NexonLv1Gothic", fontSize: "18px" }}
 								/>
 							</div>
 
 							{/* Last Name 입력 */}
-							<div>
+							<div className="flex-col justify-center">
 								<label
 									htmlFor="lastName"
-									className="block text-[18px] font-bold text-gray mb-2"
+									className="block text-[18px] font-bold text-gray mb-2 text-start w-140"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Last Name
@@ -94,15 +88,15 @@ const LoginForm: React.FC = () => {
 									value={lastName}
 									onChange={(e) => setLastName(e.target.value)}
 									required
-									className="w-full px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
-									style={{ fontFamily: "NexonLv1Gothic" }}
+									className="w-full h-11.5 px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									style={{ fontFamily: "NexonLv1Gothic", fontSize: "18px" }}
 								/>
 							</div>
 							{/* Email 입력 */}
-							<div>
+							<div className="flex-col justify-center">
 								<label
 									htmlFor="email"
-									className="block text-[18px] font-bold text-gray mb-2"
+									className="block text-[18px] font-bold text-gray mb-2 text-start w-140"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Email
@@ -113,16 +107,16 @@ const LoginForm: React.FC = () => {
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									required
-									className="w-full px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
-									style={{ fontFamily: "NexonLv1Gothic" }}
+									className="w-full h-11.5 px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									style={{ fontFamily: "NexonLv1Gothic", fontSize: "18px" }}
 								/>
 							</div>
 
 							{/* Password 입력 */}
-							<div>
+							<div className="flex-col justify-center">
 								<label
 									htmlFor="password"
-									className="block text-[18px] font-bold text-gray mb-2"
+									className="block text-[18px] font-bold text-gray mb-2 text-start w-140"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Password
@@ -133,8 +127,8 @@ const LoginForm: React.FC = () => {
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
 									required
-									className="w-full px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
-									style={{ fontFamily: "NexonLv1Gothic" }}
+									className="w-full h-11.5 px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									style={{ fontFamily: "NexonLv1Gothic", fontSize: "18px" }}
 								/>
 							</div>
 
@@ -144,7 +138,7 @@ const LoginForm: React.FC = () => {
 									{/* Sign in 버튼 */}
 									<button
 										type="submit"
-										className="flex py-4 pl-[50px] pr-[50px] rounded-full bg-gray/20 text-gray text-[18px] font-bold hover:bg-primary/40 hover:text-white transition-colors"
+										className="flex py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
 										style={{ fontFamily: "NexonLv1Gothic" }}
 									>
 										Create Account
@@ -154,7 +148,7 @@ const LoginForm: React.FC = () => {
 									<button
 										type="button"
 										onClick={() => navigate("/login")}
-										className="flex py-4 pl-[50px] pr-[50px] rounded-full bg-gray/20 text-gray text-[18px] font-bold hover:bg-primary/40 hover:text-white transition-colors"
+										className="flex py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
 										style={{ fontFamily: "NexonLv1Gothic" }}
 									>
 										Back to Login
@@ -170,4 +164,4 @@ const LoginForm: React.FC = () => {
 	);
 };
 
-export default LoginForm;
+export default SignUpForm;

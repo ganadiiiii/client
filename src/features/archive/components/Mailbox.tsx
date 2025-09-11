@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function Mailbox() {
+interface MailboxProps {
+    onClick?: () => void;
+}
+
+export default function Mailbox({ onClick }: MailboxProps) {
     const [isHovered, setIsHovered] = useState(false);
     return (
         <div
@@ -11,6 +15,7 @@ export default function Mailbox() {
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={onClick}
         >
             <motion.img
                 src="/src/assets/archive/callout.png"

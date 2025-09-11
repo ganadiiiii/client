@@ -1,13 +1,69 @@
 import { useState } from "react";
 import Mailbox from "../../features/archive/components/Mailbox";
 import FlowerGrid from "../../features/archive/FlowerGrid";
+import FriendsListModal from "../../features/archive/components/FriendsListModal";
+import DeleteConfirmModal from "../../features/archive/components/DeleteConfirmModal";
+import SuccessModal from "../../features/archive/components/SuccessModal";
+
+interface Friend {
+	id: number;
+	name: string;
+	email: string;
+	isFriend: boolean;
+}
 
 const ArchivePage = () => {
 	const [isLightOn, setIsLightOn] = useState(true);
 	const [isLampHovered, setIsLampHovered] = useState(false);
+	
+	// 모달 상태 관리
+	const [isFriendsModalOpen, setIsFriendsModalOpen] = useState(false);
+	const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
+	const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+	const [friendToDelete, setFriendToDelete] = useState<Friend | null>(null);
+	const [successMessage, setSuccessMessage] = useState("");
 
 	const toggleLight = () => {
 		setIsLightOn((isLightOn) => !isLightOn);
+	};
+
+	// Mailbox 클릭 핸들러
+	const handleMailboxClick = () => {
+		setIsFriendsModalOpen(true);
+	};
+
+	// 친구 삭제 요청 핸들러
+	const handleDeleteFriend = (friend: Friend) => {
+		setFriendToDelete(friend);
+		setIsDeleteConfirmOpen(true);
+	};
+
+	// 친구 삭제 확인 핸들러
+	const handleConfirmDelete = () => {
+		if (friendToDelete) {
+			setIsDeleteConfirmOpen(false);
+			setSuccessMessage("삭제되었습니다.");
+			setIsSuccessModalOpen(true);
+			setFriendToDelete(null);
+		}
+	};
+
+	// 친구 삭제 취소 핸들러
+	const handleCancelDelete = () => {
+		setIsDeleteConfirmOpen(false);
+		setFriendToDelete(null);
+	};
+
+	// 친구 요청 핸들러
+	const handleSendFriendRequest = () => {
+		setSuccessMessage("친구요청이\n완료되었습니다.");
+		setIsSuccessModalOpen(true);
+	};
+
+	// 성공 모달 닫기 핸들러
+	const handleCloseSuccessModal = () => {
+		setIsSuccessModalOpen(false);
+		setSuccessMessage("");
 	};
 
 	return (
@@ -65,7 +121,7 @@ const ArchivePage = () => {
 					<FlowerGrid />
 				</div>
 			</div>
-			<Mailbox />
+			<Mailbox onClick={handleMailboxClick} />
 			<div
 				className="absolute top-1/2 left-1/2 z-10 w-[400px] h-[400px]"
 				style={{
@@ -74,6 +130,27 @@ const ArchivePage = () => {
 			>
 				<img src="/src/assets/archive/sofa.svg" alt="Sofa" />
 			</div>
+
+			{/* 모달들 */}
+			<FriendsListModal
+				isOpen={isFriendsModalOpen}
+				onClose={() => setIsFriendsModalOpen(false)}
+				onDeleteFriend={handleDeleteFriend}
+				onSendFriendRequest={handleSendFriendRequest}
+			/>
+
+			<DeleteConfirmModal
+				isOpen={isDeleteConfirmOpen}
+				friendName={friendToDelete?.name || ""}
+				onConfirm={handleConfirmDelete}
+				onCancel={handleCancelDelete}
+			/>
+
+			<SuccessModal
+				isOpen={isSuccessModalOpen}
+				message={successMessage}
+				onClose={handleCloseSuccessModal}
+			/>
 		</main>
 	);
 };

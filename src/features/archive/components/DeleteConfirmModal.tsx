@@ -57,7 +57,7 @@ const DeleteConfirmModal = ({
 								</button>
 								<button
 									onClick={onCancel}
-									className="flex-1 px-11 py-3.5 text-gray bg-[#E3E3E3] rounded-3xl font-bold"
+									className="flex-1 px-11 py-3.5 text-dark-gray bg-[#E3E3E3] rounded-3xl font-bold"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									취소

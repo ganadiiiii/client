@@ -50,7 +50,7 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 	return (
 		<div
 			ref={ref}
-			className="w-[384px] h-[593px]"
+			className="w-[24em] h-[37.0625em]"
 			style={{ perspective: "1500px" }}
 		>
 			{/* Tilt layer wrapping both faces */}
@@ -92,9 +92,9 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 						}}
 						onClick={handleFlip}
 					>
-						<div className="w-[384px] h-[593px]">
+						<div className="w-[24em] h-[37.0625em]">
 							<div
-								className="relative w-full h-full rounded-[40px]"
+								className="relative w-full h-full rounded-5xl"
 								style={{
 									backgroundImage: `url(${messageCardBg})`,
 									backgroundRepeat: "no-repeat",
@@ -105,18 +105,16 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 								<div>
 									{/* Message title */}
 									<div
-										className="absolute left-[40px] top-[40px] text-black z-20"
+										className="absolute left-[2.5em] top-[2.5em] text-black z-20 font-light text-sm"
 										style={{
 											fontFamily: "Yidstreet",
-											fontSize: "14px",
-											fontWeight: "400",
 										}}
 									>
 										Message
 									</div>
 
 									{/* Message input area */}
-									<div className="absolute left-[40px] top-[80px] right-[40px] bottom-[120px] text-black">
+									<div className="absolute left-[2.5em] top-[5em] right-[2.5em] bottom-[7.5em] text-black">
 										<p
 											className="w-full h-full p-4 text-sm/7.5 focus:outline-none resize-none bg-transparent border-none"
 											style={{
@@ -128,12 +126,11 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 									</div>
 
 									{/* To & From at bottom */}
-									<div className="absolute left-[40px] bottom-[45px] flex flex-row gap-20 text-black">
+									<div className="absolute left-[3em] bottom-[3.25em] flex flex-row gap-20 text-black text-sm">
 										<div className="flex gap-3 items-baseline">
 											<span
 												style={{
 													fontFamily: "Yidstreet",
-													fontSize: "14px",
 													fontWeight: "600",
 												}}
 											>
@@ -142,18 +139,16 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 											<span
 												style={{
 													fontFamily: "NexonLv1Gothic",
-													fontSize: "14px",
 													fontWeight: "400",
 												}}
 											>
 												{flowerCard.receiver}
 											</span>
 										</div>
-										<div className="flex gap-3 items-baseline">
+										<div className="flex gap-3 items-baseline text-sm">
 											<span
 												style={{
 													fontFamily: "Yidstreet",
-													fontSize: "14px",
 													fontWeight: "600",
 												}}
 											>
@@ -162,7 +157,6 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 											<span
 												style={{
 													fontFamily: "NexonLv1Gothic",
-													fontSize: "14px",
 													fontWeight: "400",
 												}}
 											>

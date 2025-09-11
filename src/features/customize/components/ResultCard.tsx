@@ -62,14 +62,14 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 		// 4. 이벤트 핸들러와 perspective를 위한 외부 컨테이너
 		<div
 			ref={ref}
-			className="w-[384px] h-[593px]"
+			className="w-[24em] h-[37.0625em]"
 			style={{ perspective: "1500px" }}
 			onMouseMove={handleMouseMove}
 			onMouseLeave={handleMouseLeave}
 		>
 			{/* 5. 실제 기울어지는 motion.div */}
 			<motion.div
-				className="relative w-full h-full rounded-[40px]"
+				className="relative w-full h-full rounded-5xl"
 				style={{
 					backgroundImage: `url(${cardBg})`,
 					backgroundRepeat: "no-repeat",
@@ -83,43 +83,36 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 				<div>
 					{/* 날짜 */}
 					<div
-						className="absolute left-[40px] top-[40px] text-black z-20"
-						style={{
-							fontFamily: "Yidstreet",
-							fontSize: "14px",
-							fontWeight: "400",
-						}}
+						className="absolute left-[2.5em] top-[2.5em] text-black z-20 font-light text-sm"
+						style={{fontFamily: "Yidstreet"}}
 					>
 						{date}
 					</div>
 
 					{/* 꽃 이미지 */}
-					<div className="absolute left-1/2 top-[220px] transform -translate-x-1/2 -translate-y-1/2 z-10">
+					<div className="absolute left-1/2 top-[13.75em] transform -translate-x-1/2 -translate-y-1/2 z-10">
 						<img
 							src={flowerImg}
 							alt="flower"
-							className="w-[320px] h-[320px] object-contain"
+							className="h-[20em] object-contain"
 						/>
 					</div>
 					{/* 제목 */}
 					<div
-						className="absolute left-[40px] top-[393px] text-black z-20"
+						className="absolute left-[1.75em] top-[16.6em] text-black z-20 font-bold text-2xl"
 						style={{
 							fontFamily: "Yidstreet",
-							fontSize: "28px",
-							fontWeight: "600",
 						}}
 					>
 						{title}
 					</div>
 					{/* 메인/서브 꽃 */}
-					<div className="absolute flex flex-col left-[40px] top-[452px] items-start gap-[5px] text-black">
+					<div className="absolute flex flex-col left-[3.2em] top-[32.25em] items-start gap-[5px] text-black font-light text-sm">
 						<div className="flex flex-row gap-[10px]">
 							<span
 								style={{
 									fontFamily: "Yidstreet",
-									fontSize: "14px",
-									fontWeight: "600",
+									fontWeight: "700",
 								}}
 							>
 								Main
@@ -127,7 +120,6 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							<span
 								style={{
 									fontFamily: "NexonLv1Gothic",
-									fontSize: "14px",
 									fontWeight: "400",
 								}}
 							>
@@ -136,8 +128,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							<span
 								style={{
 									fontFamily: "Yidstreet",
-									fontSize: "14px",
-									fontWeight: "600",
+									fontWeight: "700",
 								}}
 							>
 								Sub
@@ -145,7 +136,6 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							<span
 								style={{
 									fontFamily: "NexonLv1Gothic",
-									fontSize: "14px",
 									fontWeight: "400",
 								}}
 							>
@@ -156,8 +146,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							<span
 								style={{
 									fontFamily: "Yidstreet",
-									fontSize: "14px",
-									fontWeight: "600",
+									fontWeight: "700",
 								}}
 							>
 								Floriography
@@ -165,7 +154,6 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							<span
 								style={{
 									fontFamily: "NexonLv1Gothic",
-									fontSize: "14px",
 									fontWeight: "400",
 								}}
 							>
@@ -173,13 +161,12 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							</span>
 						</div>
 					</div>
-					<div className="absolute left-[40px] top-[526px] flex flex-row gap-20 text-black">
+					<div className="absolute left-[3.2em] top-[37.5em] flex flex-row gap-20 text-black font-light text-sm">
 						<div className="flex gap-3 items-baseline">
 							<span
 								style={{
 									fontFamily: "Yidstreet",
-									fontSize: "14px",
-									fontWeight: "600",
+									fontWeight: "700",
 								}}
 							>
 								Size
@@ -187,7 +174,6 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							<span
 								style={{
 									fontFamily: "NexonLv1Gothic",
-									fontSize: "14px",
 									fontWeight: "400",
 								}}
 							>
@@ -198,8 +184,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							<span
 								style={{
 									fontFamily: "Yidstreet",
-									fontSize: "14px",
-									fontWeight: "600",
+									fontWeight: "700",
 								}}
 							>
 								Price
@@ -207,7 +192,6 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							<span
 								style={{
 									fontFamily: "NexonLv1Gothic",
-									fontSize: "14px",
 									fontWeight: "400",
 								}}
 							>

@@ -57,7 +57,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 			<div className={`flex flex-col items-center transition-all duration-300`}>
 				{/* 제목 */}
 				<h1
-					className="text-[27.5px] font-bold text-gray mb-6 z-40 mt-20"
+					className="text-3xl font-bold text-gray mb-6 z-40 mt-20"
 					style={{ fontFamily: "NexonLv1Gothic" }}
 				>
 					디자인 결과
@@ -70,7 +70,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 						onClick={() => navigate(-1)}
 						icon={iconRestart}
 						label="다시 만들기"
-						className="absolute left-[-100px] top-[10px]"
+						className="absolute left-[-6.25em] top-[0.625em]"
 					/>
 
 					<ResultCard flowerCard={flowerCard} />
@@ -92,8 +92,8 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 								/>
 								{uiState.showSendPopup && (
 									<div
-										className="absolute bottom-full mb-1 left-[50px] -translate-x-1/4 rounded-t-[16px] rounded-br-[16px] bg-white text-dark-gray z-50 border border-gray/60 min-w-[160px] overflow-hidden"
-										style={{ fontFamily: "NexonLv1Gothic", fontSize: "14px" }}
+										className="absolute bottom-full mb-1 left-[3.75em] -translate-x-1/4 rounded-t-2xl rounded-br-2xl bg-white text-sm text-dark-gray z-50 border border-gray/60 w-50 overflow-hidden"
+										style={{ fontFamily: "NexonLv1Gothic" }}
 										role="menu"
 										aria-label="send options"
 									>
@@ -104,7 +104,8 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 													showFriendsDialog: true,
 												});
 											}}
-											className="block w-full text-center p-4 hover:bg-gray/20"
+											className="block w-full text-center text-lg p-4 hover:bg-gray/20 font-light text-black"
+											style={{ fontFamily: "NexonLv1Gothic" }}
 											role="menuitem"
 										>
 											친구에게 보내기
@@ -116,7 +117,8 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 													archiveSavedAlertVisible: true,
 												});
 											}}
-											className="block w-full text-center p-4 hover:bg-gray/20 border-t border-gray/60"
+											className="block w-full text-center text-lg p-4 hover:bg-gray/20 border-t border-gray/60 font-light text-black"
+											style={{ fontFamily: "NexonLv1Gothic" }}
 											role="menuitem"
 										>
 											나에게 보내기

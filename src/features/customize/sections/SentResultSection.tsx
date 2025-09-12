@@ -35,7 +35,7 @@ const SentResultSection: React.FC<SentResultSectionProps> = ({
 				<ResultSentCard flowerCard={flowerCard} />
 
 				{/* Action buttons */}
-				<div className="mt-6 w-full flex justify-center">
+				<div className="mt-4 w-full flex justify-center">
 					<div className="grid grid-cols-3 gap-4">
 						<SimpleIconButton
 							onClick={() => navigate("/archive")}

@@ -72,14 +72,14 @@ const FriendsListModal = ({
 					onClick={handleBackdropClick}
 				>
 					<div className="fixed inset-0 flex items-end justify-center pointer-events-none z-20">
-						<img 
-							src="/src/assets/archive/letter_up.png" 
-							alt="letter_up" 
+						<img
+							src="/src/assets/archive/letter_up.png"
+							alt="letter_up"
 							className="absolute bottom-[13.5em] w-[52em] h-[32em]"
 						/>
 					</div>
 					<motion.div
-						className="flex flex-col items-center w-161 h-204 bg-white rounded-[2.25em] shadow-[0_0_10px_0_rgba(0,0,0,0.15)] overflow-hidden py-10 px-18 gap-y-7 z-30"
+						className="flex flex-col w-161 h-204 bg-white rounded-[2.25em] shadow-[0_0_10px_0_rgba(0,0,0,0.15)] overflow-hidden p-12 z-30"
 						initial={{ y: "100%" }}
 						animate={{ y: 0 }}
 						exit={{ y: "100%" }}
@@ -87,23 +87,23 @@ const FriendsListModal = ({
 						onClick={(e) => e.stopPropagation()}
 					>
 						<h1
-							className="w-full text-center text-3xl font-bold text-gray"
+							className="text-3xl font-bold text-gray mb-4 text-center shrink-0"
 							style={{ fontFamily: "NexonLv1Gothic" }}
 						>
 							친구목록
 						</h1>
-						<div className="flex items-center justify-between gap-x-5 h-12">
+						<div className="flex items-center justify-between gap-x-3 w-full h-12 mb-8">
 							<input
 								type="text"
 								placeholder="검색"
 								value={searchTerm}
 								onChange={(e) => setSearchTerm(e.target.value)}
-								className="w-109 h-full px-5 py-3 border border-[#d9d9d9] rounded-[36px] outline-none"
+								className="w-full h-full px-5 py-6 border border-gray/40 rounded-[1.5em] outline-none"
 								style={{ fontFamily: "NexonLv1Gothic" }}
 							/>
-							<button
+							{/* <button
 								onClick={() => setSearchTerm("")}
-								className="flex items-center justify-center w-11 h-11 rounded-full"
+								className="flex items-center justify-center w-11 h-11 rounded-full text-gray"
 								style={{
 									boxShadow:
 										"inset 1.647px 2.196px 0.878px 0 rgba(255,255,255,0.51), 0 2.196px 4.228px rgba(0,0,0,0.15)",
@@ -123,47 +123,40 @@ const FriendsListModal = ({
 										d="M6 18 18 6M6 6l12 12"
 									/>
 								</svg>
-							</button>
+							</button> */}
 						</div>
-
-						<p
-							className="text-lg text-gray-600 w-full"
+						<span
+							className="flex flex-row gap-1 text-gray ml-1 mb-4"
 							style={{ fontFamily: "NexonLv1Gothic" }}
 						>
-							<span className="font-bold">내 친구</span>{" "}
-							<span className="font-light">{filteredFriends.length}</span>
-						</p>
+							<p>내 친구</p>
+							<p className="font-bold">{filteredFriends.length}명</p>
+						</span>
 
 						{/* 내 친구 섹션 */}
 						{(searchTerm === "" || filteredFriends.length > 0) && (
-							<div className="w-138 px-16 overflow-y-auto">
-								<div className="space-y-[14px]">
+							<div
+								className="w-full px-6 overflow-y-auto select-friends-scroll"
+								style={{ fontFamily: "NexonLv1Gothic" }}
+							>
+								<div className="overflow-y-auto">
 									{filteredFriends.map((friend, index) => (
-										<div key={friend.id} className="space-y-[14px]">
-											<div className="flex items-center justify-between">
-												<div
-													className="flex flex-col text-start"
-													style={{ fontFamily: "NexonLv1Gothic" }}
-												>
-													<span className="font-semibold text-2xl text-black">
-														{friend.name}
-													</span>
-													<span className="text-lg font-light text-black">
-														{friend.email}
-													</span>
-												</div>
-												<button
-													onClick={() => onDeleteFriend(friend)}
-													className="px-7 py-3 text-lg bg-[#E3E3E3] text-black rounded-[30px] font-light"
-													style={{ fontFamily: "NexonLv1Gothic" }}
-												>
-													삭제
-												</button>
-											</div>
-											{/* 아래에 실선 */}
-											{index !== filteredFriends.length - 1 && (
-												<hr className="border-t border-gray-300" />
-											)}
+										<div
+											key={friend.id}
+											className={`flex items-center justify-between py-5 ${index !== filteredFriends.length - 1 ? 'border-b border-gray/20' : ''}`}
+										>
+											<span className="flex flex-col">
+												<p className="font-bold">{friend.name}</p>
+												<p>{friend.email}</p>
+											</span>
+											<button
+												key={friend.id}
+												onClick={() => onDeleteFriend(friend)}
+												className="px-7 py-3 bg-gray/20 text-dark-gray rounded-[30px] hover:bg-gray/40 transition-colors duration-100"
+												style={{ fontFamily: "NexonLv1Gothic" }}
+											>
+												삭제
+											</button>
 										</div>
 									))}
 								</div>
@@ -172,36 +165,29 @@ const FriendsListModal = ({
 
 						{/* 검색 결과 섹션 */}
 						{searchTerm !== "" && filteredSearchResults.length > 0 && (
-							<div className="w-138 px-16 overflow-y-auto">
-								<div className="space-y-[14px]">
+							<div
+								className="w-full px-6 overflow-y-auto border-t border-gray/60 select-friends-scroll"
+								style={{ fontFamily: "NexonLv1Gothic" }}
+							>
+								<div className="overflow-y-auto">
 									{filteredSearchResults.map((user, index) => (
-										<div key={user.id} className="space-y-[14px]">
-											<div className="flex items-center justify-between">
-												<div
-													className="flex flex-col text-start"
-													style={{ fontFamily: "NexonLv1Gothic" }}
-												>
-													<span className="font-semibold text-2xl text-black">
-														{user.name}
-													</span>
-													<span className="text-lg font-light text-black">
-														{user.email}
-													</span>
-												</div>
-												<button
-													onClick={() => {
-														setIsRequesting(true);
-														onSendFriendRequest(user);
-													}}
-													className={`px-7 py-3 text-lg rounded-[30px] font-light ${isRequesting ? "border-3 border-primary text-black bg-white cursor-not-allowed" : "bg-primary text-white"}`}
-													style={{ fontFamily: "NexonLv1Gothic" }}
-												>
-													{isRequesting ? "요청중" : "친구요청"}
-												</button>
-											</div>
-											{index !== filteredSearchResults.length - 1 && (
-												<hr className="border-t border-gray-300" />
-											)}
+										<div
+											key={user.id}
+											className={`flex items-center justify-between py-5 ${index !== filteredSearchResults.length - 1 ? 'border-b border-gray/20' : ''}`}
+										>
+											<span className="flex flex-col">
+												<p className="font-bold">{user.name}</p>
+												<p>{user.email}</p>
+											</span>
+											<button
+												onClick={() => {
+													setIsRequesting((prev) => !prev);
+													onSendFriendRequest(user);
+												}}
+												className={`px-7 py-3 rounded-[30px] bg-primary text-white`}
+											>
+												{isRequesting ? "요청 중" : "친구요청"}
+											</button>
 										</div>
 									))}
 								</div>
@@ -213,20 +199,32 @@ const FriendsListModal = ({
 							filteredFriends.length === 0 &&
 							filteredSearchResults.length === 0 && (
 								<div
-									className="text-center text-gray-600 text-lg"
+									className="text-center text-dark-gray text-lg mt-10"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									검색 결과가 없습니다.
 								</div>
 							)}
+							
+							{/* Scoped scrollbar styling for this modal only */}
+							<style>
+								{`
+								.select-friends-scroll::-webkit-scrollbar { background: transparent; }
+								.select-friends-scroll::-webkit-scrollbar-track { background: transparent; }
+								.select-friends-scroll::-webkit-scrollbar-corner { background: transparent; }
+								/* Firefox */
+								.select-friends-scroll { scrollbar-color: #a3a3a3 transparent; }
+								`}
+							</style>
 					</motion.div>
 					<div className="fixed inset-0 flex items-end justify-center pointer-events-none z-40">
-						<img 
-							src="/src/assets/archive/letter.png" 
-							alt="letter" 
+						<img
+							src="/src/assets/archive/letter.png"
+							alt="letter"
 							className="absolute bottom-0 w-[52em] h-[28em]"
 						/>
 					</div>
+					
 				</motion.div>
 			)}
 		</AnimatePresence>

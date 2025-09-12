@@ -83,7 +83,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 				<div>
 					{/* 날짜 */}
 					<div
-						className="absolute left-[2.5em] top-[2.5em] text-black z-20 font-light text-sm"
+						className="absolute left-[2.8em] top-[3em] text-black z-20 text-sm"
 						style={{fontFamily: "Yidstreet"}}
 					>
 						{date}
@@ -99,7 +99,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 					</div>
 					{/* 제목 */}
 					<div
-						className="absolute left-[1.75em] top-[16.6em] text-black z-20 font-bold text-2xl"
+						className="absolute left-[1.6em] top-[16.6em] text-black z-20 font-bold text-2xl"
 						style={{
 							fontFamily: "Yidstreet",
 						}}
@@ -107,12 +107,12 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 						{title}
 					</div>
 					{/* 메인/서브 꽃 */}
-					<div className="absolute flex flex-col left-[3.2em] top-[32.25em] items-start gap-[5px] text-black font-light text-sm">
+					<div className="absolute flex flex-col left-[2.8em] top-[32.25em] items-start gap-[5px] text-black text-sm">
 						<div className="flex flex-row gap-[10px]">
 							<span
 								style={{
 									fontFamily: "Yidstreet",
-									fontWeight: "700",
+									fontWeight: "600",
 								}}
 							>
 								Main
@@ -128,7 +128,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							<span
 								style={{
 									fontFamily: "Yidstreet",
-									fontWeight: "700",
+									fontWeight: "600",
 								}}
 							>
 								Sub
@@ -146,7 +146,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							<span
 								style={{
 									fontFamily: "Yidstreet",
-									fontWeight: "700",
+									fontWeight: "600",
 								}}
 							>
 								Floriography
@@ -161,12 +161,12 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							</span>
 						</div>
 					</div>
-					<div className="absolute left-[3.2em] top-[37.5em] flex flex-row gap-20 text-black font-light text-sm">
+					<div className="absolute left-[2.8em] top-[37.5em] flex flex-row gap-20 text-black text-sm">
 						<div className="flex gap-3 items-baseline">
 							<span
 								style={{
 									fontFamily: "Yidstreet",
-									fontWeight: "700",
+									fontWeight: "600",
 								}}
 							>
 								Size
@@ -184,7 +184,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							<span
 								style={{
 									fontFamily: "Yidstreet",
-									fontWeight: "700",
+									fontWeight: "600",
 								}}
 							>
 								Price

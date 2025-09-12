@@ -16,13 +16,13 @@ export default function SelectFriendPopup({
 	return (
 		<div className="w-full flex justify-center">
 			{/* Wrapper keeps box centered; button is positioned next to it */}
-			<div className="relative w-[540px]">
+			<div className="relative w-161">
 				<div
-					className="bg-white rounded-[36px] p-12 w-[540px] max-h-[720px] overflow-hidden flex flex-col"
+					className="bg-white rounded-[2.25em] p-12 w-161 h-204 overflow-hidden flex flex-col"
 					style={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.15)" }}
 				>
 					<h2
-						className="text-[27.5px] font-bold text-gray mb-4 text-center shrink-0"
+						className="text-3xl font-bold text-gray mb-4 text-center shrink-0"
 						style={{ fontFamily: "NexonLv1Gothic" }}
 					>
 						친구 목록
@@ -39,7 +39,7 @@ export default function SelectFriendPopup({
 							<button
 								key={friend.id}
 								onClick={() => onFriendSelect(friend)}
-								className="w-full p-6 text-left rounded-[24px] hover:bg-gray/20 transition-colors"
+								className="w-full p-6 text-left rounded-[1.5em] hover:bg-gray/20 transition-colors"
 								style={{ fontFamily: "NexonLv1Gothic" }}
 							>
 								<span className="flex flex-col">
@@ -54,14 +54,17 @@ export default function SelectFriendPopup({
 				<SimpleIconButton
 					onClick={() => updateUIState({ showFriendsDialog: false })}
 					icon={iconClose}
-					className="absolute -right-24 top-0"
+					className="absolute -right-20 top-0"
 				/>
 			</div>
 
 			{/* Scoped scrollbar styling for this popup only */}
 			<style>
 				{`
+				.select-friends-scroll::-webkit-scrollbar { background: transparent; }
 				.select-friends-scroll::-webkit-scrollbar-track { background: transparent; }
+				.select-friends-scroll::-webkit-scrollbar-corner { background: transparent; }
+				/* Firefox */
 				.select-friends-scroll { scrollbar-color: #a3a3a3 transparent; }
 				`}
 			</style>

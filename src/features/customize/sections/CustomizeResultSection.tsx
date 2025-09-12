@@ -92,7 +92,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 								/>
 								{uiState.showSendPopup && (
 									<div
-										className="absolute bottom-full mb-1 left-[3.75em] -translate-x-1/4 rounded-t-2xl rounded-br-2xl bg-white text-sm text-dark-gray z-50 border border-gray/60 w-50 overflow-hidden"
+										className="absolute bottom-full mb-1 left-[4em] -translate-x-1/4 rounded-t-2xl rounded-br-2xl bg-white text-sm text-dark-gray z-50 border border-gray/40 min-w-[140px] overflow-hidden"
 										style={{ fontFamily: "NexonLv1Gothic" }}
 										role="menu"
 										aria-label="send options"
@@ -104,7 +104,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 													showFriendsDialog: true,
 												});
 											}}
-											className="block w-full text-center text-lg p-4 hover:bg-gray/20 font-light text-black"
+											className="block w-full text-center text-base p-5 hover:bg-gray/20"
 											style={{ fontFamily: "NexonLv1Gothic" }}
 											role="menuitem"
 										>
@@ -117,7 +117,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 													archiveSavedAlertVisible: true,
 												});
 											}}
-											className="block w-full text-center text-lg p-4 hover:bg-gray/20 border-t border-gray/60 font-light text-black"
+											className="block w-full text-center text-base p-5 hover:bg-gray/20 border-t border-gray/40"
 											style={{ fontFamily: "NexonLv1Gothic" }}
 											role="menuitem"
 										>

@@ -29,12 +29,12 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
 
 	return (
 		<div
-			className={`fixed inset-0 flex items-center justify-center left-[-0.75em] z-50 pointer-events-auto transition-opacity duration-300 ${
+			className={`fixed inset-0 flex items-center justify-center z-50 -left-[10px] pointer-events-auto transition-opacity duration-300 ${
 				show ? "opacity-100" : "opacity-0"
 			}`}
 		>
 			<div
-				className={`bg-white rounded-3xl p-7 w-80 shadow-lg transform transition-all duration-300 ${
+				className={`bg-white rounded-3xl min-w-[280px] px-8 py-6 shadow-lg transform transition-all duration-300 ${
 					show ? "scale-100 translate-y-0" : "scale-95 translate-y-2"
 				}`}
 				style={{
@@ -48,7 +48,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
 				<div className="flex justify-center gap-4 mt-4">
 					<button
 						onClick={onConfirm}
-						className="flex-1 w-31 py-3.5 text-white bg-primary rounded-full hover:bg-primary/90 transition-colors cursor-pointer"
+						className="flex-1 py-4.5 text-white bg-primary rounded-full hover:bg-primary/90 transition-colors cursor-pointer"
 					>
 						{confirmText}
 					</button>
@@ -57,7 +57,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
 							setShow(false);
 							setTimeout(onClose, 300);
 						}}
-						className="flex-1 w-31 py-3.5 text-dark-gray bg-gray/20 rounded-full hover:bg-gray/30 transition-colors cursor-pointer"
+						className="flex-1 py-4.5 text-dark-gray bg-gray/20 rounded-full hover:bg-gray/30 transition-colors cursor-pointer"
 					>
 						{cancelText}
 					</button>

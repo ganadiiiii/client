@@ -48,7 +48,7 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
 			}`}
 		>
 			<div
-				className={`bg-white rounded-[19px] w-[320px] px-8 py-6 shadow-lg transform transition-all duration-300 ${
+				className={`bg-white rounded-3xl w-[280px] px-8 py-6 shadow-lg transform transition-all duration-300 ${
 					show ? "scale-100 translate-y-0" : "scale-95 translate-y-2"
 				}`}
 				style={{

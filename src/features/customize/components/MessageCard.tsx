@@ -29,7 +29,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
 				<div>
 					{/* Message title */}
 					<div
-						className="absolute left-[2.75em] top-[2.75em] text-black z-20 font-semibold text-sm"
+						className="absolute left-[2.8em] top-[3em] text-black z-20 text-sm"
 						style={{
 							fontFamily: "Yidstreet",
 						}}
@@ -51,7 +51,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
 					</div>
 
 					{/* To & From at bottom */}
-					<div className="absolute left-[3em] bottom-[3.25em] flex flex-row gap-20 text-black font-medium text-sm">
+					<div className="absolute left-[2.7em] bottom-[3.4em] flex flex-row gap-20 text-black text-sm">
 						<div className="flex gap-3 items-baseline">
 							<span
 								style={{

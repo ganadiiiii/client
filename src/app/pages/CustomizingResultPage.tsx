@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bg from "../../assets/generate/result/bg.png";
-import AlertDialog from "../../components/AlertDialog";
-import ConfirmDialog from "../../components/ConfirmDialog";
+import AlertDialog from "../../components/dialog/AlertDialog";
+import ConfirmDialog from "../../components/dialog/ConfirmDialog";
 import CustomizeResultSection from "../../features/customize/sections/CustomizeResultSection";
 import MessageSection from "../../features/customize/sections/MessageSection";
 import type {
@@ -29,6 +29,7 @@ const mockFriends: Friend[] = [
 
 // 초기 FlowerCard 데이터
 const initialFlowerCard: FlowerCard = {
+	id: "1234567890",
 	date: "2025.08.14",
 	title: "TITLE 꽃다발",
 	flowerImg: "/src/assets/generate/result/temp-flower.png",

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import checkIcon from "../assets/icon-check.svg";
+import checkIcon from "../../assets/icon-check.svg";
 
 interface AlertDialogProps {
 	text: string;

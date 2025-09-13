@@ -8,10 +8,10 @@ import iconSaveHover from "../../../assets/generate/result/icon-save-hover.svg";
 import iconSend from "../../../assets/generate/result/icon-send.svg";
 import iconSendHover from "../../../assets/generate/result/icon-send-hover.svg";
 import type { FlowerCard, Friend, UIState } from "../../../types/FlowerCard";
-import GradientIconButton from "../components/GradientIconButton";
+import GradientIconButton from "../../../components/button/GradientIconButton";
 import ResultCard from "../components/ResultCard";
 import SelectFriendPopup from "../components/SelectFriendPopup";
-import SimpleIconButton from "../components/SimpleIconButton";
+import SimpleIconButton from "../../../components/button/SimpleIconButton";
 
 interface CustomizeResultSectionProps {
 	flowerCard: FlowerCard;
@@ -92,7 +92,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 								/>
 								{uiState.showSendPopup && (
 									<div
-										className="absolute bottom-full mb-1 left-[4em] -translate-x-1/4 rounded-t-2xl rounded-br-2xl bg-white text-sm text-dark-gray z-50 border border-gray/40 min-w-[140px] overflow-hidden"
+										className="absolute bottom-full mb-1 left-[4em] -translate-x-1/4 rounded-t-2xl rounded-br-2xl bg-white text-sm text-dark-gray z-50 border border-gray/40 overflow-hidden whitespace-nowrap"
 										style={{ fontFamily: "NexonLv1Gothic" }}
 										role="menu"
 										aria-label="send options"
@@ -104,7 +104,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 													showFriendsDialog: true,
 												});
 											}}
-											className="block w-full text-center text-base p-5 hover:bg-gray/20"
+											className="block w-full text-center text-base py-5 px-8 hover:bg-gray/20"
 											style={{ fontFamily: "NexonLv1Gothic" }}
 											role="menuitem"
 										>
@@ -117,7 +117,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 													archiveSavedAlertVisible: true,
 												});
 											}}
-											className="block w-full text-center text-base p-5 hover:bg-gray/20 border-t border-gray/40"
+											className="block w-full text-center text-base py-5 px-8 hover:bg-gray/20 border-t border-gray/40"
 											style={{ fontFamily: "NexonLv1Gothic" }}
 											role="menuitem"
 										>

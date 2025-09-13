@@ -54,7 +54,7 @@ const LoginForm: React.FC = () => {
 							<div className="flex-col justify-center">
 								<label
 									htmlFor="email"
-									className="block text-[18px] font-bold text-gray mb-2 text-start w-140"
+									className="block text-lg font-bold text-gray mb-2 text-start w-140"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Email
@@ -65,7 +65,7 @@ const LoginForm: React.FC = () => {
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									required
-									className="w-140 h-11.5 px-4 py-4 border-2 border-gray/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									className="w-140 h-11.5 px-4 py-4 border-2 border-gray/40 rounded-full bg-white text-lg focus:outline-none focus:border-gray transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								/>
 							</div>
@@ -85,7 +85,7 @@ const LoginForm: React.FC = () => {
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
 									required
-									className="w-140 h-11.5 px-4 py-4 border-2 border-gray/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									className="w-140 h-11.5 px-4 py-4 border-2 border-gray/40 rounded-full bg-white text-lg focus:outline-none focus:border-gray transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								/>
 							</div>

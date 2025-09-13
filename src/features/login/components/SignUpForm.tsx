@@ -57,7 +57,7 @@ const SignUpForm: React.FC = () => {
 							<div className="flex-col justify-center">
 								<label
 									htmlFor="firstName"
-									className="block text-[18px] font-bold text-gray mb-2 text-start w-140"
+									className="block text-lg font-bold text-gray mb-2 text-start w-140"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									First Name
@@ -68,7 +68,7 @@ const SignUpForm: React.FC = () => {
 									value={firstName}
 									onChange={(e) => setFirstName(e.target.value)}
 									required
-									className="w-full h-11.5 px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									className="w-full h-11.5 px-4 py-4 border-2 border-gray/40 rounded-full bg-white text-lg focus:outline-none focus:border-gray transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic", fontSize: "18px" }}
 								/>
 							</div>
@@ -77,7 +77,7 @@ const SignUpForm: React.FC = () => {
 							<div className="flex-col justify-center">
 								<label
 									htmlFor="lastName"
-									className="block text-[18px] font-bold text-gray mb-2 text-start w-140"
+									className="block text-lg font-bold text-gray mb-2 text-start w-140"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Last Name
@@ -88,7 +88,7 @@ const SignUpForm: React.FC = () => {
 									value={lastName}
 									onChange={(e) => setLastName(e.target.value)}
 									required
-									className="w-full h-11.5 px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									className="w-full h-11.5 px-4 py-4 border-2 border-gray/40 rounded-full bg-white text-lg focus:outline-none focus:border-gray transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic", fontSize: "18px" }}
 								/>
 							</div>
@@ -96,7 +96,7 @@ const SignUpForm: React.FC = () => {
 							<div className="flex-col justify-center">
 								<label
 									htmlFor="email"
-									className="block text-[18px] font-bold text-gray mb-2 text-start w-140"
+									className="block text-lg font-bold text-gray mb-2 text-start w-140"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Email
@@ -107,7 +107,7 @@ const SignUpForm: React.FC = () => {
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									required
-									className="w-full h-11.5 px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									className="w-full h-11.5 px-4 py-4 border-2 border-gray/40 rounded-full bg-white text-lg focus:outline-none focus:border-gray transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic", fontSize: "18px" }}
 								/>
 							</div>
@@ -116,7 +116,7 @@ const SignUpForm: React.FC = () => {
 							<div className="flex-col justify-center">
 								<label
 									htmlFor="password"
-									className="block text-[18px] font-bold text-gray mb-2 text-start w-140"
+									className="block text-lg font-bold text-gray mb-2 text-start w-140"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Password
@@ -127,7 +127,7 @@ const SignUpForm: React.FC = () => {
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
 									required
-									className="w-full h-11.5 px-4 py-4 border-2 border-gray-300/60 rounded-full bg-white text-lg focus:outline-none focus:border-gray-400 transition-colors"
+									className="w-full h-11.5 px-4 py-4 border-2 border-gray/40 rounded-full bg-white text-lg focus:outline-none focus:border-gray transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic", fontSize: "18px" }}
 								/>
 							</div>

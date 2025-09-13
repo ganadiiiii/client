@@ -116,7 +116,7 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 									{/* Message input area */}
 									<div className="absolute left-[2.5em] top-[5em] right-[2.5em] bottom-[7.5em] text-black">
 										<p
-											className="w-full h-full p-4 text-sm/7.5 focus:outline-none resize-none bg-transparent border-none"
+											className="w-full h-full p-4 text-sm/7.5 focus:outline-none resize-none bg-transparent border-none text-dark-gray"
 											style={{
 												fontFamily: "NexonLv1Gothic",
 											}}

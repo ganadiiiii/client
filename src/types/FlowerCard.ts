@@ -1,5 +1,6 @@
 export interface FlowerCard {
 	// 기본 카드 정보
+	id: string;
 	date: string;
 	title: string;
 	flowerImg: string;

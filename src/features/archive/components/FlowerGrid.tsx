@@ -1,7 +1,7 @@
 import { useState } from "react";
-import PageButton from "./components/PageButton";
+import PageButton from "./PageButton";
 import FlowerCard from "./FlowerCard";
-import { flowerCardData } from "../../data/flowerCardData";
+import { flowerCardData } from "../../../data/flowerCardData";
 
 export default function FlowerGrid() {
 	const [currentPage, setCurrentPage] = useState(0);

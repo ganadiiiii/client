@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import type { FlowerCard as FlowerCardType } from "../../types/FlowerCard";
+import type { FlowerCard as FlowerCardType } from "../../../types/FlowerCard";
 
 interface FlowerCardProps {
 	flower: FlowerCardType;
@@ -36,14 +36,11 @@ const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 			</div>
 			{/* NO. 텍스트 */}
 			<div
-				className="absolute text-black z-30 text-xs"
+				className="absolute text-dark-gray z-30 text-xs font-semibold"
 				style={{
-					left: "1.5em",
-					top: "1.5em",
+					left: "1em",
+					top: "1em",
 					fontFamily: "Yidstreet",
-					fontWeight: "700",
-					lineHeight: "normal",
-					letterSpacing: "5%",
 				}}
 			>
 				NO. {flower.id}

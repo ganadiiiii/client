@@ -12,6 +12,8 @@ import GradientIconButton from "../components/GradientIconButton";
 import ResultCard from "../components/ResultCard";
 import SelectFriendPopup from "../components/SelectFriendPopup";
 import SimpleIconButton from "../components/SimpleIconButton";
+import html2canvas from 'html2canvas';
+import saveAs from 'file-saver';
 
 interface CustomizeResultSectionProps {
 	flowerCard: FlowerCard;
@@ -30,6 +32,22 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 }) => {
 	const navigate = useNavigate();
 	const sendMenuRef = useRef<HTMLDivElement | null>(null);
+    const divRef = useRef<HTMLDivElement | null>(null);
+
+	const handleDownload = async () => {
+        if (!divRef.current) return;
+
+        try {
+            const canvas = await html2canvas(divRef.current, { scale: 2 });
+            canvas.toBlob((blob) => {
+                if (blob !== null) {
+                    saveAs(blob, `result.png`);
+                }
+            });
+        } catch (error) {
+            console.error("Error converting div to image:", error);
+        }
+	}
 
 	// Close on outside click or Escape
 	useEffect(() => {
@@ -72,8 +90,9 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 						label="다시 만들기"
 						className="absolute left-[-6.25em] top-[0.625em]"
 					/>
-
-					<ResultCard flowerCard={flowerCard} />
+					<div ref={divRef}>
+						<ResultCard flowerCard={flowerCard} />
+					</div>
 					{/* action buttons below the card */}
 					<div className="mt-4 w-full flex justify-center">
 						<div className="grid grid-cols-3 gap-4">
@@ -133,7 +152,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 								label="실물 보내기"
 							/>
 							<SimpleIconButton
-								onClick={() => navigate(-1)}
+								onClick={handleDownload}
 								icon={iconSave}
 								hoverIcon={iconSaveHover}
 								label="저장하기"

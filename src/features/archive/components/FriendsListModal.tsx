@@ -11,9 +11,10 @@ interface Friend {
 interface FriendsListModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onDeleteFriend: (friend: Friend) => void;
-    onSendFriendRequest: (user: Friend) => void;
+    onDeleteFriend?: (friend: Friend) => void;
+    onSendFriendRequest?: (user: Friend) => void;
     onCancelFriendRequest?: (user: Friend) => void;
+	onSelectFriend?: (friend: Friend) => void;
 }
 
 const FriendsListModal = ({
@@ -22,6 +23,7 @@ const FriendsListModal = ({
     onDeleteFriend,
     onSendFriendRequest,
     onCancelFriendRequest,
+	onSelectFriend,
 }: FriendsListModalProps) => {
 	// Track per-user requesting state by id
 	const [requestingIds, setRequestingIds] = useState<Set<number>>(new Set());
@@ -51,11 +53,11 @@ const FriendsListModal = ({
 			friend.email.toLowerCase().includes(searchTerm.toLowerCase()),
 	);
 
-	const filteredSearchResults = searchResults.filter(
+	const filteredSearchResults = onSendFriendRequest ? searchResults.filter(
 		(user) =>
 			user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
 			user.email.toLowerCase().includes(searchTerm.toLowerCase()),
-	);
+	) : [];
 
 	// 모달 외부 클릭 시 닫기
 	const handleBackdropClick = (e: React.MouseEvent) => {
@@ -151,16 +153,27 @@ const FriendsListModal = ({
 											className={`flex items-center justify-between py-5 ${((searchTerm !== "" && filteredSearchResults.length > 0) || index !== filteredFriends.length - 1) ? 'border-b border-gray/20' : ''}`}
 										>
 											<span className="flex flex-col">
-												<p className="font-bold">{friend.name}</p>
+												<p className="font-bold text-start">{friend.name}</p>
 												<p>{friend.email}</p>
 											</span>
-											<button
-												onClick={() => onDeleteFriend(friend)}
-												className="px-7 py-3 bg-gray/20 text-dark-gray rounded-[30px] hover:bg-gray/40 transition-colors duration-100"
-												style={{ fontFamily: "NexonLv1Gothic" }}
-											>
-												삭제
-											</button>
+											{onDeleteFriend && (
+												<button
+													onClick={() => onDeleteFriend(friend)}
+													className="px-7 py-3 bg-gray/20 text-dark-gray rounded-[30px] hover:bg-gray/40 transition-colors duration-100"
+													style={{ fontFamily: "NexonLv1Gothic" }}
+												>
+													삭제
+												</button>
+											)}
+											{onSelectFriend && (
+												<button
+													onClick={() => onSelectFriend(friend)}
+													className="px-7 py-3 bg-primary text-white rounded-[30px]"
+													style={{ fontFamily: "NexonLv1Gothic" }}
+												>
+													선택
+												</button>
+											)}
 										</div>
 									))}
 
@@ -176,24 +189,26 @@ const FriendsListModal = ({
 												<p className="font-bold">{user.name}</p>
 												<p>{user.email}</p>
 											</span>
-											<button
-                                    onClick={() => {
-                                        setRequestingIds((prev) => {
-                                            const next = new Set(prev);
-                                            if (next.has(user.id)) {
-                                                next.delete(user.id);
-                                                onCancelFriendRequest?.(user);
-                                            } else {
-                                                next.add(user.id);
-                                                onSendFriendRequest(user);
-                                            }
-                                            return next;
-                                        });
-                                    }}
+											{onSendFriendRequest && (
+												<button
+													onClick={() => {
+														setRequestingIds((prev) => {
+															const next = new Set(prev);
+															if (next.has(user.id)) {
+																next.delete(user.id);
+																onCancelFriendRequest?.(user);
+															} else {
+																next.add(user.id);
+																onSendFriendRequest(user);
+															}
+															return next;
+														});
+													}}
 												className="px-7 py-3 rounded-[30px] bg-primary text-white"
-											>
-												{isUserRequesting ? "요청 중" : "친구요청"}
-											</button>
+												>
+													{isUserRequesting ? "요청 중" : "친구요청"}
+												</button>
+											)}
 										</div>
 										);
 									})}

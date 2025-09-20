@@ -34,7 +34,7 @@ const SuccessModal = ({ isOpen, message, onClose }: SuccessModalProps) => {
 						onClick={(e) => e.stopPropagation()}
 					>
 						<img
-							src="/src/assets/archive/complete.svg"
+							src="/src/assets/icon-check.svg"
 							className="mx-auto mb-3"
 						/>
 						<p className="text-dark-gray text-lg text-center whitespace-nowrap">

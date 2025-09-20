@@ -1,6 +1,6 @@
 import iconClose from "../../../assets/generate/result/icon-close.svg";
 import type { Friend, UIState } from "../../../types/FlowerCard";
-import SimpleIconButton from "./SimpleIconButton";
+import SimpleIconButton from "../../../components/button/SimpleIconButton";
 
 interface SelectFriendPopupProps {
 	mockFriends: Friend[];

@@ -29,7 +29,7 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 
 	return (
 		<motion.div
-			className={`relative cursor-pointer shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] rounded-[32px] rounded-[21px] z-0 transition-colors duration-300 ${isSelected ? "bg-[#FFD1D4]" : "bg-white"}`}
+			className={`relative cursor-pointer shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] rounded-[21px] z-0 transition-colors duration-300 ${isSelected ? "bg-[#FFD1D4]" : "bg-white"}`}
 			style={{
 				width: "21em",
 				height: "26.9em",

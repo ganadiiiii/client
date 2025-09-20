@@ -7,11 +7,11 @@ import iconOrderHover from "../../../assets/generate/result/icon-order-hover.svg
 import iconSave from "../../../assets/generate/result/icon-save.svg";
 import iconSaveHover from "../../../assets/generate/result/icon-save-hover.svg";
 import type { FlowerCard } from "../../../types/FlowerCard";
-import GradientIconButton from "../components/GradientIconButton";
+import GradientIconButton from "../../../components/button/GradientIconButton";
 import ResultSentCard from "../components/ResultSentCard";
-import SimpleIconButton from "../components/SimpleIconButton";
 import html2canvas from 'html2canvas';
 import saveAs from 'file-saver';
+import SimpleIconButton from "../../../components/button/SimpleIconButton";
 
 interface SentResultSectionProps {
 	flowerCard: FlowerCard;

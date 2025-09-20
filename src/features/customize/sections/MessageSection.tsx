@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import iconBack from "../../../assets/generate/result/icon-back.svg";
 import iconSend from "../../../assets/generate/result/icon-send.svg";
 import iconSendHover from "../../../assets/generate/result/icon-send-hover.svg";
-import ConfirmDialog from "../../../components/ConfirmDialog";
+import ConfirmDialog from "../../../components/dialog/ConfirmDialog";
 import type { FlowerCard } from "../../../types/FlowerCard";
-import GradientIconButton from "../components/GradientIconButton";
+import GradientIconButton from "../../../components/button/GradientIconButton";
 import MessageCard from "../components/MessageCard";
-import SimpleIconButton from "../components/SimpleIconButton";
+import SimpleIconButton from "../../../components/button/SimpleIconButton";
 
 interface MessageSectionProps {
 	flowerCard: FlowerCard;
@@ -38,7 +38,7 @@ const MessageSection: React.FC<MessageSectionProps> = ({
 					onClick={() => onBack()}
 					icon={iconBack}
 					label="뒤로가기"
-					className="absolute left-[-6.25em] top-[0.625em]"
+					className="absolute left-[-5.75em] top-[0.625em]"
 				/>
 				<MessageCard
 					flowerCard={flowerCard}

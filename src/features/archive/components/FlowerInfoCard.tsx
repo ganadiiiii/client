@@ -3,9 +3,9 @@ import { motion, useSpring } from "framer-motion";
 import React, { useCallback, useRef, useState } from "react";
 import messageCardBg from "../../../assets/generate/result/card-message.png";
 import type { FlowerCard } from "../../../types/FlowerCard";
-import ResultCard from "./ResultCard";
+import ResultCard from "../../customize/components/ResultCard";
 
-type ResultSentCardProps = {
+type FlowerInfoCardProps = {
 	flowerCard: FlowerCard;
 };
 
@@ -18,9 +18,10 @@ const springConfig: SpringOptions = {
 // Tilt intensity
 const ROTATE_AMPLITUDE = 8;
 
-const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
+const FlowerInfoCard: React.FC<FlowerInfoCardProps> = ({ flowerCard }) => {
 	const ref = useRef<HTMLDivElement>(null);
 	const [isFlipped, setIsFlipped] = useState(false);
+  const canFlip = Boolean(flowerCard.message && flowerCard.receiver);
 
 	// Springs for hover tilt
 	const rotateX = useSpring(0, springConfig);
@@ -28,8 +29,9 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 	const scale = useSpring(1, springConfig);
 
 	const handleFlip = useCallback(() => {
+		if (!canFlip) return;
 		setIsFlipped((v) => !v);
-	}, []);
+	}, [canFlip]);
 
 	const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
 		if (!ref.current) return;
@@ -72,7 +74,7 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 				>
 					{/* Front: ResultCard */}
 					<div
-						className="absolute inset-0 cursor-pointer"
+						className={`absolute inset-0 ${canFlip ? "cursor-pointer" : "cursor-default"}`}
 						style={{
 							backfaceVisibility:
 								"hidden" as React.CSSProperties["backfaceVisibility"],
@@ -84,7 +86,7 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 
 					{/* Back: MessageCard */}
 					<div
-						className="absolute inset-0 cursor-pointer"
+						className={`absolute inset-0 ${canFlip ? "cursor-pointer" : "cursor-default"}`}
 						style={{
 							backfaceVisibility:
 								"hidden" as React.CSSProperties["backfaceVisibility"],
@@ -126,8 +128,8 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 									</div>
 
 									{/* To & From at bottom */}
-									<div className="absolute left-[2.7em] bottom-[3.4em] flex flex-row gap-20 text-black text-sm">
-										<div className="flex gap-3 items-baseline">
+									<div className="absolute left-[2.7em] bottom-[3.4em] flex flex-row text-black text-sm">
+										<div className="flex gap-3 items-baseline mr-10">
 											<span
 												style={{
 													fontFamily: "Yidstreet",
@@ -174,4 +176,4 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 	);
 };
 
-export default ResultSentCard;
+export default FlowerInfoCard;

@@ -3,7 +3,7 @@ import DeleteConfirmModal from "../../features/archive/components/DeleteConfirmM
 import FriendsListModal from "../../features/archive/components/FriendsListModal";
 import Mailbox from "../../features/archive/components/Mailbox";
 import SuccessModal from "../../features/archive/components/SuccessModal";
-import FlowerGrid from "../../features/archive/FlowerGrid";
+import FlowerGrid from "../../features/archive/components/FlowerGrid";
 
 interface Friend {
 	id: number;

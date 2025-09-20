@@ -7,6 +7,7 @@ import CustomizingPage from "./pages/CustomizingPage";
 import CustomizingResultPage from "./pages/CustomizingResultPage";
 import ResultSentPage from "./pages/ResultSentPage";
 import OrderPage from "./pages/OrderPage";
+import FlowerInfoPage from "./pages/FlowerInfoPage";
 
 export const AppRoutes = () => {
 	return (
@@ -15,6 +16,7 @@ export const AppRoutes = () => {
 			<Route path="/customizing/result" element={<CustomizingResultPage />} />
 			<Route path="/customizing/result/sent" element={<ResultSentPage />} />
 			<Route path="/archive" element={<ArchivePage />} />
+			<Route path="/archive/:flowerId" element={<FlowerInfoPage />} />
 			<Route path="/customizing/card" element={<CustomizingCardPage />} />
 			<Route path="/login" element={<LoginForm />} />
 			<Route path="/signup" element={<SignUpForm />} />

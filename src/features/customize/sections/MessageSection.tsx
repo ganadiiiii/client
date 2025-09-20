@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import iconBack from "../../../assets/generate/result/icon-back.svg";
 import iconSend from "../../../assets/generate/result/icon-send.svg";
 import iconSendHover from "../../../assets/generate/result/icon-send-hover.svg";
+import GradientIconButton from "../../../components/button/GradientIconButton";
+import SimpleIconButton from "../../../components/button/SimpleIconButton";
 import ConfirmDialog from "../../../components/dialog/ConfirmDialog";
 import type { FlowerCard } from "../../../types/FlowerCard";
-import GradientIconButton from "../../../components/button/GradientIconButton";
 import MessageCard from "../components/MessageCard";
-import SimpleIconButton from "../../../components/button/SimpleIconButton";
 
 interface MessageSectionProps {
 	flowerCard: FlowerCard;

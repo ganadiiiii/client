@@ -21,7 +21,7 @@ const ROTATE_AMPLITUDE = 8;
 const FlowerInfoCard: React.FC<FlowerInfoCardProps> = ({ flowerCard }) => {
 	const ref = useRef<HTMLDivElement>(null);
 	const [isFlipped, setIsFlipped] = useState(false);
-  const canFlip = Boolean(flowerCard.message && flowerCard.receiver);
+	const canFlip = Boolean(flowerCard.message && flowerCard.receiver);
 
 	// Springs for hover tilt
 	const rotateX = useSpring(0, springConfig);

@@ -1,3 +1,5 @@
+import saveAs from "file-saver";
+import html2canvas from "html2canvas";
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import iconHome from "../../../assets/generate/result/icon-home.svg";
@@ -6,12 +8,10 @@ import iconOrder from "../../../assets/generate/result/icon-order.svg";
 import iconOrderHover from "../../../assets/generate/result/icon-order-hover.svg";
 import iconSave from "../../../assets/generate/result/icon-save.svg";
 import iconSaveHover from "../../../assets/generate/result/icon-save-hover.svg";
-import type { FlowerCard } from "../../../types/FlowerCard";
 import GradientIconButton from "../../../components/button/GradientIconButton";
-import ResultSentCard from "../components/ResultSentCard";
-import html2canvas from 'html2canvas';
-import saveAs from 'file-saver';
 import SimpleIconButton from "../../../components/button/SimpleIconButton";
+import type { FlowerCard } from "../../../types/FlowerCard";
+import ResultSentCard from "../components/ResultSentCard";
 
 interface SentResultSectionProps {
 	flowerCard: FlowerCard;
@@ -24,20 +24,20 @@ const SentResultSection: React.FC<SentResultSectionProps> = ({
 	const divRef = useRef<HTMLDivElement | null>(null);
 
 	const handleDownload = async () => {
-    if (!divRef.current) return;
+		if (!divRef.current) return;
 
-    try {
-        // Front result card만을 위한 임시 div 생성
-        const tempDiv = document.createElement('div');
-        tempDiv.style.position = 'absolute';
-        tempDiv.style.left = '-9999px';
-        tempDiv.style.top = '0';
-        tempDiv.style.width = '24em';
-        tempDiv.style.height = '37.0625em';
-        tempDiv.style.fontSize = '16px'; 
+		try {
+			// Front result card만을 위한 임시 div 생성
+			const tempDiv = document.createElement("div");
+			tempDiv.style.position = "absolute";
+			tempDiv.style.left = "-9999px";
+			tempDiv.style.top = "0";
+			tempDiv.style.width = "24em";
+			tempDiv.style.height = "37.0625em";
+			tempDiv.style.fontSize = "16px";
 
-        // Front result card HTML 직접 생성 (3D transform 없이)
-        tempDiv.innerHTML = `
+			// Front result card HTML 직접 생성 (3D transform 없이)
+			tempDiv.innerHTML = `
             <div style="width: 24em; height: 37.0625em;">
                 <div style="
                     position: relative;
@@ -130,31 +130,31 @@ const SentResultSection: React.FC<SentResultSectionProps> = ({
                 </div>
             </div>
         `;
-        
-        document.body.appendChild(tempDiv);
-        
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
-        const canvas = await html2canvas(tempDiv, { 
-            scale: 2,
-            useCORS: true,
-            allowTaint: true,
-            backgroundColor: null,
-            width: 384,
-            height: 593,
-        });
-        
-        document.body.removeChild(tempDiv);
-        
-        canvas.toBlob((blob) => {
-            if (blob !== null) {
-                saveAs(blob, `result-card.png`);
-            }
-        });
-    } catch (error) {
-        console.error("Error converting div to image:", error);
-    }
-}
+
+			document.body.appendChild(tempDiv);
+
+			await new Promise((resolve) => setTimeout(resolve, 100));
+
+			const canvas = await html2canvas(tempDiv, {
+				scale: 2,
+				useCORS: true,
+				allowTaint: true,
+				backgroundColor: null,
+				width: 384,
+				height: 593,
+			});
+
+			document.body.removeChild(tempDiv);
+
+			canvas.toBlob((blob) => {
+				if (blob !== null) {
+					saveAs(blob, `result-card.png`);
+				}
+			});
+		} catch (error) {
+			console.error("Error converting div to image:", error);
+		}
+	};
 
 	return (
 		<div className="flex flex-col items-center transition-all duration-300">

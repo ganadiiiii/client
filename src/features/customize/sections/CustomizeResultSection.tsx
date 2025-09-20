@@ -1,3 +1,5 @@
+import saveAs from "file-saver";
+import html2canvas from "html2canvas";
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import iconOrder from "../../../assets/generate/result/icon-order.svg";
@@ -7,13 +9,11 @@ import iconSave from "../../../assets/generate/result/icon-save.svg";
 import iconSaveHover from "../../../assets/generate/result/icon-save-hover.svg";
 import iconSend from "../../../assets/generate/result/icon-send.svg";
 import iconSendHover from "../../../assets/generate/result/icon-send-hover.svg";
-import type { FlowerCard, Friend, UIState } from "../../../types/FlowerCard";
 import GradientIconButton from "../../../components/button/GradientIconButton";
+import SimpleIconButton from "../../../components/button/SimpleIconButton";
+import type { FlowerCard, Friend, UIState } from "../../../types/FlowerCard";
 import ResultCard from "../components/ResultCard";
 import SelectFriendPopup from "../components/SelectFriendPopup";
-import html2canvas from 'html2canvas';
-import saveAs from 'file-saver';
-import SimpleIconButton from "../../../components/button/SimpleIconButton";
 
 interface CustomizeResultSectionProps {
 	flowerCard: FlowerCard;
@@ -32,21 +32,21 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 }) => {
 	const navigate = useNavigate();
 	const sendMenuRef = useRef<HTMLDivElement | null>(null);
-    const divRef = useRef<HTMLDivElement | null>(null);
+	const divRef = useRef<HTMLDivElement | null>(null);
 
 	const handleDownload = async () => {
-        if (!divRef.current) return;
+		if (!divRef.current) return;
 
-        try {
+		try {
 			// Front result card만을 위한 임시 div 생성
-			const tempDiv = document.createElement('div');
-			tempDiv.style.position = 'absolute';
-			tempDiv.style.left = '-9999px';
-			tempDiv.style.top = '0';
-			tempDiv.style.width = '24em';
-			tempDiv.style.height = '37.0625em';
-			tempDiv.style.fontSize = '16px'; 
-	
+			const tempDiv = document.createElement("div");
+			tempDiv.style.position = "absolute";
+			tempDiv.style.left = "-9999px";
+			tempDiv.style.top = "0";
+			tempDiv.style.width = "24em";
+			tempDiv.style.height = "37.0625em";
+			tempDiv.style.fontSize = "16px";
+
 			// Front result card HTML 직접 생성 (3D transform 없이)
 			tempDiv.innerHTML = `
 				<div style="width: 24em; height: 37.0625em;">
@@ -141,12 +141,12 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 					</div>
 				</div>
 			`;
-			
+
 			document.body.appendChild(tempDiv);
-			
-			await new Promise(resolve => setTimeout(resolve, 100));
-			
-			const canvas = await html2canvas(tempDiv, { 
+
+			await new Promise((resolve) => setTimeout(resolve, 100));
+
+			const canvas = await html2canvas(tempDiv, {
 				scale: 2,
 				useCORS: true,
 				allowTaint: true,
@@ -154,9 +154,9 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 				width: 384,
 				height: 593,
 			});
-			
+
 			document.body.removeChild(tempDiv);
-			
+
 			canvas.toBlob((blob) => {
 				if (blob !== null) {
 					saveAs(blob, `result-card.png`);
@@ -165,7 +165,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 		} catch (error) {
 			console.error("Error converting div to image:", error);
 		}
-	}
+	};
 
 	// Close on outside click or Escape
 	useEffect(() => {

@@ -40,7 +40,11 @@ export default function Mailbox({ onClick }: MailboxProps) {
 					className="w-38 h-78"
 				/>
 			) : (
-				<img src="/src/assets/archive/mailbox-close.svg" alt="Mailbox" className="w-28 h-77"/>
+				<img
+					src="/src/assets/archive/mailbox-close.svg"
+					alt="Mailbox"
+					className="w-28 h-77"
+				/>
 			)}
 		</div>
 	);

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import DeleteConfirmModal from "../../features/archive/components/DeleteConfirmModal";
+import FlowerGrid from "../../features/archive/components/FlowerGrid";
 import FriendsListModal from "../../features/archive/components/FriendsListModal";
 import Mailbox from "../../features/archive/components/Mailbox";
 import SuccessModal from "../../features/archive/components/SuccessModal";
-import FlowerGrid from "../../features/archive/components/FlowerGrid";
 
 interface Friend {
 	id: number;
@@ -142,8 +142,8 @@ const ArchivePage = () => {
 						}}
 					>
 						<img src="/src/assets/archive/sofa.svg" alt="Sofa" />
-						<img 
-							src="/src/assets/archive/character.png" 
+						<img
+							src="/src/assets/archive/character.png"
 							alt="Character"
 							className="absolute top-1/2 left-1/2 transform -translate-x-2/3 -translate-y-1/2"
 							style={{

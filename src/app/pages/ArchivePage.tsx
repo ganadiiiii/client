@@ -109,7 +109,7 @@ const ArchivePage = () => {
 					>
 						{isLightOn ? (
 							<img
-								src={`/src/assets/archive/${isLampHovered ? "lamp-on.svg" : "lamp-on.svg"}`}
+								src={`/src/assets/archive/${isLampHovered ? "lamp-on-hover.svg" : "lamp-on.svg"}`}
 								alt="Lamp"
 								className="pointer-events-none"
 							/>

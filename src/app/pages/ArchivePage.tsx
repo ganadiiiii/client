@@ -87,15 +87,19 @@ const ArchivePage = () => {
 					}}
 				/>
 				{/* 배경 역할을 하는 home 이미지 */}
-				<div className="relative">
+				<div className="relative w-full h-[calc(100vh-9em-80px)] 2xl:h-[calc(100vh-9em-102px)]">
 					<img
-						src={`/src/assets/archive/${isLightOn ? "home-light.svg" : "home-dark.svg"}`}
+						src={`/src/assets/archive/${isLightOn ? "home-light.png" : "home-dark.png"}`}
 						alt="Home background"
-						className="max-w-full h-auto"
+						className="absolute bottom-0 left-1/2 transform -translate-x-1/2"
+						style={{
+							width: "102em",
+							height: "53em",
+						}}
 					/>
 
 					<div
-						className="absolute z-10 group flex top-0 left-1/2 cursor-pointer h-48 justify-center items-center"
+						className="absolute z-10 group flex bottom-[42em] left-1/2 cursor-pointer w-22 h-35 justify-center items-center"
 						style={{
 							transform: "translate(-50%, -5%)",
 						}}
@@ -105,7 +109,7 @@ const ArchivePage = () => {
 					>
 						{isLightOn ? (
 							<img
-								src={`/src/assets/archive/${isLampHovered ? "lamp-on-hover.svg" : "lamp-on.svg"}`}
+								src={`/src/assets/archive/${isLampHovered ? "lamp-on.svg" : "lamp-on.svg"}`}
 								alt="Lamp"
 								className="pointer-events-none"
 							/>
@@ -118,17 +122,37 @@ const ArchivePage = () => {
 						)}
 					</div>
 					{/* --- 그리드 및 네비게이션을 포함하는 컨테이너 --- */}
-					<FlowerGrid />
+					<div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-3em]">
+						<FlowerGrid />
+					</div>
+					<div
+						className="
+							absolute bottom-[7.5em] left-1/2 z-10 cursor-pointer w-48 h-64
+							translate-x-[calc(-50%-34em)]
+						"
+					>
+						<Mailbox onClick={handleMailboxClick} />
+					</div>
+					<div
+						className="absolute left-1/2 bottom-0 z-10"
+						style={{
+							width: "25em",
+							height: "26.5em",
+							transform: "translate(calc(-50% + 33.75em), calc(-50% + 15em))",
+						}}
+					>
+						<img src="/src/assets/archive/sofa.svg" alt="Sofa" />
+						<img 
+							src="/src/assets/archive/character.png" 
+							alt="Character"
+							className="absolute top-1/2 left-1/2 transform -translate-x-2/3 -translate-y-1/2"
+							style={{
+								width: "14em",
+								height: "14em",
+							}}
+						/>
+					</div>
 				</div>
-			</div>
-			<Mailbox onClick={handleMailboxClick} />
-			<div
-				className="absolute top-1/2 left-1/2 z-10 w-[400px] h-[400px]"
-				style={{
-					transform: "translate(calc(-50% + 540px), calc(-50% + 240px))",
-				}}
-			>
-				<img src="/src/assets/archive/sofa.svg" alt="Sofa" />
 			</div>
 
 			{/* 모달들 */}

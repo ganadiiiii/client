@@ -9,13 +9,10 @@ export default function Mailbox({ onClick }: MailboxProps) {
 	const [isHovered, setIsHovered] = useState(false);
 	return (
 		<div
-			className="absolute top-1/2 left-1/2 z-10 cursor-pointer w-64 h-64"
-			style={{
-				transform: "translate(calc(-50% - 480px), calc(-50% + 200px))",
-			}}
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
 			onClick={onClick}
+			className="relative w-full h-full"
 		>
 			<motion.img
 				src="/src/assets/archive/callout.png"
@@ -31,17 +28,19 @@ export default function Mailbox({ onClick }: MailboxProps) {
 					repeat: Infinity,
 					ease: "easeOut",
 				}}
+				className="w-40 h-23"
 			/>
 			{isHovered ? (
 				<img
 					src="/src/assets/archive/mailbox-open.svg"
 					alt="Mailbox"
 					style={{
-						transform: "translate(-22px, -11px)",
+						transform: "translate(-1.375em, -0.6875em)",
 					}}
+					className="w-38 h-78"
 				/>
 			) : (
-				<img src="/src/assets/archive/mailbox-close.svg" alt="Mailbox" />
+				<img src="/src/assets/archive/mailbox-close.svg" alt="Mailbox" className="w-28 h-77"/>
 			)}
 		</div>
 	);

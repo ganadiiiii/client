@@ -86,7 +86,7 @@ const FriendsListModal = ({
 						initial={{ y: "100%" }}
 						animate={{ y: 0 }}
 						exit={{ y: "100%" }}
-						transition={{ type: "spring", damping: 25, stiffness: 300 }}
+						transition={{ type: "spring", damping: 40, stiffness: 300 }}
 						onClick={(e) => e.stopPropagation()}
 					>
 						<h1

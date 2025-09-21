@@ -1,13 +1,13 @@
+import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import GradientIconButton from "../../components/button/GradientIconButton";
-import { flowerCardData } from "../../data/flowerCardData";
 import iconShare from "../../assets/archive/icon-share.svg";
 import iconShareHover from "../../assets/archive/icon-share-hover.svg";
-import { useState } from "react";
-import FlowerInfoCard from "../../features/archive/components/FlowerInfoCard";
 import bg from "../../assets/archive/info-bg.svg";
-import SimpleIconButton from "../../components/button/SimpleIconButton";
 import iconBack from "../../assets/generate/result/icon-back.svg";
+import GradientIconButton from "../../components/button/GradientIconButton";
+import SimpleIconButton from "../../components/button/SimpleIconButton";
+import { flowerCardData } from "../../data/flowerCardData";
+import FlowerInfoCard from "../../features/archive/components/FlowerInfoCard";
 
 const FlowerInfoPage = () => {
 	const { flowerId } = useParams();

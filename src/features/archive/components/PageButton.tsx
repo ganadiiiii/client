@@ -13,12 +13,12 @@ export default function PageButton({
 		<button
 			onClick={onClick}
 			disabled={disabled}
-			className={`w-[68px] h-[68px] relative rounded-full flex items-center justify-center enabled:transition-all enabled:duration-100 enabled:hover:scale-95 enabled:cursor-pointer`}
+			className={`w-17 h-17 relative rounded-full flex items-center justify-center enabled:transition-all enabled:duration-100 enabled:hover:scale-95 enabled:cursor-pointer`}
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				width="68"
-				height="68"
+				width="4.25em"
+				height="4.25em"
 				viewBox="0 0 85 85"
 				fill="none"
 				className="absolute top-9/16 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none"

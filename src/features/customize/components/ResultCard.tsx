@@ -84,7 +84,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 					{/* 날짜 */}
 					<div
 						className="absolute left-[2.8em] top-[3em] text-black z-20 text-sm"
-						style={{fontFamily: "Yidstreet"}}
+						style={{ fontFamily: "Yidstreet" }}
 					>
 						{date}
 					</div>

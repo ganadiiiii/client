@@ -35,7 +35,9 @@ const GradientIconButton: React.FC<GradientIconButtonProps> = ({
 				onMouseEnter={() => setIsHovered(true)}
 				onMouseLeave={() => setIsHovered(false)}
 			>
-				<div className={`flex items-center justify-center w-full h-full ${className}`}>
+				<div
+					className={`flex items-center justify-center w-full h-full ${className}`}
+				>
 					<img
 						src={hoverIcon && isHovered ? hoverIcon : icon}
 						className="w-10 h-10 text-dark-gray stroke-[6px]"

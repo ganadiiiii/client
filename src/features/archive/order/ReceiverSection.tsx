@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FriendsListModal from "../components/FriendsListModal";
 
 interface Friend {
@@ -7,7 +7,11 @@ interface Friend {
 	email: string;
 }
 
-export function ReceiverSection() {
+interface ReceiverSectionProps {
+	onValidationChange: (isValid: boolean) => void;
+}
+
+export function ReceiverSection({ onValidationChange }: ReceiverSectionProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedFriend, setSelectedFriend] = useState<Friend | null>(null);
 	const [phone, setPhone] = useState("");
@@ -30,6 +34,12 @@ export function ReceiverSection() {
 		setSelectedFriend(friend);
 		setIsModalOpen(false);
 	};
+
+	// Validation check
+	useEffect(() => {
+		const isValid = selectedFriend !== null && phone.length > 0;
+		onValidationChange(isValid);
+	}, [selectedFriend, phone, onValidationChange]);
 
 	return (
 		<section

@@ -1,19 +1,37 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CalendarModal } from "./CalendarModal";
+import { TimePickerModal } from "./TimePickerModal";
 
-export function CalendarSection() {
+interface DateSectionProps {
+	onValidationChange: (isValid: boolean) => void;
+}
+
+export function DateSection({ onValidationChange }: DateSectionProps) {
 	const [date, setDate] = useState("");
 	const [time, setTime] = useState("");
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isDateModalOpen, setIsDateModalOpen] = useState(false);
+	const [isTimeModalOpen, setIsTimeModalOpen] = useState(false);
 
 	const handleDateSelect = (selectedDate: Date) => {
 		const formatted = selectedDate
 			.toLocaleDateString("ko-KR")
 			.replace(/\. /g, ".")
 			.replace(/\.$/, "");
-		setDate(formatted); // 예: 2025.09.22
+		setDate(formatted);
 	};
+
+	const handleTimeSelect = (meridiem: string, hour: string, minute: string) => {
+		const formatted = `${meridiem} ${hour}시 ${minute}분`;
+		setTime(formatted);
+		setIsTimeModalOpen(false);
+	};
+
+	// Validation check
+	useEffect(() => {
+		const isValid = date.length > 0 && time.length > 0;
+		onValidationChange(isValid);
+	}, [date, time, onValidationChange]);
 
 	return (
 		<section
@@ -39,7 +57,7 @@ export function CalendarSection() {
 							placeholder="YYYY.MM.DD"
 							value={date}
 							readOnly
-							onClick={() => setIsModalOpen(true)}
+							onClick={() => setIsDateModalOpen(true)}
 							className="w-full h-[2.6em] px-5 mt-2.5 rounded-full bg-gray/10 border border-gray/40 text-black/80 focus:outline-none"
 							style={{ fontFamily: "NexonLv1Gothic" }}
 						/>
@@ -53,6 +71,7 @@ export function CalendarSection() {
 						type="text"
 						placeholder="오전 12시 00분"
 						value={time}
+						onClick={() => setIsTimeModalOpen(true)}
 						onChange={(e) => setTime(e.target.value)}
 						className="w-full h-[2.6em] px-5 mt-2.5 rounded-full bg-gray/10 border border-gray/40 text-black/80 focus:outline-none"
 						style={{ fontFamily: "NexonLv1Gothic" }}
@@ -62,17 +81,32 @@ export function CalendarSection() {
 
 			{/* 모달 */}
 			<AnimatePresence>
-				{isModalOpen && (
+				{isDateModalOpen && (
 					<motion.div
 						className="fixed inset-0 z-50 flex items-center justify-center bg-black/30"
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						onClick={() => setIsModalOpen(false)}
+						onClick={() => setIsDateModalOpen(false)}
 					>
 						<CalendarModal
 							onSelectDate={handleDateSelect}
-							onClose={() => setIsModalOpen(false)}
+							onClose={() => setIsDateModalOpen(false)}
+						/>
+					</motion.div>
+				)}
+				{isTimeModalOpen && (
+					<motion.div
+						className="fixed inset-0 z-50 flex items-center justify-center bg-black/30"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						onClick={() => setIsTimeModalOpen(false)}
+					>
+						<TimePickerModal
+							date={new Date(date)}
+							onClose={() => setIsTimeModalOpen(false)}
+							onSelectTime={handleTimeSelect}
 						/>
 					</motion.div>
 				)}

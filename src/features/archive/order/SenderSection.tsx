@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export function SenderSection() {
+interface SenderSectionProps {
+	onValidationChange: (isValid: boolean) => void;
+}
+
+export function SenderSection({ onValidationChange }: SenderSectionProps) {
 	const [phone, setPhone] = useState("");
 	// 전화번호 자동 하이픈 추가
 	const formatPhoneNumber = (value: string) => {
@@ -14,11 +18,18 @@ export function SenderSection() {
 	const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setPhone(formatPhoneNumber(e.target.value));
 	};
+
 	// TODO: 추후 로그인 유저 정보 API로 대체
 	const user = {
 		name: "홍길동",
 		email: "ghdfkrehd@gmail.com",
 	};
+
+	// Validation check
+	useEffect(() => {
+		const isValid = user.name.length > 0 && phone.length > 0;
+		onValidationChange(isValid);
+	}, [phone, onValidationChange]);
 
 	return (
 		<section

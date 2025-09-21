@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CalendarModal } from "./CalendarModal";
 import { TimePickerModal } from "./TimePickerModal";
 

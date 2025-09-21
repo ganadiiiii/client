@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { Address } from "react-daum-postcode";
 import CustomPostcodeModal from "./CustomPostcodeModal";
 
@@ -22,7 +22,8 @@ export function AddressSection({ onValidationChange }: AddressSectionProps) {
 
 	// Validation check
 	useEffect(() => {
-		const isValid = zipcode.length > 0 && address.length > 0 && detailAddress.length > 0;
+		const isValid =
+			zipcode.length > 0 && address.length > 0 && detailAddress.length > 0;
 		onValidationChange(isValid);
 	}, [zipcode, address, detailAddress, onValidationChange]);
 

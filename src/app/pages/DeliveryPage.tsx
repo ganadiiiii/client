@@ -14,29 +14,50 @@ const DeliveryPage: React.FC = () => {
 		date: false,
 	});
 
-	const handleValidationChange = (section: keyof typeof validationStates, isValid: boolean) => {
-		setValidationStates(prev => ({
+	const handleValidationChange = (
+		section: keyof typeof validationStates,
+		isValid: boolean,
+	) => {
+		setValidationStates((prev) => ({
 			...prev,
-			[section]: isValid
+			[section]: isValid,
 		}));
 	};
 
-	const isAllValid = Object.values(validationStates).every(isValid => isValid);
+	const isAllValid = Object.values(validationStates).every(
+		(isValid) => isValid,
+	);
 
 	return (
 		<div className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center">
 			<div className="flex flex-col items-center justify-center gap-y-10 mt-40">
-				<ReceiverSection onValidationChange={(isValid) => handleValidationChange('receiver', isValid)} />
-				<SenderSection onValidationChange={(isValid) => handleValidationChange('sender', isValid)} />
-				<AddressSection onValidationChange={(isValid) => handleValidationChange('address', isValid)} />
-				<DateSection onValidationChange={(isValid) => handleValidationChange('date', isValid)} />
+				<ReceiverSection
+					onValidationChange={(isValid) =>
+						handleValidationChange("receiver", isValid)
+					}
+				/>
+				<SenderSection
+					onValidationChange={(isValid) =>
+						handleValidationChange("sender", isValid)
+					}
+				/>
+				<AddressSection
+					onValidationChange={(isValid) =>
+						handleValidationChange("address", isValid)
+					}
+				/>
+				<DateSection
+					onValidationChange={(isValid) =>
+						handleValidationChange("date", isValid)
+					}
+				/>
 				<button
 					type="button"
 					onClick={() => navigate("/")}
 					className={`w-105 h-13.5 rounded-full text-white text-xl font-bold mb-10 transition-colors duration-200 ${
-						isAllValid 
-							? 'bg-primary hover:bg-primary/90' 
-							: 'bg-gray/40 cursor-not-allowed'
+						isAllValid
+							? "bg-primary hover:bg-primary/90"
+							: "bg-gray/40 cursor-not-allowed"
 					}`}
 					style={{ fontFamily: "NexonLv1Gothic" }}
 					disabled={!isAllValid}

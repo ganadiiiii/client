@@ -1,5 +1,6 @@
 import { useId, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { authAPI } from "../../../api";
 
 const LoginForm: React.FC = () => {
 	const navigate = useNavigate();
@@ -8,10 +9,23 @@ const LoginForm: React.FC = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		// 로그인 로직 구현
-		console.log("Login attempted with:", { email, password });
+		if (!email.trim() || !password.trim()) {
+			return;
+		}
+		try {
+			const data = await authAPI.login(email, password);
+			const { accessToken, refreshToken } = data;
+	  
+			localStorage.setItem('accessToken', accessToken);
+			localStorage.setItem('refreshToken', refreshToken);
+
+			// 로그인 성공 후 메인 페이지로 이동
+			navigate('/');
+		  } catch (error) {
+			console.error('Login failed:', error);
+		  }
 	};
 
 	return (
@@ -53,7 +67,7 @@ const LoginForm: React.FC = () => {
 							{/* Email 입력 */}
 							<div className="flex-col justify-center">
 								<label
-									htmlFor="email"
+									htmlFor="emailId"
 									className="block text-lg font-bold text-gray mb-2 text-start w-140"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
@@ -73,7 +87,7 @@ const LoginForm: React.FC = () => {
 							{/* Password 입력 */}
 							<div className="flex-col justify-center">
 								<label
-									htmlFor="password"
+									htmlFor="passwordId"
 									className="block font-bold text-gray text-lg mb-2 w-140"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>

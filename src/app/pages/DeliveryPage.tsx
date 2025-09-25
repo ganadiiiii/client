@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AddressSection } from "../../features/archive/order/AddressSection";
-import { DateSection } from "../../features/archive/order/DateSection";
-import { ReceiverSection } from "../../features/archive/order/ReceiverSection";
-import { SenderSection } from "../../features/archive/order/SenderSection";
+import { AddressSection } from "../../features/order/AddressSection";
+import { DateSection } from "../../features/order/DateSection";
+import { ReceiverSection } from "../../features/order/ReceiverSection";
+import { SenderSection } from "../../features/order/SenderSection";
 
 const DeliveryPage: React.FC = () => {
 	const navigate = useNavigate();

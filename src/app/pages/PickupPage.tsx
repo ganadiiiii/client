@@ -1,5 +1,5 @@
 import React from "react";
-import GoogleMapComponent from "../../features/archive/order/GoogleMap";
+import GoogleMapComponent from "../../features/order/GoogleMap";
 
 const PickupPage: React.FC = () => {
 	return (

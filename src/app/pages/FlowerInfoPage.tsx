@@ -1,4 +1,6 @@
-import { useState } from "react";
+import saveAs from "file-saver";
+import html2canvas from "html2canvas";
+import { useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import iconShare from "../../assets/archive/icon-share.svg";
 import iconShareHover from "../../assets/archive/icon-share-hover.svg";
@@ -13,6 +15,7 @@ const FlowerInfoPage = () => {
 	const { flowerId } = useParams();
 	const navigate = useNavigate();
 	const [showSharePopup, setShowSharePopup] = useState(false);
+	const divRef = useRef<HTMLDivElement | null>(null);
 	const flower = flowerCardData.find((f) => f.id === String(flowerId));
 	if (!flower) {
 		return (
@@ -27,6 +30,139 @@ const FlowerInfoPage = () => {
 			</main>
 		);
 	}
+
+	const handleDownload = async () => {
+		if (!divRef.current) return;
+
+		try {
+			// Front result card만을 위한 임시 div 생성
+			const tempDiv = document.createElement("div");
+			tempDiv.style.position = "absolute";
+			tempDiv.style.left = "-9999px";
+			tempDiv.style.top = "0";
+			tempDiv.style.width = "24em";
+			tempDiv.style.height = "37.0625em";
+			tempDiv.style.fontSize = "16px";
+
+			// Front result card HTML 직접 생성 (3D transform 없이)
+			tempDiv.innerHTML = `
+				<div style="width: 24em; height: 37.0625em;">
+					<div style="
+						position: relative;
+						width: 100%;
+						height: 100%;
+						border-radius: 2.5rem;
+						background-image: url(/src/assets/generate/result/card.png);
+						background-repeat: no-repeat;
+						background-size: 100% 100%;
+						background-position: center;
+					">
+						<!-- 날짜 -->
+						<div style="
+							position: absolute;
+							left: 2.8em;
+							top: 2.5em;
+							color: black;
+							z-index: 20;
+							font-size: 1.175rem;
+							font-family: Yidstreet;
+						">
+							${flower.date}
+						</div>
+	
+						<!-- 꽃 이미지 -->
+						<div style="
+							position: absolute;
+							left: 45%;
+							top: 13.75em;
+							transform: translate(-50%, -50%);
+							z-index: 10;
+						">
+							<img src="${flower.flowerImg}" alt="flower" style="height: 20em; object-fit: contain;" />
+						</div>
+	
+						<!-- 제목 -->
+						<div style="
+							position: absolute;
+							left: 1.6em;
+							top: 16em;
+							color: black;
+							z-index: 20;
+							font-weight: bold;
+							font-size: 2rem;
+							font-family: Yidstreet;
+						">
+							${flower.title}
+						</div>
+	
+						<!-- 메인/서브 꽃 -->
+						<div style="
+							position: absolute;
+							left: 2.8em;
+							top: 31.5em;
+							color: black;
+							font-size: 1.175rem;
+						">
+							<div style="display: flex; flex-direction: row; gap: 10px; margin-bottom: 5px;">
+								<span style="font-family: Yidstreet; font-weight: 600;">Main</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.mainFlowers.join(", ")}</span>
+								<span style="font-family: Yidstreet; font-weight: 600;">Sub</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.subFlowers.join(", ")}</span>
+							</div>
+							<div style="display: flex; flex-direction: row; gap: 10px;">
+								<span style="font-family: Yidstreet; font-weight: 600;">Floriography</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.floriography}</span>
+							</div>
+						</div>
+	
+						<!-- Size & Price -->
+						<div style="
+							position: absolute;
+							left: 2.8em;
+							top: 36.75em;
+							display: flex;
+							flex-direction: row;
+							gap: 5rem;
+							color: black;
+							font-size: 1.175rem;
+						">
+							<div style="display: flex; gap: 0.75rem; align-items: baseline;">
+								<span style="font-family: Yidstreet; font-weight: 600;">Size</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.size}</span>
+							</div>
+							<div style="display: flex; gap: 0.75rem; align-items: baseline;">
+								<span style="font-family: Yidstreet; font-weight: 600;">Price</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.price}원</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			`;
+
+			document.body.appendChild(tempDiv);
+
+			await new Promise((resolve) => setTimeout(resolve, 100));
+
+			const canvas = await html2canvas(tempDiv, {
+				scale: 2,
+				useCORS: true,
+				allowTaint: true,
+				backgroundColor: null,
+				width: 384,
+				height: 593,
+			});
+
+			document.body.removeChild(tempDiv);
+
+			canvas.toBlob((blob) => {
+				if (blob !== null) {
+					saveAs(blob, `${flower.title}.png`);
+				}
+			});
+		} catch (error) {
+			console.error("Error converting div to image:", error);
+		}
+	};
 	return (
 		<div
 			className="relative w-screen min-h-screen flex flex-col items-center justify-center bg-[#FCFBF6] bg-cover bg-center bg-no-repeat"
@@ -50,7 +186,9 @@ const FlowerInfoPage = () => {
 						icon={iconBack}
 						className="absolute left-[-5em] top-[0.625em]"
 					/>
-					<FlowerInfoCard flowerCard={flower} />
+					<div ref={divRef}>
+						<FlowerInfoCard flowerCard={flower} />
+					</div>
 
 					{/* Action button */}
 					<div className="relative mt-4 w-full flex justify-center">
@@ -81,6 +219,7 @@ const FlowerInfoPage = () => {
 								<button
 									onClick={() => {
 										setShowSharePopup(false);
+										handleDownload();
 									}}
 									className="block w-full text-center text-base py-5 px-12 hover:bg-gray/20 border-t border-gray/40"
 									style={{ fontFamily: "NexonLv1Gothic" }}

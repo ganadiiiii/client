@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { cardAPI } from "../../../api";
 
 interface MailboxProps {
 	onClick?: () => void;
@@ -7,6 +8,21 @@ interface MailboxProps {
 
 export default function Mailbox({ onClick }: MailboxProps) {
 	const [isHovered, setIsHovered] = useState(false);
+	const [isNewFriend, setIsNewFriend] = useState(false);
+
+	const getNewFriend = async () => {
+		try {
+			const response = await cardAPI.newFriend();
+			setIsNewFriend(response.hasPendingFriendRequests);
+		} catch (error) {
+			console.error('친구 요청 여부 가져오기 실패:', error);
+		}
+	};
+
+	useEffect(() => {
+		getNewFriend();
+	}, []);
+
 	return (
 		<div
 			onMouseEnter={() => setIsHovered(true)}
@@ -28,7 +44,7 @@ export default function Mailbox({ onClick }: MailboxProps) {
 					repeat: Infinity,
 					ease: "easeOut",
 				}}
-				className="w-40 h-23"
+				className={`w-40 h-23 ${isNewFriend ? "opacity-100" : "opacity-0 pointer-events-none invisible"}`}
 			/>
 			{isHovered ? (
 				<img

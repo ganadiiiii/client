@@ -214,7 +214,7 @@ const FlowerInfoPage = () => {
 									style={{ fontFamily: "NexonLv1Gothic" }}
 									role="menuitem"
 								>
-									주문하기
+									실물 보내기
 								</button>
 								<button
 									onClick={() => {

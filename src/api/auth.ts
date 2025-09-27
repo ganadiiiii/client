@@ -38,4 +38,15 @@ export const authAPI = {
     const response = await axios.post(`${API_BASE_URL}/auth/signup`, userData);
     return response.data;
   },
+
+  // 유저 정보 API
+  me: async () => {
+    const accessToken = localStorage.getItem("accessToken");
+    const response = await axios.get(`${API_BASE_URL}/users/me`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  },
 };

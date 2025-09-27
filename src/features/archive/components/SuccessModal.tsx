@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect } from "react";
 
 interface SuccessModalProps {
 	isOpen: boolean;
@@ -7,6 +8,16 @@ interface SuccessModalProps {
 }
 
 const SuccessModal = ({ isOpen, message, onClose }: SuccessModalProps) => {
+	useEffect(() => {
+		if (isOpen) {
+			const timer = setTimeout(() => {
+				onClose();
+			}, 3000);
+
+			return () => clearTimeout(timer);
+		}
+	}, [isOpen, onClose]);
+	
 	return (
 		<AnimatePresence>
 			{isOpen && (

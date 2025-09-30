@@ -40,13 +40,25 @@ export const customizingQuestions: Question[] = [
 	{
 		id: 4,
 		title: "특별히 담고 싶은 꽃이 있다면 선택해 주세요.",
-		options: ["선택지1", "선택지2", "선택지3", "선택지4", "선택지5"],
+		options: ["rose", "tulip", "carnation", "sunflower", "lily", "gerbera", "baby's breath", "freesia", "muguet"],
 		isMultipleChoice: true,
 	},
 	{
 		id: 5,
 		title: "꽃다발의 크기를 정해 주세요.",
-		options: ["최종1", "최종2", "최종3"],
+		options: ["s", "m", "l"],
+		isMultipleChoice: false,
+	},
+	{
+		id: 6,
+		title: "꽃다발의 포장지를 선택해 주세요.",
+		options: ["kraft paper", "color paper", "clear vinyl"],
+		isMultipleChoice: false,
+	},
+	{
+		id: 7,
+		title: "포인트 장식을 선택해 주세요.",
+		options: ["none", "specia"],
 		isMultipleChoice: false,
 	},
 ];

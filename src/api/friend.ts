@@ -92,4 +92,16 @@ export const friendAPI = {
         });
         return response.data;
     },
+
+    // 친구 요청 여부 API
+    newFriend: async () => {
+      const accessToken = localStorage.getItem("accessToken");
+      const response = await axios.get(`${API_BASE_URL}/archive/meta`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      return response.data;
+  },
 };

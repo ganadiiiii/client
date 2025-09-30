@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { friendAPI } from "../../api";
 import bg from "../../assets/generate/result/bg.png";
 import AlertDialog from "../../components/dialog/AlertDialog";
 import ConfirmDialog from "../../components/dialog/ConfirmDialog";
@@ -12,8 +13,6 @@ import type {
 	UIState,
 } from "../../types/FlowerCard";
 import { ResultPhase as ResultPhaseConst } from "../../types/FlowerCard";
-import { friendAPI } from "../../api";
-
 
 // 초기 FlowerCard 데이터
 const initialFlowerCard: FlowerCard = {
@@ -49,14 +48,21 @@ const CustomizingResultPage: React.FC = () => {
 	const getFriends = async () => {
 		try {
 			const response = await friendAPI.getFriends();
-			const friendsData = response.items.map((item: { userId: string; firstName: string; lastName: string; email: string }) => ({
-				id: item.userId,
-				name: `${item.firstName} ${item.lastName}`.trim(),
-				email: item.email
-			}));
+			const friendsData = response.items.map(
+				(item: {
+					userId: string;
+					firstName: string;
+					lastName: string;
+					email: string;
+				}) => ({
+					id: item.userId,
+					name: `${item.firstName} ${item.lastName}`.trim(),
+					email: item.email,
+				}),
+			);
 			setFriends(friendsData);
 		} catch (error) {
-			console.error('친구 목록 가져오기 실패:', error);
+			console.error("친구 목록 가져오기 실패:", error);
 		}
 	};
 

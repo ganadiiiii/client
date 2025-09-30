@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useState, useEffect } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { authAPI } from "../../api";
 
 interface User {
@@ -37,7 +37,7 @@ export const SenderSection = forwardRef<SenderSectionRef>((_, ref) => {
 			};
 			setUser(userData);
 		} catch (error) {
-			console.error('유저 정보 가져오기 실패:', error);
+			console.error("유저 정보 가져오기 실패:", error);
 		}
 	};
 

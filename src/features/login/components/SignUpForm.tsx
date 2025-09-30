@@ -24,29 +24,31 @@ const SignUpForm: React.FC = () => {
 		hasSpecial: /[!@#$%^&*(),.?":{}|<>]/.test(password),
 		length: password.length >= 8 && password.length <= 20,
 	};
-	
+
 	const isPasswordValid =
-		passwordValid.hasEng && passwordValid.hasNum && passwordValid.hasSpecial && passwordValid.length;
-	
+		passwordValid.hasEng &&
+		passwordValid.hasNum &&
+		passwordValid.hasSpecial &&
+		passwordValid.length;
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		try {
 			await authAPI.signup({
-			  firstName,
-			  lastName,
-			  email,
-			  password,
+				firstName,
+				lastName,
+				email,
+				password,
 			});
-			setTimeout(() => navigate('/login'), 2000);
-		  } catch (error: any) {
+			setTimeout(() => navigate("/login"), 2000);
+		} catch (error: any) {
 			if (error.response?.status === 409) {
-			  console.error("이미 존재하는 이메일입니다.");
-			  setDuplicate(true);
+				console.error("이미 존재하는 이메일입니다.");
+				setDuplicate(true);
 			} else {
-			  console.error("Login failed:", error);
+				console.error("Login failed:", error);
 			}
-		  }
+		}
 	};
 
 	return (
@@ -141,8 +143,16 @@ const SignUpForm: React.FC = () => {
 									className="w-full h-11.5 px-4 py-4 border-2 border-gray/40 rounded-full bg-white text-lg focus:outline-none focus:border-gray transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic", fontSize: "18px" }}
 								/>
-								{!emailValid.email && <p className="text-gray text-sm p-2 w-full text-start">이메일 형식이 올바르지 않습니다.</p>}
-								{duplicate && <p className="text-gray text-sm p-2 w-full text-start">이미 존재하는 이메일입니다.</p>}
+								{!emailValid.email && (
+									<p className="text-gray text-sm p-2 w-full text-start">
+										이메일 형식이 올바르지 않습니다.
+									</p>
+								)}
+								{duplicate && (
+									<p className="text-gray text-sm p-2 w-full text-start">
+										이미 존재하는 이메일입니다.
+									</p>
+								)}
 							</div>
 
 							{/* Password 입력 */}
@@ -164,10 +174,34 @@ const SignUpForm: React.FC = () => {
 									style={{ fontFamily: "NexonLv1Gothic", fontSize: "18px" }}
 								/>
 								<ul className="text-sm flex flex-row gap-2 text-start w-full p-2">
-									<li className={passwordValid.hasEng ? 'text-primary' : 'text-gray'}>✓ 영문</li>
-									<li className={passwordValid.hasNum ? 'text-primary' : 'text-gray'}>✓ 숫자</li>
-									<li className={passwordValid.hasSpecial ? 'text-primary' : 'text-gray'}>✓ 특수문자</li>
-									<li className={passwordValid.length ? 'text-primary' : 'text-gray'}>✓ 8~20자</li>
+									<li
+										className={
+											passwordValid.hasEng ? "text-primary" : "text-gray"
+										}
+									>
+										✓ 영문
+									</li>
+									<li
+										className={
+											passwordValid.hasNum ? "text-primary" : "text-gray"
+										}
+									>
+										✓ 숫자
+									</li>
+									<li
+										className={
+											passwordValid.hasSpecial ? "text-primary" : "text-gray"
+										}
+									>
+										✓ 특수문자
+									</li>
+									<li
+										className={
+											passwordValid.length ? "text-primary" : "text-gray"
+										}
+									>
+										✓ 8~20자
+									</li>
 								</ul>
 							</div>
 

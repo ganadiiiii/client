@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { friendAPI } from "../../../api";
 
 interface MailboxProps {
@@ -15,7 +15,7 @@ export default function Mailbox({ onClick }: MailboxProps) {
 			const response = await friendAPI.newFriend();
 			setIsNewFriend(response.hasPendingFriendRequests);
 		} catch (error) {
-			console.error('친구 요청 여부 가져오기 실패:', error);
+			console.error("친구 요청 여부 가져오기 실패:", error);
 		}
 	};
 

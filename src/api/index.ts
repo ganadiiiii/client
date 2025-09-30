@@ -1,4 +1,4 @@
-export { authAPI } from './auth';
-export { apiClient } from './client';
-export { friendAPI } from './friend';
-export { cardAPI } from './card';
+export { authAPI } from "./auth";
+export { cardAPI } from "./card";
+export { apiClient } from "./client";
+export { friendAPI } from "./friend";

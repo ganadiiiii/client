@@ -37,7 +37,7 @@ export const ReceiverSection = forwardRef<ReceiverSectionRef>((_, ref) => {
 	};
 
 	useImperativeHandle(ref, () => ({
-		isValid: () => selectedFriend !== null && phone.length > 0
+		isValid: () => selectedFriend !== null && phone.length > 0,
 	}));
 
 	// Validation check

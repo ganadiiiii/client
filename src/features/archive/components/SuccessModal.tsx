@@ -17,7 +17,7 @@ const SuccessModal = ({ isOpen, message, onClose }: SuccessModalProps) => {
 			return () => clearTimeout(timer);
 		}
 	}, [isOpen, onClose]);
-	
+
 	return (
 		<AnimatePresence>
 			{isOpen && (

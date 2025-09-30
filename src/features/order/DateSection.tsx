@@ -29,7 +29,7 @@ export const DateSection = forwardRef<DateSectionRef>((_, ref) => {
 
 	// Validation check
 	useImperativeHandle(ref, () => ({
-		isValid: () => date.length > 0 && time.length > 0
+		isValid: () => date.length > 0 && time.length > 0,
 	}));
 
 	return (

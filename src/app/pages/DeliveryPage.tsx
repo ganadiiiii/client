@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AddressSection } from "../../features/order/AddressSection";
 import { DateSection } from "../../features/order/DateSection";
@@ -8,7 +8,7 @@ import { SenderSection } from "../../features/order/SenderSection";
 
 const DeliveryPage: React.FC = () => {
 	const navigate = useNavigate();
-	
+
 	// 각 섹션의 ref를 통해 validation 상태를 확인
 	const receiverRef = useRef<{ isValid: () => boolean }>(null);
 	const senderRef = useRef<{ isValid: () => boolean }>(null);
@@ -19,12 +19,11 @@ const DeliveryPage: React.FC = () => {
 
 	// validation 체크 함수
 	const checkValidation = useCallback(() => {
-		const isValid = (
+		const isValid =
 			receiverRef.current?.isValid() &&
 			senderRef.current?.isValid() &&
 			addressRef.current?.isValid() &&
-			dateRef.current?.isValid()
-		);
+			dateRef.current?.isValid();
 		setButtonEnabled(!!isValid);
 	}, []);
 

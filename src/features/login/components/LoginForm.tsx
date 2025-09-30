@@ -17,15 +17,15 @@ const LoginForm: React.FC = () => {
 		try {
 			const data = await authAPI.login(email, password);
 			const { accessToken, refreshToken } = data;
-	  
-			localStorage.setItem('accessToken', accessToken);
-			localStorage.setItem('refreshToken', refreshToken);
+
+			localStorage.setItem("accessToken", accessToken);
+			localStorage.setItem("refreshToken", refreshToken);
 
 			// 로그인 성공 후 메인 페이지로 이동
-			navigate('/');
-		  } catch (error) {
-			console.error('Login failed:', error);
-		  }
+			navigate("/");
+		} catch (error) {
+			console.error("Login failed:", error);
+		}
 	};
 
 	return (

@@ -22,7 +22,8 @@ export const AddressSection = forwardRef<AddressSectionRef>((_, ref) => {
 
 	// Validation check
 	useImperativeHandle(ref, () => ({
-		isValid: () => zipcode.length > 0 && address.length > 0 && detailAddress.length > 0
+		isValid: () =>
+			zipcode.length > 0 && address.length > 0 && detailAddress.length > 0,
 	}));
 
 	return (

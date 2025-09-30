@@ -55,15 +55,18 @@ export const friendAPI = {
 	// 친구 요청 API
 	sendFriendRequest: async (receiverId: string) => {
 		const accessToken = localStorage.getItem("accessToken");
-		const response = await axios.post(`${API_BASE_URL}/friends/requests`, {
-			receiverId,
-			headers: {
+		const response = await axios.post(
+			`${API_BASE_URL}/friends/requests`,
+			{ receiverId },
+			{
+				headers: {
 				Authorization: `Bearer ${accessToken}`,
 				"Content-Type": "application/json",
-			},
-		});
+				},
+			}
+		);
 		return response.data;
-	},
+	  },
 
 	// 친구 요청 거절 API
 	rejectFriendRequest: async (requestId: number) => {

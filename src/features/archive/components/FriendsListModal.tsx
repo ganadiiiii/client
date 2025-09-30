@@ -79,7 +79,7 @@ const FriendsListModal = forwardRef<FriendsListModalRef, FriendsListModalProps>(
 	const getFriends = async () => {
 		try {
 			const response = await friendAPI.getFriends();
-			const friendsData = response.items.map((item: any) => ({
+			const friendsData = response.items.map((item: { userId: string; firstName: string; lastName: string; email: string }) => ({
 				id: item.userId,
 				name: `${item.firstName} ${item.lastName}`.trim(),
 				email: item.email,
@@ -148,7 +148,7 @@ const FriendsListModal = forwardRef<FriendsListModalRef, FriendsListModalProps>(
 		setLoading(true);
 		try {
 			const response = await friendAPI.search(term);
-			const searchData = response.items.map((item: any) => ({
+			const searchData = response.items.map((item: { userId: string; firstName: string; lastName: string; email: string; isFriend: boolean }) => ({
 				id: item.userId,
 				name: `${item.firstName} ${item.lastName}`.trim(),
 				email: item.email,

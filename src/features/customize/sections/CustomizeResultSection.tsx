@@ -20,7 +20,7 @@ interface CustomizeResultSectionProps {
 	uiState: UIState;
 	updateUIState: (updates: Partial<UIState>) => void;
 	onFriendSelect: (friend: Friend) => void;
-	mockFriends: Friend[];
+	friends: Friend[];
 }
 
 const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
@@ -28,7 +28,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 	uiState,
 	updateUIState,
 	onFriendSelect,
-	mockFriends,
+	friends,
 }) => {
 	const navigate = useNavigate();
 	const sendMenuRef = useRef<HTMLDivElement | null>(null);
@@ -284,7 +284,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 			{uiState.showFriendsDialog && (
 				<div className="fixed inset-0 flex items-center justify-center z-50">
 					<SelectFriendPopup
-						mockFriends={mockFriends}
+						friends={friends}
 						onFriendSelect={onFriendSelect}
 						updateUIState={updateUIState}
 					/>

@@ -40,7 +40,17 @@ export const customizingQuestions: Question[] = [
 	{
 		id: 4,
 		title: "특별히 담고 싶은 꽃이 있다면 선택해 주세요.",
-		options: ["rose", "tulip", "carnation", "sunflower", "lily", "gerbera", "baby's breath", "freesia", "muguet"],
+		options: [
+			"rose",
+			"tulip",
+			"carnation",
+			"sunflower",
+			"lily",
+			"gerbera",
+			"baby's breath",
+			"freesia",
+			"muguet",
+		],
 		isMultipleChoice: true,
 	},
 	{

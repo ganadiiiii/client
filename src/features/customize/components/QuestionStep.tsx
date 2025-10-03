@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import { sampleFlowerData as flowerCardData } from "../../../data/flowerData";
 import FlowerSizeOptionCard from "../components/FlowerSizeOptionCard";
 import FlowerTypeOptionCard from "../components/FlowerTypeOptionCard";
+import DecorationOptionCard from "./DecorationOptionCard";
 import NavigationButton from "./NavigationButton";
 import OptionButton from "./OptionButton";
 import PaperOptionCard from "./PaperOptionCard";
-import DecorationOptionCard from "./DecorationOptionCard";
 
 interface QuestionStepProps {
 	questionNumber: number;
@@ -192,46 +192,46 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 								/>
 							</div>
 						) : questionNumber === 6 ? (
-								<div className="flex flex-wrap justify-center gap-6">
-									<PaperOptionCard
-										number={1}
-										paper="Kraft paper"
-										description="크라프트지"
-										isSelected={selectedOptions.includes("Kraft paper")}
-										onClick={() => onOptionSelect("Kraft paper")}
-									/>
-									<PaperOptionCard
-										number={2}
-										paper="Color paper"
-										description="컬러 종이"
-										isSelected={selectedOptions.includes("Color paper")}
-										onClick={() => onOptionSelect("Color paper")}
-									/>
-									<PaperOptionCard
-										number={3}
-										paper="Clear vinyl"
-										description="투명 비닐"
-										isSelected={selectedOptions.includes("Clear vinyl")}
-										onClick={() => onOptionSelect("Clear vinyl")}
-									/>
-								</div>
+							<div className="flex flex-wrap justify-center gap-6">
+								<PaperOptionCard
+									number={1}
+									paper="Kraft paper"
+									description="크라프트지"
+									isSelected={selectedOptions.includes("Kraft paper")}
+									onClick={() => onOptionSelect("Kraft paper")}
+								/>
+								<PaperOptionCard
+									number={2}
+									paper="Color paper"
+									description="컬러 종이"
+									isSelected={selectedOptions.includes("Color paper")}
+									onClick={() => onOptionSelect("Color paper")}
+								/>
+								<PaperOptionCard
+									number={3}
+									paper="Clear vinyl"
+									description="투명 비닐"
+									isSelected={selectedOptions.includes("Clear vinyl")}
+									onClick={() => onOptionSelect("Clear vinyl")}
+								/>
+							</div>
 						) : questionNumber === 7 ? (
-								<div className="flex flex-wrap justify-center gap-6">
-									<DecorationOptionCard
-										number={1}
-										decoration="None"
-										description="장식 없이 포장만"
-										isSelected={selectedOptions.includes("None")}
-										onClick={() => onOptionSelect("None")}
-									/>
-									<DecorationOptionCard
-										number={2}
-										decoration="Special Detail"
-										description="장식 달기"
-										isSelected={selectedOptions.includes("Special Detail")}
-										onClick={() => onOptionSelect("Special Detail")}
-									/>
-								</div>
+							<div className="flex flex-wrap justify-center gap-6">
+								<DecorationOptionCard
+									number={1}
+									decoration="None"
+									description="장식 없이 포장만"
+									isSelected={selectedOptions.includes("None")}
+									onClick={() => onOptionSelect("None")}
+								/>
+								<DecorationOptionCard
+									number={2}
+									decoration="Special Detail"
+									description="장식 달기"
+									isSelected={selectedOptions.includes("Special Detail")}
+									onClick={() => onOptionSelect("Special Detail")}
+								/>
+							</div>
 						) : (
 							// 기본 옵션 버튼 렌더링
 							<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-1.5 gap-y-4 place-items-center">

@@ -9,6 +9,7 @@ import FlowerInfoPage from "./pages/FlowerInfoPage";
 import OrderPage from "./pages/OrderPage";
 import PickupPage from "./pages/PickupPage";
 import ResultSentPage from "./pages/ResultSentPage";
+import Cart from "../features/login/components/Cart";
 
 export const AppRoutes = () => {
 	return (
@@ -23,6 +24,7 @@ export const AppRoutes = () => {
 			<Route path="/shop" element={<OrderPage />} />
 			<Route path="/shop/delivery" element={<DeliveryPage />} />
 			<Route path="/shop/pickup" element={<PickupPage />} />
+			<Route path="/cart" element={<Cart />} />
 		</Routes>
 	);
 };

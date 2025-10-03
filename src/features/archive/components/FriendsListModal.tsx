@@ -1,41 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import { authAPI, friendAPI } from "../../../api";
-
-interface Friend {
-	id: string;
-	name: string;
-	email: string;
-	isFriend: boolean;
-	requestStatus?: "sent" | "received" | "none";
-	requestId?: number;
-}
-
-interface FriendRequest {
-	requestId: number;
-	sender: {
-		userId: string;
-		email: string;
-		firstName: string;
-		lastName: string;
-	};
-	receiver: {
-		userId: string;
-		email: string;
-		firstName: string;
-		lastName: string;
-	};
-	status: string;
-	createdAt: string;
-	respondedAt: string | null;
-}
-
-interface User {
-	userId: string;
-	email: string;
-	firstName: string;
-	lastName: string;
-}
+import { forwardRef, useEffect, useImperativeHandle } from "react";
+import { type Friend, useFriendsManager } from "../hooks/useFriendsManager";
+import FriendListItem from "./FriendListItem";
+import FriendRequestModal from "./FriendRequestModal";
 
 interface FriendsListModalProps {
 	isOpen: boolean;
@@ -54,213 +21,38 @@ const FriendsListModal = forwardRef<FriendsListModalRef, FriendsListModalProps>(
 		{ isOpen, onClose, onDeleteFriend, onSendFriendRequest, onSelectFriend },
 		ref,
 	) => {
-		const [searchTerm, setSearchTerm] = useState("");
-		const [friends, setFriends] = useState<Friend[]>([]);
-		const [searchResults, setSearchResults] = useState<Friend[]>([]);
-		const [friendRequests, setFriendRequests] = useState<FriendRequest[]>([]);
-		const [currentUser, setCurrentUser] = useState<User | null>(null);
-		const [loading, setLoading] = useState(false);
-		const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
-		const [selectedRequest, setSelectedRequest] = useState<Friend | null>(null);
+		const {
+			searchTerm,
+			setSearchTerm,
+			loading,
+			isRequestModalOpen,
+			setIsRequestModalOpen,
+			selectedRequest,
+			setSelectedRequest,
+			filteredFriends,
+			filteredSearchResults,
+			refreshFriends,
+			handleSendFriendRequest,
+			handleAcceptRequest,
+			handleRejectRequest,
+			handleRequestReceived,
+		} = useFriendsManager();
 
-		// 현재 사용자 정보 가져오기
-		const getCurrentUser = async () => {
-			try {
-				const response = await authAPI.me();
-				setCurrentUser(response);
-			} catch (error) {
-				console.error("현재 사용자 정보 가져오기 실패:", error);
+		const handleBackdropClick = (e: React.MouseEvent) => {
+			if (e.target === e.currentTarget) {
+				onClose();
 			}
-		};
-
-		// 친구 목록 가져오기
-		const getFriends = async () => {
-			try {
-				const response = await friendAPI.getFriends();
-				const friendsData = response.items.map(
-					(item: {
-						userId: string;
-						firstName: string;
-						lastName: string;
-						email: string;
-					}) => ({
-						id: item.userId,
-						name: `${item.firstName} ${item.lastName}`.trim(),
-						email: item.email,
-						isFriend: true,
-						requestStatus: "none" as const,
-					}),
-				);
-				setFriends(friendsData);
-			} catch (error) {
-				console.error("친구 목록 가져오기 실패:", error);
-			}
-		};
-
-		// 친구 요청 목록 가져오기
-		const getFriendRequests = async () => {
-			if (!currentUser) return;
-
-			try {
-				const response = await friendAPI.getFriendsRequest();
-				setFriendRequests(response.items || []);
-
-				// 친구 요청 사용자들을 친구 목록에 추가
-				const requestUsers: Friend[] = [];
-				response.items?.forEach((request: FriendRequest) => {
-					if (request.status === "PENDING") {
-						const isReceived = request.receiver.userId === currentUser.userId;
-						const userInfo = isReceived ? request.sender : request.receiver;
-
-						requestUsers.push({
-							id: userInfo.userId,
-							name: `${userInfo.firstName} ${userInfo.lastName}`.trim(),
-							email: userInfo.email,
-							isFriend: false,
-							requestStatus: isReceived ? "received" : "sent",
-							requestId: request.requestId,
-						});
-					}
-				});
-
-				// 기존 친구 목록과 요청 사용자들을 합치기
-				setFriends((prev) => {
-					const existingFriends = prev.filter((f) => f.isFriend);
-					return [...existingFriends, ...requestUsers];
-				});
-			} catch (error) {
-				console.error("친구 요청 목록 가져오기 실패:", error);
-			}
-		};
-
-		const refreshFriends = async () => {
-			await getCurrentUser();
-			await getFriends();
-			await getFriendRequests();
 		};
 
 		useImperativeHandle(ref, () => ({
 			refreshFriends,
 		}));
 
-		// 검색 실행
-		const searchUsers = async (term: string) => {
-			if (!term.trim()) {
-				setSearchResults([]);
-				return;
-			}
-
-			setLoading(true);
-			try {
-				const response = await friendAPI.search(term);
-				const searchData = response.items.map(
-					(item: {
-						userId: string;
-						firstName: string;
-						lastName: string;
-						email: string;
-						isFriend: boolean;
-					}) => ({
-						id: item.userId,
-						name: `${item.firstName} ${item.lastName}`.trim(),
-						email: item.email,
-						isFriend: item.isFriend,
-						requestStatus: "none" as const,
-					}),
-				);
-				setSearchResults(searchData);
-			} catch (error) {
-				console.error("검색 실패:", error);
-				setSearchResults([]);
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		// 모달이 열릴 때마다 데이터 로드
 		useEffect(() => {
 			if (isOpen) {
 				refreshFriends();
 			}
-		}, [isOpen]);
-
-		// 검색어가 변경될 때마다 검색 실행
-		useEffect(() => {
-			const timeoutId = setTimeout(() => {
-				searchUsers(searchTerm);
-			}, 300);
-
-			return () => clearTimeout(timeoutId);
-		}, [searchTerm]);
-
-		// 검색 필터링
-		const filteredFriends = friends.filter(
-			(friend) =>
-				friend.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-				friend.email.toLowerCase().includes(searchTerm.toLowerCase()),
-		);
-
-		// 검색 결과에서 이미 친구가 아닌 사용자만 표시
-		const filteredSearchResults = onSendFriendRequest
-			? searchResults.filter((user) => !user.isFriend)
-			: [];
-
-		// 친구 요청 보내기
-		const handleSendFriendRequest = async (user: Friend) => {
-			try {
-				await friendAPI.sendFriendRequest(user.id);
-				onSendFriendRequest?.(user);
-				refreshFriends(); // 요청 후 목록 새로고침
-			} catch (error) {
-				console.error("친구 요청 보내기 실패:", error);
-			}
-		};
-
-		// 친구 요청 수락
-		const handleAcceptRequest = async (friend: Friend) => {
-			if (!friend.requestId) return;
-
-			try {
-				await friendAPI.acceptFriendRequest(friend.requestId);
-				setIsRequestModalOpen(false);
-				setSelectedRequest(null);
-				refreshFriends();
-			} catch (error) {
-				console.error("친구 요청 수락 실패:", error);
-			}
-		};
-
-		// 친구 요청 거절
-		const handleRejectRequest = async (friend: Friend) => {
-			if (!friend.requestId) return;
-
-			try {
-				await friendAPI.rejectFriendRequest(friend.requestId);
-				setIsRequestModalOpen(false);
-				setSelectedRequest(null);
-				refreshFriends();
-			} catch (error) {
-				console.error("친구 요청 거절 실패:", error);
-			}
-		};
-
-		// 친구 요청 받은 사람 클릭 핸들러
-		const handleRequestReceived = (friend: Friend) => {
-			setSelectedRequest(friend);
-			setIsRequestModalOpen(true);
-		};
-
-		// 친구 삭제
-		const handleDeleteFriend = (friend: Friend) => {
-			onDeleteFriend?.(friend);
-		};
-
-		// 모달 외부 클릭 시 닫기
-		const handleBackdropClick = (e: React.MouseEvent) => {
-			if (e.target === e.currentTarget) {
-				onClose();
-			}
-		};
+		}, [isOpen, refreshFriends]);
 
 		return (
 			<AnimatePresence>
@@ -350,58 +142,17 @@ const FriendsListModal = forwardRef<FriendsListModalRef, FriendsListModalProps>(
 										{filteredFriends.map((friend, index) => (
 											<div
 												key={`friend-${friend.id}`}
-												className={`flex items-center justify-between py-5 ${(searchTerm !== "" && filteredSearchResults.length > 0) || index !== filteredFriends.length - 1 ? "border-b border-gray/20" : ""}`}
+												className={` ${(searchTerm !== "" && filteredSearchResults.length > 0) || index !== filteredFriends.length - 1 ? "border-b border-gray/20" : ""}`}
 											>
-												<span className="flex flex-col">
-													<p className="font-bold text-start">{friend.name}</p>
-													<p>{friend.email}</p>
-												</span>
-
-												{/* 친구인 경우 */}
-												{friend.isFriend && (
-													<>
-														{onDeleteFriend && (
-															<button
-																onClick={() => handleDeleteFriend(friend)}
-																className="px-7 py-3 bg-gray/20 text-dark-gray rounded-[30px] hover:bg-gray/40 transition-colors duration-100"
-																style={{ fontFamily: "NexonLv1Gothic" }}
-															>
-																삭제
-															</button>
-														)}
-														{onSelectFriend && (
-															<button
-																onClick={() => onSelectFriend(friend)}
-																className="px-7 py-3 bg-primary text-white rounded-[30px]"
-																style={{ fontFamily: "NexonLv1Gothic" }}
-															>
-																선택
-															</button>
-														)}
-													</>
-												)}
-
-												{/* 요청 보낸 경우 */}
-												{friend.requestStatus === "sent" && (
-													<button
-														disabled
-														className="px-5 py-2 bg-white text-primary border-3 border-primary cursor-not-allowed rounded-[30px]"
-														style={{ fontFamily: "NexonLv1Gothic" }}
-													>
-														요청중
-													</button>
-												)}
-
-												{/* 요청 받은 경우 */}
-												{friend.requestStatus === "received" && (
-													<button
-														onClick={() => handleRequestReceived(friend)}
-														className="px-5 py-2 bg-white text-primary border-3 border-primary rounded-[30px]"
-														style={{ fontFamily: "NexonLv1Gothic" }}
-													>
-														요청받음
-													</button>
-												)}
+												<FriendListItem
+													friend={friend}
+													onDeleteFriend={onDeleteFriend}
+													onSelectFriend={onSelectFriend}
+													onRequestClick={(u) => {
+														handleSendFriendRequest(u, onSendFriendRequest);
+													}}
+													onRequestReceived={handleRequestReceived}
+												/>
 											</div>
 										))}
 
@@ -418,7 +169,12 @@ const FriendsListModal = forwardRef<FriendsListModalRef, FriendsListModalProps>(
 													</span>
 													{onSendFriendRequest && (
 														<button
-															onClick={() => handleSendFriendRequest(user)}
+															onClick={() =>
+																handleSendFriendRequest(
+																	user,
+																	onSendFriendRequest,
+																)
+															}
 															className="px-7 py-3 bg-primary text-white rounded-[30px] hover:bg-primary/90"
 															style={{ fontFamily: "NexonLv1Gothic" }}
 														>
@@ -475,56 +231,16 @@ const FriendsListModal = forwardRef<FriendsListModalRef, FriendsListModalProps>(
 					</motion.div>
 				)}
 
-				{/* 친구 요청 수락/거절 모달 */}
-				<AnimatePresence>
-					{isRequestModalOpen && selectedRequest && (
-						<motion.div
-							className="fixed inset-0 z-[80] flex items-center justify-center"
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							onClick={(e) => {
-								if (e.target === e.currentTarget) {
-									setIsRequestModalOpen(false);
-									setSelectedRequest(null);
-								}
-							}}
-						>
-							<motion.div
-								className="bg-white rounded-3xl min-w-[280px] px-8 py-6 shadow-lg"
-								style={{
-									boxShadow: "2.351px 3.135px 15.519px 0 rgba(0,0,0,0.25)",
-									fontFamily: "NexonLv1Gothic",
-								}}
-								initial={{ scale: 0.7, opacity: 0 }}
-								animate={{ scale: 1, opacity: 1 }}
-								exit={{ scale: 0.7, opacity: 0 }}
-								transition={{ type: "spring", damping: 25, stiffness: 300 }}
-								onClick={(e) => e.stopPropagation()}
-							>
-								<p className="text-black text-lg text-center whitespace-pre-line">
-									{selectedRequest.name}님의 친구요청을
-									<br />
-									수락하시겠습니까?
-								</p>
-								<div className="flex justify-center gap-4 mt-4">
-									<button
-										onClick={() => handleAcceptRequest(selectedRequest)}
-										className="flex-1 py-4.5 text-white bg-primary rounded-full hover:bg-primary/90 transition-colors cursor-pointer"
-									>
-										수락
-									</button>
-									<button
-										onClick={() => handleRejectRequest(selectedRequest)}
-										className="flex-1 py-4.5 text-dark-gray bg-gray/20 rounded-full hover:bg-gray/30 transition-colors cursor-pointer"
-									>
-										거절
-									</button>
-								</div>
-							</motion.div>
-						</motion.div>
-					)}
-				</AnimatePresence>
+				<FriendRequestModal
+					isOpen={isRequestModalOpen}
+					selectedRequest={selectedRequest}
+					onClose={() => {
+						setIsRequestModalOpen(false);
+						setSelectedRequest(null);
+					}}
+					onAccept={handleAcceptRequest}
+					onReject={handleRejectRequest}
+				/>
 			</AnimatePresence>
 		);
 	},

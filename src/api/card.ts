@@ -14,4 +14,16 @@ export const cardAPI = {
 		});
 		return response.data;
 	},
+
+	// 카드 생성 API
+	// createCard: async (cardData: CardData) => {
+	// 	const accessToken = localStorage.getItem("accessToken");
+	// 	const response = await axios.post(`${API_BASE_URL}/cards`, cardData, {
+	// 		headers: {
+	// 			Authorization: `Bearer ${accessToken}`,
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 	});
+	// 	return response.data;
+	// },
 };

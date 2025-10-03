@@ -229,7 +229,9 @@ const SignUpForm: React.FC = () => {
 					</div>
 				</div>
 			</div>
-			<footer className="w-full h-[200px] bg-[#EDEDED] mt-auto" />
+			<footer className="w-full h-[36em] bg-transparent mt-auto">
+				<img src="/src/assets/footer.png" className="w-full h-full" />
+			</footer>
 		</div>
 	);
 };

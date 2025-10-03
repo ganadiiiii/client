@@ -67,8 +67,20 @@ export const customizingQuestions: Question[] = [
 	},
 	{
 		id: 7,
+		title: "꽃다발의 색깔을 선택해 주세요.",
+		options: ["none", "white", "pink", "yellow", "orange", "blue", "black"],
+		isMultipleChoice: false,
+	},
+	{
+		id: 8,
 		title: "포인트 장식을 선택해 주세요.",
 		options: ["none", "specia"],
+		isMultipleChoice: false,
+	},
+	{
+		id: 9,
+		title: "세부 장식을 선택해 주세요.",
+		options: ["none", "special detail"],
 		isMultipleChoice: false,
 	},
 ];

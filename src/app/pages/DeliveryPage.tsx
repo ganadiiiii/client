@@ -1,13 +1,15 @@
 import React, { useCallback, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AddressSection } from "../../features/order/AddressSection";
 import { DateSection } from "../../features/order/DateSection";
 import { FlowerSection } from "../../features/order/FlowerSection";
 import { ReceiverSection } from "../../features/order/ReceiverSection";
 import { SenderSection } from "../../features/order/SenderSection";
+import type { FlowerCard } from "../../types/FlowerCard";
 
 const DeliveryPage: React.FC = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	// 각 섹션의 ref를 통해 validation 상태를 확인
 	const receiverRef = useRef<{ isValid: () => boolean }>(null);
@@ -33,10 +35,16 @@ const DeliveryPage: React.FC = () => {
 		return () => clearInterval(interval);
 	}, [checkValidation]);
 
+	const flowerCard = location.state?.flowerCard as FlowerCard;
+	if (!flowerCard) {
+		navigate("/archive");
+		return null;
+	}
+
 	return (
 		<div className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center">
 			<div className="flex flex-col items-center justify-center gap-y-10 mt-40">
-				<FlowerSection />
+				<FlowerSection flowerCard={flowerCard} />
 				<ReceiverSection ref={receiverRef} />
 				<SenderSection ref={senderRef} />
 				<AddressSection ref={addressRef} />

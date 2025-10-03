@@ -264,7 +264,9 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 								)}
 							</div>
 							<GradientIconButton
-								onClick={() => navigate(-1)}
+								onClick={() =>
+									navigate("/shop", { state: { flowerCard: flowerCard } })
+								}
 								icon={iconOrder}
 								hoverIcon={iconOrderHover}
 								label="실물 보내기"

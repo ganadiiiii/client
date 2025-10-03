@@ -60,13 +60,13 @@ export const friendAPI = {
 			{ receiverId },
 			{
 				headers: {
-				Authorization: `Bearer ${accessToken}`,
-				"Content-Type": "application/json",
+					Authorization: `Bearer ${accessToken}`,
+					"Content-Type": "application/json",
 				},
-			}
+			},
 		);
 		return response.data;
-	  },
+	},
 
 	// 친구 요청 거절 API
 	rejectFriendRequest: async (requestId: number) => {

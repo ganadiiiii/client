@@ -48,18 +48,18 @@ export default function Mailbox({ onClick }: MailboxProps) {
 			/>
 			{isHovered ? (
 				<img
-					src="/src/assets/archive/mailbox-open.svg"
+					src="/src/assets/archive/mailbox-open.png"
 					alt="Mailbox"
 					style={{
-						transform: "translate(-1.375em, -0.6875em)",
+						transform: "translate(-1.35em, -0.6em)",
 					}}
-					className="w-38 h-78"
+					className="w-38 h-80"
 				/>
 			) : (
 				<img
-					src="/src/assets/archive/mailbox-close.svg"
+					src="/src/assets/archive/mailbox-close.png"
 					alt="Mailbox"
-					className="w-28 h-77"
+					className="w-30 h-76"
 				/>
 			)}
 		</div>

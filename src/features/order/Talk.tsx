@@ -40,7 +40,7 @@ const Talk: React.FC = () => {
 			{
 				id: crypto.randomUUID(),
 				sender: "other",
-				text: `플로리스트가 "${text}"에 대해 답변을 준비중입니다.`,
+				text: `플로리스트가 답변을 준비중입니다.`,
 			},
 		]);
 	};
@@ -143,11 +143,12 @@ const Talk: React.FC = () => {
 						}`}
 					>
 						<div
-							className={`rounded-3xl px-6 py-4 max-w-[70%] text-lg text-black ${
+							className={`rounded-3xl px-6 py-4 max-w-[70%] text-lg text-black ml-17 mr-3 ${
 								msg.sender === "me"
 									? "bg-primary"
 									: "bg-[#FFEBEF]"
 							}`}
+                            style={{ fontFamily: "NexonLv1Gothic" }}
 						>
 							{msg.text && <p>{msg.text}</p>}
 							{msg.image && (
@@ -170,7 +171,7 @@ const Talk: React.FC = () => {
 					value={input}
 					onChange={(e) => setInput(e.target.value)}
 					placeholder="메시지를 입력하세요."
-					className="flex-1 border-none outline-none text-lg text-black/40 py-2" style={{ fontFamily: "NexonLv1Gothic" }}
+					className="flex-1 border-none outline-none text-lg text-black/40 pb-2" style={{ fontFamily: "NexonLv1Gothic" }}
 				/>
                 <div className="flex flex-row justify-between items-center w-full">
                     <label>

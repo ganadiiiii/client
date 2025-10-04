@@ -34,6 +34,27 @@ const CustomizingPage: React.FC = () => {
 	};
 
 	const handleNext = () => {
+		// Question 8에서 "None" 선택 시 바로 결과 페이지로 이동
+		if (currentStep === 7 && currentAnswers.includes("None")) {
+			console.log("설문 완료:", answers);
+			navigate("/customizing/result");
+			return;
+		}
+
+		// Question 8에서 "Special Detail" 선택 시에만 Question 9로 이동
+		if (currentStep === 7 && currentAnswers.includes("Special Detail")) {
+			if (currentStep < customizingQuestions.length - 1) {
+				const nextQuestionId = customizingQuestions[currentStep + 1].id;
+				setAnswers((prev) => ({
+					...prev,
+					[nextQuestionId]: [],
+				}));
+				setCurrentStep(currentStep + 1);
+			}
+			return;
+		}
+
+		// 일반적인 다음 질문으로 이동
 		if (currentStep < customizingQuestions.length - 1) {
 			const nextQuestionId = customizingQuestions[currentStep + 1].id;
 			setAnswers((prev) => ({

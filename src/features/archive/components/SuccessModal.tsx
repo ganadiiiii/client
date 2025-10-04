@@ -22,7 +22,7 @@ const SuccessModal = ({ isOpen, message, onClose }: SuccessModalProps) => {
 		<AnimatePresence>
 			{isOpen && (
 				<motion.div
-					className="fixed inset-0 z-[70] flex items-center justify-center"
+					className="fixed inset-0 z-[70] flex items-center justify-center bg-modal-bg/60"
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}

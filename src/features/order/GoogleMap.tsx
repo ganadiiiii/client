@@ -1,5 +1,5 @@
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef} from "react";
 
 const containerStyle = {
 	width: "100%",
@@ -11,7 +11,7 @@ const containerStyle = {
 const center = {
 	lat: 37.4979511,
 	lng: 127.0276182,
-};
+}; // 나중에 시간 나면 현재 위치로 변경?
 
 export default function GoogleMapComponent() {
 	const { isLoaded, loadError } = useJsApiLoader({

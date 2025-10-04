@@ -10,6 +10,8 @@ import OrderPage from "./pages/OrderPage";
 import PickupPage from "./pages/PickupPage";
 import ResultSentPage from "./pages/ResultSentPage";
 import Cart from "../features/login/components/Cart";
+import ChatStartPage from "./pages/ChatStartPage";
+import ChatPage from "./pages/ChatPage";
 
 export const AppRoutes = () => {
 	return (
@@ -25,6 +27,8 @@ export const AppRoutes = () => {
 			<Route path="/shop/delivery" element={<DeliveryPage />} />
 			<Route path="/shop/pickup" element={<PickupPage />} />
 			<Route path="/cart" element={<Cart />} />
+			<Route path="/shop/pickup/chat-start" element={<ChatStartPage />} />
+			<Route path="/shop/pickup/chat" element={<ChatPage />} />
 		</Routes>
 	);
 };

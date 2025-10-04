@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { friendAPI } from "../../api";
 import bg from "../../assets/generate/result/bg.png";
 import AlertDialog from "../../components/dialog/AlertDialog";
 import ConfirmDialog from "../../components/dialog/ConfirmDialog";
@@ -12,20 +13,6 @@ import type {
 	UIState,
 } from "../../types/FlowerCard";
 import { ResultPhase as ResultPhaseConst } from "../../types/FlowerCard";
-
-// Mock friends data - replace with actual data source later
-const mockFriends: Friend[] = [
-	{ id: "1", name: "김민진", email: "minjin@gmail.com" },
-	{ id: "2", name: "황종훈", email: "jonghun@gmail.com" },
-	{ id: "3", name: "김혜란", email: "hyeran@gmail.com" },
-	{ id: "4", name: "문정환", email: "junghwan@gmail.com" },
-	{ id: "5", name: "김정원", email: "jeongwon@gmail.com" },
-	{ id: "6", name: "가나디", email: "ganadii@gmail.com" },
-	{ id: "7", name: "가나디", email: "ganadii@gmail.com" },
-	{ id: "8", name: "가나디", email: "ganadii@gmail.com" },
-	{ id: "9", name: "가나디", email: "ganadii@gmail.com" },
-	{ id: "10", name: "가나디", email: "ganadii@gmail.com" },
-];
 
 // 초기 FlowerCard 데이터
 const initialFlowerCard: FlowerCard = {
@@ -55,6 +42,34 @@ const CustomizingResultPage: React.FC = () => {
 		archiveSavedAlertVisible: false,
 		sendCompletedAlertVisible: false,
 	});
+	const [friends, setFriends] = useState<Friend[]>([]);
+
+	// 친구 목록 가져오기
+	const getFriends = async () => {
+		try {
+			const response = await friendAPI.getFriends();
+			const friendsData = response.items.map(
+				(item: {
+					userId: string;
+					firstName: string;
+					lastName: string;
+					email: string;
+				}) => ({
+					id: item.userId,
+					name: `${item.firstName} ${item.lastName}`.trim(),
+					email: item.email,
+				}),
+			);
+			setFriends(friendsData);
+		} catch (error) {
+			console.error("친구 목록 가져오기 실패:", error);
+		}
+	};
+
+	// 컴포넌트 마운트 시 친구 목록 가져오기
+	useEffect(() => {
+		getFriends();
+	}, []); // getFriends는 의도적으로 제외 (함수 재생성 방지)
 
 	// 선택된 친구 상태 (UI와 분리)
 	// const [selectedFriend, setSelectedFriend] = useState<Friend | null>(null);
@@ -110,7 +125,7 @@ const CustomizingResultPage: React.FC = () => {
 						uiState={uiState}
 						updateUIState={updateUIState}
 						onFriendSelect={handleFriendSelect}
-						mockFriends={mockFriends}
+						friends={friends}
 					/>
 				);
 			case ResultPhaseConst.MESSAGE_WRITING:
@@ -129,7 +144,7 @@ const CustomizingResultPage: React.FC = () => {
 						uiState={uiState}
 						updateUIState={updateUIState}
 						onFriendSelect={handleFriendSelect}
-						mockFriends={mockFriends}
+						friends={friends}
 					/>
 				);
 		}

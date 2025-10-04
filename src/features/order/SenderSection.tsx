@@ -1,11 +1,19 @@
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { authAPI } from "../../api";
 
-interface SenderSectionProps {
-	onValidationChange: (isValid: boolean) => void;
+interface User {
+	id: string;
+	name: string;
+	email: string;
 }
 
-export function SenderSection({ onValidationChange }: SenderSectionProps) {
+interface SenderSectionRef {
+	isValid: () => boolean;
+}
+
+export const SenderSection = forwardRef<SenderSectionRef>((_, ref) => {
 	const [phone, setPhone] = useState("");
+	const [user, setUser] = useState<User | null>(null);
 	// 전화번호 자동 하이픈 추가
 	const formatPhoneNumber = (value: string) => {
 		const onlyNums = value.replace(/[^0-9]/g, "");
@@ -19,17 +27,28 @@ export function SenderSection({ onValidationChange }: SenderSectionProps) {
 		setPhone(formatPhoneNumber(e.target.value));
 	};
 
-	// TODO: 추후 로그인 유저 정보 API로 대체
-	const user = {
-		name: "홍길동",
-		email: "ghdfkrehd@gmail.com",
+	const getUser = async () => {
+		try {
+			const response = await authAPI.me();
+			const userData: User = {
+				id: response.userId,
+				name: `${response.lastName}${response.firstName}`.trim(),
+				email: response.email,
+			};
+			setUser(userData);
+		} catch (error) {
+			console.error("유저 정보 가져오기 실패:", error);
+		}
 	};
 
-	// Validation check
 	useEffect(() => {
-		const isValid = user.name.length > 0 && phone.length > 0;
-		onValidationChange(isValid);
-	}, [phone, onValidationChange]);
+		if (!user) getUser();
+	}, [user]);
+
+	// Validation check
+	useImperativeHandle(ref, () => ({
+		isValid: () => !!user && phone.length > 0,
+	}));
 
 	return (
 		<section
@@ -69,13 +88,13 @@ export function SenderSection({ onValidationChange }: SenderSectionProps) {
 							className="text-xl font-bold text-black"
 							style={{ fontFamily: "NexonLv1Gothic" }}
 						>
-							{user.name}
+							{user?.name}
 						</h2>
 						<span
 							className="text-black text-lg font-light"
 							style={{ fontFamily: "NexonLv1Gothic" }}
 						>
-							{user.email}
+							{user?.email}
 						</span>
 					</div>
 				</div>
@@ -113,4 +132,4 @@ export function SenderSection({ onValidationChange }: SenderSectionProps) {
 			</div>
 		</section>
 	);
-}
+});

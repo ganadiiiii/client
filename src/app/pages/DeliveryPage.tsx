@@ -1,66 +1,64 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { AddressSection } from "../../features/archive/order/AddressSection";
-import { DateSection } from "../../features/archive/order/DateSection";
-import { ReceiverSection } from "../../features/archive/order/ReceiverSection";
-import { SenderSection } from "../../features/archive/order/SenderSection";
+import React, { useCallback, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AddressSection } from "../../features/order/AddressSection";
+import { DateSection } from "../../features/order/DateSection";
+import { FlowerSection } from "../../features/order/FlowerSection";
+import { ReceiverSection } from "../../features/order/ReceiverSection";
+import { SenderSection } from "../../features/order/SenderSection";
+import type { FlowerCard } from "../../types/FlowerCard";
 
 const DeliveryPage: React.FC = () => {
 	const navigate = useNavigate();
-	const [validationStates, setValidationStates] = useState({
-		receiver: false,
-		sender: false,
-		address: false,
-		date: false,
-	});
+	const location = useLocation();
 
-	const handleValidationChange = (
-		section: keyof typeof validationStates,
-		isValid: boolean,
-	) => {
-		setValidationStates((prev) => ({
-			...prev,
-			[section]: isValid,
-		}));
-	};
+	// 각 섹션의 ref를 통해 validation 상태를 확인
+	const receiverRef = useRef<{ isValid: () => boolean }>(null);
+	const senderRef = useRef<{ isValid: () => boolean }>(null);
+	const addressRef = useRef<{ isValid: () => boolean }>(null);
+	const dateRef = useRef<{ isValid: () => boolean }>(null);
 
-	const isAllValid = Object.values(validationStates).every(
-		(isValid) => isValid,
-	);
+	const [buttonEnabled, setButtonEnabled] = useState(false);
+
+	// validation 체크 함수
+	const checkValidation = useCallback(() => {
+		const isValid =
+			receiverRef.current?.isValid() &&
+			senderRef.current?.isValid() &&
+			addressRef.current?.isValid() &&
+			dateRef.current?.isValid();
+		setButtonEnabled(!!isValid);
+	}, []);
+
+	// 주기적으로 validation 체크 (input 변경 시)
+	React.useEffect(() => {
+		const interval = setInterval(checkValidation, 500);
+		return () => clearInterval(interval);
+	}, [checkValidation]);
+
+	const flowerCard = location.state?.flowerCard as FlowerCard;
+	if (!flowerCard) {
+		navigate("/archive");
+		return null;
+	}
 
 	return (
 		<div className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center">
 			<div className="flex flex-col items-center justify-center gap-y-10 mt-40">
-				<ReceiverSection
-					onValidationChange={(isValid) =>
-						handleValidationChange("receiver", isValid)
-					}
-				/>
-				<SenderSection
-					onValidationChange={(isValid) =>
-						handleValidationChange("sender", isValid)
-					}
-				/>
-				<AddressSection
-					onValidationChange={(isValid) =>
-						handleValidationChange("address", isValid)
-					}
-				/>
-				<DateSection
-					onValidationChange={(isValid) =>
-						handleValidationChange("date", isValid)
-					}
-				/>
+				<FlowerSection flowerCard={flowerCard} />
+				<ReceiverSection ref={receiverRef} />
+				<SenderSection ref={senderRef} />
+				<AddressSection ref={addressRef} />
+				<DateSection ref={dateRef} />
 				<button
 					type="button"
 					onClick={() => navigate("/")}
 					className={`w-105 h-13.5 rounded-full text-white text-xl font-bold mb-10 transition-colors duration-200 ${
-						isAllValid
+						buttonEnabled
 							? "bg-primary hover:bg-primary/90"
 							: "bg-gray/40 cursor-not-allowed"
 					}`}
 					style={{ fontFamily: "NexonLv1Gothic" }}
-					disabled={!isAllValid}
+					disabled={!buttonEnabled}
 				>
 					결제하기
 				</button>

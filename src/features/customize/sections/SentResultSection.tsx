@@ -181,9 +181,9 @@ const SentResultSection: React.FC<SentResultSectionProps> = ({
 							label="아카이빙"
 						/>
 						<GradientIconButton
-							onClick={() => {
-								navigate(-1);
-							}}
+							onClick={() =>
+								navigate("/shop", { state: { flowerCard: flowerCard } })
+							}
 							icon={iconOrder}
 							hoverIcon={iconOrderHover}
 							label="실물 보내기"

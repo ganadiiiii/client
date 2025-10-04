@@ -3,13 +3,13 @@ import SimpleIconButton from "../../../components/button/SimpleIconButton";
 import type { Friend, UIState } from "../../../types/FlowerCard";
 
 interface SelectFriendPopupProps {
-	mockFriends: Friend[];
+	friends: Friend[];
 	onFriendSelect: (friend: Friend) => void;
 	updateUIState: (updates: Partial<UIState>) => void;
 }
 
 export default function SelectFriendPopup({
-	mockFriends,
+	friends,
 	onFriendSelect,
 	updateUIState,
 }: SelectFriendPopupProps) {
@@ -32,10 +32,10 @@ export default function SelectFriendPopup({
 						style={{ fontFamily: "NexonLv1Gothic" }}
 					>
 						<p>내 친구</p>
-						<p className="font-bold">{mockFriends.length}명</p>
+						<p className="font-bold">{friends.length}명</p>
 					</span>
 					<div className="overflow-y-auto flex-1 pr-1 select-friends-scroll">
-						{mockFriends.map((friend) => (
+						{friends.map((friend) => (
 							<button
 								key={friend.id}
 								onClick={() => onFriendSelect(friend)}

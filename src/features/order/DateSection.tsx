@@ -1,13 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 import { CalendarModal } from "./CalendarModal";
 import { TimePickerModal } from "./TimePickerModal";
 
-interface DateSectionProps {
-	onValidationChange: (isValid: boolean) => void;
+interface DateSectionRef {
+	isValid: () => boolean;
 }
 
-export function DateSection({ onValidationChange }: DateSectionProps) {
+export const DateSection = forwardRef<DateSectionRef>((_, ref) => {
 	const [date, setDate] = useState("");
 	const [time, setTime] = useState("");
 	const [isDateModalOpen, setIsDateModalOpen] = useState(false);
@@ -28,10 +28,9 @@ export function DateSection({ onValidationChange }: DateSectionProps) {
 	};
 
 	// Validation check
-	useEffect(() => {
-		const isValid = date.length > 0 && time.length > 0;
-		onValidationChange(isValid);
-	}, [date, time, onValidationChange]);
+	useImperativeHandle(ref, () => ({
+		isValid: () => date.length > 0 && time.length > 0,
+	}));
 
 	return (
 		<section
@@ -113,7 +112,7 @@ export function DateSection({ onValidationChange }: DateSectionProps) {
 			</AnimatePresence>
 		</section>
 	);
-}
+});
 
 function LabelWithCheck({
 	label,

@@ -3,8 +3,12 @@ import React, { useEffect, useState } from "react";
 import { sampleFlowerData as flowerCardData } from "../../../data/flowerData";
 import FlowerSizeOptionCard from "../components/FlowerSizeOptionCard";
 import FlowerTypeOptionCard from "../components/FlowerTypeOptionCard";
+import DecorationOptionCard from "./DecorationOptionCard";
 import NavigationButton from "./NavigationButton";
 import OptionButton from "./OptionButton";
+import PaperOptionCard from "./PaperOptionCard";
+import ColorOptionCard from "./ColorOptionCard";
+import DecoOptionCard from "./DecoOptionCard";
 
 interface QuestionStepProps {
 	questionNumber: number;
@@ -24,6 +28,10 @@ const HIGHLIGHT_MAP: Record<number, string> = {
 	3: "어떤 감정을 담고 싶으신가요?",
 	4: "특별히 담고 싶은 꽃",
 	5: "꽃다발의 크기",
+	6: "꽃다발의 포장지",
+	7: "꽃다발의 색깔",
+	8: "포인트 장식",
+	9: "세부 장식",
 };
 
 function renderHighlighted(title: string, phrase?: string) {
@@ -63,6 +71,20 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 	const [hasMounted, setHasMounted] = useState(false);
 	useEffect(() => setHasMounted(true), []);
 
+	// Q9 (Deco) local state to avoid parent overwriting between point/color
+	const [decoPoint, setDecoPoint] = useState<string>("ribbon");
+	const [decoColor, setDecoColor] = useState<string>("white");
+
+	useEffect(() => {
+		if (questionNumber === 9) {
+			const initialPoint = selectedOptions.find((v) => v.startsWith("point:"))?.split(":")[1] ?? "ribbon";
+			const initialColor = selectedOptions.find((v) => v.startsWith("color:"))?.split(":")[1] ?? "white";
+			setDecoPoint(initialPoint);
+			setDecoColor(initialColor);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [questionNumber]);
+
 	// Slide variants based on direction
 	const slideVariants = {
 		enter: (dir: number) => ({ x: dir * 200, opacity: 0 }),
@@ -71,6 +93,11 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 	};
 
 	const handleNext = () => {
+		// For Q9, persist both point and color to parent before moving next
+		if (questionNumber === 9) {
+			onOptionSelect(`point:${decoPoint}`);
+			onOptionSelect(`color:${decoColor}`);
+		}
 		setDirection(1);
 		onNext();
 	};
@@ -187,6 +214,59 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 									onClick={() => onOptionSelect("L")}
 								/>
 							</div>
+						) : questionNumber === 6 ? (
+							<div className="flex flex-wrap justify-center gap-6">
+								<PaperOptionCard
+									number={1}
+									paper="Kraft paper"
+									description="크라프트지"
+									isSelected={selectedOptions.includes("Kraft paper")}
+									onClick={() => onOptionSelect("Kraft paper")}
+								/>
+								<PaperOptionCard
+									number={2}
+									paper="Color paper"
+									description="컬러 종이"
+									isSelected={selectedOptions.includes("Color paper")}
+									onClick={() => onOptionSelect("Color paper")}
+								/>
+								<PaperOptionCard
+									number={3}
+									paper="Clear vinyl"
+									description="투명 비닐"
+									isSelected={selectedOptions.includes("Clear vinyl")}
+									onClick={() => onOptionSelect("Clear vinyl")}
+								/>
+							</div>
+                        ) : questionNumber === 7 ? (
+                            <ColorOptionCard
+                                selectedValue={selectedOptions[0] ?? "none"}
+                                onChange={(value) => onOptionSelect(value)}
+                            />
+						) : questionNumber === 8 ? (
+							<div className="flex flex-wrap justify-center gap-6">
+								<DecorationOptionCard
+									number={1}
+									decoration="None"
+									description="장식 없이 포장만"
+									isSelected={selectedOptions.includes("None")}
+									onClick={() => onOptionSelect("None")}
+								/>
+								<DecorationOptionCard
+									number={2}
+									decoration="Special Detail"
+									description="장식 달기"
+									isSelected={selectedOptions.includes("Special Detail")}
+									onClick={() => onOptionSelect("Special Detail")}
+								/>
+							</div>
+                        ) : questionNumber === 9 ? (
+                            <DecoOptionCard
+                                selectedPoint={decoPoint}
+                                selectedColor={decoColor}
+                                onPointChange={(value) => setDecoPoint(value)}
+                                onColorChange={(value) => setDecoColor(value)}
+                            />
 						) : (
 							// 기본 옵션 버튼 렌더링
 							<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-1.5 gap-y-4 place-items-center">
@@ -217,7 +297,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 				<NavigationButton
 					direction="right"
 					onClick={handleNext}
-					disabled={!canProceed}
+					disabled={questionNumber === 9 ? !(decoPoint && decoColor) : !canProceed}
 				/>
 			</div>
 		</div>

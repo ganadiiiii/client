@@ -66,9 +66,11 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 					className="absolute object-cover rounded-sm z-30"
 					style={{
 						left: "50%",
-						transform: "translateX(-50%)",
-						top: "5em",
-						height: "13.75em",
+						top: "4em",
+						height: "16em",
+						transform: `translateX(-50%) scale(${
+							number === 1 ? 0.8 : number === 3 ? 1.1 : 1
+						})`,
 					}}
 				/>
 

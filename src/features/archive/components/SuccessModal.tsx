@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect } from "react";
 
 interface SuccessModalProps {
 	isOpen: boolean;
@@ -7,11 +8,21 @@ interface SuccessModalProps {
 }
 
 const SuccessModal = ({ isOpen, message, onClose }: SuccessModalProps) => {
+	useEffect(() => {
+		if (isOpen) {
+			const timer = setTimeout(() => {
+				onClose();
+			}, 2000);
+
+			return () => clearTimeout(timer);
+		}
+	}, [isOpen, onClose]);
+
 	return (
 		<AnimatePresence>
 			{isOpen && (
 				<motion.div
-					className="fixed inset-0 z-[70] flex items-center justify-center"
+					className="fixed inset-0 z-[70] flex items-center justify-center bg-modal-bg/60"
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}

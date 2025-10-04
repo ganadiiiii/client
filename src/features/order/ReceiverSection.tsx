@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
-import FriendsListModal from "../components/FriendsListModal";
+import { forwardRef, useImperativeHandle, useState } from "react";
+import FriendsListModal from "../archive/components/FriendsListModal";
 
 interface Friend {
-	id: number;
+	id: string;
 	name: string;
 	email: string;
+	isFriend: boolean;
 }
 
-interface ReceiverSectionProps {
-	onValidationChange: (isValid: boolean) => void;
+interface ReceiverSectionRef {
+	isValid: () => boolean;
 }
 
-export function ReceiverSection({ onValidationChange }: ReceiverSectionProps) {
+export const ReceiverSection = forwardRef<ReceiverSectionRef>((_, ref) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedFriend, setSelectedFriend] = useState<Friend | null>(null);
 	const [phone, setPhone] = useState("");
@@ -35,11 +36,15 @@ export function ReceiverSection({ onValidationChange }: ReceiverSectionProps) {
 		setIsModalOpen(false);
 	};
 
+	useImperativeHandle(ref, () => ({
+		isValid: () => selectedFriend !== null && phone.length > 0,
+	}));
+
 	// Validation check
-	useEffect(() => {
-		const isValid = selectedFriend !== null && phone.length > 0;
-		onValidationChange(isValid);
-	}, [selectedFriend, phone, onValidationChange]);
+	// useEffect(() => {
+	// 	const isValid = selectedFriend !== null && phone.length > 0;
+	// 	onValidationChange(isValid);
+	// }, [selectedFriend, phone, onValidationChange]);
 
 	return (
 		<section
@@ -164,4 +169,4 @@ export function ReceiverSection({ onValidationChange }: ReceiverSectionProps) {
 			</div>
 		</section>
 	);
-}
+});

@@ -1,13 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 import type { Address } from "react-daum-postcode";
 import CustomPostcodeModal from "./CustomPostcodeModal";
 
-interface AddressSectionProps {
-	onValidationChange: (isValid: boolean) => void;
+interface AddressSectionRef {
+	isValid: () => boolean;
 }
 
-export function AddressSection({ onValidationChange }: AddressSectionProps) {
+export const AddressSection = forwardRef<AddressSectionRef>((_, ref) => {
 	const [zipcode, setZipcode] = useState("");
 	const [address, setAddress] = useState("");
 	const [detailAddress, setDetailAddress] = useState("");
@@ -21,11 +21,10 @@ export function AddressSection({ onValidationChange }: AddressSectionProps) {
 	};
 
 	// Validation check
-	useEffect(() => {
-		const isValid =
-			zipcode.length > 0 && address.length > 0 && detailAddress.length > 0;
-		onValidationChange(isValid);
-	}, [zipcode, address, detailAddress, onValidationChange]);
+	useImperativeHandle(ref, () => ({
+		isValid: () =>
+			zipcode.length > 0 && address.length > 0 && detailAddress.length > 0,
+	}));
 
 	return (
 		<section
@@ -109,7 +108,7 @@ export function AddressSection({ onValidationChange }: AddressSectionProps) {
 			</AnimatePresence>
 		</section>
 	);
-}
+});
 
 function LabelWithCheck({
 	label,

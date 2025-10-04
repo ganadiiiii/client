@@ -1,5 +1,6 @@
 import { useId, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { authAPI } from "../../../api";
 
 const LoginForm: React.FC = () => {
 	const navigate = useNavigate();
@@ -8,16 +9,29 @@ const LoginForm: React.FC = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		// 로그인 로직 구현
-		console.log("Login attempted with:", { email, password });
+		if (!email.trim() || !password.trim()) {
+			return;
+		}
+		try {
+			const data = await authAPI.login(email, password);
+			const { accessToken, refreshToken } = data;
+
+			localStorage.setItem("accessToken", accessToken);
+			localStorage.setItem("refreshToken", refreshToken);
+
+			// 로그인 성공 후 메인 페이지로 이동
+			navigate("/");
+		} catch (error) {
+			console.error("Login failed:", error);
+		}
 	};
 
 	return (
 		<div className="flex items-start flex-col min-h-screen pt-[600px] 2xl:pt-[700px] bg-background">
 			<div className="flex justify-center px-4 w-full">
-				<div className="w-full max-w-6xl h-[1000px]">
+				<div className="w-full max-w-6xl h-[600px]">
 					{/* 로그인 제목과 데코레이션 라인 */}
 					<div className="flex items-center justify-center mb-12">
 						{/* 왼쪽 분홍색 파선 */}
@@ -53,7 +67,7 @@ const LoginForm: React.FC = () => {
 							{/* Email 입력 */}
 							<div className="flex-col justify-center">
 								<label
-									htmlFor="email"
+									htmlFor="emailId"
 									className="block text-lg font-bold text-gray mb-2 text-start w-140"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
@@ -73,7 +87,7 @@ const LoginForm: React.FC = () => {
 							{/* Password 입력 */}
 							<div className="flex-col justify-center">
 								<label
-									htmlFor="password"
+									htmlFor="passwordId"
 									className="block font-bold text-gray text-lg mb-2 w-140"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
@@ -126,7 +140,9 @@ const LoginForm: React.FC = () => {
 					</div>
 				</div>
 			</div>
-			<footer className="w-full h-[200px] bg-[#EDEDED] mt-auto" />
+			<footer className="w-full h-[36em] bg-transparent mt-auto">
+				<img src="/src/assets/footer.png" className="w-full h-full" />
+			</footer>
 		</div>
 	);
 };

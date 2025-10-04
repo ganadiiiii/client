@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { friendAPI } from "../../api";
 import DeleteConfirmModal from "../../features/archive/components/DeleteConfirmModal";
 import FlowerGrid from "../../features/archive/components/FlowerGrid";
-import FriendsListModal from "../../features/archive/components/FriendsListModal";
+import FriendsListModal, {
+	type FriendsListModalRef,
+} from "../../features/archive/components/FriendsListModal";
 import Mailbox from "../../features/archive/components/Mailbox";
 import SuccessModal from "../../features/archive/components/SuccessModal";
 
 interface Friend {
-	id: number;
+	id: string;
 	name: string;
 	email: string;
 	isFriend: boolean;
@@ -22,6 +25,9 @@ const ArchivePage = () => {
 	const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 	const [friendToDelete, setFriendToDelete] = useState<Friend | null>(null);
 	const [successMessage, setSuccessMessage] = useState("");
+
+	// FriendsListModal ref
+	const friendsModalRef = useRef<FriendsListModalRef>(null);
 
 	const toggleLight = () => {
 		setIsLightOn((isLightOn) => !isLightOn);
@@ -39,12 +45,20 @@ const ArchivePage = () => {
 	};
 
 	// 친구 삭제 확인 핸들러
-	const handleConfirmDelete = () => {
+	const handleConfirmDelete = async () => {
 		if (friendToDelete) {
-			setIsDeleteConfirmOpen(false);
-			setSuccessMessage("삭제되었습니다.");
-			setIsSuccessModalOpen(true);
-			setFriendToDelete(null);
+			try {
+				await friendAPI.deleteFriend(friendToDelete.id);
+				setIsDeleteConfirmOpen(false);
+				setSuccessMessage("삭제되었습니다.");
+				setIsSuccessModalOpen(true);
+				setFriendToDelete(null);
+
+				// 친구 목록 즉시 새로고침
+				friendsModalRef.current?.refreshFriends();
+			} catch (error) {
+				console.error("친구 삭제 실패:", error);
+			}
 		}
 	};
 
@@ -111,13 +125,13 @@ const ArchivePage = () => {
 							<img
 								src={`/src/assets/archive/${isLampHovered ? "lamp-on-hover.svg" : "lamp-on.svg"}`}
 								alt="Lamp"
-								className="pointer-events-none"
+								className={`pointer-events-none ${isLampHovered ? "scale-110" : ""}`}
 							/>
 						) : (
 							<img
 								src={`/src/assets/archive/${isLampHovered ? "lamp-off-hover.svg" : "lamp-off.svg"}`}
 								alt="Lamp"
-								className="pointer-events-none"
+								className={`pointer-events-none ${isLampHovered ? "scale-115" : ""}`}
 							/>
 						)}
 					</div>
@@ -157,6 +171,7 @@ const ArchivePage = () => {
 
 			{/* 모달들 */}
 			<FriendsListModal
+				ref={friendsModalRef}
 				isOpen={isFriendsModalOpen}
 				onClose={() => setIsFriendsModalOpen(false)}
 				onDeleteFriend={handleDeleteFriend}

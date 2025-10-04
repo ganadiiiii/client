@@ -1,10 +1,32 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import RedirectModal from "../../features/order/RedirectModal";
+import type { FlowerCard } from "../../types/FlowerCard";
 
 const OrderPage: React.FC = () => {
 	const [isDeliveryHovered, setIsDeliveryHovered] = useState(false);
 	const [isPickupHovered, setIsPickupHovered] = useState(false);
+	const [isRedirectModalOpen, setIsRedirectModalOpen] = useState(false);
 	const navigate = useNavigate();
+	const location = useLocation();
+
+	const flowerCard = location.state?.flowerCard as FlowerCard;
+
+	// flowerCard가 없으면 모달을 보여주고 리다이렉트
+	if (!flowerCard) {
+		return (
+			<div className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center">
+				<RedirectModal
+					isOpen={true}
+					message="꽃다발을 먼저 선택해주세요"
+					onClose={() => {
+						setIsRedirectModalOpen(false);
+						navigate("/archive");
+					}}
+				/>
+			</div>
+		);
+	}
 	return (
 		<div
 			className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center"
@@ -30,7 +52,7 @@ const OrderPage: React.FC = () => {
 						onMouseEnter={() => setIsDeliveryHovered(true)}
 						onMouseLeave={() => setIsDeliveryHovered(false)}
 						onClick={() => {
-							navigate("/shop/delivery");
+							navigate("/shop/delivery", { state: { flowerCard } });
 						}}
 					>
 						<div className="relative flex w-full h-full items-center justify-center">
@@ -74,7 +96,7 @@ const OrderPage: React.FC = () => {
 						onMouseEnter={() => setIsPickupHovered(true)}
 						onMouseLeave={() => setIsPickupHovered(false)}
 						onClick={() => {
-							navigate("/shop/pickup");
+							navigate("/shop/pickup", { state: { flowerCard } });
 						}}
 					>
 						<div className="relative flex w-full h-full items-center justify-center">

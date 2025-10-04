@@ -1,114 +1,100 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
-
-interface Friend {
-	id: number;
-	name: string;
-	email: string;
-	isFriend: boolean;
-}
+import { forwardRef, useEffect, useImperativeHandle } from "react";
+import { type Friend, useFriendsManager } from "../hooks/useFriendsManager";
+import FriendListItem from "./FriendListItem";
+import FriendRequestModal from "./FriendRequestModal";
 
 interface FriendsListModalProps {
 	isOpen: boolean;
 	onClose: () => void;
 	onDeleteFriend?: (friend: Friend) => void;
 	onSendFriendRequest?: (user: Friend) => void;
-	onCancelFriendRequest?: (user: Friend) => void;
 	onSelectFriend?: (friend: Friend) => void;
 }
 
-const FriendsListModal = ({
-	isOpen,
-	onClose,
-	onDeleteFriend,
-	onSendFriendRequest,
-	onCancelFriendRequest,
-	onSelectFriend,
-}: FriendsListModalProps) => {
-	// Track per-user requesting state by id
-	const [requestingIds, setRequestingIds] = useState<Set<number>>(new Set());
-	const [searchTerm, setSearchTerm] = useState("");
-	const [friends] = useState<Friend[]>([
-		{ id: 1, name: "김철수", email: "chulsoo@example.com", isFriend: true },
-		{ id: 2, name: "이영희", email: "younghee@example.com", isFriend: true },
-		{ id: 3, name: "박민수", email: "minsu@example.com", isFriend: true },
-		{ id: 4, name: "최지영", email: "jiyoung@example.com", isFriend: true },
-		{ id: 5, name: "한동훈", email: "donghoon@example.com", isFriend: true },
-		{ id: 6, name: "정영희", email: "younghee@example.com", isFriend: true },
-		{ id: 7, name: "김민수", email: "minsu@example.com", isFriend: true },
-		{ id: 8, name: "이지영", email: "jiyoung@example.com", isFriend: true },
-		{ id: 9, name: "박동훈", email: "donghoon@example.com", isFriend: true },
-		{ id: 10, name: "최영희", email: "younghee@example.com", isFriend: true },
-	]);
+export interface FriendsListModalRef {
+	refreshFriends: () => void;
+}
 
-	const [searchResults] = useState<Friend[]>([
-		{ id: 4, name: "최지수", email: "jisoo@example.com", isFriend: false },
-		{ id: 5, name: "한동석", email: "dongseok@example.com", isFriend: false },
-	]);
+const FriendsListModal = forwardRef<FriendsListModalRef, FriendsListModalProps>(
+	(
+		{ isOpen, onClose, onDeleteFriend, onSendFriendRequest, onSelectFriend },
+		ref,
+	) => {
+		const {
+			searchTerm,
+			setSearchTerm,
+			loading,
+			isRequestModalOpen,
+			setIsRequestModalOpen,
+			selectedRequest,
+			setSelectedRequest,
+			filteredFriends,
+			filteredSearchResults,
+			refreshFriends,
+			handleSendFriendRequest,
+			handleAcceptRequest,
+			handleRejectRequest,
+			handleRequestReceived,
+		} = useFriendsManager();
 
-	// 검색 필터링
-	const filteredFriends = friends.filter(
-		(friend) =>
-			friend.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-			friend.email.toLowerCase().includes(searchTerm.toLowerCase()),
-	);
+		const handleBackdropClick = (e: React.MouseEvent) => {
+			if (e.target === e.currentTarget) {
+				onClose();
+			}
+		};
 
-	const filteredSearchResults = onSendFriendRequest
-		? searchResults.filter(
-				(user) =>
-					user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-					user.email.toLowerCase().includes(searchTerm.toLowerCase()),
-			)
-		: [];
+		useImperativeHandle(ref, () => ({
+			refreshFriends,
+		}));
 
-	// 모달 외부 클릭 시 닫기
-	const handleBackdropClick = (e: React.MouseEvent) => {
-		if (e.target === e.currentTarget) {
-			onClose();
-		}
-	};
+		useEffect(() => {
+			if (isOpen) {
+				refreshFriends();
+			}
+		}, [isOpen, refreshFriends]);
 
-	return (
-		<AnimatePresence>
-			{isOpen && (
-				<motion.div
-					className="fixed inset-0 z-10 flex items-center justify-center bg-modal-bg/60"
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					exit={{ opacity: 0 }}
-					onClick={handleBackdropClick}
-				>
-					<div className="fixed inset-0 flex items-end justify-center pointer-events-none z-20">
-						<img
-							src="/src/assets/archive/letter_up.png"
-							alt="letter_up"
-							className="absolute bottom-[13.5em] w-[52em] h-[32em]"
-						/>
-					</div>
+		return (
+			<AnimatePresence>
+				{isOpen && (
 					<motion.div
-						className="flex flex-col w-161 h-204 bg-white rounded-[2.25em] shadow-[0_0_10px_0_rgba(0,0,0,0.15)] overflow-hidden p-12 z-30"
-						initial={{ y: "100%" }}
-						animate={{ y: 0 }}
-						exit={{ y: "100%" }}
-						transition={{ type: "spring", damping: 40, stiffness: 300 }}
-						onClick={(e) => e.stopPropagation()}
+						className="fixed inset-0 z-10 flex items-center justify-center bg-modal-bg/60"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						onClick={handleBackdropClick}
 					>
-						<h1
-							className="text-3xl font-bold text-gray mb-4 text-center shrink-0"
-							style={{ fontFamily: "NexonLv1Gothic" }}
-						>
-							친구목록
-						</h1>
-						<div className="flex items-center justify-between gap-x-3 w-full h-12 mb-8">
-							<input
-								type="text"
-								placeholder="검색"
-								value={searchTerm}
-								onChange={(e) => setSearchTerm(e.target.value)}
-								className="w-full h-full px-5 py-6 border border-gray/40 rounded-[1.5em] outline-none"
-								style={{ fontFamily: "NexonLv1Gothic" }}
+						<div className="fixed inset-0 flex items-end justify-center pointer-events-none z-20">
+							<img
+								src="/src/assets/archive/letter_up.png"
+								alt="letter_up"
+								className="absolute bottom-[13.5em] w-[52em] h-[32em]"
 							/>
-							{/* <button
+						</div>
+						<motion.div
+							className="flex flex-col w-161 h-204 bg-white rounded-[2.25em] shadow-[0_0_10px_0_rgba(0,0,0,0.15)] overflow-hidden p-12 z-30"
+							initial={{ y: "100%" }}
+							animate={{ y: 0 }}
+							exit={{ y: "100%" }}
+							transition={{ type: "spring", damping: 40, stiffness: 300 }}
+							onClick={(e) => e.stopPropagation()}
+						>
+							<h1
+								className="text-3xl font-bold text-gray mb-4 text-center shrink-0"
+								style={{ fontFamily: "NexonLv1Gothic" }}
+							>
+								친구목록
+							</h1>
+							<div className="flex items-center justify-between gap-x-3 w-full h-12 mb-8">
+								<input
+									type="text"
+									placeholder="검색"
+									value={searchTerm}
+									onChange={(e) => setSearchTerm(e.target.value)}
+									className="w-full h-full px-5 py-6 border border-gray/40 rounded-[1.5em] outline-none"
+									style={{ fontFamily: "NexonLv1Gothic" }}
+								/>
+								{/* <button
 								onClick={() => setSearchTerm("")}
 								className="flex items-center justify-center w-11 h-11 rounded-full text-gray"
 								style={{
@@ -131,61 +117,48 @@ const FriendsListModal = ({
 									/>
 								</svg>
 							</button> */}
-						</div>
-						<span
-							className="flex flex-row gap-1 text-gray ml-1 mb-4"
-							style={{ fontFamily: "NexonLv1Gothic" }}
-						>
-							<p>내 친구</p>
-							<p className="font-bold">{filteredFriends.length}명</p>
-						</span>
-
-						{/* 통합 목록: 검색 시 내 친구(필터됨) + 검색 결과 함께 표시 */}
-						{((searchTerm === "" && filteredFriends.length > 0) ||
-							(searchTerm !== "" &&
-								(filteredFriends.length > 0 ||
-									filteredSearchResults.length > 0))) && (
-							<div
-								className="w-full px-6 overflow-y-auto select-friends-scroll"
+							</div>
+							<span
+								className="flex flex-row gap-1 text-gray ml-1 mb-4"
 								style={{ fontFamily: "NexonLv1Gothic" }}
 							>
-								<div className="overflow-y-auto">
-									{/* 내 친구: 먼저 */}
-									{filteredFriends.map((friend, index) => (
-										<div
-											key={`friend-${friend.id}`}
-											className={`flex items-center justify-between py-5 ${(searchTerm !== "" && filteredSearchResults.length > 0) || index !== filteredFriends.length - 1 ? "border-b border-gray/20" : ""}`}
-										>
-											<span className="flex flex-col">
-												<p className="font-bold text-start">{friend.name}</p>
-												<p>{friend.email}</p>
-											</span>
-											{onDeleteFriend && (
-												<button
-													onClick={() => onDeleteFriend(friend)}
-													className="px-7 py-3 bg-gray/20 text-dark-gray rounded-[30px] hover:bg-gray/40 transition-colors duration-100"
-													style={{ fontFamily: "NexonLv1Gothic" }}
-												>
-													삭제
-												</button>
-											)}
-											{onSelectFriend && (
-												<button
-													onClick={() => onSelectFriend(friend)}
-													className="px-7 py-3 bg-primary text-white rounded-[30px]"
-													style={{ fontFamily: "NexonLv1Gothic" }}
-												>
-													선택
-												</button>
-											)}
-										</div>
-									))}
+								<p>내 친구</p>
+								<p className="font-bold">
+									{filteredFriends.filter((f) => f.isFriend).length}명
+								</p>
+							</span>
 
-									{/* 검색 결과: 친구 다음에 */}
-									{searchTerm !== "" &&
-										filteredSearchResults.map((user, index) => {
-											const isUserRequesting = requestingIds.has(user.id);
-											return (
+							{/* 친구 목록 */}
+							{((searchTerm === "" && filteredFriends.length > 0) ||
+								(searchTerm !== "" &&
+									(filteredFriends.length > 0 ||
+										filteredSearchResults.length > 0))) && (
+								<div
+									className="w-full px-6 overflow-y-auto select-friends-scroll"
+									style={{ fontFamily: "NexonLv1Gothic" }}
+								>
+									<div className="overflow-y-auto">
+										{/* 내 친구 + 요청 중인 사람들 */}
+										{filteredFriends.map((friend, index) => (
+											<div
+												key={`friend-${friend.id}`}
+												className={` ${(searchTerm !== "" && filteredSearchResults.length > 0) || index !== filteredFriends.length - 1 ? "border-b border-gray/20" : ""}`}
+											>
+												<FriendListItem
+													friend={friend}
+													onDeleteFriend={onDeleteFriend}
+													onSelectFriend={onSelectFriend}
+													onRequestClick={(u) => {
+														handleSendFriendRequest(u, onSendFriendRequest);
+													}}
+													onRequestReceived={handleRequestReceived}
+												/>
+											</div>
+										))}
+
+										{/* 검색 결과 (친구가 아닌 사용자들) */}
+										{searchTerm !== "" &&
+											filteredSearchResults.map((user, index) => (
 												<div
 													key={`user-${user.id}`}
 													className={`flex items-center justify-between py-5 ${index !== filteredSearchResults.length - 1 ? "border-b border-gray/20" : ""}`}
@@ -196,65 +169,83 @@ const FriendsListModal = ({
 													</span>
 													{onSendFriendRequest && (
 														<button
-															onClick={() => {
-																setRequestingIds((prev) => {
-																	const next = new Set(prev);
-																	if (next.has(user.id)) {
-																		next.delete(user.id);
-																		onCancelFriendRequest?.(user);
-																	} else {
-																		next.add(user.id);
-																		onSendFriendRequest(user);
-																	}
-																	return next;
-																});
-															}}
-															className="px-7 py-3 rounded-[30px] bg-primary text-white"
+															onClick={() =>
+																handleSendFriendRequest(
+																	user,
+																	onSendFriendRequest,
+																)
+															}
+															className="px-7 py-3 bg-primary text-white rounded-[30px] hover:bg-primary/90"
+															style={{ fontFamily: "NexonLv1Gothic" }}
 														>
-															{isUserRequesting ? "요청 중" : "친구요청"}
+															친구요청
 														</button>
 													)}
 												</div>
-											);
-										})}
+											))}
+									</div>
 								</div>
-							</div>
-						)}
+							)}
 
-						{/* 검색 결과 없음 */}
-						{searchTerm !== "" &&
-							filteredFriends.length === 0 &&
-							filteredSearchResults.length === 0 && (
+							{/* 검색 결과 없음 */}
+							{searchTerm !== "" &&
+								filteredFriends.length === 0 &&
+								filteredSearchResults.length === 0 &&
+								!loading && (
+									<div
+										className="text-center text-dark-gray text-lg mt-10"
+										style={{ fontFamily: "NexonLv1Gothic" }}
+									>
+										검색 결과가 없습니다.
+									</div>
+								)}
+
+							{/* 로딩 상태 */}
+							{loading && (
 								<div
 									className="text-center text-dark-gray text-lg mt-10"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
-									검색 결과가 없습니다.
+									검색 중...
 								</div>
 							)}
 
-						{/* Scoped scrollbar styling for this modal only */}
-						<style>
-							{`
+							{/* Scoped scrollbar styling for this modal only */}
+							<style>
+								{`
 								.select-friends-scroll::-webkit-scrollbar { background: transparent; }
 								.select-friends-scroll::-webkit-scrollbar-track { background: transparent; }
 								.select-friends-scroll::-webkit-scrollbar-corner { background: transparent; }
 								/* Firefox */
 								.select-friends-scroll { scrollbar-color: #a3a3a3 transparent; }
 								`}
-						</style>
+							</style>
+						</motion.div>
+						<div className="fixed inset-0 flex items-end justify-center pointer-events-none z-40">
+							<img
+								src="/src/assets/archive/letter.png"
+								alt="letter"
+								className="absolute bottom-0 w-[52em] h-[28em]"
+							/>
+						</div>
 					</motion.div>
-					<div className="fixed inset-0 flex items-end justify-center pointer-events-none z-40">
-						<img
-							src="/src/assets/archive/letter.png"
-							alt="letter"
-							className="absolute bottom-0 w-[52em] h-[28em]"
-						/>
-					</div>
-				</motion.div>
-			)}
-		</AnimatePresence>
-	);
-};
+				)}
+
+				<FriendRequestModal
+					isOpen={isRequestModalOpen}
+					selectedRequest={selectedRequest}
+					onClose={() => {
+						setIsRequestModalOpen(false);
+						setSelectedRequest(null);
+					}}
+					onAccept={handleAcceptRequest}
+					onReject={handleRejectRequest}
+				/>
+			</AnimatePresence>
+		);
+	},
+);
+
+FriendsListModal.displayName = "FriendsListModal";
 
 export default FriendsListModal;

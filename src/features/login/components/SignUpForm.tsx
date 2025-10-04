@@ -1,5 +1,6 @@
 import { useId, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { authAPI } from "../../../api";
 
 const SignUpForm: React.FC = () => {
 	const firstNameId = useId();
@@ -11,11 +12,43 @@ const SignUpForm: React.FC = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
+	const [duplicate, setDuplicate] = useState(false);
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const emailValid = {
+		email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email),
+	};
+
+	const passwordValid = {
+		hasEng: /[a-zA-Z]/.test(password),
+		hasNum: /[0-9]/.test(password),
+		hasSpecial: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+		length: password.length >= 8 && password.length <= 20,
+	};
+
+	const isPasswordValid =
+		passwordValid.hasEng &&
+		passwordValid.hasNum &&
+		passwordValid.hasSpecial &&
+		passwordValid.length;
+
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log("Sign up with:", { firstName, lastName, email, password });
-		// 회원가입 처리 로직
+		try {
+			await authAPI.signup({
+				firstName,
+				lastName,
+				email,
+				password,
+			});
+			setTimeout(() => navigate("/login"), 2000);
+		} catch (error: any) {
+			if (error.response?.status === 409) {
+				console.error("이미 존재하는 이메일입니다.");
+				setDuplicate(true);
+			} else {
+				console.error("Login failed:", error);
+			}
+		}
 	};
 
 	return (
@@ -110,6 +143,16 @@ const SignUpForm: React.FC = () => {
 									className="w-full h-11.5 px-4 py-4 border-2 border-gray/40 rounded-full bg-white text-lg focus:outline-none focus:border-gray transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic", fontSize: "18px" }}
 								/>
+								{!emailValid.email && (
+									<p className="text-gray text-sm p-2 w-full text-start">
+										이메일 형식이 올바르지 않습니다.
+									</p>
+								)}
+								{duplicate && (
+									<p className="text-gray text-sm p-2 w-full text-start">
+										이미 존재하는 이메일입니다.
+									</p>
+								)}
 							</div>
 
 							{/* Password 입력 */}
@@ -130,21 +173,48 @@ const SignUpForm: React.FC = () => {
 									className="w-full h-11.5 px-4 py-4 border-2 border-gray/40 rounded-full bg-white text-lg focus:outline-none focus:border-gray transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic", fontSize: "18px" }}
 								/>
+								<ul className="text-sm flex flex-row gap-2 text-start w-full p-2">
+									<li
+										className={
+											passwordValid.hasEng ? "text-primary" : "text-gray"
+										}
+									>
+										✓ 영문
+									</li>
+									<li
+										className={
+											passwordValid.hasNum ? "text-primary" : "text-gray"
+										}
+									>
+										✓ 숫자
+									</li>
+									<li
+										className={
+											passwordValid.hasSpecial ? "text-primary" : "text-gray"
+										}
+									>
+										✓ 특수문자
+									</li>
+									<li
+										className={
+											passwordValid.length ? "text-primary" : "text-gray"
+										}
+									>
+										✓ 8~20자
+									</li>
+								</ul>
 							</div>
 
 							<div className="text-center pt-4">
-								{/* Create 버튼 */}
 								<div className="flex gap-4 pt-12 justify-center">
-									{/* Sign in 버튼 */}
 									<button
 										type="submit"
+										disabled={!isPasswordValid || !emailValid.email}
 										className="flex py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
 										style={{ fontFamily: "NexonLv1Gothic" }}
 									>
 										Create Account
 									</button>
-
-									{/* Create Account 버튼 */}
 									<button
 										type="button"
 										onClick={() => navigate("/login")}
@@ -159,7 +229,9 @@ const SignUpForm: React.FC = () => {
 					</div>
 				</div>
 			</div>
-			<footer className="w-full h-[200px] bg-[#EDEDED] mt-auto" />
+			<footer className="w-full h-[36em] bg-transparent mt-auto">
+				<img src="/src/assets/footer.png" className="w-full h-full" />
+			</footer>
 		</div>
 	);
 };

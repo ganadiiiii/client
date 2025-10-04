@@ -162,7 +162,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 							{/* 복수선택 문구 */}
 							{isMultipleChoice && (
 								<p
-									className="absolute right-0 text-right text-gray font-medium text-xs"
+									className="absolute right-0 text-right text-gray font-medium text-medium"
 									style={{
 										fontFamily: "NexonLv1Gothic",
 										fontWeight: "400",

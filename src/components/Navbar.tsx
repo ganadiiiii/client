@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
 			{isAuthPage && (
 				<div
 					className="absolute top-0 left-0 w-screen h-[482px] 2xl:h-[579px] z-0 bg-cover bg-center bg-no-repeat"
-					style={{ backgroundImage: "url('./src/assets/nav_bg.svg')" }}
+					style={{ backgroundImage: "url('./src/assets/login-bg.png')" }}
 				/>
 			)}
 

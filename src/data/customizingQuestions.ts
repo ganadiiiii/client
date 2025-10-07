@@ -35,7 +35,7 @@ export const customizingQuestions: Question[] = [
 			"사과",
 			"애도",
 		],
-		isMultipleChoice: false,
+		isMultipleChoice: true,
 	},
 	{
 		id: 4,

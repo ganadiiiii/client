@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import bg from "../../assets/generate/bg.svg";
 
 const ChatStartPage: React.FC = () => {
     const navigate = useNavigate();
@@ -7,7 +8,7 @@ const ChatStartPage: React.FC = () => {
 		<div
 			className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center"
 			style={{
-				backgroundImage: "url('./src/assets/generate/bg.svg')",
+				backgroundImage: `url(${bg})`,
 			}}
 		>
 			<div className="flex flex-col items-center justify-center">

@@ -12,10 +12,13 @@ import ResultSentPage from "./pages/ResultSentPage";
 import Cart from "../features/login/components/Cart";
 import ChatStartPage from "./pages/ChatStartPage";
 import ChatPage from "./pages/ChatPage";
+import TestPage from "./pages/TestPage";
+import MainPage from "./pages/MainPage";
 
 export const AppRoutes = () => {
 	return (
 		<Routes>
+			<Route path="/" element={<MainPage />} />
 			<Route path="/customizing" element={<CustomizingPage />} />
 			<Route path="/customizing/result" element={<CustomizingResultPage />} />
 			<Route path="/customizing/result/sent" element={<ResultSentPage />} />
@@ -29,6 +32,7 @@ export const AppRoutes = () => {
 			<Route path="/cart" element={<Cart />} />
 			<Route path="/shop/pickup/chat-start" element={<ChatStartPage />} />
 			<Route path="/shop/pickup/chat" element={<ChatPage />} />
+			<Route path="/test" element={<TestPage />} />
 		</Routes>
 	);
 };

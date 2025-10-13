@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { cardAPI } from "../../api";
 import { friendAPI } from "../../api";
 import bg from "../../assets/generate/result/bg.png";
 import AlertDialog from "../../components/dialog/AlertDialog";
@@ -29,10 +30,12 @@ const initialFlowerCard: FlowerCard = {
 };
 
 const CustomizingResultPage: React.FC = () => {
-	const navigate = useNavigate();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-	// 통합된 상태 관리 - 3개로 축소!
-	const [flowerCard, setFlowerCard] = useState<FlowerCard>(initialFlowerCard);
+    // location.state에 전달된 카드가 있으면 우선 사용
+    const stateFlowerCard = (location.state as { flowerCard?: FlowerCard } | undefined)?.flowerCard;
+    const [flowerCard, setFlowerCard] = useState<FlowerCard>(stateFlowerCard || initialFlowerCard);
 	const [currentPhase, setCurrentPhase] = useState<ResultPhase>(
 		ResultPhaseConst.RESULT_DISPLAY,
 	);
@@ -42,9 +45,10 @@ const CustomizingResultPage: React.FC = () => {
 		archiveSavedAlertVisible: false,
 		sendCompletedAlertVisible: false,
 	});
-	const [friends, setFriends] = useState<Friend[]>([]);
+    const [friends, setFriends] = useState<Friend[]>([]);
+    const [selectedFriend, setSelectedFriend] = useState<Friend | null>(null);
 
-	// 친구 목록 가져오기
+    // 친구 목록 가져오기
 	const getFriends = async () => {
 		try {
 			const response = await friendAPI.getFriends();
@@ -66,10 +70,13 @@ const CustomizingResultPage: React.FC = () => {
 		}
 	};
 
-	// 컴포넌트 마운트 시 친구 목록 가져오기
-	useEffect(() => {
-		getFriends();
-	}, []); // getFriends는 의도적으로 제외 (함수 재생성 방지)
+    // 컴포넌트 마운트 시: 친구 목록과 location.state의 카드 반영
+    useEffect(() => {
+        getFriends();
+        if (stateFlowerCard) {
+            setFlowerCard(stateFlowerCard);
+        }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	// 선택된 친구 상태 (UI와 분리)
 	// const [selectedFriend, setSelectedFriend] = useState<Friend | null>(null);
@@ -85,24 +92,39 @@ const CustomizingResultPage: React.FC = () => {
 	};
 
 	// Handler functions for phase transitions
-	const handleFriendSelect = (friend: Friend) => {
-		// setSelectedFriend(friend);
-		updateFlowerCard({ receiver: friend.name });
-		updateUIState({ showFriendsDialog: false });
-		setCurrentPhase(ResultPhaseConst.MESSAGE_WRITING);
-	};
+    const handleFriendSelect = (friend: Friend) => {
+        setSelectedFriend(friend);
+        updateFlowerCard({ receiver: friend.name, sender: localStorage.getItem("name") || "" });
+        updateUIState({ showFriendsDialog: false });
+        setCurrentPhase(ResultPhaseConst.MESSAGE_WRITING);
+    };
 
-	const handleSendMessage = () => {
-		if (flowerCard.message?.trim() && flowerCard.sender?.trim()) {
-			// Navigate to the sent result page with flower card data
-			updateUIState({ sendCompletedAlertVisible: true });
-			setTimeout(() => {
-				navigate("/customizing/result/sent", {
-					state: { flowerCard },
-				});
-			}, 1800);
-		}
-	};
+    const handleSendMessage = async () => {
+        if (
+            flowerCard.message?.trim() &&
+            (flowerCard.sender?.trim() || localStorage.getItem("name")) &&
+            selectedFriend
+        ) {
+            try {
+                await cardAPI.sendCardToFriend(
+                    String(flowerCard.id),
+                    selectedFriend.id,
+                    selectedFriend.name,
+                    localStorage.getItem("name") || flowerCard.sender || "",
+                    flowerCard.message || "",
+                );
+            } catch (e) {
+                console.error("sendCardToFriend error", e);
+            }
+            // Navigate to the sent result page with flower card data
+            updateUIState({ sendCompletedAlertVisible: true });
+            setTimeout(() => {
+                navigate("/customizing/result/sent", {
+                    state: { flowerCard },
+                });
+            }, 1800);
+        }
+    };
 
 	const handleBack = () => {
 		if (currentPhase === ResultPhaseConst.MESSAGE_WRITING) {

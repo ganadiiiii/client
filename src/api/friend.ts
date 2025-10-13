@@ -28,14 +28,15 @@ export const friendAPI = {
 		return response.data;
 	},
 
-	// 친구 요청 목록 API
-	getFriendsRequest: async () => {
+	// 친구 요청 목록 API (type: all | sent | received)
+	getFriendsRequest: async (type: "all" | "sent" | "received" = "all") => {
 		const accessToken = localStorage.getItem("accessToken");
 		const response = await axios.get(`${API_BASE_URL}/friends/requests`, {
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
 				"Content-Type": "application/json",
 			},
+			params: { type },
 		});
 		return response.data;
 	},

@@ -220,22 +220,22 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 									number={1}
 									paper="Kraft paper"
 									description="크라프트지"
-									isSelected={selectedOptions.includes("Kraft paper")}
-									onClick={() => onOptionSelect("Kraft paper")}
+									isSelected={selectedOptions.includes("KRAFT_PAPER")}
+									onClick={() => onOptionSelect("KRAFT_PAPER")}
 								/>
 								<PaperOptionCard
 									number={2}
 									paper="Color paper"
 									description="컬러 종이"
-									isSelected={selectedOptions.includes("Color paper")}
-									onClick={() => onOptionSelect("Color paper")}
+									isSelected={selectedOptions.includes("COLOR_PAPER")}
+									onClick={() => onOptionSelect("COLOR_PAPER")}
 								/>
 								<PaperOptionCard
 									number={3}
-									paper="Clear vinyl"
+									paper="CLEAR_VINYL"
 									description="투명 비닐"
-									isSelected={selectedOptions.includes("Clear vinyl")}
-									onClick={() => onOptionSelect("Clear vinyl")}
+									isSelected={selectedOptions.includes("CLEAR_VINYL")}
+									onClick={() => onOptionSelect("CLEAR_VINYL")}
 								/>
 							</div>
                         ) : questionNumber === 7 ? (

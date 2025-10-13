@@ -79,23 +79,30 @@ export function useFriendsManager() {
 	const getFriendRequests = useCallback(async (user: User | null) => {
 		if (!user)
 			return { requestUsers: [] as Friend[], requests: [] as FriendRequest[] };
-		const response = await friendAPI.getFriendsRequest();
+		const response = await friendAPI.getFriendsRequest("all");
 		const requests: FriendRequest[] = response.items || [];
-		const requestUsers: Friend[] = [];
+
+		const idToRequestUser = new Map<string, Friend>();
 		requests.forEach((request: FriendRequest) => {
 			if (request.status === "PENDING") {
 				const isReceived = request.receiver.userId === user.userId;
 				const userInfo = isReceived ? request.sender : request.receiver;
-				requestUsers.push({
+				const existing = idToRequestUser.get(userInfo.userId);
+				const candidate: Friend = {
 					id: userInfo.userId,
 					name: `${userInfo.firstName} ${userInfo.lastName}`.trim(),
 					email: userInfo.email,
 					isFriend: false,
 					requestStatus: isReceived ? "received" : "sent",
 					requestId: request.requestId,
-				});
+				};
+				if (!existing || (existing.requestStatus === "sent" && candidate.requestStatus === "received")) {
+					idToRequestUser.set(userInfo.userId, candidate);
+				}
 			}
 		});
+
+		const requestUsers = Array.from(idToRequestUser.values());
 		return { requestUsers, requests };
 	}, []);
 
@@ -106,10 +113,14 @@ export function useFriendsManager() {
 			getFriendRequests(user),
 		]);
 
-		// Merge friends and request users
-		const existingFriends = friendList.filter((f) => f.isFriend);
-		const merged = [...existingFriends, ...requestUsers];
-		setFriends(merged);
+
+		const idToFriend = new Map(friendList.map((f) => [f.id, f] as const));
+		requestUsers.forEach((reqUser) => {
+			if (!idToFriend.has(reqUser.id)) {
+				idToFriend.set(reqUser.id, reqUser);
+			}
+		});
+		setFriends(Array.from(idToFriend.values()));
 		setFriendRequests(requests);
 	}, [getCurrentUser, getFriends, getFriendRequests]);
 
@@ -159,7 +170,6 @@ export function useFriendsManager() {
 				);
 				setSearchResults(mapSearchWithStatuses(searchData));
 			} catch {
-				// Reset results on search error to avoid showing stale items
 				setSearchResults([]);
 			} finally {
 				setLoading(false);
@@ -188,9 +198,21 @@ export function useFriendsManager() {
 				return [...prev, updateToSent(user)];
 			});
 
-			setSearchResults((prev) =>
-				prev.map((u) => (u.id === user.id ? updateToSent(u) : u)),
-			);
+		setSearchResults((prev) => {
+			const seen = new Set<string>();
+			const updated = prev.map((u) => {
+				if (u.id === user.id) {
+					seen.add(u.id);
+					return updateToSent(u);
+				}
+				return u;
+			});
+			if (!seen.has(user.id)) {
+				updated.push(updateToSent(user));
+			}
+			const uniqueById = new Map(updated.map((u) => [u.id, u] as const));
+			return Array.from(uniqueById.values());
+		});
 
 			try {
 				await friendAPI.sendFriendRequest(user.id);
@@ -260,10 +282,10 @@ export function useFriendsManager() {
 		[friends, searchTerm],
 	);
 
-	const filteredSearchResults = useMemo(
-		() => searchResults.filter((user) => !user.isFriend),
-		[searchResults],
-	);
+	const filteredSearchResults = useMemo(() => {
+		const friendIds = new Set(friends.map((f) => f.id));
+		return searchResults.filter((user) => !user.isFriend && !friendIds.has(user.id));
+	}, [searchResults, friends]);
 
 	return {
 		// state

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 const Navbar: React.FC = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -37,7 +38,7 @@ const Navbar: React.FC = () => {
 				{/* 로고 영역 - 좌우 300px 간격 */}
 				<div>
 					<Link to="/">
-						<img src="./src/assets/logo.png" alt="Logo" className="h-12" />
+						<img src={logo} alt="Logo" className="h-12" />
 					</Link>
 				</div>
 

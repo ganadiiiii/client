@@ -52,7 +52,7 @@ const SignUpForm: React.FC = () => {
 	};
 
 	return (
-		<div className="flex items-start flex-col min-h-screen pt-[600px] 2xl:pt-[700px] bg-background">
+		<div className="flex items-start flex-col min-h-screen pt-[600px] 2xl:pt-[600px] bg-background">
 			<div className="flex justify-center px-4 w-full">
 				<div className="w-full max-w-6xl h-[1000px]">
 					{/* 로그인 제목과 데코레이션 라인 */}
@@ -210,7 +210,7 @@ const SignUpForm: React.FC = () => {
 									<button
 										type="submit"
 										disabled={!isPasswordValid || !emailValid.email}
-										className="flex py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
+										className="flex cursor-pointer py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
 										style={{ fontFamily: "NexonLv1Gothic" }}
 									>
 										Create Account
@@ -218,7 +218,7 @@ const SignUpForm: React.FC = () => {
 									<button
 										type="button"
 										onClick={() => navigate("/login")}
-										className="flex py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
+										className="flex cursor-pointer py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
 										style={{ fontFamily: "NexonLv1Gothic" }}
 									>
 										Back to Login

@@ -112,7 +112,7 @@ const LoginForm: React.FC = () => {
 								{/* Sign in 버튼 */}
 								<button
 									type="submit"
-									className="flex py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
+									className="flex cursor-pointer py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Sign in
@@ -122,7 +122,7 @@ const LoginForm: React.FC = () => {
 								<button
 									type="button"
 									onClick={() => navigate("/signup")}
-									className="flex py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
+									className="flex cursor-pointer py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Create Account

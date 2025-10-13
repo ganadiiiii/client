@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { customizingQuestions } from "../../data/customizingQuestions";
 import QuestionStep from "../../features/customize/components/QuestionStep";
+import TitleInputStep from "../../features/customize/components/TitleInputStep";
 // import { authAPI } from "../../api";
 import { cardAPI } from "../../api";
 import type { FlowerCard } from "../../types/FlowerCard";
@@ -10,11 +11,15 @@ const CustomizingPage: React.FC = () => {
 	const navigate = useNavigate();
 	const [currentStep, setCurrentStep] = useState(0);
 	const [answers, setAnswers] = useState<Record<number, string[]>>({});
+	const [bouquetTitle, setBouquetTitle] = useState("");
 
-	const currentQuestion = customizingQuestions[currentStep];
-	const currentAnswers = answers[currentQuestion.id] || [];
+	// currentStep이 0이면 제목 입력 단계, 1부터는 질문 단계
+	const currentQuestion = currentStep > 0 ? customizingQuestions[currentStep - 1] : null;
+	const currentAnswers = currentQuestion ? answers[currentQuestion.id] || [] : [];
 
 	const handleOptionSelect = (option: string) => {
+		if (!currentQuestion) return;
+		
 		const newAnswers = { ...answers };
 		const questionAnswers = newAnswers[currentQuestion.id] || [];
 
@@ -37,8 +42,14 @@ const CustomizingPage: React.FC = () => {
 	};
 
     const handleNext = async () => {
-		// Question 8에서 "None" 선택 시 바로 결과 페이지로 이동
-		if (currentStep === 7 && currentAnswers.includes("None")) {
+		// 제목 입력 단계에서 첫 번째 질문으로 이동
+		if (currentStep === 0) {
+			setCurrentStep(1);
+			return;
+		}
+
+		// Question 8에서 "None" 선택 시 바로 결과 페이지로 이동 (currentStep 8 = 실제 질문 7)
+		if (currentStep === 8 && currentAnswers.includes("None")) {
 			// 카드 생성 호출 후 결과 페이지로 이동
 			const flowerCard = await createCardFromAnswers();
 			navigate("/customizing/result", { state: { flowerCard } });
@@ -46,9 +57,9 @@ const CustomizingPage: React.FC = () => {
 		}
 
 		// Question 8에서 "Special Detail" 선택 시에만 Question 9로 이동
-		if (currentStep === 7 && currentAnswers.includes("Special Detail")) {
-			if (currentStep < customizingQuestions.length - 1) {
-				const nextQuestionId = customizingQuestions[currentStep + 1].id;
+		if (currentStep === 8 && currentAnswers.includes("Special Detail")) {
+			if (currentStep < customizingQuestions.length) {
+				const nextQuestionId = customizingQuestions[currentStep].id;
 				setAnswers((prev) => ({
 					...prev,
 					[nextQuestionId]: [],
@@ -59,8 +70,8 @@ const CustomizingPage: React.FC = () => {
 		}
 
 		// 일반적인 다음 질문으로 이동
-		if (currentStep < customizingQuestions.length - 1) {
-			const nextQuestionId = customizingQuestions[currentStep + 1].id;
+		if (currentStep < customizingQuestions.length) {
+			const nextQuestionId = customizingQuestions[currentStep].id;
 			setAnswers((prev) => ({
 				...prev,
 				[nextQuestionId]: [], // 다음 질문의 응답을 초기화
@@ -103,7 +114,7 @@ const CustomizingPage: React.FC = () => {
 
 			const payload = {
 				mainFlowerId: Number(q4) || 0,
-				title: "test",
+				title: bouquetTitle || "꽃다발",
 				whoType: q1 || "",
 				whenType: q2 || "",
 				emotionTypes: q3 as string[],
@@ -148,19 +159,26 @@ const CustomizingPage: React.FC = () => {
 		}
 	};
 
-	const canProceed = currentAnswers.length > 0;
+	const canProceed = currentStep === 0 ? bouquetTitle.trim().length > 0 : currentAnswers.length > 0;
 
-	return (
+	return currentStep === 0 ? (
+		<TitleInputStep
+			value={bouquetTitle}
+			onChange={setBouquetTitle}
+			onNext={handleNext}
+			canProceed={canProceed}
+		/>
+	) : (
 		<QuestionStep
-			questionNumber={currentStep + 1}
-			title={currentQuestion.title}
-			options={currentQuestion.options}
+			questionNumber={currentStep}
+			title={currentQuestion!.title}
+			options={currentQuestion!.options}
 			selectedOptions={currentAnswers}
 			onOptionSelect={handleOptionSelect}
 			onNext={handleNext}
 			onPrevious={currentStep > 0 ? handlePrevious : undefined}
 			canProceed={canProceed}
-			isMultipleChoice={currentQuestion.isMultipleChoice}
+			isMultipleChoice={currentQuestion!.isMultipleChoice}
 		/>
 	);
 };

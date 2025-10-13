@@ -14,7 +14,7 @@ const ChatStartPage: React.FC = () => {
 			<div className="flex flex-col items-center justify-center">
                 <img src="/src/assets/order/chat.png" alt="chat" className="w-[26.25em] h-[14.75em] mb-9" />
 				<p
-					className="text-black text-center mb-19 font-semibold whitespace-nowrap text-3xl mb-16"
+					className="text-black text-center mb-14 font-semibold whitespace-nowrap text-3xl"
 					style={{
 						fontFamily: "NexonLv1Gothic",
 						lineHeight: "1.39",

@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
 			{/* 배경 이미지 영역: 로그인/회원가입/메인/온보딩에서만 보이도록 */}
 			{isAuthPage && (
 				<div
-					className="absolute top-0 left-0 w-screen h-[482px] 2xl:h-[579px] z-0 bg-cover bg-center bg-no-repeat"
+					className="absolute w-full h-full object-cover bg-no-repeat"
 					style={{ backgroundImage: "url('./src/assets/login-bg.png')" }}
 				/>
 			)}

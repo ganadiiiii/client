@@ -1,21 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import RedirectModal from "../../order/RedirectModal";
+import bg from "../../../assets/generate/bg.svg";
 
 const Cart: React.FC = () => {
     const navigate = useNavigate();
-    const [isRedirectModalOpen, setIsRedirectModalOpen] = useState(false);
 
 	return (
-        <div className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center">
-            <RedirectModal
-                isOpen={true}
-                message="주문 내역이 없습니다"
-                onClose={() => {
-                    setIsRedirectModalOpen(false);
-                    navigate("/");
-                }}
-            />
+        <div
+			className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center"
+			style={{
+				backgroundImage: `url(${bg})`,
+			}}
+		>  
+            <div className="flex flex-col items-center justify-center">
+                <img src="/src/assets/cart.png" alt="chat" className="w-[10.8em] h-[13.2em] mb-9" />
+				<p
+					className="text-black text-center font-semibold whitespace-nowrap text-3xl mb-14"
+					style={{
+						fontFamily: "NexonLv1Gothic",
+						lineHeight: "1.39",
+					}}
+				>
+					주문내역이 없어요!
+				</p>
+                <button className="py-4 px-32 rounded-full flex items-center justify-center bg-primary text-white text-white text-lg" style={{ fontFamily: "NexonLv1Gothic" }} onClick={() => navigate("/archive")}>
+                    주문하러 가기
+                </button>
+			</div>
         </div>
     );
 };

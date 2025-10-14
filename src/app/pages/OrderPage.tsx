@@ -52,7 +52,7 @@ const OrderPage: React.FC = () => {
 						onMouseEnter={() => setIsDeliveryHovered(true)}
 						onMouseLeave={() => setIsDeliveryHovered(false)}
 						onClick={() => {
-							navigate("/shop/delivery", { state: { flowerCard } });
+							navigate("/order/delivery", { state: { flowerCard } });
 						}}
 					>
 						<div className="relative flex w-full h-full items-center justify-center">
@@ -96,7 +96,7 @@ const OrderPage: React.FC = () => {
 						onMouseEnter={() => setIsPickupHovered(true)}
 						onMouseLeave={() => setIsPickupHovered(false)}
 						onClick={() => {
-							navigate("/shop/pickup", { state: { flowerCard } });
+							navigate("/order/pickup", { state: { flowerCard } });
 						}}
 					>
 						<div className="relative flex w-full h-full items-center justify-center">

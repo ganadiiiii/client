@@ -24,7 +24,7 @@ const PickupPage: React.FC = () => {
 				>
 					픽업할 꽃집을 선택해주세요
 				</h1>
-				<div className="w-full h-full" onClick={() => navigate("/shop/pickup/chat-start")}>
+				<div className="w-full h-full" onClick={() => navigate("/order/pickup/chat-start")}>
 					<GoogleMapComponent />
 				</div>
 			</div>

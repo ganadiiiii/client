@@ -23,12 +23,12 @@ export const AppRoutes = () => {
 			<Route path="/archive/:flowerId" element={<FlowerInfoPage />} />
 			<Route path="/login" element={<LoginForm />} />
 			<Route path="/signup" element={<SignUpForm />} />
-			<Route path="/shop" element={<OrderPage />} />
-			<Route path="/shop/delivery" element={<DeliveryPage />} />
-			<Route path="/shop/pickup" element={<PickupPage />} />
+			<Route path="/order" element={<OrderPage />} />
+			<Route path="/order/delivery" element={<DeliveryPage />} />
+			<Route path="/order/pickup" element={<PickupPage />} />
 			<Route path="/cart" element={<Cart />} />
-			<Route path="/shop/pickup/chat-start" element={<ChatStartPage />} />
-			<Route path="/shop/pickup/chat" element={<ChatPage />} />
+			<Route path="/order/pickup/chat-start" element={<ChatStartPage />} />
+			<Route path="/order/pickup/chat" element={<ChatPage />} />
 		</Routes>
 	);
 };

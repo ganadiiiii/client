@@ -73,13 +73,13 @@ const Navbar: React.FC = () => {
 						Customizing
 					</Link>
 					<Link
-						to="/brand"
+						to="/order"
 						className="text-[#5A5A5A] hover:text-black transition-colors text-[17px] font-bold"
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
 					>
-						Brand
+						Order
 					</Link>
 					<Link
 						to="/archive"

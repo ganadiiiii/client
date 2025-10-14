@@ -23,7 +23,7 @@ const ChatStartPage: React.FC = () => {
 					플로리스트와 1:1 채팅을 통해<br />
                     날짜, 시간, 요구사항 등을 자세히 소통할 수 있어요!
 				</p>
-                <button className="py-4 px-32 rounded-full flex items-center justify-center bg-primary text-white text-white text-lg" style={{ fontFamily: "NexonLv1Gothic" }} onClick={() => navigate("/shop/pickup/chat")}>
+                <button className="py-4 px-32 rounded-full flex items-center justify-center bg-primary text-white text-white text-lg" style={{ fontFamily: "NexonLv1Gothic" }} onClick={() => navigate("/order/pickup/chat")}>
                     1:1 상담 시작하기
                 </button>
 			</div>

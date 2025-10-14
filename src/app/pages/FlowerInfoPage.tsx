@@ -222,7 +222,7 @@ const FlowerInfoPage = () => {
 								<button
 									onClick={() => {
 										setShowSharePopup(false);
-										navigate("/shop", { state: { flowerCard: flower } });
+										navigate("/order", { state: { flowerCard: flower } });
 									}}
 									className="block w-full text-center text-base py-5 px-12 hover:bg-gray/20"
 									style={{ fontFamily: "NexonLv1Gothic" }}

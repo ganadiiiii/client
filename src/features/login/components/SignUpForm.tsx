@@ -211,7 +211,7 @@ const SignUpForm: React.FC = () => {
 									<button
 										type="submit"
 										disabled={!isPasswordValid || !emailValid.email}
-										className="flex py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
+										className="flex cursor-pointer py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
 										style={{ fontFamily: "NexonLv1Gothic" }}
 									>
 										Create Account
@@ -219,7 +219,7 @@ const SignUpForm: React.FC = () => {
 									<button
 										type="button"
 										onClick={() => navigate("/login")}
-										className="flex py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
+										className="flex cursor-pointer py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
 										style={{ fontFamily: "NexonLv1Gothic" }}
 									>
 										Back to Login

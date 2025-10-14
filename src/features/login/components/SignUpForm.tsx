@@ -41,8 +41,9 @@ const SignUpForm: React.FC = () => {
 				password,
 			});
 			setTimeout(() => navigate("/login"), 2000);
-		} catch (error: any) {
-			if (error.response?.status === 409) {
+		} catch (error: unknown) {
+			const err = error as { response?: { status?: number } } | undefined;
+			if (err?.response?.status === 409) {
 				console.error("이미 존재하는 이메일입니다.");
 				setDuplicate(true);
 			} else {
@@ -52,7 +53,7 @@ const SignUpForm: React.FC = () => {
 	};
 
 	return (
-		<div className="flex items-start flex-col min-h-screen pt-[600px] 2xl:pt-[600px] bg-background">
+		<div className="flex items-start flex-col min-h-screen pt-[500px] 2xl:pt-[650px] bg-background">
 			<div className="flex justify-center px-4 w-full">
 				<div className="w-full max-w-6xl h-[1000px]">
 					{/* 로그인 제목과 데코레이션 라인 */}

@@ -5,6 +5,7 @@ import { DateSection } from "../../features/order/DateSection";
 import { FlowerSection } from "../../features/order/FlowerSection";
 import { ReceiverSection } from "../../features/order/ReceiverSection";
 import { SenderSection } from "../../features/order/SenderSection";
+import { TagSection } from "../../features/order/TagSection";
 import type { FlowerCard } from "../../types/FlowerCard";
 
 const DeliveryPage: React.FC = () => {
@@ -46,6 +47,7 @@ const DeliveryPage: React.FC = () => {
 			<div className="flex flex-col items-center justify-center gap-y-10 mt-40">
 				<FlowerSection flowerCard={flowerCard} />
 				<ReceiverSection ref={receiverRef} />
+				<TagSection/>
 				<SenderSection ref={senderRef} />
 				<AddressSection ref={addressRef} />
 				<DateSection ref={dateRef} />

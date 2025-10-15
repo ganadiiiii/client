@@ -12,6 +12,7 @@ import ResultSentPage from "./pages/ResultSentPage";
 import Cart from "../features/login/components/Cart";
 import ChatStartPage from "./pages/ChatStartPage";
 import ChatPage from "./pages/ChatPage";
+import ShopPage from "./pages/ShopPage";
 
 export const AppRoutes = () => {
 	return (
@@ -29,6 +30,7 @@ export const AppRoutes = () => {
 			<Route path="/cart" element={<Cart />} />
 			<Route path="/order/pickup/chat-start" element={<ChatStartPage />} />
 			<Route path="/order/pickup/chat" element={<ChatPage />} />
+			<Route path="/shop" element={<ShopPage />} />
 		</Routes>
 	);
 };

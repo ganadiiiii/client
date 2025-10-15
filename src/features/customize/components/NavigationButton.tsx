@@ -18,7 +18,7 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
 			type="button"
 			onClick={onClick}
 			disabled={disabled}
-			className={`w-17 h-17 relative rounded-full flex items-center justify-center ${className} ${disabled ? "" : "transition-all duration-100 hover:scale-95 cursor-pointer"}`}
+			className={`w-17 h-17 relative rounded-full flex items-center justify-center ${className} ${disabled ? "" : "transition-all duration-200 hover:scale-105 cursor-pointer"}`}
 		>
 			{/* Pink background for enabled state, only for right button */}
 			{direction === "right" && (

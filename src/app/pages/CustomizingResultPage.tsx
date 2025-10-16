@@ -5,8 +5,11 @@ import { friendAPI } from "../../api";
 import bg from "../../assets/generate/result/bg.png";
 import AlertDialog from "../../components/dialog/AlertDialog";
 import ConfirmDialog from "../../components/dialog/ConfirmDialog";
+import LoadingPage from "../../components/LoadingPage";
 import CustomizeResultSection from "../../features/customize/sections/CustomizeResultSection";
 import MessageSection from "../../features/customize/sections/MessageSection";
+import type { CardData } from "../../features/customize/api/cardCreation";
+import { createCardFromData } from "../../features/customize/api/cardCreation";
 import type {
 	FlowerCard,
 	Friend,
@@ -33,9 +36,24 @@ const CustomizingResultPage: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // location.state에 전달된 카드가 있으면 우선 사용
-    const stateFlowerCard = (location.state as { flowerCard?: FlowerCard } | undefined)?.flowerCard;
+    // location.state에 전달된 카드와 cardData가 있으면 우선 사용
+    const locationState = location.state as { flowerCard?: FlowerCard; cardData?: CardData } | undefined;
+    const stateFlowerCard = locationState?.flowerCard;
+    const stateCardData = locationState?.cardData;
     const [flowerCard, setFlowerCard] = useState<FlowerCard>(stateFlowerCard || initialFlowerCard);
+    
+    // cardData가 없으면 기본값 생성 (초기 FlowerCard 기반)
+    const defaultCardData: CardData = {
+        mainFlowerId: 1,
+        title: initialFlowerCard.title,
+        whoType: "",
+        whenType: "",
+        emotionTypes: [],
+        bouquetSize: initialFlowerCard.size,
+        wrappingType: "",
+        price: initialFlowerCard.price,
+    };
+    const [cardData] = useState<CardData>(stateCardData || defaultCardData);
 	const [currentPhase, setCurrentPhase] = useState<ResultPhase>(
 		ResultPhaseConst.RESULT_DISPLAY,
 	);
@@ -47,6 +65,7 @@ const CustomizingResultPage: React.FC = () => {
 	});
     const [friends, setFriends] = useState<Friend[]>([]);
     const [selectedFriend, setSelectedFriend] = useState<Friend | null>(null);
+    const [isRecreating, setIsRecreating] = useState(false);
 
     // 친구 목록 가져오기
 	const getFriends = async () => {
@@ -138,16 +157,39 @@ const CustomizingResultPage: React.FC = () => {
 		updateFlowerCard({ message });
 	};
 
+	const handleRecreate = async (cardDataToRecreate: CardData) => {
+		try {
+			setIsRecreating(true);
+			const newFlowerCard = await createCardFromData({ cardData: cardDataToRecreate });
+			setIsRecreating(false);
+			
+			if (newFlowerCard) {
+				navigate("/customizing/result", { 
+					state: { 
+						flowerCard: newFlowerCard,
+						cardData: cardDataToRecreate 
+					},
+					replace: true 
+				});
+			}
+		} catch (error) {
+			console.error("Recreate card error:", error);
+			setIsRecreating(false);
+		}
+	};
+
 	const renderPhaseContent = () => {
 		switch (currentPhase) {
 			case ResultPhaseConst.RESULT_DISPLAY:
 				return (
 					<CustomizeResultSection
 						flowerCard={flowerCard}
+						cardData={cardData}
 						uiState={uiState}
 						updateUIState={updateUIState}
 						onFriendSelect={handleFriendSelect}
 						friends={friends}
+						onRecreate={handleRecreate}
 					/>
 				);
 			case ResultPhaseConst.MESSAGE_WRITING:
@@ -163,14 +205,21 @@ const CustomizingResultPage: React.FC = () => {
 				return (
 					<CustomizeResultSection
 						flowerCard={flowerCard}
+						cardData={cardData}
 						uiState={uiState}
 						updateUIState={updateUIState}
 						onFriendSelect={handleFriendSelect}
 						friends={friends}
+						onRecreate={handleRecreate}
 					/>
 				);
 		}
 	};
+
+	// 재생성 중일 때 로딩 페이지 표시
+	if (isRecreating) {
+		return <LoadingPage message="꽃다발 다시 만드는 중" />;
+	}
 
 	return (
 		<div

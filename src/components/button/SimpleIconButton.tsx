@@ -25,7 +25,7 @@ const SimpleIconButton: React.FC<SimpleIconButtonProps> = ({
 		>
 			<button
 				onClick={onClick}
-				className="w-16 h-16 rounded-full shadow-lg hover:scale-95 transition-all duration-200 cursor-pointer mb-4"
+				className="w-16 h-16 rounded-full shadow-lg hover:scale-105 transition-all duration-200 cursor-pointer mb-4"
 				style={{
 					background:
 						"linear-gradient(149deg, rgba(255, 255, 255, 0.1) 12%, rgba(255, 255, 255, 0.8) 60%)",

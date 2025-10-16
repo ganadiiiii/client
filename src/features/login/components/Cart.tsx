@@ -23,7 +23,7 @@ const Cart: React.FC = () => {
 				>
 					주문내역이 없어요!
 				</p>
-                <button className="py-4 px-32 rounded-full flex items-center justify-center bg-primary text-white text-white text-lg" style={{ fontFamily: "NexonLv1Gothic" }} onClick={() => navigate("/archive")}>
+                <button className="py-4 px-32 rounded-full flex items-center justify-center bg-primary text-white text-lg" style={{ fontFamily: "NexonLv1Gothic" }} onClick={() => navigate("/archive")}>
                     주문하러 가기
                 </button>
 			</div>

@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { customizingQuestions } from "../../data/customizingQuestions";
 import QuestionStep from "../../features/customize/components/QuestionStep";
 import TitleInputStep from "../../features/customize/components/TitleInputStep";
-// import { authAPI } from "../../api";
-import { cardAPI } from "../../api";
-import type { FlowerCard } from "../../types/FlowerCard";
+import LoadingPage from "../../components/LoadingPage";
+import { createCardFromAnswers } from "../../features/customize/api/cardCreation";
 
 const CustomizingPage: React.FC = () => {
 	const navigate = useNavigate();
 	const [currentStep, setCurrentStep] = useState(0);
 	const [answers, setAnswers] = useState<Record<number, string[]>>({});
 	const [bouquetTitle, setBouquetTitle] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
 	// currentStep이 0이면 제목 입력 단계, 1부터는 질문 단계
 	const currentQuestion = currentStep > 0 ? customizingQuestions[currentStep - 1] : null;
@@ -51,8 +51,17 @@ const CustomizingPage: React.FC = () => {
 		// Question 8에서 "None" 선택 시 바로 결과 페이지로 이동 (currentStep 8 = 실제 질문 7)
 		if (currentStep === 8 && currentAnswers.includes("None")) {
 			// 카드 생성 호출 후 결과 페이지로 이동
-			const flowerCard = await createCardFromAnswers();
-			navigate("/customizing/result", { state: { flowerCard } });
+			setIsLoading(true);
+			const result = await createCardFromAnswers({ answers, bouquetTitle });
+			setIsLoading(false);
+			if (result) {
+				navigate("/customizing/result", { 
+					state: { 
+						flowerCard: result.flowerCard, 
+						cardData: result.cardData 
+					} 
+				});
+			}
 			return;
 		}
 
@@ -79,77 +88,17 @@ const CustomizingPage: React.FC = () => {
 			setCurrentStep(currentStep + 1);
 		} else {
 			// 마지막 질문 완료 시 결과 페이지로 이동하거나 다른 처리
-			const flowerCard = await createCardFromAnswers();
-			navigate("/customizing/result", { state: { flowerCard } });
-		}
-	};
-
-	// 질문 답변을 기반으로 카드 생성 API 호출
-	const createCardFromAnswers = async (): Promise<FlowerCard | undefined> => {
-		try {
-			// 유저 id
-			// const me = await authAPI.me();
-			// const userId: string = me.userId ?? me.id ?? "";
-
-			// 각 질문별 값 추출
-			const q1 = answers[1]?.[0]; // whoType
-			const q2 = answers[2]?.[0]; // whenType
-			const q3 = answers[3] || []; // emotionTypes
-			const q4 = answers[4]?.[0]; // mainFlowerId (id 문자열 가정)
-			const q5 = answers[5]?.[0]; // bouquetSize S|M|L
-			const q6 = answers[6]?.[0]; // wrappingType
-
-			const sizeToPrice = (size?: string) => {
-				switch ((size || "").toLowerCase()) {
-					case "s":
-						return 10000;
-					case "m":
-						return 25000;
-					case "l":
-						return 50000;
-					default:
-						return 25000;
-				}
-			};
-
-			const payload = {
-				mainFlowerId: Number(q4) || 0,
-				title: bouquetTitle || "꽃다발",
-				whoType: q1 || "",
-				whenType: q2 || "",
-				emotionTypes: q3 as string[],
-				bouquetSize: q5 || "",
-				wrappingType: q6 || "",
-				price: sizeToPrice(q5),
-			};
-
-			const res = await cardAPI.createCard(payload);
-
-			// 결과 페이지에 전달할 FlowerCard 구성
-			const senderName = localStorage.getItem("name") || "";
-			const today = new Date();
-			const formatDate = (d: Date) =>
-				`${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(
-					d.getDate(),
-				).padStart(2, "0")}`;
-
-			const flowerCard: FlowerCard = {
-				id: String(res.cardId),
-				date: formatDate(today),
-				title: res.title,
-				flowerImg: res.imageUrl,
-				mainFlowers: [res.mainFlower?.koreanName || ""],
-				subFlowers: [res.subFlower?.koreanName || ""],
-				floriography: res.floriography || "",
-				size: res.bouquetSize,
-				price: res.price,
-				sender: senderName || undefined,
-			};
-
-			return flowerCard;
-		} catch (e) {
-			console.error("createCard error", e);
-			return undefined;
+			setIsLoading(true);
+			const result = await createCardFromAnswers({ answers, bouquetTitle });
+			setIsLoading(false);
+			if (result) {
+				navigate("/customizing/result", { 
+					state: { 
+						flowerCard: result.flowerCard, 
+						cardData: result.cardData 
+					} 
+				});
+			}
 		}
 	};
 
@@ -160,6 +109,11 @@ const CustomizingPage: React.FC = () => {
 	};
 
 	const canProceed = currentStep === 0 ? bouquetTitle.trim().length > 0 : currentAnswers.length > 0;
+
+	// 로딩 중일 때 로딩 페이지 표시
+	if (isLoading) {
+		return <LoadingPage message="꽃다발 만드는 중" />;
+	}
 
 	return currentStep === 0 ? (
 		<TitleInputStep

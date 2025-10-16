@@ -15,25 +15,34 @@ import type { FlowerCard, Friend, UIState } from "../../../types/FlowerCard";
 import ResultCard from "../components/ResultCard";
 import SelectFriendPopup from "../components/SelectFriendPopup";
 import { cardAPI } from "../../../api";
+import type { CardData } from "../api/cardCreation";
 
 interface CustomizeResultSectionProps {
 	flowerCard: FlowerCard;
+	cardData: CardData;
 	uiState: UIState;
 	updateUIState: (updates: Partial<UIState>) => void;
 	onFriendSelect: (friend: Friend) => void;
 	friends: Friend[];
+	onRecreate: (cardData: CardData) => void;
 }
 
 const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 	flowerCard,
+	cardData,
 	uiState,
 	updateUIState,
 	onFriendSelect,
 	friends,
+	onRecreate,
 }) => {
 	const navigate = useNavigate();
 	const sendMenuRef = useRef<HTMLDivElement | null>(null);
 	const divRef = useRef<HTMLDivElement | null>(null);
+
+	const handleRecreate = () => {
+		onRecreate(cardData);
+	};
 
 	const handleDownload = async () => {
 		if (!divRef.current) return;
@@ -204,7 +213,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 				<div className="relative inline-block">
 					{/* recreate button */}
 					<SimpleIconButton
-						onClick={() => navigate(-1)}
+						onClick={handleRecreate}
 						icon={iconRestart}
 						label="다시 만들기"
 						className="absolute left-[-6.25em] top-[0.625em]"

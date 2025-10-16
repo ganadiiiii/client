@@ -1,4 +1,4 @@
-export type CategoryType = "전체" | "엽서" | "키링" | "폰케이스" | "머그컵" | "의류";
+export type CategoryType = "전체" | "엽서" | "키링" | "폰케이스" | "향" | "의류";
 
 export interface Product {
   id: string;
@@ -42,7 +42,7 @@ export const products: Product[] = [
     name: "[한줌] Lana T-shirt",
     price: 3000,
     image: "/assets/products/keyring-1.png",
-    category: "키링",
+    category: "의류",
   },
   {
     id: "6",
@@ -77,6 +77,6 @@ export const products: Product[] = [
     name: "[한줌] Lana T-shirt",
     price: 3000,
     image: "/assets/products/keyring-1.png",
-    category: "키링",
+    category: "의류",
   },
 ];

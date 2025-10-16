@@ -4,7 +4,7 @@ import BannerSlider from "../../features/shop/components/BannerSlider";
 import { products, type CategoryType } from "../../data/productData";
 import ProductGrid from "../../features/shop/components/ProductGrid";
 
-const categories: CategoryType[] = ["전체", "엽서", "키링", "폰케이스", "머그컵", "의류"];
+const categories: CategoryType[] = ["전체", "엽서", "키링", "폰케이스", "향", "의류"];
 
 const ShopPage = () => {
   const [activeCategory, setActiveCategory] = useState<CategoryType>("전체");
@@ -32,7 +32,7 @@ const ShopPage = () => {
             className={`px-15 py-5 rounded-full text-xl text-black transition ${
               activeCategory === cat
                 ? "font-bold border-4 border-primary"
-                : "font-normal"
+                : "font-normal border-4 border-white"
             }`}
             style={{
               fontFamily: "NexonLv1Gothic"

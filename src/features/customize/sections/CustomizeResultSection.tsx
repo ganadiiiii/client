@@ -14,6 +14,7 @@ import SimpleIconButton from "../../../components/button/SimpleIconButton";
 import type { FlowerCard, Friend, UIState } from "../../../types/FlowerCard";
 import ResultCard from "../components/ResultCard";
 import SelectFriendPopup from "../components/SelectFriendPopup";
+import { cardAPI } from "../../../api";
 
 interface CustomizeResultSectionProps {
 	flowerCard: FlowerCard;
@@ -249,6 +250,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 										</button>
 										<button
 											onClick={() => {
+												cardAPI.sendCardToMyself(flowerCard.id);
 												updateUIState({
 													showSendPopup: false,
 													archiveSavedAlertVisible: true,
@@ -265,7 +267,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 							</div>
 							<GradientIconButton
 								onClick={() =>
-									navigate("/shop", { state: { flowerCard: flowerCard } })
+									navigate("/order", { state: { flowerCard: flowerCard } })
 								}
 								icon={iconOrder}
 								hoverIcon={iconOrderHover}

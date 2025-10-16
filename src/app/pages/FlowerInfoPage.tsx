@@ -10,6 +10,8 @@ import GradientIconButton from "../../components/button/GradientIconButton";
 import SimpleIconButton from "../../components/button/SimpleIconButton";
 import { flowerCardData } from "../../data/flowerCardData";
 import FlowerInfoCard from "../../features/archive/components/FlowerInfoCard";
+import iconTrash from "../../assets/archive/icon-trash.svg";
+// import { cardAPI } from "../../api";
 
 const FlowerInfoPage = () => {
 	const { flowerId } = useParams();
@@ -163,6 +165,12 @@ const FlowerInfoPage = () => {
 			console.error("Error converting div to image:", error);
 		}
 	};
+
+	const handleDelete = () => {
+		// cardAPI.deleteCard(flower.id); -> 테스트 부탁드립니다.
+		navigate("/archive");
+	};
+
 	return (
 		<div
 			className="relative w-screen min-h-screen flex flex-col items-center justify-center bg-[#FCFBF6] bg-cover bg-center bg-no-repeat"
@@ -189,6 +197,11 @@ const FlowerInfoPage = () => {
 					<div ref={divRef}>
 						<FlowerInfoCard flowerCard={flower} />
 					</div>
+					<SimpleIconButton
+						onClick={handleDelete}
+						icon={iconTrash}
+						className="absolute right-[-5em] top-[0.625em]"
+					/>
 
 					{/* Action button */}
 					<div className="relative mt-4 w-full flex justify-center">
@@ -209,7 +222,7 @@ const FlowerInfoPage = () => {
 								<button
 									onClick={() => {
 										setShowSharePopup(false);
-										navigate("/shop", { state: { flowerCard: flower } });
+										navigate("/order", { state: { flowerCard: flower } });
 									}}
 									className="block w-full text-center text-base py-5 px-12 hover:bg-gray/20"
 									style={{ fontFamily: "NexonLv1Gothic" }}

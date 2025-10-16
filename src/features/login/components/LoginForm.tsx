@@ -17,10 +17,13 @@ const LoginForm: React.FC = () => {
 		try {
 			const data = await authAPI.login(email, password);
 			const { accessToken, refreshToken } = data;
+			const { userId, lastName, firstName } = data.user;
+			const name = `${lastName} ${firstName}`;
 
 			localStorage.setItem("accessToken", accessToken);
 			localStorage.setItem("refreshToken", refreshToken);
-
+			localStorage.setItem("userId", userId);
+			localStorage.setItem("name", name);
 			// 로그인 성공 후 메인 페이지로 이동
 			navigate("/");
 		} catch (error) {
@@ -29,7 +32,7 @@ const LoginForm: React.FC = () => {
 	};
 
 	return (
-		<div className="flex items-start flex-col min-h-screen pt-[600px] 2xl:pt-[700px] bg-background">
+		<div className="flex items-start flex-col min-h-screen pt-[500px] 2xl:pt-[650px] bg-background">
 			<div className="flex justify-center px-4 w-full">
 				<div className="w-full max-w-6xl h-[600px]">
 					{/* 로그인 제목과 데코레이션 라인 */}
@@ -109,7 +112,7 @@ const LoginForm: React.FC = () => {
 								{/* Sign in 버튼 */}
 								<button
 									type="submit"
-									className="flex py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
+									className="flex cursor-pointer py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Sign in
@@ -119,7 +122,7 @@ const LoginForm: React.FC = () => {
 								<button
 									type="button"
 									onClick={() => navigate("/signup")}
-									className="flex py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
+									className="flex cursor-pointer py-3 pl-8 pr-8 rounded-full bg-gray/20 text-gray text-lg font-bold hover:bg-primary/40 hover:text-white transition-colors"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									Create Account

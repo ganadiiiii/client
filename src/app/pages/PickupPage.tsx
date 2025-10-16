@@ -1,6 +1,7 @@
 import React from "react";
 import GoogleMapComponent from "../../features/order/GoogleMap";
 import { useNavigate } from "react-router-dom";
+import bg from "../../assets/generate/bg.svg";
 
 const PickupPage: React.FC = () => {
 	const navigate = useNavigate();
@@ -9,7 +10,7 @@ const PickupPage: React.FC = () => {
 		<div
 			className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center"
 			style={{
-				backgroundImage: "url('./src/assets/generate/bg.svg')",
+				backgroundImage: `url(${bg})`,
 			}}
 		>
 			<div className="flex flex-col items-center justify-center">
@@ -23,7 +24,7 @@ const PickupPage: React.FC = () => {
 				>
 					픽업할 꽃집을 선택해주세요
 				</h1>
-				<div className="w-full h-full" onClick={() => navigate("/shop/pickup/chat-start")}>
+				<div className="w-full h-full" onClick={() => navigate("/order/pickup/chat-start")}>
 					<GoogleMapComponent />
 				</div>
 			</div>

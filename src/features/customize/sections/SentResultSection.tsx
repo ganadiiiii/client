@@ -182,7 +182,7 @@ const SentResultSection: React.FC<SentResultSectionProps> = ({
 						/>
 						<GradientIconButton
 							onClick={() =>
-								navigate("/shop", { state: { flowerCard: flowerCard } })
+								navigate("/order", { state: { flowerCard: flowerCard } })
 							}
 							icon={iconOrder}
 							hoverIcon={iconOrderHover}

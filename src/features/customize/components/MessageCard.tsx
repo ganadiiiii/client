@@ -51,7 +51,7 @@ const MessageCard: React.FC<MessageCardProps> = ({
 					</div>
 
 					{/* To & From at bottom */}
-					<div className="absolute left-[2.7em] bottom-[3.4em] flex flex-row gap-20 text-black text-sm">
+                    <div className="absolute left-[2.7em] bottom-[3.4em] flex flex-row gap-20 text-black text-sm">
 						<div className="flex gap-3 items-baseline">
 							<span
 								style={{
@@ -61,13 +61,13 @@ const MessageCard: React.FC<MessageCardProps> = ({
 							>
 								To
 							</span>
-							<span
+                            <span
 								style={{
 									fontFamily: "NexonLv1Gothic",
 									fontWeight: "400",
 								}}
 							>
-								{receiver}
+                                {receiver}
 							</span>
 						</div>
 						<div className="flex gap-3 items-baseline">
@@ -79,13 +79,13 @@ const MessageCard: React.FC<MessageCardProps> = ({
 							>
 								From
 							</span>
-							<span
+                            <span
 								style={{
 									fontFamily: "NexonLv1Gothic",
 									fontWeight: "400",
 								}}
 							>
-								{sender}
+                                {sender || localStorage.getItem("name") || ""}
 							</span>
 						</div>
 					</div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 const Navbar: React.FC = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -22,10 +23,20 @@ const Navbar: React.FC = () => {
 		<nav>
 			{/* 배경 이미지 영역: 로그인/회원가입에서만 보이도록 */}
 			{isAuthPage && (
-				<div
-					className="absolute top-0 left-0 w-screen h-[482px] 2xl:h-[579px] z-0 bg-cover bg-center bg-no-repeat"
-					style={{ backgroundImage: "url('./src/assets/nav_bg.svg')" }}
-				/>
+				<>
+					<div
+						className="absolute top-0 left-0 w-screen h-[357px] 2xl:h-[481px] z-0 bg-cover bg-center bg-no-repeat"
+						style={{ backgroundImage: "url('./src/assets/nav_bg.png')" }}
+					/>
+					<div
+						className="absolute top-[357px] 2xl:top-[481px] w-screen z-0"
+						style={{
+							height: "2em",
+							background:
+								"linear-gradient(90deg, #FFA8B5 0%, #E3CAEB 37.98%, #F8CBD6 68.27%, #FFBBD8 100%)",
+						}}
+					/>
+				</>
 			)}
 
 			{/* 상단 바만 배경색이 변경되도록 분리 */}
@@ -38,7 +49,7 @@ const Navbar: React.FC = () => {
 				{/* 로고 영역 - 좌우 300px 간격 */}
 				<div>
 					<Link to="/">
-						<img src="./src/assets/logo.png" alt="Logo" className="h-12" />
+						<img src={logo} alt="Logo" className="h-12" />
 					</Link>
 				</div>
 
@@ -63,13 +74,13 @@ const Navbar: React.FC = () => {
 						Customizing
 					</Link>
 					<Link
-						to="/brand"
+						to="/order"
 						className={`${isMainPage ? 'text-white hover:text-gray-200' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
 					>
-						Brand
+						Order
 					</Link>
 					<Link
 						to="/archive"

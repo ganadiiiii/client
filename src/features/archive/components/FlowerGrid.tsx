@@ -67,8 +67,8 @@ export default function FlowerGrid() {
 										}}
 										transition={{
 											type: "spring",
-											stiffness: 180,
-											damping: 8,
+											stiffness: 50,
+											damping: 5,
 											mass: 0.8,
 											bounce: 0.4,
 										}}

@@ -44,15 +44,15 @@ const MessageSection: React.FC<MessageSectionProps> = ({
 					flowerCard={flowerCard}
 					onMessageChange={onMessageChange}
 				/>
-				<div className="mt-4 flex justify-center">
-					<GradientIconButton
-						onClick={() => setShowConfirm(true)}
-						icon={iconSend}
-						hoverIcon={iconSendHover}
-						label="보내기"
-						disabled={!flowerCard.message?.trim() || !flowerCard.sender?.trim()}
-					/>
-				</div>
+                <div className="mt-4 flex justify-center">
+                    <GradientIconButton
+                        onClick={() => setShowConfirm(true)}
+                        icon={iconSend}
+                        hoverIcon={iconSendHover}
+                        label="보내기"
+                        disabled={!flowerCard.message?.trim() || !(flowerCard.sender?.trim() || localStorage.getItem("name"))}
+                    />
+                </div>
 			</div>
 
 			<ConfirmDialog

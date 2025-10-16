@@ -16,7 +16,8 @@ interface Friend {
 }
 
 const ArchivePage = () => {
-	const [isLightOn, setIsLightOn] = useState(true);
+	type LightState = "day" | "sunset" | "night";
+	const [lightState, setLightState] = useState<LightState>("day");
 	const [isLampHovered, setIsLampHovered] = useState(false);
 
 	// 모달 상태 관리
@@ -30,7 +31,9 @@ const ArchivePage = () => {
 	const friendsModalRef = useRef<FriendsListModalRef>(null);
 
 	const toggleLight = () => {
-		setIsLightOn((isLightOn) => !isLightOn);
+		setLightState((prev) =>
+			prev === "day" ? "sunset" : prev === "sunset" ? "night" : "day"
+		);
 	};
 
 	// Mailbox 클릭 핸들러
@@ -89,7 +92,15 @@ const ArchivePage = () => {
 					className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-400 ease-in-out pointer-events-none"
 					style={{
 						backgroundImage: "url(/src/assets/archive/bg.svg)",
-						opacity: isLightOn ? 1 : 0,
+						opacity: lightState === "day" ? 1 : 0,
+					}}
+				/>
+				{/* Sunset background layer */}
+				<div
+					className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-400 ease-in-out pointer-events-none"
+					style={{
+						backgroundImage: "url(/src/assets/archive/bg-sunset.svg)",
+						opacity: lightState === "sunset" ? 1 : 0,
 					}}
 				/>
 				{/* Dark background layer */}
@@ -97,13 +108,17 @@ const ArchivePage = () => {
 					className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-400 ease-in-out pointer-events-none"
 					style={{
 						backgroundImage: "url(/src/assets/archive/bg-dark.svg)",
-						opacity: isLightOn ? 0 : 1,
+						opacity: lightState === "night" ? 1 : 0,
 					}}
 				/>
 				{/* 배경 역할을 하는 home 이미지 */}
 				<div className="relative w-full h-[calc(100vh-9em-80px)] 2xl:h-[calc(100vh-9em-102px)]">
 					<img
-						src={`/src/assets/archive/${isLightOn ? "home-light.png" : "home-dark.png"}`}
+						src={`/src/assets/archive/${{
+							day: "home-light.png",
+							sunset: "home-light.png",
+							night: "home-dark.png",
+						}[lightState]}`}
 						alt="Home background"
 						className="absolute bottom-0 left-1/2 transform -translate-x-1/2"
 						style={{
@@ -121,7 +136,7 @@ const ArchivePage = () => {
 						onMouseLeave={() => setIsLampHovered(false)}
 						onClick={toggleLight}
 					>
-						{isLightOn ? (
+						{lightState !== "night" ? (
 							<img
 								src={`/src/assets/archive/${isLampHovered ? "lamp-on-hover.svg" : "lamp-on.svg"}`}
 								alt="Lamp"

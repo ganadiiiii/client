@@ -16,7 +16,6 @@ export const ReceiverSection = forwardRef<ReceiverSectionRef>((_, ref) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedFriend, setSelectedFriend] = useState<Friend | null>(null);
 	const [phone, setPhone] = useState("");
-	const [message, setMessage] = useState("");
 
 	// 전화번호 자동 하이픈 추가
 	const formatPhoneNumber = (value: string) => {
@@ -51,7 +50,7 @@ export const ReceiverSection = forwardRef<ReceiverSectionRef>((_, ref) => {
 			className="bg-transparent"
 			style={{
 				width: "42.4375em",
-				height: "31em",
+				height: "18em",
 			}}
 		>
 			<h2
@@ -110,7 +109,7 @@ export const ReceiverSection = forwardRef<ReceiverSectionRef>((_, ref) => {
 				</div>
 
 				{/* 연락처 */}
-				<div className="mb-6">
+				<div className="flex flex-col">
 					<div className="flex items-center gap-2">
 						<p
 							className="text-black/60 text-base font-light"
@@ -138,26 +137,6 @@ export const ReceiverSection = forwardRef<ReceiverSectionRef>((_, ref) => {
 							style={{ fontFamily: "NexonLv1Gothic" }}
 						/>
 					</div>
-				</div>
-
-				{/* 점선 */}
-				{/* <div className="relative w-full border-t border-dashed border-gray/40 z-20"/> */}
-
-				{/* 메시지 */}
-				<div className="flex flex-col">
-					<p
-						className="text-black/60 text-base font-light text-start mb-2"
-						style={{ fontFamily: "NexonLv1Gothic" }}
-					>
-						메시지
-					</p>
-					<textarea
-						placeholder="친구에게 보낼 메시지를 입력해 보세요!"
-						value={message}
-						onChange={(e) => setMessage(e.target.value)}
-						className="w-full h-[9.625em] rounded-[15px] border border-gray/40 p-4 resize-none overflow-y-auto focus:outline-none"
-						style={{ fontFamily: "NexonLv1Gothic" }}
-					></textarea>
 				</div>
 
 				{/* 친구 선택 모달 */}

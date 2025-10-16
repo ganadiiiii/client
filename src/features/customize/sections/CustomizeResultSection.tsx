@@ -267,7 +267,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 							</div>
 							<GradientIconButton
 								onClick={() =>
-									navigate("/shop", { state: { flowerCard: flowerCard } })
+									navigate("/order", { state: { flowerCard: flowerCard } })
 								}
 								icon={iconOrder}
 								hoverIcon={iconOrderHover}

@@ -29,10 +29,10 @@ const ShopPage = () => {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-15 py-5 rounded-full text-xl text-black transition ${
+            className={`px-15 py-5 rounded-full text-xl  transition ${
               activeCategory === cat
-                ? "font-bold border-4 border-primary"
-                : "font-normal border-4 border-white"
+                ? "font-semibold border-3 border-primary text-primary"
+                : "border-3 border-white text-gray"
             }`}
             style={{
               fontFamily: "NexonLv1Gothic"

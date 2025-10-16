@@ -136,19 +136,19 @@ const ArchivePage = () => {
 						onMouseLeave={() => setIsLampHovered(false)}
 						onClick={toggleLight}
 					>
-					<img
-						src={`/src/assets/archive/${
-							lightState === "night"
-								? isLampHovered
-									? "lamp-off-hover.svg"
-									: "lamp-off.svg"
-								: isLampHovered
-									? "lamp-on-hover.svg"
-									: "lamp-on.svg"
-						}`}
-						alt="Lamp"
-						className={`pointer-events-none ${isLampHovered ? (lightState === "night" ? "scale-115" : "scale-110") : ""}`}
-					/>
+						{lightState !== "night" ? (
+							<img
+								src={`/src/assets/archive/${isLampHovered ? "lamp-on-hover.svg" : "lamp-on.svg"}`}
+								alt="Lamp"
+								className={`pointer-events-none ${isLampHovered ? "scale-121" : ""}`}
+							/>
+						) : (
+							<img
+								src={`/src/assets/archive/${isLampHovered ? "lamp-off-hover.svg" : "lamp-off.svg"}`}
+								alt="Lamp"
+								className={`pointer-events-none ${isLampHovered ? "scale-118" : ""}`}
+							/>
+						)}
 					</div>
 					{/* --- 그리드 및 네비게이션을 포함하는 컨테이너 --- */}
 					<div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-3em]">

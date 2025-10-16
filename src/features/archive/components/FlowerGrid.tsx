@@ -20,7 +20,7 @@ export default function FlowerGrid() {
 		if (!hoveredCard) return { y: 0, scale: 1 };
 		const distance = Math.abs(currentColIdx - hoveredColIdx);
 		if (distance === 0) return { y: 14, scale: 1.16 }; // 호버된 카드는 14px 아래로 + 15% 확대
-		if (distance === 1) return { y: 10, scale: 1.08 }; // 인접한 카드는 10px + 10% 확대
+		if (distance === 1) return { y: 8, scale: 1.08 }; // 인접한 카드는 10px + 10% 확대
 		if (distance === 2) return { y: 4, scale: 1.04 };  // 2칸 떨어진 카드는 4px + 5% 확대
 		return { y: 0, scale: 1 }; // 그 외는 영향 없음
 	};

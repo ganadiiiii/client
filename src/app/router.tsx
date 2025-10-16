@@ -12,11 +12,13 @@ import ResultSentPage from "./pages/ResultSentPage";
 import Cart from "../features/login/components/Cart";
 import ChatStartPage from "./pages/ChatStartPage";
 import ChatPage from "./pages/ChatPage";
+import MainPage from "./pages/MainPage";
 import ShopPage from "./pages/ShopPage";
 
 export const AppRoutes = () => {
 	return (
 		<Routes>
+			<Route path="/" element={<MainPage />} />
 			<Route path="/customizing" element={<CustomizingPage />} />
 			<Route path="/customizing/result" element={<CustomizingResultPage />} />
 			<Route path="/customizing/result/sent" element={<ResultSentPage />} />

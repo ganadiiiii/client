@@ -10,11 +10,13 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@gsap/react": "^2.1.2",
 		"@heroicons/react": "^2.2.0",
 		"@react-google-maps/api": "^2.20.7",
 		"@tailwindcss/vite": "^4.1.12",
 		"axios": "^1.12.2",
 		"file-saver": "^2.0.5",
+		"gsap": "^3.13.0",
 		"html2canvas": "^1.4.1",
 		"motion": "^12.23.12",
 		"react": "^19.1.1",

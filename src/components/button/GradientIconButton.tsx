@@ -27,7 +27,7 @@ const GradientIconButton: React.FC<GradientIconButtonProps> = ({
 				className={`w-20 h-20 rounded-full shadow-sm transition-all duration-200 mb-4 ${
 					disabled
 						? "opacity-50 cursor-not-allowed"
-						: "hover:scale-95 cursor-pointer"
+						: "hover:scale-105 cursor-pointer"
 				}`}
 				style={{
 					background: "linear-gradient(145deg, #FFD1D4 0%, #CAE4FF 100%)",

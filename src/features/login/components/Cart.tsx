@@ -23,7 +23,7 @@ const Cart: React.FC = () => {
 				>
 					주문내역이 없어요!
 				</p>
-				<button className="cursor-pointer py-4.5 px-32 text-lg font-semibold rounded-full flex items-center justify-center bg-primary text-white hover:scale-105 transition-all duration-200 hover:bg-primary/90 active:scale-95" style={{ fontFamily: "NexonLv1Gothic" }} onClick={() => navigate("/archive")}>
+				<button className="px-32 py-4.5 rounded-full text-lg font-semibold transition-all duration-200 bg-primary text-white hover:bg-primary/90 hover:scale-105 active:scale-95 cursor-pointer" style={{ fontFamily: "NexonLv1Gothic", fontWeight: "600", }} onClick={() => navigate("/archive")}>
 					주문하러 가기
 				</button>
 			</div>

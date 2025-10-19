@@ -20,7 +20,7 @@ const ShopPage = () => {
 
       {/* Category Tabs */}
       <div 
-        className="flex bg-white mt-6 rounded-full justify-center items-center"
+        className="flex bg-white rounded-full justify-center items-center z-5 translate-y-[-30px]"
         style={{
           boxShadow: "0 4px 14.1px 0 rgba(0, 0, 0, 0.10)"
         }}
@@ -29,7 +29,7 @@ const ShopPage = () => {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-15 py-5 rounded-full text-xl  transition ${
+            className={`px-15 py-5 rounded-full text-xl transition ${
               activeCategory === cat
                 ? "font-semibold border-3 border-primary text-primary"
                 : "border-3 border-white text-gray"
@@ -44,7 +44,7 @@ const ShopPage = () => {
       </div>
 
       {/* Product Grid */}
-      <div className="my-27">
+      <div className="mt-20 mb-60">
         <ProductGrid products={filteredProducts} />
       </div>
     </div>

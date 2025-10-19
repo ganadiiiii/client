@@ -25,7 +25,7 @@ export const FlowerSection = forwardRef<FlowerSectionRef, FlowerSectionProps>(
 			}
 		};
 
-		const price = getPriceBySize(flowerCard.size);
+		const price = getPriceBySize(flowerCard.bouquetSize);
 
 		useImperativeHandle(ref, () => ({
 			isValid: () => true, // FlowerSection is always valid
@@ -60,11 +60,11 @@ export const FlowerSection = forwardRef<FlowerSectionRef, FlowerSectionProps>(
 								backgroundPosition: "center",
 							}}
 						>
-							<img
-								src={flowerCard.flowerImg}
-								alt="flower"
-								className="w-full h-full object-contain"
-							/>
+						<img
+							src={flowerCard.imageUrl}
+							alt="flower"
+							className="w-full h-full object-contain"
+						/>
 						</div>
 						<div className="flex flex-col text-start w-full justify-center">
 							<h2
@@ -73,7 +73,7 @@ export const FlowerSection = forwardRef<FlowerSectionRef, FlowerSectionProps>(
 							>
 								{flowerCard.title}
 							</h2>
-							<div className="inline-block flex flew-row">
+							<div className="flex flex-row">
 								<span
 									className="text-black text-lg font-light mr-3"
 									style={{ fontFamily: "NexonLv1Gothic" }}

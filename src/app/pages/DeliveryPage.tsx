@@ -47,18 +47,17 @@ const DeliveryPage: React.FC = () => {
 			<div className="flex flex-col items-center justify-center gap-y-10 mt-40">
 				<FlowerSection flowerCard={flowerCard} />
 				<ReceiverSection ref={receiverRef} />
-				<TagSection/>
+				<TagSection />
 				<SenderSection ref={senderRef} />
 				<AddressSection ref={addressRef} />
 				<DateSection ref={dateRef} />
 				<button
 					type="button"
 					onClick={() => navigate("/")}
-					className={`w-105 h-13.5 rounded-full text-white text-xl font-bold mb-10 transition-colors duration-200 ${
-						buttonEnabled
-							? "bg-primary hover:bg-primary/90"
-							: "bg-gray/40 cursor-not-allowed"
-					}`}
+					className={`px-32 py-4.5 rounded-full text-lg font-semibold transition-all duration-200 mb-40 ${buttonEnabled
+						? "bg-primary text-white hover:bg-primary/90 hover:scale-105 active:scale-95 cursor-pointer"
+						: "bg-gray/20 text-gray"
+						}`}
 					style={{ fontFamily: "NexonLv1Gothic" }}
 					disabled={!buttonEnabled}
 				>

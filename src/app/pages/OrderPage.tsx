@@ -47,7 +47,7 @@ const OrderPage: React.FC = () => {
 				</h1>
 				<div className="flex flex-row gap-x-5">
 					<button
-						className="w-60 h-77.5 rounded-3xl flex flex-col items-center justify-end bg-white p-4"
+						className="w-60 h-77.5 rounded-3xl flex flex-col items-center justify-end bg-white p-4 cursor-pointer"
 						style={{ boxShadow: "2.182px 2.182px 3.71px rgba(0, 0, 0, 0.10)" }}
 						onMouseEnter={() => setIsDeliveryHovered(true)}
 						onMouseLeave={() => setIsDeliveryHovered(false)}
@@ -91,7 +91,7 @@ const OrderPage: React.FC = () => {
 						</p>
 					</button>
 					<button
-						className="w-60 h-77.5 rounded-3xl flex flex-col items-center justify-end bg-white p-4"
+						className="w-60 h-77.5 rounded-3xl flex flex-col items-center justify-end bg-white p-4 cursor-pointer"
 						style={{ boxShadow: "2.182px 2.182px 3.71px rgba(0, 0, 0, 0.10)" }}
 						onMouseEnter={() => setIsPickupHovered(true)}
 						onMouseLeave={() => setIsPickupHovered(false)}

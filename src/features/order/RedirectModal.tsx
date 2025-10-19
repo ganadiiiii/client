@@ -33,7 +33,7 @@ const RedirectModal = ({ isOpen, message, onClose }: RedirectModalProps) => {
 					}}
 				>
 					<motion.div
-						className="bg-white rounded-3xl w-[280px] px-8 py-6"
+						className="bg-white rounded-3xl w-[17.5em] px-8 py-6"
 						style={{
 							boxShadow: "2.351px 3.135px 15.519px 0 rgba(0,0,0,0.25)",
 							fontFamily: "NexonLv1Gothic",

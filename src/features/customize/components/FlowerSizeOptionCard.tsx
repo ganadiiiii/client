@@ -29,7 +29,7 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 
 	return (
 		<motion.div
-			className={`relative cursor-pointer shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] rounded-[21px] z-0 transition-colors duration-300 ${isSelected ? "bg-[#FFD1D4]" : "bg-white"}`}
+			className={`relative cursor-pointer shadow-[1.9px_1.9px_3.2px_0px_rgba(0,0,0,0.1)] rounded-[1.5em] z-0 transition-colors duration-300 ${isSelected ? "bg-[#FFD1D4]" : "bg-white"}`}
 			style={{
 				width: "21em",
 				height: "26.9em",
@@ -49,7 +49,7 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 			{/* 그라데이션 영역 */}
 			<div>
 				<div
-					className="absolute rounded-[1.7em] z-10"
+					className="absolute rounded-[1.7em] z-10 bg-cover bg-no-repeat bg-center"
 					style={{
 						left: "1.25em",
 						top: "1.44em",
@@ -75,7 +75,7 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 				/>
 
 				{/* 원들 표시 */}
-				<div className="absolute top-[1.5em] left-[2.125em] flex gap-[1.5em] 2xl:gap-[0.81em] z-20">
+				<div className="absolute top-[1.5em] left-[2.125em] flex gap-[1.125em] 3xl:gap-[0.81em] z-20">
 					{Array.from({ length: number }).map((_, idx) => (
 						<div
 							key={idx}

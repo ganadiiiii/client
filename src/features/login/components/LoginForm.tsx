@@ -32,9 +32,9 @@ const LoginForm: React.FC = () => {
 	};
 
 	return (
-		<div className="flex items-start flex-col min-h-screen pt-[500px] 2xl:pt-[650px] bg-background">
+		<div className="flex items-start flex-col min-h-screen pt-[500px] 3xl:pt-[650px] 4xl:pt-[800px] bg-background">
 			<div className="flex justify-center px-4 w-full">
-				<div className="w-full max-w-6xl h-[600px]">
+				<div className="w-full max-w-6xl h-[500px] 3xl:h-[600px] 4xl:h-[700px]">
 					{/* 로그인 제목과 데코레이션 라인 */}
 					<div className="flex items-center justify-center mb-12">
 						{/* 왼쪽 분홍색 파선 */}
@@ -47,7 +47,7 @@ const LoginForm: React.FC = () => {
 
 						{/* 로그인 제목 */}
 						<h1
-							className="px-8 text-[28px] text-nowrap text-purple font-normal"
+							className="px-8 text-3xl text-nowrap text-purple font-normal"
 							style={{ fontFamily: "BagelFatOne-Regular" }}
 						>
 							CUSTOMER LOGIN

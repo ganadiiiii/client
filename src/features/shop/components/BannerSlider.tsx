@@ -32,11 +32,11 @@ const BannerSlider = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[480px] overflow-hidden">
+    <div className="relative w-full h-[400px] 2xl:h-[480px] overflow-hidden">
       {/* 이미지 슬라이드 */}
       <div className="flex transition-transform duration-700 ease-in-out bg-gray-100" style={{ transform: `translateX(-${index * 100}%)` }}>
         {images.map((src, i) => (
-          <img key={i} src={src} alt={`banner-${i}`} className="w-full flex-shrink-0 object-cover h-[480px]" />
+          <img key={i} src={src} alt={`banner-${i}`} className="w-full flex-shrink-0 object-cover h-[400px] 2xl:h-[480px]" />
         ))}
       </div>
 

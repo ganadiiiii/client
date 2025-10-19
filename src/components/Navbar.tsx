@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
+import logoWhite from "../assets/logo-white.png";
+import logoBlack from "../assets/logo-black.png";
 
 const Navbar: React.FC = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -8,6 +10,7 @@ const Navbar: React.FC = () => {
 	const isAuthPage =
 		location.pathname === "/login" || location.pathname === "/signup";
 	const isMainPage = location.pathname === "/";
+	const isShopPage = location.pathname === "/shop";
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -49,7 +52,7 @@ const Navbar: React.FC = () => {
 				{/* 로고 영역 - 좌우 300px 간격 */}
 				<div>
 					<Link to="/">
-						<img src={logo} alt="Logo" className="h-12" />
+						<img src={isMainPage ? logoWhite : isShopPage ? logo : logoBlack} alt="Logo" className="h-12" />
 					</Link>
 				</div>
 
@@ -57,7 +60,7 @@ const Navbar: React.FC = () => {
 				<div className="hidden xl:flex gap-[50px]">
 					<Link
 						to="/shop"
-						className={`${isMainPage ? 'text-white hover:text-gray-200' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
+						className={`${isMainPage ? 'text-white hover:text-gray-200' : isShopPage ? 'text-primary hover:text-primary/80' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
@@ -66,7 +69,7 @@ const Navbar: React.FC = () => {
 					</Link>
 					<Link
 						to="/customizing"
-						className={`${isMainPage ? 'text-white hover:text-gray-200' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
+						className={`${isMainPage ? 'text-white hover:text-gray-200' : isShopPage ? 'text-primary hover:text-primary/80' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
@@ -75,7 +78,7 @@ const Navbar: React.FC = () => {
 					</Link>
 					<Link
 						to="/order"
-						className={`${isMainPage ? 'text-white hover:text-gray-200' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
+						className={`${isMainPage ? 'text-white hover:text-gray-200' : isShopPage ? 'text-primary hover:text-primary/80' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
@@ -84,7 +87,7 @@ const Navbar: React.FC = () => {
 					</Link>
 					<Link
 						to="/archive"
-						className={`${isMainPage ? 'text-white hover:text-gray-200' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
+						className={`${isMainPage ? 'text-white hover:text-gray-200' : isShopPage ? 'text-primary hover:text-primary/80' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
@@ -97,7 +100,7 @@ const Navbar: React.FC = () => {
 				<div className="flex items-center gap-[50px]">
 					<Link
 						to="/login"
-						className={`${isMainPage ? 'text-white hover:text-gray-200' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
+						className={`${isMainPage ? 'text-white hover:text-gray-200' : isShopPage ? 'text-primary hover:text-primary/80' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
@@ -106,7 +109,7 @@ const Navbar: React.FC = () => {
 					</Link>
 					<Link
 						to="/cart"
-						className={`${isMainPage ? 'text-white hover:text-gray-200' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
+						className={`${isMainPage ? 'text-white hover:text-gray-200' : isShopPage ? 'text-primary hover:text-primary/80' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}

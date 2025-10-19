@@ -2,11 +2,16 @@
 import { useEffect, useRef, useState } from "react";
 import iconLeft from "../../../assets/shop/icon-left.svg";
 import iconRight from "../../../assets/shop/icon-right.svg";
+import banner1 from '../../../assets/shop/banner-1.png';
+import banner2 from '../../../assets/shop/banner-2.png';
+import banner3 from '../../../assets/shop/banner-3.png';
+import banner4 from '../../../assets/shop/banner-4.png';
 
 const images = [
-  "/assets/banner/banner1.png",
-  "/assets/banner/banner2.png",
-  "/assets/banner/banner3.png",
+  banner1,
+  banner2,
+  banner3,
+  banner4,
 ];
 
 const BannerSlider = () => {
@@ -44,7 +49,7 @@ const BannerSlider = () => {
       </button>
 
       {/* 하단 점 */}
-      <div className="absolute bottom-1/10 left-1/2 transform -translate-x-1/2 flex gap-4">
+      <div className="absolute bottom-[50px] left-1/2 transform -translate-x-1/2 flex gap-4">
         {images.map((_, i) => (
           <div
             key={i}

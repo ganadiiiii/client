@@ -20,15 +20,36 @@ import { ResultPhase as ResultPhaseConst } from "../../types/FlowerCard";
 
 // 초기 FlowerCard 데이터
 const initialFlowerCard: FlowerCard = {
-	id: "1234567890",
-	date: "2025.08.14",
+	cardId: 0,
 	title: "TITLE 꽃다발",
-	flowerImg: "/src/assets/generate/result/temp-flower.png",
-	mainFlowers: ["프리지아"],
-	subFlowers: ["개나리", "해바라기"],
+	imageUrl: "/src/assets/generate/result/temp-flower.png",
+	imageSource: "",
 	floriography: "새로운 시작을 응원합니다",
-	size: "M",
+	whoType: "",
+	whoLabel: "",
+	whenType: "",
+	whenLabel: "",
+	emotionTypes: [],
+	emotionLabels: [],
+	bouquetSize: "M",
+	bouquetLabel: "M",
+	wrappingType: "",
+	wrappingLabel: "",
 	price: 30000,
+	designAssetId: 1,
+	backgroundColors: ["#FFE5E5", "#FFF0F0"],
+	mainFlower: {
+		flowerId: 1,
+		koreanName: "프리지아",
+		englishName: "Freesia",
+		imageUrl: "",
+	},
+	subFlower: {
+		flowerId: 2,
+		koreanName: "개나리",
+		englishName: "Forsythia",
+		imageUrl: "",
+	},
 	sender: "seollhii",
 };
 
@@ -49,7 +70,7 @@ const CustomizingResultPage: React.FC = () => {
         whoType: "",
         whenType: "",
         emotionTypes: [],
-        bouquetSize: initialFlowerCard.size,
+        bouquetSize: initialFlowerCard.bouquetSize,
         wrappingType: "",
         price: initialFlowerCard.price,
     };
@@ -126,7 +147,7 @@ const CustomizingResultPage: React.FC = () => {
         ) {
             try {
                 await cardAPI.sendCardToFriend(
-                    String(flowerCard.id),
+                    String(flowerCard.cardId),
                     selectedFriend.id,
                     selectedFriend.name,
                     localStorage.getItem("name") || flowerCard.sender || "",

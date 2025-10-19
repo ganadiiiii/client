@@ -20,15 +20,21 @@ const ROTATE_AMPLITUDE = 8; // 기울기 강도
 
 const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 	const {
-		date,
 		title,
-		flowerImg,
-		mainFlowers,
-		subFlowers,
+		imageUrl,
 		floriography,
-		size,
+		bouquetSize,
 		price,
+		mainFlower,
+		subFlower,
 	} = flowerCard;
+	
+	// 날짜는 현재 날짜로 표시 (API 응답에 없음)
+	const date = new Date().toLocaleDateString('ko-KR', { 
+		year: 'numeric', 
+		month: '2-digit', 
+		day: '2-digit' 
+	}).replace(/\. /g, '.').replace(/\.$/, '');
 	const ref = useRef<HTMLDivElement>(null);
 
 	// 2. useSpring을 사용하여 회전 및 스케일 값 설정
@@ -92,7 +98,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 					{/* 꽃 이미지 */}
 					<div className="absolute left-1/2 top-[13.75em] transform -translate-x-1/2 -translate-y-1/2 z-10">
 						<img
-							src={flowerImg}
+							src={imageUrl}
 							alt="flower"
 							className="h-[20em] object-contain"
 						/>
@@ -123,7 +129,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 									fontWeight: "400",
 								}}
 							>
-								{mainFlowers.join(", ")}
+								{mainFlower.koreanName}
 							</span>
 							<span
 								style={{
@@ -139,7 +145,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 									fontWeight: "400",
 								}}
 							>
-								{subFlowers.join(", ")}
+								{subFlower.koreanName}
 							</span>
 						</div>
 						<div className="flex flex-row gap-[10px]">
@@ -177,7 +183,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 									fontWeight: "400",
 								}}
 							>
-								{size}
+								{bouquetSize}
 							</span>
 						</div>
 						<div className="flex gap-3 items-baseline">

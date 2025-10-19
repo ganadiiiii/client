@@ -1,6 +1,6 @@
 import saveAs from "file-saver";
 import html2canvas from "html2canvas";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import iconShare from "../../assets/archive/icon-share.svg";
 import iconShareHover from "../../assets/archive/icon-share-hover.svg";
@@ -8,23 +8,57 @@ import bg from "../../assets/archive/info-bg.svg";
 import iconBack from "../../assets/generate/result/icon-back.svg";
 import GradientIconButton from "../../components/button/GradientIconButton";
 import SimpleIconButton from "../../components/button/SimpleIconButton";
-import { flowerCardData } from "../../data/flowerCardData";
 import FlowerInfoCard from "../../features/archive/components/FlowerInfoCard";
 import iconTrash from "../../assets/archive/icon-trash.svg";
-// import { cardAPI } from "../../api";
+import { cardAPI } from "../../api";
+import type { FlowerCard } from "../../types/FlowerCard";
+import LoadingPage from "../../components/LoadingPage";
 
 const FlowerInfoPage = () => {
 	const { flowerId } = useParams();
 	const navigate = useNavigate();
 	const [showSharePopup, setShowSharePopup] = useState(false);
+	const [flower, setFlower] = useState<FlowerCard | null>(null);
+	const [isLoading, setIsLoading] = useState(true);
+	const [error, setError] = useState<string | null>(null);
 	const divRef = useRef<HTMLDivElement | null>(null);
-	const flower = flowerCardData.find((f) => f.id === String(flowerId));
-	if (!flower) {
+
+	// API에서 카드 상세 정보 가져오기
+	useEffect(() => {
+		const fetchCardDetail = async () => {
+			if (!flowerId) {
+				setError("카드 ID가 없습니다.");
+				setIsLoading(false);
+				return;
+			}
+
+			try {
+				setIsLoading(true);
+				const response = await cardAPI.getCardDetail(flowerId);
+				setFlower(response);
+			} catch (error) {
+				console.error("카드 상세 조회 실패:", error);
+				setError("카드 정보를 불러오는데 실패했습니다.");
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchCardDetail();
+	}, [flowerId]);
+
+	if (isLoading) {
+		return <LoadingPage message="카드 정보를 불러오는 중" />;
+	}
+
+	if (error || !flower) {
 		return (
 			<main className="min-h-screen flex items-center justify-center p-6">
 				<div className="text-center">
 					<h1 className="text-2xl font-bold mb-2">꽃 정보를 찾을 수 없어요</h1>
-					<p className="text-gray-600 mb-6">요청하신 ID: {flowerId}</p>
+					<p className="text-gray-600 mb-6">
+						{error || `요청하신 ID: ${flowerId}`}
+					</p>
 					<Link to="/archive" className="text-rose-500 underline font-semibold">
 						보관함으로 돌아가기
 					</Link>
@@ -69,7 +103,7 @@ const FlowerInfoPage = () => {
 							font-size: 1.175rem;
 							font-family: Yidstreet;
 						">
-							${flower.date}
+							${new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\. /g, '.').replace(/\.$/, '')}
 						</div>
 	
 						<!-- 꽃 이미지 -->
@@ -80,7 +114,7 @@ const FlowerInfoPage = () => {
 							transform: translate(-50%, -50%);
 							z-index: 10;
 						">
-							<img src="${flower.flowerImg}" alt="flower" style="height: 20em; object-fit: contain;" />
+							<img src="${flower.imageUrl}" alt="flower" style="height: 20em; object-fit: contain;" />
 						</div>
 	
 						<!-- 제목 -->
@@ -107,9 +141,9 @@ const FlowerInfoPage = () => {
 						">
 							<div style="display: flex; flex-direction: row; gap: 10px; margin-bottom: 5px;">
 								<span style="font-family: Yidstreet; font-weight: 600;">Main</span>
-								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.mainFlowers.join(", ")}</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.mainFlower.koreanName}</span>
 								<span style="font-family: Yidstreet; font-weight: 600;">Sub</span>
-								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.subFlowers.join(", ")}</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.subFlower.koreanName}</span>
 							</div>
 							<div style="display: flex; flex-direction: row; gap: 10px;">
 								<span style="font-family: Yidstreet; font-weight: 600;">Floriography</span>
@@ -130,7 +164,7 @@ const FlowerInfoPage = () => {
 						">
 							<div style="display: flex; gap: 0.75rem; align-items: baseline;">
 								<span style="font-family: Yidstreet; font-weight: 600;">Size</span>
-								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.size}</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.bouquetSize}</span>
 							</div>
 							<div style="display: flex; gap: 0.75rem; align-items: baseline;">
 								<span style="font-family: Yidstreet; font-weight: 600;">Price</span>
@@ -166,9 +200,16 @@ const FlowerInfoPage = () => {
 		}
 	};
 
-	const handleDelete = () => {
-		// cardAPI.deleteCard(flower.id); -> 테스트 부탁드립니다.
-		navigate("/archive");
+	const handleDelete = async () => {
+		if (!flower) return;
+		
+		try {
+			await cardAPI.deleteCard(String(flower.cardId));
+			navigate("/archive");
+		} catch (error) {
+			console.error("카드 삭제 실패:", error);
+			alert("카드 삭제에 실패했습니다.");
+		}
 	};
 
 	return (

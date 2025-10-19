@@ -39,7 +39,7 @@ export default function SelectFriendPopup({
 							<button
 								key={friend.id}
 								onClick={() => onFriendSelect(friend)}
-								className="w-full p-6 text-left rounded-[1.5em] hover:bg-gray/20 transition-colors"
+								className="w-full cursor-pointer p-6 text-left rounded-2xl hover:bg-gray/20 transition-colors"
 								style={{ fontFamily: "NexonLv1Gothic" }}
 							>
 								<span className="flex flex-col">

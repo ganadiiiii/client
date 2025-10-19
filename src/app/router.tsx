@@ -14,6 +14,7 @@ import ChatStartPage from "./pages/ChatStartPage";
 import ChatPage from "./pages/ChatPage";
 import MainPage from "./pages/MainPage";
 import ShopPage from "./pages/ShopPage";
+import PageNotFound from "./pages/404";
 
 export const AppRoutes = () => {
 	return (
@@ -33,6 +34,8 @@ export const AppRoutes = () => {
 			<Route path="/order/pickup/chat-start" element={<ChatStartPage />} />
 			<Route path="/order/pickup/chat" element={<ChatPage />} />
 			<Route path="/shop" element={<ShopPage />} />
+			{/* 404 - Catch all unmatched routes */}
+			<Route path="*" element={<PageNotFound />} />
 		</Routes>
 	);
 };

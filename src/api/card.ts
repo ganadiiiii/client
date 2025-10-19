@@ -80,9 +80,10 @@ export const cardAPI = {
 	},
 
 	// 만든 카드 모두 조회 API
-	getCreatedCards: async () => {
+	getAllCards: async (page = 0, size = 15) => {
 		const accessToken = localStorage.getItem("accessToken");
 		const response = await axios.get(`${API_BASE_URL}/cards`, {
+			params: { page, size },
 			headers: {
 				Authorization: `Bearer ${accessToken}`,
 				"Content-Type": "application/json",
@@ -104,16 +105,16 @@ export const cardAPI = {
 	},
 
 	// 받은 카드만 조회 API
-	getReceivedCards: async () => {
-		const accessToken = localStorage.getItem("accessToken");
-		const response = await axios.get(`${API_BASE_URL}/archive`, {
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-				"Content-Type": "application/json",
-			},
-		});
-		return response.data;
-	},
+	// getReceivedCards: async () => {
+	// 	const accessToken = localStorage.getItem("accessToken");
+	// 	const response = await axios.get(`${API_BASE_URL}/archive`, {
+	// 		headers: {
+	// 			Authorization: `Bearer ${accessToken}`,
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 	});
+	// 	return response.data;
+	// },
 
 	// 카드 삭제 API
 	deleteCard: async (cardId: string) => {

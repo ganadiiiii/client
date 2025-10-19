@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { friendAPI } from "../../api";
+import { useEffect, useRef, useState } from "react";
+import { cardAPI, friendAPI } from "../../api";
 import DeleteConfirmModal from "../../features/archive/components/DeleteConfirmModal";
 import FlowerGrid from "../../features/archive/components/FlowerGrid";
 import FriendsListModal, {
@@ -7,6 +7,8 @@ import FriendsListModal, {
 } from "../../features/archive/components/FriendsListModal";
 import Mailbox from "../../features/archive/components/Mailbox";
 import SuccessModal from "../../features/archive/components/SuccessModal";
+import PageButton from "../../features/archive/components/PageButton";
+import type { FlowerCard } from "../../types/FlowerCard";
 
 interface Friend {
 	id: string;
@@ -20,6 +22,12 @@ const ArchivePage = () => {
 	const [lightState, setLightState] = useState<LightState>("day");
 	const [isLampHovered, setIsLampHovered] = useState(false);
 
+	// 카드 데이터 상태
+	const [cards, setCards] = useState<FlowerCard[]>([]);
+	const [isLoading, setIsLoading] = useState(true);
+	const [currentPage, setCurrentPage] = useState(0);
+	const [totalPages, setTotalPages] = useState(0);
+
 	// 모달 상태 관리
 	const [isFriendsModalOpen, setIsFriendsModalOpen] = useState(false);
 	const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
@@ -29,6 +37,24 @@ const ArchivePage = () => {
 
 	// FriendsListModal ref
 	const friendsModalRef = useRef<FriendsListModalRef>(null);
+
+	// 카드 데이터 가져오기
+	useEffect(() => {
+		const fetchCards = async () => {
+			try {
+				setIsLoading(true);
+				const response = await cardAPI.getAllCards(currentPage, 15);
+				setCards(response.cards);
+				setTotalPages(response.totalPages);
+			} catch (error) {
+				console.error("카드 목록 조회 실패:", error);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
+		fetchCards();
+	}, [currentPage]);
 
 	const toggleLight = () => {
 		setLightState((prev) =>
@@ -81,6 +107,19 @@ const ArchivePage = () => {
 	const handleCloseSuccessModal = () => {
 		setIsSuccessModalOpen(false);
 		setSuccessMessage("");
+	};
+
+	// 페이지네이션 핸들러
+	const goToNextPage = () => {
+		if (currentPage < totalPages - 1) {
+			setCurrentPage(currentPage + 1);
+		}
+	};
+
+	const goToPreviousPage = () => {
+		if (currentPage > 0) {
+			setCurrentPage(currentPage - 1);
+		}
 	};
 
 	return (
@@ -152,7 +191,35 @@ const ArchivePage = () => {
 					</div>
 					{/* --- 그리드 및 네비게이션을 포함하는 컨테이너 --- */}
 					<div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-3em]">
-						<FlowerGrid />
+						<FlowerGrid 
+							cards={cards}
+							isLoading={isLoading}
+						/>
+					</div>
+					
+					{/* 페이지네이션 */}
+					<div className="absolute bottom-[-3em] left-1/2 transform -translate-x-1/2 gap-[160px] w-full flex flex-row justify-center items-center">
+						{/* 왼쪽 화살표 버튼 */}
+						<PageButton
+							direction="left"
+							onClick={goToPreviousPage}
+							disabled={currentPage === 0}
+						/>
+
+						{/* 페이지 번호 레이블 */}
+						<span
+							className="font-bold text-[#868686] text-lg w-12 text-center"
+							style={{ fontFamily: "NEXONLv1Gothic" }}
+						>
+							{currentPage + 1} / {totalPages}
+						</span>
+
+						{/* 오른쪽 화살표 버튼 */}
+						<PageButton
+							direction="right"
+							onClick={goToNextPage}
+							disabled={currentPage >= totalPages - 1}
+						/>
 					</div>
 					<div
 						className="

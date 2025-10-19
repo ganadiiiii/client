@@ -10,8 +10,11 @@ interface FlowerCardProps {
 const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 	const navigate = useNavigate();
 	const handleClick = () => {
-		navigate(`/archive/${flower.id}`);
+		navigate(`/archive/${flower.cardId}`);
 	};
+
+	// designAssetId에 따라 배경 이미지 선택 (1-9)
+	const bgImageNumber = ((flower.designAssetId - 1) % 9) + 1;
 
 	return (
 		<div
@@ -28,7 +31,7 @@ const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 						top: "0.56em",
 						width: "5.625em",
 						height: "7.6875em",
-						backgroundImage: `url('./src/assets/generate/bg-1.svg')`,
+						backgroundImage: `url('./src/assets/generate/bg-${bgImageNumber}.svg')`,
 						backgroundRepeat: "no-repeat",
 						backgroundPosition: "center",
 					}}
@@ -43,11 +46,11 @@ const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 					fontFamily: "Yidstreet",
 				}}
 			>
-				NO. {flower.id}
+				NO. {flower.cardId}
 			</div>
 			<img
-				src={flower.flowerImg}
-				alt={`Flower ${flower.id}`}
+				src={flower.imageUrl}
+				alt={`Flower ${flower.cardId}`}
 				className="absolute object-cover rounded-sm z-20"
 				style={{
 					left: "50%",

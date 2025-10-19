@@ -34,11 +34,6 @@ const sizeToPrice = (size?: string) => {
     }
 };
 
-const formatDate = (d: Date) =>
-    `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(
-        d.getDate(),
-    ).padStart(2, "0")}`;
-
 /**
  * 질문 답변을 기반으로 카드를 생성합니다.
  */
@@ -72,20 +67,11 @@ export const createCardFromAnswers = async ({
 
         const res = await cardAPI.createCard(cardData);
 
-        // 결과 페이지에 전달할 FlowerCard 구성
+        // 결과 페이지에 전달할 FlowerCard 구성 (API 응답을 그대로 사용)
         const senderName = localStorage.getItem("name") || "";
-        const today = new Date();
 
         const flowerCard: FlowerCard = {
-            id: String(res.cardId),
-            date: formatDate(today),
-            title: res.title,
-            flowerImg: res.imageUrl,
-            mainFlowers: [res.mainFlower?.koreanName || ""],
-            subFlowers: [res.subFlower?.koreanName || ""],
-            floriography: res.floriography || "",
-            size: res.bouquetSize,
-            price: res.price,
+            ...res,
             sender: senderName || undefined,
         };
 
@@ -105,20 +91,11 @@ export const createCardFromData = async ({
     try {
         const res = await cardAPI.createCard(cardData);
 
-        // 결과 페이지에 전달할 FlowerCard 구성
+        // 결과 페이지에 전달할 FlowerCard 구성 (API 응답을 그대로 사용)
         const senderName = localStorage.getItem("name") || "";
-        const today = new Date();
 
         const flowerCard: FlowerCard = {
-            id: String(res.cardId),
-            date: formatDate(today),
-            title: res.title,
-            flowerImg: res.imageUrl,
-            mainFlowers: [res.mainFlower?.koreanName || ""],
-            subFlowers: [res.subFlower?.koreanName || ""],
-            floriography: res.floriography || "",
-            size: res.bouquetSize,
-            price: res.price,
+            ...res,
             sender: senderName || undefined,
         };
 

@@ -80,7 +80,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 							font-size: 0.875rem;
 							font-family: Yidstreet;
 						">
-							${flowerCard.date}
+							${new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\. /g, '.').replace(/\.$/, '')}
 						</div>
 	
 						<!-- 꽃 이미지 -->
@@ -91,7 +91,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 							transform: translate(-50%, -50%);
 							z-index: 10;
 						">
-							<img src="${flowerCard.flowerImg}" alt="flower" style="height: 20em; object-fit: contain;" />
+							<img src="${flowerCard.imageUrl}" alt="flower" style="height: 20em; object-fit: contain;" />
 						</div>
 	
 						<!-- 제목 -->
@@ -118,9 +118,9 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 						">
 							<div style="display: flex; flex-direction: row; gap: 10px; margin-bottom: 5px;">
 								<span style="font-family: Yidstreet; font-weight: 600;">Main</span>
-								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flowerCard.mainFlowers.join(", ")}</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flowerCard.mainFlower.koreanName}</span>
 								<span style="font-family: Yidstreet; font-weight: 600;">Sub</span>
-								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flowerCard.subFlowers.join(", ")}</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flowerCard.subFlower.koreanName}</span>
 							</div>
 							<div style="display: flex; flex-direction: row; gap: 10px;">
 								<span style="font-family: Yidstreet; font-weight: 600;">Floriography</span>
@@ -141,7 +141,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 						">
 							<div style="display: flex; gap: 0.75rem; align-items: baseline;">
 								<span style="font-family: Yidstreet; font-weight: 600;">Size</span>
-								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flowerCard.size}</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flowerCard.bouquetSize}</span>
 							</div>
 							<div style="display: flex; gap: 0.75rem; align-items: baseline;">
 								<span style="font-family: Yidstreet; font-weight: 600;">Price</span>
@@ -251,7 +251,7 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 													showFriendsDialog: true,
 												});
 											}}
-											className="block w-full text-center text-base py-5 px-8 hover:bg-gray/20"
+											className="block w-full cursor-pointer text-center text-base py-5 px-8 hover:bg-gray/20"
 											style={{ fontFamily: "NexonLv1Gothic" }}
 											role="menuitem"
 										>
@@ -259,13 +259,13 @@ const CustomizeResultSection: React.FC<CustomizeResultSectionProps> = ({
 										</button>
 										<button
 											onClick={() => {
-												cardAPI.sendCardToMyself(flowerCard.id);
+												cardAPI.sendCardToMyself(String(flowerCard.cardId));
 												updateUIState({
 													showSendPopup: false,
 													archiveSavedAlertVisible: true,
 												});
 											}}
-											className="block w-full text-center text-base py-5 px-8 hover:bg-gray/20 border-t border-gray/40"
+											className="block w-full cursor-pointer text-center text-base py-5 px-8 hover:bg-gray/20 border-t border-gray/40"
 											style={{ fontFamily: "NexonLv1Gothic" }}
 											role="menuitem"
 										>

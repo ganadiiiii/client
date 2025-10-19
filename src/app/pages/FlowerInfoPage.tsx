@@ -230,19 +230,19 @@ const FlowerInfoPage = () => {
 
 				{/* Final result card with message */}
 				<div className="relative inline-block">
-					<SimpleIconButton
+
+  					<div className="absolute left-[-5em] top-[0.625em] flex flex-col items-center gap-2">
+					  <SimpleIconButton
 						onClick={() => navigate(-1)}
 						icon={iconBack}
-						className="absolute left-[-5em] top-[0.625em]"
 					/>
+						<button onClick={handleDelete} className="w-16 h-16 rounded-full flex items-center justify-center">
+							<img src={iconTrash} alt="trash" className="w-6 h-6" />
+						</button>
+					</div>
 					<div ref={divRef}>
 						<FlowerInfoCard flowerCard={flower} />
 					</div>
-					<SimpleIconButton
-						onClick={handleDelete}
-						icon={iconTrash}
-						className="absolute right-[-5em] top-[0.625em]"
-					/>
 
 					{/* Action button */}
 					<div className="relative mt-4 w-full flex justify-center">

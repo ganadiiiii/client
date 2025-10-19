@@ -88,6 +88,6 @@ export const products: Product[] = [
     name: "[한줌] 하나 공식 봉제 인형",
     price: 10000,
     image: doll,
-    category: "의류",
+    category: "키링",
   },
 ];

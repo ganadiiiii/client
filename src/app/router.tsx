@@ -15,6 +15,7 @@ import ChatPage from "./pages/ChatPage";
 import MainPage from "./pages/MainPage";
 import ShopPage from "./pages/ShopPage";
 import PageNotFound from "./pages/404";
+import MainTestPage from "./pages/MainTestPage";
 
 export const AppRoutes = () => {
 	return (
@@ -36,6 +37,7 @@ export const AppRoutes = () => {
 			<Route path="/shop" element={<ShopPage />} />
 			{/* 404 - Catch all unmatched routes */}
 			<Route path="*" element={<PageNotFound />} />
+			<Route path="/main" element={<MainTestPage />} />
 		</Routes>
 	);
 };

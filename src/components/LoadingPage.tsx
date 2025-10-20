@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 
 interface LoadingPageProps {
     message?: string;
+    image?: string;
 }
 
 const LoadingPage: React.FC<LoadingPageProps> = ({
-    message = "꽃다발 생성 중"
+    message = "꽃다발 생성 중",
+    image = "/src/assets/character-loading.png"
 }) => {
     const [dots, setDots] = useState("");
 
@@ -31,7 +33,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({
         >
             <div className="flex flex-col items-center justify-center">
                 <img
-                    src="/src/assets/generate/loading.png"
+                    src={image}
                     alt="Loading character"
                     className="w-[10.8em] h-[13.2em] mb-9"
                 />

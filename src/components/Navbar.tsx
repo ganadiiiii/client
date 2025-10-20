@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import logo from "../assets/logo.png";
 import logoWhite from "../assets/logo-white.png";
 import logoBlack from "../assets/logo-black.png";
@@ -56,67 +57,97 @@ const Navbar: React.FC = () => {
 					</Link>
 				</div>
 
-				{/* 중앙 메뉴 - 50px 간격 */}
-				<div className="hidden xl:flex gap-[50px]">
+			{/* 중앙 메뉴 - 50px 간격 */}
+			<div className="hidden xl:flex gap-[10px]">
+				<motion.div
+					whileHover={{ rotate: -5 }}
+					transition={{ type: "spring", stiffness: 300 }}
+				>
 					<Link
 						to="/shop"
-						className={`${isMainPage ? 'text-white hover:text-gray-200' : isShopPage ? 'text-primary hover:text-primary/80' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-[17px] font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
 					>
 						Shop
 					</Link>
+				</motion.div>
+				<motion.div
+					whileHover={{ rotate: 5 }}
+					transition={{ type: "spring", stiffness: 300 }}
+				>
 					<Link
 						to="/customizing"
-						className={`${isMainPage ? 'text-white hover:text-gray-200' : isShopPage ? 'text-primary hover:text-primary/80' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-[17px] font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
 					>
 						Customizing
 					</Link>
+				</motion.div>
+				<motion.div
+					whileHover={{ rotate: -8 }}
+					transition={{ type: "spring", stiffness: 300 }}
+				>
 					<Link
 						to="/order"
-						className={`${isMainPage ? 'text-white hover:text-gray-200' : isShopPage ? 'text-primary hover:text-primary/80' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-[17px] font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
 					>
 						Order
 					</Link>
+				</motion.div>
+				<motion.div
+					whileHover={{ rotate: 5 }}
+					transition={{ type: "spring", stiffness: 300 }}
+				>
 					<Link
 						to="/archive"
-						className={`${isMainPage ? 'text-white hover:text-gray-200' : isShopPage ? 'text-primary hover:text-primary/80' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-[17px] font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
 					>
 						Archive
 					</Link>
-				</div>
+				</motion.div>
+			</div>
 
-				{/* 우측 메뉴 - 300px 간격 */}
-				<div className="flex items-center gap-[50px]">
+			{/* 우측 메뉴 - 300px 간격 */}
+			<div className="flex items-center gap-[10px]">
+				<motion.div
+					whileHover={{ rotate: -5 }}
+					transition={{ type: "spring", stiffness: 300 }}
+				>
 					<Link
 						to="/login"
-						className={`${isMainPage ? 'text-white hover:text-gray-200' : isShopPage ? 'text-primary hover:text-primary/80' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-[17px] font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
 					>
 						Login
 					</Link>
+				</motion.div>
+				<motion.div
+					whileHover={{ rotate: -3 }}
+					transition={{ type: "spring", stiffness: 300 }}
+				>
 					<Link
 						to="/cart"
-						className={`${isMainPage ? 'text-white hover:text-gray-200' : isShopPage ? 'text-primary hover:text-primary/80' : 'text-[#5A5A5A] hover:text-black'} transition-colors text-[17px] font-bold`}
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-[17px] font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
 					>
 						Cart
 					</Link>
-				</div>
+				</motion.div>
+			</div>
 			</div>
 		</nav>
 	);

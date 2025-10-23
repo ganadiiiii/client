@@ -35,7 +35,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({
                 <img
                     src={image}
                     alt="Loading character"
-                    className="w-[10.8em] h-[13.2em] mb-9"
+                    className="w-60 mb-9"
                 />
                 {/* Loading Text with Dots */}
                 <h1

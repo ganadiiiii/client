@@ -145,17 +145,10 @@ const Navbar: React.FC = () => {
 							fontFamily: "SUIT-Regular",
 						}}
 					>
-						<Link
-							to="/cart"
-							className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-[17px] font-bold`}
-							style={{
-								fontFamily: "SUIT-Regular",
-							}}
-						>
-							Cart
-						</Link>
-					</motion.div>
-				</div>
+						Cart
+					</Link>
+				</motion.div>
+			</div>
 			</div>
 		</nav>
 	);

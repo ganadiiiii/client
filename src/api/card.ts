@@ -82,7 +82,7 @@ export const cardAPI = {
 	// 만든 카드 모두 조회 API
 	getAllCards: async (page = 0, size = 15) => {
 		const accessToken = localStorage.getItem("accessToken");
-		const response = await axios.get(`${API_BASE_URL}/cards`, {
+		const response = await axios.get(`${API_BASE_URL}/archive`, {
 			params: { page, size },
 			headers: {
 				Authorization: `Bearer ${accessToken}`,

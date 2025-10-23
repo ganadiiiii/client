@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import logo from "../assets/logo.png";
+import bg from "../assets/nav_bg.png";
 import logoWhite from "../assets/logo-white.png";
 import logoBlack from "../assets/logo-black.png";
 
@@ -30,7 +31,7 @@ const Navbar: React.FC = () => {
 				<>
 					<div
 						className="absolute top-0 left-0 w-screen h-[357px] 3xl:h-[481px] 4xl:h-[605px] z-0 bg-cover bg-center bg-no-repeat"
-						style={{ backgroundImage: "url('./src/assets/nav_bg.png')" }}
+						style={{ backgroundImage: `url(${bg})` }}
 					/>
 					<div
 						className="absolute top-[357px] 3xl:top-[481px] 4xl:top-[605px] w-screen z-0"

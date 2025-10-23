@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Bubble from "../../components/Bubble";
 import { useNavigate } from "react-router-dom";
 

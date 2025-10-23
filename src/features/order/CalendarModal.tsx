@@ -53,7 +53,7 @@ export function CalendarModal({ onSelectDate, onClose }: CalendarModalProps) {
 					maxDetail="month"
 					prev2Label={null}
 					next2Label={null}
-					formatDay={(locale, date) =>
+					formatDay={(_locale, date) =>
 						date.toLocaleString("en", { day: "numeric" })
 					}
 					className="custom-calendar"

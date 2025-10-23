@@ -6,7 +6,6 @@ import type { FlowerCard } from "../../types/FlowerCard";
 const OrderPage: React.FC = () => {
 	const [isDeliveryHovered, setIsDeliveryHovered] = useState(false);
 	const [isPickupHovered, setIsPickupHovered] = useState(false);
-	const [isRedirectModalOpen, setIsRedirectModalOpen] = useState(false);
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -20,7 +19,6 @@ const OrderPage: React.FC = () => {
 					isOpen={true}
 					message="꽃다발을 먼저 선택해주세요"
 					onClose={() => {
-						setIsRedirectModalOpen(false);
 						navigate("/archive");
 					}}
 				/>

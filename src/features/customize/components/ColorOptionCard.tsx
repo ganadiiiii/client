@@ -14,10 +14,10 @@ const ColorOptionCard: React.FC<ColorOptionCardProps> = ({ selectedValue, onChan
 	};
 
 	return (
-        <div className="relative w-[62em] h-[37.625em] flex items-center justify-center">
+        <div className="relative w-[62em] h-[33.175em] flex items-center justify-center">
 			{/* Left: Bouquet Image */}
 			<div 
-                className="absolute left-0 w-[37.56rem] h-full flex items-center justify-center z-10"
+                className="absolute left-0 w-[32.65rem] h-full flex items-center justify-center z-10"
                 style={{ 
                     backgroundImage: "url('/src/assets/generate/detailcard.png')", 
                     backgroundSize: "contain", 
@@ -29,7 +29,7 @@ const ColorOptionCard: React.FC<ColorOptionCardProps> = ({ selectedValue, onChan
                 <img
                     src={getImageSrc(selectedValue)}
                     alt={`Bouquet - ${selectedValue}`}
-                    className={`max-w-full max-h-full object-contain transition-all duration-300 ${
+                    className={`max-w-full max-h-full 2xl:scale-80 4xl:scale-100 object-contain transition-all duration-300 ${
                         selectedValue === "none" ? "blur-[7.65px]" : ""
                     }`}
                 />
@@ -37,7 +37,7 @@ const ColorOptionCard: React.FC<ColorOptionCardProps> = ({ selectedValue, onChan
 
 			{/* Right: Color Selector - Overlapping */}
 			<div 
-                className="absolute -right-8 flex w-[40rem] h-[34em] rounded-3xl items-center justify-center pl-48 z-0"
+                className="absolute right-25 flex w-[30rem] h-[30em] rounded-3xl items-center justify-center pl-22 z-0"
                 style={{
                     background: "linear-gradient(163deg, rgba(255, 255, 255, 0.20) 22.62%, rgba(255, 255, 255, 0.80) 85.11%)",
                     filter: "drop-shadow(2px 4px 14.4px rgba(0, 0, 0, 0.15))"

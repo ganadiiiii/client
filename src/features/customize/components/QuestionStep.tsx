@@ -202,7 +202,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 								<FlowerSizeOptionCard
 									number={2}
 									size="M = Mini bouquets"
-									description="조화로운 중간 크기"
+									description="적당한 크기"
 									isSelected={selectedOptions.includes("M")}
 									onClick={() => onOptionSelect("M")}
 								/>

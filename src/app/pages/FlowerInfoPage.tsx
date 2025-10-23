@@ -236,9 +236,9 @@ const FlowerInfoPage = () => {
 						onClick={() => navigate(-1)}
 						icon={iconBack}
 					/>
-						<button onClick={handleDelete} className="w-16 h-16 rounded-full flex items-center justify-center">
+						{/* <button onClick={handleDelete} className="w-16 h-16 rounded-full flex items-center justify-center">
 							<img src={iconTrash} alt="trash" className="w-6 h-6" />
-						</button>
+						</button> */}
 					</div>
 					<div ref={divRef}>
 						<FlowerInfoCard flowerCard={flower} />

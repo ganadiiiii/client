@@ -112,17 +112,11 @@ const Navbar: React.FC = () => {
 							fontFamily: "SUIT-Regular",
 						}}
 					>
-						<Link
-							to="/archive"
-							className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-[17px] font-bold`}
-							style={{
-								fontFamily: "SUIT-Regular",
-							}}
-						>
-							Archive
-						</Link>
-					</motion.div>
-				</div>
+						Archive
+					</Link>
+				</motion.div>
+			</div>
+
 
 			{/* 우측 메뉴 - 300px 간격 */}
 			<div className="flex items-center gap-[10px] 4xl:gap-[3.125em]">

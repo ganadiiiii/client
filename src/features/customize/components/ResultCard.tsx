@@ -16,7 +16,7 @@ const springConfig: SpringOptions = {
 };
 
 // 효과 강도 설정
-const ROTATE_AMPLITUDE = 8; // 기울기 강도
+const ROTATE_AMPLITUDE = 10; // 기울기 강도
 
 const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 	const {
@@ -129,7 +129,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 									fontWeight: "400",
 								}}
 							>
-								{mainFlower.koreanName}
+								{mainFlower?.koreanName || ""}
 							</span>
 							<span
 								style={{
@@ -145,7 +145,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 									fontWeight: "400",
 								}}
 							>
-								{subFlower.koreanName}
+								{subFlower?.koreanName || ""}
 							</span>
 						</div>
 						<div className="flex flex-row gap-[10px]">
@@ -167,7 +167,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							</span>
 						</div>
 					</div>
-					<div className="absolute left-[2.8em] top-[37.5em] flex flex-row gap-20 text-black text-sm">
+					<div className="absolute left-[2.8em] top-[37.5em] flex flex-row gap-17 text-black text-sm">
 						<div className="flex gap-3 items-baseline">
 							<span
 								style={{

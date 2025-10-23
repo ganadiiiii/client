@@ -29,11 +29,11 @@ const Navbar: React.FC = () => {
 			{isAuthPage && (
 				<>
 					<div
-						className="absolute top-0 left-0 w-screen h-[357px] 2xl:h-[481px] z-0 bg-cover bg-center bg-no-repeat"
+						className="absolute top-0 left-0 w-screen h-[357px] 3xl:h-[481px] 4xl:h-[605px] z-0 bg-cover bg-center bg-no-repeat"
 						style={{ backgroundImage: "url('./src/assets/nav_bg.png')" }}
 					/>
 					<div
-						className="absolute top-[357px] 2xl:top-[481px] w-screen z-0"
+						className="absolute top-[357px] 3xl:top-[481px] 4xl:top-[605px] w-screen z-0"
 						style={{
 							height: "2em",
 							background:
@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
 			<div
 				className={`fixed top-0 left-0 w-full z-10 transition-all duration-300 ease-in-out
 				${isScrolled && !isMainPage ? "bg-background" : "bg-transparent"}
-				h-[80px] 2xl:h-[102px] flex items-center justify-between px-[300px]
+				h-[80px] 3xl:h-[102px] 4xl:h-[124px] flex items-center justify-between px-[300px]
 			`}
 			>
 				{/* 로고 영역 - 좌우 300px 간격 */}
@@ -57,53 +57,60 @@ const Navbar: React.FC = () => {
 					</Link>
 				</div>
 
-				{/* 중앙 메뉴 - 50px 간격 */}
-				<div className="hidden xl:flex gap-[10px]">
-					<motion.div
-						whileHover={{ rotate: -5 }}
-						transition={{ type: "spring", ease: "easeOut", stiffness: 500 }}
+			{/* 중앙 메뉴 - 50px 간격 */}
+			<div className="hidden xl:flex gap-[10px] 4xl:gap-[3.125em]">
+				<motion.div
+					whileHover={{ rotate: -5 }}
+					transition={{ type: "spring", stiffness: 300 }}
+				>
+					<Link
+						to="/shop"
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-lg font-bold`}
+						style={{
+							fontFamily: "SUIT-Regular",
+						}}
 					>
-						<Link
-							to="/shop"
-							className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-[17px] font-bold`}
-							style={{
-								fontFamily: "SUIT-Regular",
-							}}
-						>
-							Shop
-						</Link>
-					</motion.div>
-					<motion.div
-						whileHover={{ rotate: 5 }}
-						transition={{ type: "spring", stiffness: 300 }}
+						Shop
+					</Link>
+				</motion.div>
+				<motion.div
+					whileHover={{ rotate: 5 }}
+					transition={{ type: "spring", stiffness: 300 }}
+				>
+					<Link
+						to="/customizing"
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-lg font-bold`}
+						style={{
+							fontFamily: "SUIT-Regular",
+						}}
 					>
-						<Link
-							to="/customizing"
-							className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-[17px] font-bold`}
-							style={{
-								fontFamily: "SUIT-Regular",
-							}}
-						>
-							Customizing
-						</Link>
-					</motion.div>
-					<motion.div
-						whileHover={{ rotate: -8 }}
-						transition={{ type: "spring", stiffness: 300 }}
+						Customizing
+					</Link>
+				</motion.div>
+				<motion.div
+					whileHover={{ rotate: -8 }}
+					transition={{ type: "spring", stiffness: 300 }}
+				>
+					<Link
+						to="/order"
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-lg font-bold`}
+						style={{
+							fontFamily: "SUIT-Regular",
+						}}
 					>
-						<Link
-							to="/order"
-							className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-[17px] font-bold`}
-							style={{
-								fontFamily: "SUIT-Regular",
-							}}
-						>
-							Order
-						</Link>
-					</motion.div>
-					<motion.div
-						whileHover={{ rotate: 5 }}
-						transition={{ type: "spring", stiffness: 300 }}
+						Order
+					</Link>
+				</motion.div>
+				<motion.div
+					whileHover={{ rotate: 5 }}
+					transition={{ type: "spring", stiffness: 300 }}
+				>
+					<Link
+						to="/archive"
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-lg font-bold`}
+						style={{
+							fontFamily: "SUIT-Regular",
+						}}
 					>
 						<Link
 							to="/archive"
@@ -117,25 +124,32 @@ const Navbar: React.FC = () => {
 					</motion.div>
 				</div>
 
-				{/* 우측 메뉴 - 300px 간격 */}
-				<div className="flex items-center gap-[10px]">
-					<motion.div
-						whileHover={{ rotate: -5 }}
-						transition={{ type: "spring", stiffness: 300 }}
+			{/* 우측 메뉴 - 300px 간격 */}
+			<div className="flex items-center gap-[10px] 4xl:gap-[3.125em]">
+				<motion.div
+					whileHover={{ rotate: -5 }}
+					transition={{ type: "spring", stiffness: 300 }}
+				>
+					<Link
+						to="/login"
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-lg font-bold`}
+						style={{
+							fontFamily: "SUIT-Regular",
+						}}
 					>
-						<Link
-							to="/login"
-							className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-[17px] font-bold`}
-							style={{
-								fontFamily: "SUIT-Regular",
-							}}
-						>
-							Login
-						</Link>
-					</motion.div>
-					<motion.div
-						whileHover={{ rotate: -3 }}
-						transition={{ type: "spring", stiffness: 300 }}
+						Login
+					</Link>
+				</motion.div>
+				<motion.div
+					whileHover={{ rotate: -3 }}
+					transition={{ type: "spring", stiffness: 300 }}
+				>
+					<Link
+						to="/cart"
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-lg font-bold`}
+						style={{
+							fontFamily: "SUIT-Regular",
+						}}
 					>
 						<Link
 							to="/cart"

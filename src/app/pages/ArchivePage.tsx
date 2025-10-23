@@ -151,7 +151,7 @@ const ArchivePage = () => {
 					}}
 				/>
 				{/* 배경 역할을 하는 home 이미지 */}
-				<div className="relative w-full h-[calc(100vh-9em-80px)] 2xl:h-[calc(100vh-9em-102px)]">
+				<div className="relative w-full h-[calc(100vh-9em-80px)] 3xl:h-[calc(100vh-9em-102px)]">
 					<img
 						src={`/src/assets/archive/${{
 							day: "home-light.png",

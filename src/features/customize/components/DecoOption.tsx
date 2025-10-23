@@ -61,7 +61,7 @@ const DecoSelector: React.FC<DecoSelectorProps> = ({
 			<div className="flex flex-col gap-4 w-full">
 				<div className="flex flex-row text-start items-center gap-2">
 					<h2 className="text-xl font-normal text-black" style={{ fontFamily: "NexonLv1Gothic" }}>Color</h2>
-					<p className="text-medium text-[#8E8E8E] font-normal" style={{ fontFamily: "NexonLv1Gothic" }}>장식 색상을 선택해 주세요</p>
+					<p className="text-sm text-[#8E8E8E] font-normal" style={{ fontFamily: "NexonLv1Gothic" }}>장식 색상을 선택해 주세요</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					{decoOptions

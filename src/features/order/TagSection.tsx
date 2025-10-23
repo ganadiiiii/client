@@ -53,7 +53,7 @@ export const TagSection = forwardRef<TagSectionRef>((_, ref) => {
                                     onClick={() => setSelectedIndex(index)}
                                     className={`absolute bottom-0 right-4 mt-3 w-4.5 h-4.5 rounded-full transition-all ${
                                         selectedIndex === index
-                                            ? "border-4 border-primary 2xl:border-6"
+                                            ? "border-4 border-primary 3xl:border-6"
                                             : "border border-black/20"
                                     }`}
                                 />

@@ -10,6 +10,9 @@ import GradientIconButton from "../../components/button/GradientIconButton";
 import SimpleIconButton from "../../components/button/SimpleIconButton";
 import FlowerInfoCard from "../../features/archive/components/FlowerInfoCard";
 import iconTrash from "../../assets/archive/icon-trash.svg";
+import iconTrashHover from "../../assets/archive/icon-trash-hover.svg";
+import iconSend from "../../assets/archive/icon-send.svg";
+import iconSendHover from "../../assets/archive/icon-send-hover.svg";
 import { cardAPI } from "../../api";
 import type { FlowerCard } from "../../types/FlowerCard";
 import LoadingPage from "../../components/LoadingPage";
@@ -35,7 +38,21 @@ const FlowerInfoPage = () => {
 			try {
 				setIsLoading(true);
 				const response = await cardAPI.getCardDetail(flowerId);
-				setFlower(response);
+
+				// API 응답이 SharedCardDetail 형태인 경우 처리
+				if (response.card) {
+					// SharedCardDetail 응답
+					const flowerCardWithMessage: FlowerCard = {
+						...response.card,
+						message: response.note || undefined,
+						sender: response.fromName || undefined,
+						receiver: response.toName || undefined,
+					};
+					setFlower(flowerCardWithMessage);
+				} else {
+					// 직접 FlowerCard 응답
+					setFlower(response);
+				}
 			} catch (error) {
 				console.error("카드 상세 조회 실패:", error);
 				setError("카드 정보를 불러오는데 실패했습니다.");
@@ -141,9 +158,9 @@ const FlowerInfoPage = () => {
 						">
 							<div style="display: flex; flex-direction: row; gap: 10px; margin-bottom: 5px;">
 								<span style="font-family: Yidstreet; font-weight: 600;">Main</span>
-								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.mainFlower.koreanName}</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.mainFlower?.koreanName || ""}</span>
 								<span style="font-family: Yidstreet; font-weight: 600;">Sub</span>
-								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.subFlower.koreanName}</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.subFlower?.koreanName || ""}</span>
 							</div>
 							<div style="display: flex; flex-direction: row; gap: 10px;">
 								<span style="font-family: Yidstreet; font-weight: 600;">Floriography</span>
@@ -202,7 +219,7 @@ const FlowerInfoPage = () => {
 
 	const handleDelete = async () => {
 		if (!flower) return;
-		
+
 		try {
 			await cardAPI.deleteCard(String(flower.cardId));
 			navigate("/archive");
@@ -231,59 +248,67 @@ const FlowerInfoPage = () => {
 				{/* Final result card with message */}
 				<div className="relative inline-block">
 
-  					<div className="absolute left-[-5em] top-[0.625em] flex flex-col items-center gap-2">
-					  <SimpleIconButton
-						onClick={() => navigate(-1)}
-						icon={iconBack}
-					/>
-						{/* <button onClick={handleDelete} className="w-16 h-16 rounded-full flex items-center justify-center">
-							<img src={iconTrash} alt="trash" className="w-6 h-6" />
-						</button> */}
+					<div className="absolute left-[-5em] top-[0.625em] flex flex-col items-center gap-2">
+						<SimpleIconButton
+							onClick={() => navigate(-1)}
+							icon={iconBack}
+						/>
+
 					</div>
 					<div ref={divRef}>
 						<FlowerInfoCard flowerCard={flower} />
 					</div>
 
 					{/* Action button */}
-					<div className="relative mt-4 w-full flex justify-center">
-						<GradientIconButton
-							onClick={() => setShowSharePopup(!showSharePopup)}
-							icon={iconShare}
-							hoverIcon={iconShareHover}
-							label="공유하기"
-							disabled={false}
-						/>
-						{showSharePopup && (
+
+					<div className="mt-4 w-full flex justify-center">
+						<div className="grid grid-cols-3 gap-4">
+							<SimpleIconButton onClick={handleDelete} icon={iconTrashHover} hoverIcon={iconTrash} label="삭제하기" />
+
+							<GradientIconButton
+								onClick={() => navigate('/customizing')}
+								icon={iconSend}
+								hoverIcon={iconSendHover}
+								label="나도 보내기"
+								disabled={false}
+							/>
 							<div
-								className="absolute bottom-full mb-2 rounded-2xl bg-white text-sm text-dark-gray z-50 border border-gray/40 overflow-hidden whitespace-nowrap"
-								style={{ fontFamily: "NexonLv1Gothic" }}
-								role="menu"
-								aria-label="send options"
+								className="relative flex items-center justify-center"
 							>
-								<button
-									onClick={() => {
-										setShowSharePopup(false);
-										navigate("/order", { state: { flowerCard: flower } });
-									}}
-									className="block w-full text-center text-base py-5 px-12 hover:bg-gray/20"
-									style={{ fontFamily: "NexonLv1Gothic" }}
-									role="menuitem"
-								>
-									실물 보내기
-								</button>
-								<button
-									onClick={() => {
-										setShowSharePopup(false);
-										handleDownload();
-									}}
-									className="block w-full text-center text-base py-5 px-12 hover:bg-gray/20 border-t border-gray/40"
-									style={{ fontFamily: "NexonLv1Gothic" }}
-									role="menuitem"
-								>
-									저장하기
-								</button>
+								<SimpleIconButton onClick={() => setShowSharePopup(!showSharePopup)} icon={iconShare} hoverIcon={iconShareHover} label="공유하기" />
+								{showSharePopup && (
+									<div
+										className="absolute bottom-full mb-2 rounded-2xl bg-white text-sm text-dark-gray z-50 border border-gray/40 overflow-hidden whitespace-nowrap"
+										style={{ fontFamily: "NexonLv1Gothic" }}
+										role="menu"
+										aria-label="send options"
+									>
+										<button
+											onClick={() => {
+												setShowSharePopup(false);
+												navigate("/order", { state: { flowerCard: flower } });
+											}}
+											className="block w-full text-center text-base py-5 px-12 hover:bg-gray/20"
+											style={{ fontFamily: "NexonLv1Gothic" }}
+											role="menuitem"
+										>
+											실물 보내기
+										</button>
+										<button
+											onClick={() => {
+												setShowSharePopup(false);
+												handleDownload();
+											}}
+											className="block w-full text-center text-base py-5 px-12 hover:bg-gray/20 border-t border-gray/40"
+											style={{ fontFamily: "NexonLv1Gothic" }}
+											role="menuitem"
+										>
+											저장하기
+										</button>
+									</div>
+								)}
 							</div>
-						)}
+						</div>
 					</div>
 				</div>
 			</div>

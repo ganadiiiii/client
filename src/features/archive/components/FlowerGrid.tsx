@@ -6,11 +6,13 @@ import FlowerCard from "./FlowerCard";
 interface FlowerGridProps {
 	cards: FlowerCardType[];
 	isLoading: boolean;
+	triggerCardLanding?: boolean;
 }
 
 export default function FlowerGrid({ 
 	cards, 
 	isLoading,
+	triggerCardLanding = false,
 }: FlowerGridProps) {
 	const [hoveredCard, setHoveredCard] = useState<{ rowIdx: number; colIdx: number } | null>(null);
 
@@ -23,6 +25,16 @@ export default function FlowerGrid({
 		if (distance === 0) return { y: 14, scale: 1.16 }; // 호버된 카드는 14px 아래로 + 15% 확대
 		if (distance === 1) return { y: 8, scale: 1.08 }; // 인접한 카드는 10px + 10% 확대
 		if (distance === 2) return { y: 4, scale: 1.04 };  // 2칸 떨어진 카드는 4px + 5% 확대
+		return { y: 0, scale: 1 }; // 그 외는 영향 없음
+	};
+
+	// 카드 착지 애니메이션을 위한 영향도 계산 함수
+	const calculateLandingInfluence = (colIdx: number) => {
+		const distance = Math.abs(colIdx - 0); // 첫 번째 카드(인덱스 0)와의 거리
+		if (distance === 0) return { y: 0, scale: 0.80, rotateX: 10}; // 첫 번째 카드는 20px 아래로 + 15% 축소
+		if (distance === 1) return { y: 0, scale: 0.85 }; // 인접한 카드는 12px 아래로 + 8% 축소
+		if (distance === 2) return { y: 0, scale: 0.90 };  // 2칸 떨어진 카드는 6px 아래로 + 4% 축소
+		if (distance === 3) return { y: 0, scale: 0.95 };  // 2칸 떨어진 카드는 6px 아래로 + 4% 축소
 		return { y: 0, scale: 1 }; // 그 외는 영향 없음
 	};
 
@@ -47,9 +59,15 @@ export default function FlowerGrid({
 									
 									// 현재 카드가 호버된 행에 있는지 확인하고 영향도 계산
 									const isInHoveredRow = hoveredCard?.rowIdx === rowIdx;
-									const influence = isInHoveredRow ? calculateInfluence(hoveredCard.colIdx, i) : { y: 0, scale: 1 };
-									const targetY = baseTranslateY + influence.y;
-									const targetScale = influence.scale;
+									const hoverInfluence = isInHoveredRow ? calculateInfluence(hoveredCard.colIdx, i) : { y: 0, scale: 1 };
+									
+									// 카드 착지 애니메이션 영향도 계산 (첫 번째 행에만 적용)
+									const landingInfluence = (triggerCardLanding && rowIdx === 0) 
+										? calculateLandingInfluence(i) 
+										: { y: 0, scale: 1 };
+									
+									const targetY = baseTranslateY + hoverInfluence.y + landingInfluence.y;
+									const targetScale = hoverInfluence.scale * landingInfluence.scale;
 									
 									return (
 										<motion.div

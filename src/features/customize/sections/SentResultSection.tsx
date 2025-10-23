@@ -97,9 +97,9 @@ const SentResultSection: React.FC<SentResultSectionProps> = ({
                     ">
                         <div style="display: flex; flex-direction: row; gap: 10px; margin-bottom: 5px;">
                             <span style="font-family: Yidstreet; font-weight: 600;">Main</span>
-                            <span style="font-family: NexonLv1Gothic; font-weight: 400;">${flowerCard.mainFlower.koreanName}</span>
+                            <span style="font-family: NexonLv1Gothic; font-weight: 400;">${flowerCard.mainFlower?.koreanName || ""}</span>
                             <span style="font-family: Yidstreet; font-weight: 600;">Sub</span>
-                            <span style="font-family: NexonLv1Gothic; font-weight: 400;">${flowerCard.subFlower.koreanName}</span>
+                            <span style="font-family: NexonLv1Gothic; font-weight: 400;">${flowerCard.subFlower?.koreanName || ""}</span>
                         </div>
                         <div style="display: flex; flex-direction: row; gap: 10px;">
                             <span style="font-family: Yidstreet; font-weight: 600;">Floriography</span>

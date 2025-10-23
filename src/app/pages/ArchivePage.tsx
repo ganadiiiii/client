@@ -14,12 +14,18 @@ import AnimatedFlowerCard from "../../features/archive/components/AnimatedFlower
 import cardAlertPng from "../../assets/archive/card-alert.png";
 import sofaSvg from "../../assets/archive/sofa.svg";
 import characterPng from "../../assets/archive/character.png";
-import homeLight from "/src/assets/archive/home-light.png"
-import homeDark from "/src/assets/archive/home-dark.png"
-import lampOn from "/src/assets/archive/lamp-on.svg";
-import lampOnHover from "/src/assets/archive/lamp-on-hover.svg";
-import lampOff from "/src/assets/archive/lamp-off.svg";
-import lampOffHover from "/src/assets/archive/lamp-off-hover.svg";
+import homeLight from "../../assets/archive/home-light.png";
+import homeDark from "../../assets/archive/home-dark.png";
+import lampOn from "../../assets/archive/lamp-on.svg";
+import lampOnHover from "../../assets/archive/lamp-on-hover.svg";
+import lampOff from "../../assets/archive/lamp-off.svg";
+import lampOffHover from "../../assets/archive/lamp-off-hover.svg";
+import bgDaySvg from "../../assets/archive/bg.svg";
+import bgSunsetSvg from "../../assets/archive/bg-sunset.svg";
+import bgNightSvg from "../../assets/archive/bg-dark.svg";
+import bouquetPinkPng from "../../assets/generate/bouquet-pink.png";
+import flower1Png from "../../assets/generate/flower-1.png";
+import flower2Png from "../../assets/generate/flower-2.png";
 
 interface Friend {
 	id: string;
@@ -58,7 +64,7 @@ const ArchivePage = () => {
 	const dummyCard: FlowerCard = {
 		cardId: 999,
 		title: "축하의 마음을 전해요",
-		imageUrl: "/src/assets/generate/bouquet-pink.png",
+		imageUrl: bouquetPinkPng,
 		imageSource: "custom",
 		floriography: "사랑과 감사의 마음을 담아",
 		whoType: "friend",
@@ -78,13 +84,13 @@ const ArchivePage = () => {
 			flowerId: 1,
 			koreanName: "장미",
 			englishName: "Rose",
-			imageUrl: "/src/assets/generate/flower-1.png",
+			imageUrl: flower1Png,
 		},
 		subFlower: {
 			flowerId: 2,
 			koreanName: "카네이션",
 			englishName: "Carnation",
-			imageUrl: "/src/assets/generate/flower-2.png",
+			imageUrl: flower2Png,
 		},
 		message: "생일 축하해! 항상 행복하고 건강하길 바랄게. 우리 앞으로도 오래오래 좋은 친구로 지내자!",
 		sender: "지은",
@@ -211,7 +217,7 @@ const ArchivePage = () => {
 				<div
 					className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-400 ease-in-out pointer-events-none"
 					style={{
-						backgroundImage: "url(/src/assets/archive/bg.svg)",
+						backgroundImage: `url(${bgDaySvg})`,
 						opacity: lightState === "day" ? 1 : 0,
 					}}
 				/>
@@ -219,7 +225,7 @@ const ArchivePage = () => {
 				<div
 					className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-400 ease-in-out pointer-events-none"
 					style={{
-						backgroundImage: "url(/src/assets/archive/bg-sunset.svg)",
+						backgroundImage: `url(${bgSunsetSvg})`,
 						opacity: lightState === "sunset" ? 1 : 0,
 					}}
 				/>
@@ -227,7 +233,7 @@ const ArchivePage = () => {
 				<div
 					className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-400 ease-in-out pointer-events-none"
 					style={{
-						backgroundImage: "url(/src/assets/archive/bg-dark.svg)",
+						backgroundImage: `url(${bgNightSvg})`,
 						opacity: lightState === "night" ? 1 : 0,
 					}}
 				/>

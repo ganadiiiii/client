@@ -192,7 +192,7 @@ function MainPage() {
 					ref={bgRef}
 					src="/src/assets/main/scroll-bg.png"
 					alt="img"
-					className="absolute w-full h-[calc(100vh+10em-80px)] 2xl:h-[calc(100vh+7em-102px)] object-cover -z-20"
+					className="absolute w-full h-[calc(100vh+10em-80px)] 3xl:h-[calc(100vh+7em-102px)] 4xl:h-[calc(100vh+7em-124px)] object-cover -z-20"
 				/>
 				{/* 검정색 오버레이 */}
 				<div

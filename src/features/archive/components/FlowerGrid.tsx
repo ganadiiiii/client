@@ -39,7 +39,7 @@ export default function FlowerGrid({
 	};
 
 	return (
-		<div className="w-full max-w-3xl h-[32em] flex flex-col items-center justify-center gap-4 mb-[9.5em]">
+		<div className="w-full max-w-3xl h-[32em] flex flex-col items-center justify-start gap-4 mb-[9.5em]">
 				{isLoading ? (
 					<div className="flex items-center justify-center h-full">
 						<span className="text-gray-500">로딩 중...</span>

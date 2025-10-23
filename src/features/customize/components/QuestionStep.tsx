@@ -175,7 +175,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 						</div>
 						{questionNumber === 4 ? (
 							// 꽃 종류 카드 컴포넌트 렌더링
-							<div className="flex flex-wrap gap-4 justify-center md:max-w-[800px] lg:max-w-[900px] 2xl:max-w-[1089px]">
+							<div className="flex flex-wrap gap-4 justify-center max-w-[900px] 3xl:max-w-[1100px] 4xl:max-w-[1440px]">
 								{flowerCardData.map((card) => (
 									<div key={card.id} style={{ width: "12.8em" }}>
 										<FlowerTypeOptionCard
@@ -202,7 +202,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 								<FlowerSizeOptionCard
 									number={2}
 									size="M = Mini bouquets"
-									description="조화로운 중간 크기"
+									description="적당한 크기"
 									isSelected={selectedOptions.includes("M")}
 									onClick={() => onOptionSelect("M")}
 								/>

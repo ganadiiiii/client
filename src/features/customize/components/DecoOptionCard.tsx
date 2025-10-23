@@ -11,7 +11,7 @@ interface DecoOptionCardProps {
 const DecoOptionCard: React.FC<DecoOptionCardProps> = ({ selectedPoint, selectedColor, onPointChange, onColorChange }) => {
 
 	const getImageSrc = (point: string, color: string) => {
-        return `/src/assets/generate/bouquet-${point}-${color}.png`;
+        return `/assets/generate/bouquet-${point}-${color}.png`;
     };
 
 	return (
@@ -20,7 +20,7 @@ const DecoOptionCard: React.FC<DecoOptionCardProps> = ({ selectedPoint, selected
 			<div 
                 className="absolute left-0 w-[32.65rem] h-full flex items-center justify-center z-10"
                 style={{ 
-                    backgroundImage: "url('/src/assets/generate/detailcard.png')", 
+                    backgroundImage: "url('/assets/generate/detailcard.png')", 
                     backgroundSize: "contain", 
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",

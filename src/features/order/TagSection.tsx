@@ -45,7 +45,7 @@ export const TagSection = forwardRef<TagSectionRef>((_, ref) => {
                         {tags.map((number, index) => (
                             <div key={number} className="flex flex-col relative w-[6.625em] h-[9.4em] items-center">
                                 <img
-                                    src={`/src/assets/order/tag-${number}.png`}
+                                    src={`/assets/order/tag-${number}.png`}
                                     alt={`tag-${number}`}
                                     className="w-full h-[7.525em]"
                                 />

@@ -52,7 +52,7 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 						top: "0.9em",
 						width: "11.3em",
 						height: "12.6em",
-						backgroundImage: `url('./src/assets/generate/bg-${number}.svg')`,
+						backgroundImage: `url('/assets/generate/bg-${number}.svg')`,
 						backgroundRepeat: "no-repeat",
 						backgroundSize: "100% 100%",
 						backgroundPosition: "center",
@@ -60,7 +60,7 @@ const FlowerTypeOptionCard: React.FC<FlowerTypeOptionCardProps> = ({
 				/>
 				{/* flower image */}
 				<img
-					src={`./src/assets/generate/flower-${number}.png`}
+					src={`/assets/generate/flower-${number}.png`}
 					alt={name}
 					className="absolute object-cover rounded-sm z-20"
 					style={{

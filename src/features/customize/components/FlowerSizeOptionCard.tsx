@@ -55,13 +55,13 @@ const FlowerSizeOptionCard: React.FC<FlowerSizeOptionCardProps> = ({
 						top: "1.175em",
 						width: "15em",
 						height: "16.7em",
-						backgroundImage: "url('./src/assets/generate/size.svg')",
+						backgroundImage: `url('/assets/generate/size.svg')`,
 					}}
 				/>
 
 				{/* 꽃 이미지 */}
 				<img
-					src={`./src/assets/generate/size-${number}.png`}
+					src={`/assets/generate/size-${number}.png`}
 					alt={description}
 					className="absolute object-cover rounded-sm z-30"
 					style={{

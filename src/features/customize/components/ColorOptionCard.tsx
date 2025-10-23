@@ -9,8 +9,8 @@ interface ColorOptionCardProps {
 const ColorOptionCard: React.FC<ColorOptionCardProps> = ({ selectedValue, onChange }) => {
 
 	const getImageSrc = (value: string) => {
-		if (value === "none") return "src/assets/generate/bouquet-white.png";
-		return `src/assets/generate/bouquet-${value}.png`;
+		if (value === "none") return "/assets/generate/bouquet-white.png";
+		return `/assets/generate/bouquet-${value}.png`;
 	};
 
 	return (
@@ -19,7 +19,7 @@ const ColorOptionCard: React.FC<ColorOptionCardProps> = ({ selectedValue, onChan
 			<div 
                 className="absolute left-0 w-[32.65rem] h-full flex items-center justify-center z-10"
                 style={{ 
-                    backgroundImage: "url('/src/assets/generate/detailcard.png')", 
+                    backgroundImage: "url('/assets/generate/detailcard.png')", 
                     backgroundSize: "contain", 
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",

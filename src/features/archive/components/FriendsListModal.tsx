@@ -3,6 +3,8 @@ import { forwardRef, useEffect, useImperativeHandle } from "react";
 import { type Friend, useFriendsManager } from "../hooks/useFriendsManager";
 import FriendListItem from "./FriendListItem";
 import FriendRequestModal from "./FriendRequestModal";
+import letterUpPng from "../../../assets/archive/letter_up.png";
+import letterPng from "../../../assets/archive/letter.png";
 
 interface FriendsListModalProps {
 	isOpen: boolean;
@@ -66,7 +68,7 @@ const FriendsListModal = forwardRef<FriendsListModalRef, FriendsListModalProps>(
 					>
 						<div className="fixed inset-0 flex items-end justify-center pointer-events-none z-20">
 							<img
-								src="/src/assets/archive/letter_up.png"
+								src={letterUpPng}
 								alt="letter_up"
 								className="absolute bottom-[13.5em] w-[52em] h-[32em]"
 							/>
@@ -223,7 +225,7 @@ const FriendsListModal = forwardRef<FriendsListModalRef, FriendsListModalProps>(
 						</motion.div>
 						<div className="fixed inset-0 flex items-end justify-center pointer-events-none z-40">
 							<img
-								src="/src/assets/archive/letter.png"
+								src={letterPng}
 								alt="letter"
 								className="absolute bottom-0 w-[52em] h-[28em]"
 							/>

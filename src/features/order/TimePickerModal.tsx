@@ -1,5 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import iconUpSvg from "../../assets/order/icon-up.svg";
+import iconDownSvg from "../../assets/order/icon-down.svg";
 
 interface TimePickerModalProps {
 	date: Date;
@@ -114,8 +116,8 @@ function TimeColumn({ list, selected, setSelected }: TimeColumnProps) {
 
 	return (
 		<div className="flex flex-col items-center gap-2">
-			<img
-				src="/src/assets/order/icon-up.svg"
+				<img
+				src={iconUpSvg}
 				alt="up"
 				className="w-6 h-4 cursor-pointer"
 				onClick={handleUp}
@@ -136,8 +138,8 @@ function TimeColumn({ list, selected, setSelected }: TimeColumnProps) {
 					</motion.div>
 				</AnimatePresence>
 			</div>
-			<img
-				src="/src/assets/order/icon-down.svg"
+				<img
+				src={iconDownSvg}
 				alt="down"
 				className="w-6 h-4 cursor-pointer"
 				onClick={handleDown}

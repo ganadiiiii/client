@@ -1,5 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import characterLoadingPng from "../assets/character-loading.png";
+import backgroundSvg from "../assets/generate/bg.svg";
 
 interface LoadingPageProps {
     message?: string;
@@ -8,7 +10,7 @@ interface LoadingPageProps {
 
 const LoadingPage: React.FC<LoadingPageProps> = ({
     message = "꽃다발 생성 중",
-    image = "/src/assets/character-loading.png"
+    image = characterLoadingPng
 }) => {
     const [dots, setDots] = useState("");
 
@@ -28,7 +30,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({
         <div
             className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center"
             style={{
-                backgroundImage: "url('/src/assets/generate/bg.svg')",
+                backgroundImage: `url(${backgroundSvg})`,
             }}
         >
             <div className="flex flex-col items-center justify-center">

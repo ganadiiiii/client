@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import bg from "../../assets/generate/bg.svg";
+import chatPng from "../../assets/order/chat.png";
 
 const ChatStartPage: React.FC = () => {
     const navigate = useNavigate();
@@ -12,7 +13,7 @@ const ChatStartPage: React.FC = () => {
 			}}
 		>
 			<div className="flex flex-col items-center justify-center">
-                <img src="/src/assets/order/chat.png" alt="chat" className="w-[26.25em] h-[14.75em] mb-9" />
+                <img src={chatPng} alt="chat" className="w-[26.25em] h-[14.75em] mb-9" />
 				<p
 					className="text-black text-center font-semibold whitespace-nowrap text-3xl mb-14"
 					style={{

@@ -1,5 +1,6 @@
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { useCallback, useRef} from "react";
+import currentpositionSvg from "../../assets/order/currentposition.svg";
 
 const containerStyle = {
 	width: "100%",
@@ -88,7 +89,7 @@ export default function GoogleMapComponent() {
 				}}
 			>
 				<img
-					src="/src/assets/order/currentposition.svg"
+					src={currentpositionSvg}
 					alt="현재 위치로 이동"
 					className="w-10 h-10"
 				/>

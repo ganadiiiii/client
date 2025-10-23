@@ -6,6 +6,13 @@ import { useGSAP } from '@gsap/react';
 import { useNavigate } from 'react-router-dom';
 import startButton from '../../assets/main/start-button.png';
 import startButtonHover from '../../assets/main/start-button-hover.png';
+import scrollObfPng from '../../assets/main/scroll-obf.png';
+import scrollOffPng from '../../assets/main/scroll-off.png';
+import scrollYbfPng from '../../assets/main/scroll-ybf.png';
+import scrollYffPng from '../../assets/main/scroll-yff.png';
+import scrollBlfPng from '../../assets/main/scroll-blf.png';
+import scrollBrfPng from '../../assets/main/scroll-brf.png';
+import scrollBgPng from '../../assets/main/scroll-bg.png';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, DrawSVGPlugin);
 
@@ -161,43 +168,43 @@ function MainPage() {
 			<div ref={wrapperRef} className="relative w-full h-screen">
 				<img
 					ref={obfRef}
-					src="/src/assets/main/scroll-obf.png"
+					src={scrollObfPng}
 					alt="img"
 					className="absolute w-full bottom-0 right-0 h-auto object-cover"
 				/>
 				<img
 					ref={offRef}
-					src="/src/assets/main/scroll-off.png"
+					src={scrollOffPng}
 					alt="img"
 					className="absolute w-full bottom-0 right-0 h-auto object-cover"
 				/>
 				<img
 					ref={ybfRef}
-					src="/src/assets/main/scroll-ybf.png"
+					src={scrollYbfPng}
 					alt="img"
 					className="absolute w-full bottom-0 left-0 h-auto object-cover"
 				/>
 				<img
 					ref={yffRef}
-					src="/src/assets/main/scroll-yff.png"
+					src={scrollYffPng}
 					alt="img"
 					className="absolute w-full bottom-0 left-0 h-auto object-cover"
 				/>
 				<img
 					ref={blfRef}
-					src="/src/assets/main/scroll-blf.png"
+					src={scrollBlfPng}
 					alt="img"
 					className="absolute w-full -bottom-1/20 right-[2%] h-auto object-cover -z-10"
 				/>
 				<img
 					ref={brfRef}
-					src="/src/assets/main/scroll-brf.png"
+					src={scrollBrfPng}
 					alt="img"
 					className="absolute w-full -bottom-1/20 left-[2%] h-auto object-cover -z-10"
 				/>
 				<img
 					ref={bgRef}
-					src="/src/assets/main/scroll-bg.png"
+					src={scrollBgPng}
 					alt="img"
 					className="absolute w-full h-[calc(100vh+10em-80px)] 3xl:h-[calc(100vh+7em-102px)] 4xl:h-[calc(100vh+7em-124px)] object-cover -z-20"
 				/>

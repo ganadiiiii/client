@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import bg from "../../assets/generate/bg.svg";
+import cartPng from "../../assets/cart.png";
 
 const PageNotFound: React.FC = () => {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ const PageNotFound: React.FC = () => {
 			}}
 		>  
             <div className="flex flex-col items-center justify-center">
-                <img src="/src/assets/cart.png" alt="404" className="w-[10.8em] h-[13.2em] mb-9" />
+                <img src={cartPng} alt="404" className="w-[10.8em] h-[13.2em] mb-9" />
 				<p
 					className="text-black text-center font-semibold whitespace-nowrap text-3xl mb-14"
 					style={{

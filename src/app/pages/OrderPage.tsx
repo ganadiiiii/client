@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import RedirectModal from "../../features/order/RedirectModal";
 import type { FlowerCard } from "../../types/FlowerCard";
+import backgroundSvg from "../../assets/generate/bg.svg";
+import deliveryPng from "../../assets/order/delivery.png";
+import pickupPng from "../../assets/order/pickup.png";
 
 const OrderPage: React.FC = () => {
 	const [isDeliveryHovered, setIsDeliveryHovered] = useState(false);
@@ -29,7 +32,7 @@ const OrderPage: React.FC = () => {
 		<div
 			className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center"
 			style={{
-				backgroundImage: "url('./src/assets/generate/bg.svg')",
+				backgroundImage: `url(${backgroundSvg})`,
 			}}
 		>
 			<div className="flex flex-col items-center justify-center">
@@ -68,14 +71,14 @@ const OrderPage: React.FC = () => {
 										/>
 									</svg>
 									<img
-										src="/src/assets/order/delivery.png"
+										src={deliveryPng}
 										alt="delivery"
 										className="absolute left-1/2 bottom-10 transform -translate-x-1/2 w-50 h-30 z-20"
 									/>
 								</>
 							) : (
 								<img
-									src="/src/assets/order/delivery.png"
+									src={deliveryPng}
 									alt="delivery"
 									className="absolute left-1/2 bottom-10 transform -translate-x-1/2 w-50 h-30 z-20"
 								/>
@@ -112,14 +115,14 @@ const OrderPage: React.FC = () => {
 										/>
 									</svg>
 									<img
-										src="/src/assets/order/pickup.png"
+										src={pickupPng}
 										alt="pickup"
 										className="absolute left-1/2 bottom-10 transform -translate-x-1/2 w-50 h-38 z-20"
 									/>
 								</>
 							) : (
 								<img
-									src="/src/assets/order/pickup.png"
+									src={pickupPng}
 									alt="pickup"
 									className="absolute left-1/2 bottom-10 transform -translate-x-1/2 w-50 h-38 z-20"
 								/>

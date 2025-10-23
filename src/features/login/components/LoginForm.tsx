@@ -1,6 +1,7 @@
 import { useId, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authAPI } from "../../../api";
+import footerPng from "../../../assets/footer.png";
 
 const LoginForm: React.FC = () => {
 	const navigate = useNavigate();
@@ -144,7 +145,7 @@ const LoginForm: React.FC = () => {
 				</div>
 			</div>
 			<footer className="w-full h-[36em] bg-transparent mt-auto">
-				<img src="/src/assets/footer.png" className="w-full h-full" />
+				<img src={footerPng} className="w-full h-full" />
 			</footer>
 		</div>
 	);

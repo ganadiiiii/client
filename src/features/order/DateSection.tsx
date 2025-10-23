@@ -2,6 +2,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { CalendarModal } from "./CalendarModal";
 import { TimePickerModal } from "./TimePickerModal";
+import iconFullSvg from "../../assets/icon-full.svg";
+import iconCheckSvg from "../../assets/icon-check.svg";
 
 interface DateSectionRef {
 	isValid: () => boolean;
@@ -130,9 +132,7 @@ function LabelWithCheck({
 				{label}
 			</p>
 			<img
-				src={
-					isFilled ? "/src/assets/icon-full.svg" : "/src/assets/icon-check.svg"
-				}
+				src={isFilled ? iconFullSvg : iconCheckSvg}
 				className="w-5 h-5"
 				alt="check"
 			/>

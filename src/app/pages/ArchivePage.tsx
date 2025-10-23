@@ -11,6 +11,15 @@ import PageButton from "../../features/archive/components/PageButton";
 import type { FlowerCard } from "../../types/FlowerCard";
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
 import AnimatedFlowerCard from "../../features/archive/components/AnimatedFlowerCard";
+import cardAlertPng from "../../assets/archive/card-alert.png";
+import sofaSvg from "../../assets/archive/sofa.svg";
+import characterPng from "../../assets/archive/character.png";
+import homeLight from "/src/assets/archive/home-light.png"
+import homeDark from "/src/assets/archive/home-dark.png"
+import lampOn from "/src/assets/archive/lamp-on.svg";
+import lampOnHover from "/src/assets/archive/lamp-on-hover.svg";
+import lampOff from "/src/assets/archive/lamp-off.svg";
+import lampOffHover from "/src/assets/archive/lamp-off-hover.svg";
 
 interface Friend {
 	id: string;
@@ -224,12 +233,7 @@ const ArchivePage = () => {
 				/>
 				{/* 배경 역할을 하는 home 이미지 */}
 				<div className="relative w-full h-[calc(100vh-9em-80px)] 3xl:h-[calc(100vh-9em-102px)]">
-					<img
-						src={`/src/assets/archive/${{
-							day: "home-light.png",
-							sunset: "home-light.png",
-							night: "home-dark.png",
-						}[lightState]}`}
+					<img src={{day: homeLight, sunset: homeLight, night: homeDark}[lightState]}
 						alt="Home background"
 						className="absolute bottom-0 left-1/2 transform -translate-x-1/2"
 						style={{
@@ -237,7 +241,6 @@ const ArchivePage = () => {
 							height: "53em",
 						}}
 					/>
-
 					<div
 						className="absolute z-10 group flex bottom-[42em] left-1/2 cursor-pointer w-22 h-35 justify-center items-center"
 						style={{
@@ -249,13 +252,13 @@ const ArchivePage = () => {
 					>
 						{lightState !== "night" ? (
 							<img
-								src={`/src/assets/archive/${isLampHovered ? "lamp-on-hover.svg" : "lamp-on.svg"}`}
+								src={isLampHovered ? lampOnHover : lampOn}
 								alt="Lamp"
 								className={`pointer-events-none ${isLampHovered ? "scale-121" : ""}`}
 							/>
 						) : (
 							<img
-								src={`/src/assets/archive/${isLampHovered ? "lamp-off-hover.svg" : "lamp-off.svg"}`}
+								src={isLampHovered ? lampOffHover : lampOff}
 								alt="Lamp"
 								className={`pointer-events-none ${isLampHovered ? "scale-118" : ""}`}
 							/>
@@ -312,15 +315,15 @@ const ArchivePage = () => {
 						}}
 					>
 					<motion.img
-						src="/src/assets/archive/card-alert.png"
+						src={cardAlertPng}
 						alt="New Card Alert"
 						whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 100, ease: easeInOut, duration: 0.5 }}
 						className={`absolute w-40 transform translate-x-3/5 -translate-y-1/4 cursor-pointer ${isNewCardAlert ? "opacity-100" : "opacity-0 invisible"}`}
 						onClick={handleNewCardAlertClick}
 					/>
-						<img src="/src/assets/archive/sofa.svg" alt="Sofa" />
+						<img src={sofaSvg} alt="Sofa" />
 						<img
-							src="/src/assets/archive/character.png"
+							src={characterPng}
 							alt="Character"
 							className="absolute top-1/2 left-1/2 transform -translate-x-2/3 -translate-y-1/2"
 							style={{

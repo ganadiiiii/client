@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
+import iconCheckSvg from "../../assets/icon-check.svg";
 
 interface RedirectModalProps {
 	isOpen: boolean;
@@ -44,7 +45,7 @@ const RedirectModal = ({ isOpen, message, onClose }: RedirectModalProps) => {
 						transition={{ type: "spring", damping: 25, stiffness: 300 }}
 						onClick={(e) => e.stopPropagation()}
 					>
-						<img src="/src/assets/icon-check.svg" className="mx-auto mb-3" />
+						<img src={iconCheckSvg} className="mx-auto mb-3" />
 						<p className="text-dark-gray text-lg text-center whitespace-nowrap">
 							{message}
 						</p>

@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ConfirmModal from "./ConfirmModal";
 import SuccessModal from "../archive/components/SuccessModal";
+import avatarPng from "../../assets/order/avatar.png";
 
 type MessageType = {
 	id: string;
@@ -112,8 +113,8 @@ const Talk: React.FC = () => {
 
 				{/* 시작 안내 메시지 */}
 				<div className="flex items-start gap-3">
-					<img
-						src="/src/assets/order/avatar.png"
+						<img
+							src={avatarPng}
 						alt="avatar"
 						className="w-14 h-14 rounded-full"
 					/>
@@ -209,7 +210,7 @@ const Talk: React.FC = () => {
                         </button>
                     </div>
 					<div className="px-auto pb-10 flex flex-col gap-4 items-center">
-						<img src="/src/assets/order/avatar.png" className="w-24.5 h-24.5 rounded-full" />
+						<img src={avatarPng} className="w-24.5 h-24.5 rounded-full" />
 						<h2 className="text-2xl font-bold" style={{ fontFamily: "NexonLv1Gothic" }}>꽃집이름</h2>
                         <button className="rounded-full border border-gray px-3 py-1">
                             <div className="flex flex-row block gap-1.5 items-center justify-center text-center">

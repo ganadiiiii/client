@@ -1,6 +1,12 @@
 import { useState } from "react";
 import Bubble from "../../components/Bubble";
 import { useNavigate } from "react-router-dom";
+import mainBgPng from "../../assets/main/main_bg.png";
+import cartPng from "../../assets/main/cart.png";
+import archivePng from "../../assets/main/archive.png";
+import customPng from "../../assets/main/custom.png";
+import orderPng from "../../assets/main/order.png";
+import tablePng from "../../assets/main/table.png";
 
 const MainTestPage = () => {
 	const [characterSpeechIndex, setCharacterSpeechIndex] = useState(0);
@@ -28,7 +34,7 @@ const MainTestPage = () => {
 		<div
 			className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center"
 			style={{
-				backgroundImage: "url('./src/assets/main/main_bg.png')",
+				backgroundImage: `url(${mainBgPng})`,
 			}}
 		>
             <div>
@@ -38,7 +44,7 @@ const MainTestPage = () => {
                     onClick={() => navigate("/shop")}
                     className="absolute bottom-[8.74em] left-1/2 z-30 cursor-pointer w-[12.25em] h-[11.88em] translate-x-[calc(-50%-18.5em)]">
                     <img 
-                        src="/src/assets/main/cart.png"
+                        src={cartPng}
                         alt="shop"
                         className="w-full h-full"
                     />
@@ -54,7 +60,7 @@ const MainTestPage = () => {
                     onClick={() => navigate("/archive")}
                     className="absolute bottom-[14.516em] left-1/2 z-20 cursor-pointer w-[22.54em] h-[20.55em] translate-x-[calc(-50%+23.5em)]">
                     <img 
-                        src="/src/assets/main/archive.png"
+                        src={archivePng}
                         alt="archive"
                         className="w-full h-full"
                     />
@@ -70,7 +76,7 @@ const MainTestPage = () => {
                     onClick={() => navigate("/customizing")}
                     className="absolute bottom-[16.8em] left-1/2 z-20 cursor-pointer w-[20em] h-[21.3125em] translate-x-[calc(-50%-25em)]">
                     <img 
-                        src="/src/assets/main/custom.png"
+                        src={customPng}
                         alt="customizing"
                         className="w-full h-full"
                     />
@@ -86,7 +92,7 @@ const MainTestPage = () => {
                     onClick={() => navigate("/order")}
                     className="absolute bottom-[26.2em] left-1/2 transform -translate-x-1/2 z-40 cursor-pointer w-[5.78em] h-[4.3em] translate-x-[calc(-10em)]">
                     <img 
-                        src="/src/assets/main/order.png"
+                        src={orderPng}
                         alt="order"
                         className="w-full h-full"
                     />
@@ -97,7 +103,7 @@ const MainTestPage = () => {
 						)}
 				</button>
                 <img 
-                    src="/src/assets/main/table.png"
+                    src={tablePng}
 					alt="table"
 					className="absolute bottom-[14em] left-1/2 transform -translate-x-1/2 w-[24.28em] h-[28.375em] z-30"
 					onClick={handleCharacterClick}

@@ -1,5 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { authAPI } from "../../api";
+import iconFullSvg from "../../assets/icon-full.svg";
+import iconCheckSvg from "../../assets/icon-check.svg";
 
 interface User {
 	id: string;
@@ -78,7 +80,7 @@ export const SenderSection = forwardRef<SenderSectionRef>((_, ref) => {
 							이름
 						</p>
 						<img
-							src="/src/assets/icon-full.svg"
+							src={iconFullSvg}
 							alt="check"
 							className="w-5 h-5"
 						/>
@@ -111,8 +113,8 @@ export const SenderSection = forwardRef<SenderSectionRef>((_, ref) => {
 						<img
 							src={
 								phone
-									? "/src/assets/icon-full.svg"
-									: "/src/assets/icon-check.svg"
+								? iconFullSvg
+								: iconCheckSvg
 							}
 							className="w-5 h-5"
 							alt="check"

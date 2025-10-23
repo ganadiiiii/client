@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { friendAPI } from "../../../api";
+import calloutPng from "../../../assets/archive/callout.png";
+import mailboxOpenPng from "../../../assets/archive/mailbox-open.png";
+import mailboxClosePng from "../../../assets/archive/mailbox-close.png";
 
 interface MailboxProps {
 	onClick?: () => void;
@@ -31,7 +34,7 @@ export default function Mailbox({ onClick }: MailboxProps) {
 			className="relative w-full h-full"
 		>
 			<motion.img
-				src="/src/assets/archive/callout.png"
+				src={calloutPng}
 				alt="Callout"
 				// style의 transform을 제거하고, animate 속성으로 위치를 제어합니다.
 				// x는 고정된 왼쪽 위치, y는 아래에서 위아래로 움직이는 애니메이션입니다.
@@ -48,7 +51,7 @@ export default function Mailbox({ onClick }: MailboxProps) {
 			/>
 			{isHovered ? (
 				<img
-					src="/src/assets/archive/mailbox-open.png"
+					src={mailboxOpenPng}
 					alt="Mailbox"
 					style={{
 						transform: "translate(-1.35em, -0.6em)",
@@ -57,7 +60,7 @@ export default function Mailbox({ onClick }: MailboxProps) {
 				/>
 			) : (
 				<img
-					src="/src/assets/archive/mailbox-close.png"
+					src={mailboxClosePng}
 					alt="Mailbox"
 					className="w-30 h-76"
 				/>

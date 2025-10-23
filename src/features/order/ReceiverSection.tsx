@@ -1,5 +1,7 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import FriendsListModal from "../archive/components/FriendsListModal";
+import iconFullSvg from "../../assets/icon-full.svg";
+import iconCheckSvg from "../../assets/icon-check.svg";
 
 interface Friend {
 	id: string;
@@ -75,8 +77,8 @@ export const ReceiverSection = forwardRef<ReceiverSectionRef>((_, ref) => {
 						<img
 							src={
 								selectedFriend
-									? "/src/assets/icon-full.svg"
-									: "/src/assets/icon-check.svg"
+									? iconFullSvg
+									: iconCheckSvg
 							}
 							alt="check"
 							className="w-5 h-5"
@@ -120,8 +122,8 @@ export const ReceiverSection = forwardRef<ReceiverSectionRef>((_, ref) => {
 						<img
 							src={
 								phone
-									? "/src/assets/icon-full.svg"
-									: "/src/assets/icon-check.svg"
+									? iconFullSvg
+									: iconCheckSvg
 							}
 							className="w-5 h-5"
 							alt="check"

@@ -34,7 +34,7 @@ const Talk: React.FC = () => {
 	}, [messages]);
 
 	// 빠른 버튼 클릭
-	const handleQuickReply = (text: string) => {
+	const handleQuickReply = (_text: string) => {
 		setMessages((prev) => [
 			...prev,
 			{

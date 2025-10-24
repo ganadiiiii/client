@@ -13,9 +13,6 @@ const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 		navigate(`/archive/${flower.cardId}`);
 	};
 
-	// designAssetId에 따라 배경 이미지 선택 (1-9)
-	const bgImageNumber = ((flower.designAssetId - 1) % 9) + 1;
-
 	// 이미지 로드 에러 핸들러
 	const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
 		e.currentTarget.src = "/src/assets/generate/result/temp-flower.png"; // 기본 이미지
@@ -36,9 +33,20 @@ const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 						top: "0.56em",
 						width: "5.625em",
 						height: "7.6875em",
-						backgroundImage: `url('./src/assets/generate/bg-${bgImageNumber}.svg')`,
-						backgroundRepeat: "no-repeat",
-						backgroundPosition: "center",
+						backgroundImage: `conic-gradient(from 0deg in oklab, ${flower.backgroundColors[0]} 28%, ${flower.backgroundColors[1]}33 46%, ${flower.backgroundColors[1]} 83%, ${flower.backgroundColors[0]} 100%)`,
+					}}
+				/>
+				{/* 중앙 흰색 반투명 원 */}
+				<div
+					className="absolute z-15"
+					style={{
+						left: "50%",
+						top: "50%",
+						transform: "translate(-50%, -50%) translateY(0.5em)",
+						width: "4.8em",
+						height: "4.8em",
+						borderRadius: "50%",
+						background: "linear-gradient(rgba(255, 255, 255, 0.5) 0%, rgba(244, 244, 244, 0.6) 100%)",
 					}}
 				/>
 			</div>
@@ -53,34 +61,34 @@ const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 			>
 				NO. {flower.cardId}
 			</div>
-		{flower.imageUrl ? (
-			<img
-				src={flower.imageUrl}
-				alt={`Flower ${flower.cardId}`}
-				className="absolute object-contain rounded-sm z-20"
-				style={{
-					left: "50%",
-					transform: "translateX(-50%)",
-					top: "1.5em",
-					height: "6.375em",
-					maxWidth: "5.5em",
-				}}
-				onError={handleImageError}
-			/>
-		) : (
-			<div 
-				className="absolute z-20 flex items-center justify-center text-gray-400 text-xs"
-				style={{
-					left: "50%",
-					transform: "translateX(-50%)",
-					top: "1.5em",
-					height: "6.375em",
-					width: "5em",
-				}}
-			>
-				No Image
-			</div>
-		)}
+			{flower.imageUrl ? (
+				<img
+					src={flower.imageUrl}
+					alt={`Flower ${flower.cardId}`}
+					className="absolute object-contain rounded-sm z-20"
+					style={{
+						left: "50%",
+						transform: "translateX(-50%)",
+						top: "1.5em",
+						height: "6.375em",
+						maxWidth: "5.5em",
+					}}
+					onError={handleImageError}
+				/>
+			) : (
+				<div
+					className="absolute z-20 flex items-center justify-center text-gray-400 text-xs"
+					style={{
+						left: "50%",
+						transform: "translateX(-50%)",
+						top: "1.5em",
+						height: "6.375em",
+						width: "5em",
+					}}
+				>
+					No Image
+				</div>
+			)}
 		</div>
 	);
 };

@@ -2,7 +2,7 @@ import type { SpringOptions } from "framer-motion";
 import { motion, useSpring } from "framer-motion";
 import React, { useRef } from "react";
 
-import cardBg from "../../../assets/generate/result/card.png";
+import cardBg from "../../../assets/card-bg.png";
 import type { FlowerCard } from "../../../types/FlowerCard";
 
 type ResultCardProps = {
@@ -28,12 +28,12 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 		mainFlower,
 		subFlower,
 	} = flowerCard;
-	
+
 	// 날짜는 현재 날짜로 표시 (API 응답에 없음)
-	const date = new Date().toLocaleDateString('ko-KR', { 
-		year: 'numeric', 
-		month: '2-digit', 
-		day: '2-digit' 
+	const date = new Date().toLocaleDateString('ko-KR', {
+		year: 'numeric',
+		month: '2-digit',
+		day: '2-digit'
 	}).replace(/\. /g, '.').replace(/\.$/, '');
 	const ref = useRef<HTMLDivElement>(null);
 
@@ -89,14 +89,38 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 				<div>
 					{/* 날짜 */}
 					<div
-						className="absolute left-[2.8em] top-[3em] text-black z-20 text-sm"
+						className="absolute left-[3.2em] top-[3em] text-black z-20 text-sm"
 						style={{ fontFamily: "Yidstreet" }}
 					>
 						{date}
 					</div>
 
+					<div>
+						{/* gradation */}
+						<div
+							className="absolute rounded-3xl z-10 w-78 h-89"
+							style={{
+								left: "50%",
+								top: "50%",
+								transform: "translate(-50%, -50%) translateX(-0.3em) translateY(-5.6em)",
+								backgroundImage: `conic-gradient(from 0deg in oklab, ${flowerCard.backgroundColors[0]} 28%, ${flowerCard.backgroundColors[1]}33 46%, ${flowerCard.backgroundColors[1]} 83%, ${flowerCard.backgroundColors[0]} 100%)`,
+							}}
+						/>
+						{/* 중앙 흰색 반투명 원 */}
+						<div
+							className="absolute z-15 w-64 h-64"
+							style={{
+								left: "50%",
+								top: "50%",
+								transform: "translate(-50%, -50%) translateX(-0.3em) translateY(-5em)",
+								borderRadius: "50%",
+								background: "linear-gradient(rgba(255, 255, 255, 0.5) 0%, rgba(244, 244, 244, 0.6) 100%)",
+							}}
+						/>
+					</div>
+
 					{/* 꽃 이미지 */}
-					<div className="absolute left-1/2 top-[13.75em] transform -translate-x-1/2 -translate-y-1/2 z-10">
+					<div className="absolute left-1/2 top-[13.75em] transform -translate-x-1/2 -translate-y-1/2 z-20">
 						<img
 							src={imageUrl}
 							alt="flower"

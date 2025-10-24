@@ -89,12 +89,12 @@ const Talk: React.FC = () => {
     const handleEndChatConfirm = () => {
         //로딩중 애니메이션 띄우기
         setIsEndChatConfirmModalOpen(false);
-        navigate("/");
+        navigate("/main");
     };
 
     const handleCloseSuccessModal = () => {
         setIsSuccessModalOpen(false);
-        navigate("/");
+        navigate("/main");
     };
 
 	return (

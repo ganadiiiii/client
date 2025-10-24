@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 import React, { useState, useEffect } from "react";
+import bg from "../../../assets/generate/bg.svg";
 
 interface TitleInputStepProps {
     value: string;
@@ -47,7 +48,7 @@ const TitleInputStep: React.FC<TitleInputStepProps> = ({
         <div
             className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center"
             style={{
-                backgroundImage: "url('./src/assets/generate/bg.svg')",
+                backgroundImage: `url(${bg})`,
             }}
         >
             {/* content with slide transition */}

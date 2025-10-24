@@ -9,6 +9,7 @@ import OptionButton from "./OptionButton";
 import PaperOptionCard from "./PaperOptionCard";
 import ColorOptionCard from "./ColorOptionCard";
 import DecoOptionCard from "./DecoOptionCard";
+import bg from "../../../assets/generate/bg.svg";
 
 interface QuestionStepProps {
 	questionNumber: number;
@@ -110,7 +111,7 @@ const QuestionStep: React.FC<QuestionStepProps> = ({
 		<div
 			className="min-h-screen flex flex-col items-center justify-center relative bg-background bg-cover bg-center text-center"
 			style={{
-				backgroundImage: "url('./src/assets/generate/bg.svg')",
+				backgroundImage: `url(${bg})`,
 			}}
 		>
 			{/* question content with slide transition */}

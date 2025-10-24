@@ -1,6 +1,6 @@
 import React from "react";
 import type { Friend } from "../hooks/useFriendsManager";
-import iconHome from "../../../assets/generate/result/icon-home-hover.svg";
+import iconHome from "../../../assets/archive/icon-friend-home.svg";
 import iconTrash from "../../../assets/archive/icon-trash.svg";
 interface FriendListItemProps {
 	friend: Friend;
@@ -59,7 +59,7 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
 			{friend.requestStatus === "sent" && (
 				<button
 					disabled
-					className="px-5 py-2 bg-white text-primary border-3 border-primary cursor-not-allowed rounded-[30px]"
+					className="px-5 py-2 bg-white text-primary border-3 border-primary cursor-not-allowed rounded-xl text-nowrap font-semibold"
 					style={{ fontFamily: "NexonLv1Gothic" }}
 				>
 					요청중
@@ -69,23 +69,23 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
 			{friend.requestStatus === "received" && (
 				<button
 					onClick={() => onRequestReceived?.(friend)}
-					className="px-5 py-2 bg-white text-primary border-3 border-primary rounded-[30px]"
+					className="px-5 py-2 bg-white text-primary border-3 border-primary cursor-not-allowed rounded-xl text-nowrap font-semibold"
 					style={{ fontFamily: "NexonLv1Gothic" }}
 				>
-					요청받음
+					요청받기
 				</button>
 			)}
 
 			{!friend.isFriend &&
-				(!friend.requestStatus || friend.requestStatus === "none") && (
+				(!friend.requestStatus || friend.requestStatus === "none") && 
 					<button
 						onClick={() => onRequestClick?.(friend)}
-						className="px-7 py-3 bg-primary text-white rounded-[30px] hover:bg-primary/90"
+						className="px-7 py-3 bg-primary text-white rounded-[30px] hover:bg-primary/90 text-nowrap"
 						style={{ fontFamily: "NexonLv1Gothic" }}
 					>
 						친구요청
 					</button>
-				)}
+				}
 		</div>
 	);
 };

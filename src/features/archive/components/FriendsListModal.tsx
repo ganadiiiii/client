@@ -179,7 +179,7 @@ const FriendsListModal = forwardRef<FriendsListModalRef, FriendsListModalProps>(
 																	onSendFriendRequest,
 																)
 															}
-															className="px-7 py-3 bg-primary text-white rounded-[30px] hover:bg-primary/90"
+															className="px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 text-nowrap cursor-pointer"
 															style={{ fontFamily: "NexonLv1Gothic" }}
 														>
 															친구요청

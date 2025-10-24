@@ -265,7 +265,7 @@ const ArchivePage = () => {
 					}}
 				/>
 				{/* 배경 역할을 하는 home 이미지 */}
-				<div className="relative w-full h-[calc(100vh-9em-80px)] 3xl:h-[calc(100vh-9em-102px)]">
+				<div className="relative w-full h-[calc(100vh-10em-80px)] 3xl:h-[calc(100vh-8em-102px)]">
 					<img src={{day: homeLight, sunset: homeLight, night: homeDark}[lightState]}
 						alt="Home background"
 						className="absolute bottom-0 left-1/2 transform -translate-x-1/2"

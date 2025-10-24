@@ -96,10 +96,13 @@ export function useFriendsManager() {
 					requestStatus: isReceived ? "received" : "sent",
 					requestId: request.requestId,
 				};
-				if (!existing || (existing.requestStatus === "sent" && candidate.requestStatus === "received")) {
+				
+				// received 상태를 우선시 (요청받은 사람이 더 중요한 상태)
+				if (!existing || candidate.requestStatus === "received") {
 					idToRequestUser.set(userInfo.userId, candidate);
 				}
 			}
+			// ACCEPTED 상태는 getFriends() API에서만 처리하므로 여기서는 제외
 		});
 
 		const requestUsers = Array.from(idToRequestUser.values());
@@ -114,13 +117,29 @@ export function useFriendsManager() {
 		]);
 
 
+		// 친구 목록을 먼저 설정 (getFriends() API 결과를 우선시)
 		const idToFriend = new Map(friendList.map((f) => [f.id, f] as const));
+		
+		// PENDING 상태의 요청만 추가 (ACCEPTED는 getFriends()에서 처리)
 		requestUsers.forEach((reqUser) => {
 			if (!idToFriend.has(reqUser.id)) {
+				// 친구가 아닌 경우, 요청 상태와 함께 추가
 				idToFriend.set(reqUser.id, reqUser);
+			} else {
+				// 이미 친구인 경우, PENDING 요청 상태만 업데이트
+				const existingFriend = idToFriend.get(reqUser.id)!;
+				if (reqUser.requestStatus && reqUser.requestStatus !== "none") {
+					idToFriend.set(reqUser.id, {
+						...existingFriend,
+						requestStatus: reqUser.requestStatus,
+						requestId: reqUser.requestId,
+					});
+				}
 			}
 		});
-		setFriends(Array.from(idToFriend.values()));
+		
+		const finalFriends = Array.from(idToFriend.values());
+		setFriends(finalFriends);
 		setFriendRequests(requests);
 	}, [getCurrentUser, getFriends, getFriendRequests]);
 
@@ -198,21 +217,21 @@ export function useFriendsManager() {
 				return [...prev, updateToSent(user)];
 			});
 
-		setSearchResults((prev) => {
-			const seen = new Set<string>();
-			const updated = prev.map((u) => {
-				if (u.id === user.id) {
-					seen.add(u.id);
-					return updateToSent(u);
+			setSearchResults((prev) => {
+				const seen = new Set<string>();
+				const updated = prev.map((u) => {
+					if (u.id === user.id) {
+						seen.add(u.id);
+						return updateToSent(u);
+					}
+					return u;
+				});
+				if (!seen.has(user.id)) {
+					updated.push(updateToSent(user));
 				}
-				return u;
+				const uniqueById = new Map(updated.map((u) => [u.id, u] as const));
+				return Array.from(uniqueById.values());
 			});
-			if (!seen.has(user.id)) {
-				updated.push(updateToSent(user));
-			}
-			const uniqueById = new Map(updated.map((u) => [u.id, u] as const));
-			return Array.from(uniqueById.values());
-		});
 
 			try {
 				await friendAPI.sendFriendRequest(user.id);

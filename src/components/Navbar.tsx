@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
 				{/* 로고 영역 - 좌우 300px 간격 */}
 				<div>
 					<Link to="/">
-						<motion.img src={isMainPage ? logoWhite : isShopPage ? logo : logoBlack} alt="Logo" className="h-12" whileHover={{ scale: 1.06,  }} transition={{ type: "spring", stiffness: 300 }} />
+						<motion.img src={isMainPage ? logoWhite : logo} alt="Logo" className="h-12" whileHover={{ scale: 1.06,  }} transition={{ type: "spring", stiffness: 300 }} />
 					</Link>
 				</div>
 
@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
 				>
 					<Link
 						to="/shop"
-						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-lg font-bold`}
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : 'text-primary hover:border-primary'} transition-all text-lg font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
@@ -80,7 +80,7 @@ const Navbar: React.FC = () => {
 				>
 					<Link
 						to="/customizing"
-						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-lg font-bold`}
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : 'text-primary hover:border-primary'} transition-all text-lg font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
@@ -94,7 +94,7 @@ const Navbar: React.FC = () => {
 				>
 					<Link
 						to="/order"
-						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-lg font-bold`}
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : 'text-primary hover:border-primary'} transition-all text-lg font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
@@ -108,7 +108,7 @@ const Navbar: React.FC = () => {
 				>
 					<Link
 						to="/archive"
-						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-lg font-bold`}
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : 'text-primary hover:border-primary'} transition-all text-lg font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
@@ -127,7 +127,7 @@ const Navbar: React.FC = () => {
 				>
 					<Link
 						to="/login"
-						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-lg font-bold`}
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : 'text-primary hover:border-primary'} transition-all text-lg font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}
@@ -141,7 +141,7 @@ const Navbar: React.FC = () => {
 				>
 					<Link
 						to="/cart"
-						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : isShopPage ? 'text-primary hover:border-primary' : 'text-[#5A5A5A] hover:border-[#5A5A5A]'} transition-all text-lg font-bold`}
+						className={`flex items-center justify-center px-6 py-1.5 rounded-full border-2 border-transparent ${isMainPage ? 'text-white hover:border-white' : 'text-primary hover:border-primary'} transition-all text-lg font-bold`}
 						style={{
 							fontFamily: "SUIT-Regular",
 						}}

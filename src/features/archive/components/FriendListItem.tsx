@@ -1,5 +1,6 @@
 import React from "react";
 import type { Friend } from "../hooks/useFriendsManager";
+import visit from "../../../assets/archive/visit.svg";
 
 interface FriendListItemProps {
 	friend: Friend;
@@ -7,6 +8,7 @@ interface FriendListItemProps {
 	onSelectFriend?: (friend: Friend) => void;
 	onRequestClick?: (friend: Friend) => void;
 	onRequestReceived?: (friend: Friend) => void;
+	onVisitFriend?: (friend: Friend) => void;
 }
 
 const FriendListItem: React.FC<FriendListItemProps> = ({
@@ -15,13 +17,22 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
 	onSelectFriend,
 	onRequestClick,
 	onRequestReceived,
+	onVisitFriend,
 }) => {
 	return (
 		<div className="flex items-center justify-between py-5">
-			<span className="flex flex-col">
-				<p className="font-bold text-start">{friend.name}</p>
-				<p>{friend.email}</p>
-			</span>
+			<div className="flex flex-row items-center gap-5">
+				<button 
+					className="w-5.4 h-5"
+					onClick={() => onVisitFriend?.(friend)}
+				>
+					<img src={visit} alt="visit" className="w-full h-full" />
+				</button>
+				<span className="flex flex-col">
+					<p className="font-bold text-start">{friend.name}</p>
+					<p>{friend.email}</p>
+				</span>
+			</div>
 
 			{friend.isFriend && (!friend.requestStatus || friend.requestStatus === "none") && (
 				<>

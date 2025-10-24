@@ -16,6 +16,7 @@ import MainPage from "./pages/MainPage";
 import ShopPage from "./pages/ShopPage";
 import PageNotFound from "./pages/404";
 import MainTestPage from "./pages/MainTestPage";
+import FriendArchivePage from "./pages/FriendArchivePage";
 
 export const AppRoutes = () => {
 	return (
@@ -26,6 +27,7 @@ export const AppRoutes = () => {
 			<Route path="/customizing/result/sent" element={<ResultSentPage />} />
 			<Route path="/archive" element={<ArchivePage />} />
 			<Route path="/archive/:flowerId" element={<FlowerInfoPage />} />
+			<Route path="/archive/user/:userId" element={<FriendArchivePage />} />
 			<Route path="/login" element={<LoginForm />} />
 			<Route path="/signup" element={<SignUpForm />} />
 			<Route path="/order" element={<OrderPage />} />

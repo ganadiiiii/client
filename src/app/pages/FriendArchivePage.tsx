@@ -1,15 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { cardAPI, friendAPI } from "../../api";
-import DeleteConfirmModal from "../../features/archive/components/DeleteConfirmModal";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { cardAPI } from "../../api";
 import FlowerGrid from "../../features/archive/components/FlowerGrid";
-import FriendsListModal, {
-	type FriendsListModalRef,
-} from "../../features/archive/components/FriendsListModal";
-import Mailbox from "../../features/archive/components/Mailbox";
-import SuccessModal from "../../features/archive/components/SuccessModal";
 import PageButton from "../../features/archive/components/PageButton";
-import NoCardsModal from "../../features/archive/components/NoCardsModal";
 import type { FlowerCard } from "../../types/FlowerCard";
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
 import AnimatedFlowerCard from "../../features/archive/components/AnimatedFlowerCard";
@@ -28,16 +21,13 @@ import bgNightSvg from "../../assets/archive/bg-dark.svg";
 import bouquetPinkPng from "../../assets/generate/bouquet-pink.png";
 import flower1Png from "../../assets/generate/flower-1.png";
 import flower2Png from "../../assets/generate/flower-2.png";
+import SimpleIconButton from "../../components/button/SimpleIconButton";
+import iconBack from "../../assets/generate/result/icon-back.svg";
 
-interface Friend {
-	id: string;
-	name: string;
-	email: string;
-	isFriend: boolean;
-}
-
-const ArchivePage = () => {
+const FriendArchivePage = () => {
+	const { userId } = useParams<{ userId: string }>();
 	const navigate = useNavigate();
+	
 	type LightState = "day" | "sunset" | "night";
 	const [lightState, setLightState] = useState<LightState>("day");
 	const [isLampHovered, setIsLampHovered] = useState(false);
@@ -48,21 +38,10 @@ const ArchivePage = () => {
 	const [currentPage, setCurrentPage] = useState(0);
 	const [totalPages, setTotalPages] = useState(0);
 
-	// 모달 상태 관리
-	const [isFriendsModalOpen, setIsFriendsModalOpen] = useState(false);
-	const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
-	const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-	const [friendToDelete, setFriendToDelete] = useState<Friend | null>(null);
-	const [successMessage, setSuccessMessage] = useState("");
-	const [showNoCardsModal, setShowNoCardsModal] = useState(false);
-
 	// new card alert state
 	const [isNewCardAlert, setIsNewCardAlert] = useState(true);
 	const [showCardAnimation, setShowCardAnimation] = useState(false);
 	const [triggerCardLanding, setTriggerCardLanding] = useState(false);
-
-	// FriendsListModal ref
-	const friendsModalRef = useRef<FriendsListModalRef>(null);
 
 	// Dummy FlowerCard data
 	const dummyCard: FlowerCard = {
@@ -104,104 +83,41 @@ const ArchivePage = () => {
 	// 카드 데이터 가져오기
 	useEffect(() => {
 		const fetchCards = async () => {
-		try {
-			setIsLoading(true);
-			const response = await cardAPI.getAllCards(currentPage, 15);
+			if (!userId) return;
 			
-			// SharedCardDetail 배열을 FlowerCard 배열로 변환
-			const flowerCards = response.items?.map((sharedCard: {
-				card: FlowerCard;
-				note: string;
-				fromName: string;
-				toName: string;
-			}) => ({
-				...sharedCard.card,
-				message: sharedCard.note,
-				sender: sharedCard.fromName,
-				receiver: sharedCard.toName,
-			})) || [];
-			
-			setCards(flowerCards);
-			setTotalPages(response.totalPages || 0);
-		} catch (error) {
-			console.error("카드 목록 조회 실패:", error);
-		} finally {
-			setIsLoading(false);
-		}
+			try {
+				setIsLoading(true);
+				const response = await cardAPI.getUserCards(userId, currentPage, 15);
+				
+				// SharedCardDetail 배열을 FlowerCard 배열로 변환
+				const flowerCards = response.items?.map((sharedCard: {
+					card: FlowerCard;
+					note: string;
+					fromName: string;
+					toName: string;
+				}) => ({
+					...sharedCard.card,
+					message: sharedCard.note,
+					sender: sharedCard.fromName,
+					receiver: sharedCard.toName,
+				})) || [];
+				
+				setCards(flowerCards);
+				setTotalPages(response.totalPages || 0);
+			} catch (error) {
+				console.error("친구 카드 목록 조회 실패:", error);
+			} finally {
+				setIsLoading(false);
+			}
 		};
 
 		fetchCards();
-	}, [currentPage]);
-
-	// 카드가 없을 때 모달을 보여주고 2초 후 자동으로 닫기
-	useEffect(() => {
-		if (!isLoading && cards.length === 0) {
-			setShowNoCardsModal(true);
-			const timer = setTimeout(() => {
-				setShowNoCardsModal(false);
-			}, 2000);
-			
-			return () => clearTimeout(timer);
-		}
-	}, [isLoading, cards.length]);
+	}, [userId, currentPage]);
 
 	const toggleLight = () => {
 		setLightState((prev) =>
 			prev === "day" ? "sunset" : prev === "sunset" ? "night" : "day"
 		);
-	};
-
-	// Mailbox 클릭 핸들러
-	const handleMailboxClick = () => {
-		setIsFriendsModalOpen(true);
-	};
-
-	// 친구 삭제 요청 핸들러
-	const handleDeleteFriend = (friend: Friend) => {
-		setFriendToDelete(friend);
-		setIsDeleteConfirmOpen(true);
-	};
-
-	// 친구 삭제 확인 핸들러
-	const handleConfirmDelete = async () => {
-		if (friendToDelete) {
-			try {
-				await friendAPI.deleteFriend(friendToDelete.id);
-				setIsDeleteConfirmOpen(false);
-				setSuccessMessage("삭제되었습니다.");
-				setIsSuccessModalOpen(true);
-				setFriendToDelete(null);
-
-				// 친구 목록 즉시 새로고침
-				friendsModalRef.current?.refreshFriends();
-			} catch (error) {
-				console.error("친구 삭제 실패:", error);
-			}
-		}
-	};
-
-	// 친구 삭제 취소 핸들러
-	const handleCancelDelete = () => {
-		setIsDeleteConfirmOpen(false);
-		setFriendToDelete(null);
-	};
-
-	// 친구 요청 핸들러
-	const handleSendFriendRequest = () => {
-		setSuccessMessage("친구요청이\n완료되었습니다.");
-		setIsSuccessModalOpen(true);
-	};
-
-	// 친구 방문 핸들러
-	const handleVisitFriend = (friend: Friend) => {
-		// 친구의 카드 페이지로 이동
-		navigate(`/archive/user/${friend.id}`);
-	};
-
-	// 성공 모달 닫기 핸들러
-	const handleCloseSuccessModal = () => {
-		setIsSuccessModalOpen(false);
-		setSuccessMessage("");
 	};
 
 	// New Card Alert 클릭 핸들러
@@ -236,6 +152,11 @@ const ArchivePage = () => {
 		}
 	};
 
+	// 뒤로가기 핸들러
+	const handleGoBack = () => {
+		navigate(-1);
+	};
+
 	return (
 		<main className="overflow-hidden">
 			{/* background image with smooth crossfade */}
@@ -265,7 +186,7 @@ const ArchivePage = () => {
 					}}
 				/>
 				{/* 배경 역할을 하는 home 이미지 */}
-				<div className="relative w-full h-[calc(100vh-9em-80px)] 3xl:h-[calc(100vh-9em-102px)]">
+				<div className="relative w-full h-[calc(100vh-10em-80px)] 3xl:h-[calc(100vh-8em-102px)]">
 					<img src={{day: homeLight, sunset: homeLight, night: homeDark}[lightState]}
 						alt="Home background"
 						className="absolute bottom-0 left-1/2 transform -translate-x-1/2"
@@ -330,14 +251,14 @@ const ArchivePage = () => {
 							disabled={currentPage >= totalPages - 1}
 						/>
 					</div>
-					<div
-						className="
-							absolute bottom-[7.5em] left-1/2 z-10 cursor-pointer w-48 h-64
-							translate-x-[calc(-50%-34em)]
-						"
-					>
-						<Mailbox onClick={handleMailboxClick} />
-					</div>
+
+					{/* 뒤로가기 버튼 */}
+					<SimpleIconButton
+                        onClick={handleGoBack}
+                        icon={iconBack}
+                        label="뒤로가기"
+                        className="absolute left-1/10 top-6"
+				    />
 
 					<div
 						className="absolute left-1/2 bottom-0 z-10"
@@ -435,36 +356,8 @@ const ArchivePage = () => {
 				</>
 			)}
 		</AnimatePresence>
-
-		{/* 모달들 */}
-		<FriendsListModal
-				ref={friendsModalRef}
-				isOpen={isFriendsModalOpen}
-				onClose={() => setIsFriendsModalOpen(false)}
-				onDeleteFriend={handleDeleteFriend}
-				onSendFriendRequest={handleSendFriendRequest}
-				onVisitFriend={handleVisitFriend}
-			/>
-
-			<DeleteConfirmModal
-				isOpen={isDeleteConfirmOpen}
-				friendName={friendToDelete?.name || ""}
-				onConfirm={handleConfirmDelete}
-				onCancel={handleCancelDelete}
-			/>
-
-			<SuccessModal
-				isOpen={isSuccessModalOpen}
-				message={successMessage}
-				onClose={handleCloseSuccessModal}
-			/>
-
-			<NoCardsModal
-				isVisible={showNoCardsModal}
-				onClose={() => setShowNoCardsModal(false)}
-			/>
 		</main>
 	);
 };
 
-export default ArchivePage;
+export default FriendArchivePage;

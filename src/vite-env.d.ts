@@ -7,3 +7,9 @@ interface ImportMetaEnv {
 interface ImportMeta {
 	readonly env: ImportMetaEnv;
 }
+
+// Audio file types
+declare module "*.mp3" {
+	const src: string;
+	export default src;
+}

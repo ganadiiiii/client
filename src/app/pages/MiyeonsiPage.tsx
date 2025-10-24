@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import CircleTransition from "../../components/CircleTransition";
 import bg from "../../assets/archive/miyeonsi/bg-mi.svg";
 import home from "../../assets/archive/miyeonsi/home.png";
+import bgMusic from "../../assets/archive/miyeonsi/여신_등장!.mp3";
 
 interface Dialogue {
     id: number;
@@ -42,12 +43,38 @@ const MiyeonsiPage = () => {
     const [currentDialogueIndex, setCurrentDialogueIndex] = useState(0);
     const [isTextAnimating, setIsTextAnimating] = useState(false);
     const [showCircleTransition, setShowCircleTransition] = useState(true);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
     const currentDialogue = dialogues[currentDialogueIndex];
 
-    // 페이지 진입 시 circle transition 시작
+    // 페이지 진입 시 circle transition 시작 및 오디오 재생
     useEffect(() => {
         setShowCircleTransition(true);
+
+        // 오디오 생성 및 재생
+        const audio = new Audio(bgMusic);
+        audio.volume = 0.5; // 볼륨 50%
+        audioRef.current = audio;
+
+        // 오디오 재생 시도
+        const playAudio = async () => {
+            try {
+                await audio.play();
+            } catch (error) {
+                console.log("Auto-play was prevented:", error);
+                // 브라우저 autoplay policy로 인해 재생이 막힐 수 있음
+            }
+        };
+
+        playAudio();
+
+        // 컴포넌트 언마운트 시 오디오 정지
+        return () => {
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current = null;
+            }
+        };
     }, []);
 
     const handleDialogueClick = () => {

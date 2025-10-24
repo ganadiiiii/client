@@ -398,19 +398,18 @@ const ArchivePage = () => {
 							transform: "translate(calc(-50% + 33.75em), calc(-50% + 15em))",
 						}}
 					>
-						{isClickMeHovered ?
+						{isNewCardAlert && !isClickMeHovered ?
 							<motion.img
 								src={cardAlertPng}
 								alt="New Card Alert"
 								whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 100, ease: easeInOut, duration: 0.5 }}
-								className={`absolute w-40 transform translate-x-3/5 -translate-y-1/4 cursor-pointer ${isNewCardAlert ? "opacity-100" : "opacity-0 invisible"}`}
+								className="absolute w-40 transform translate-x-3/5 -translate-y-1/4 cursor-pointer"
 								onClick={handleNewCardAlertClick}
 							/> :
-							<motion.img
+							<img
 								src={clickMePng}
 								alt="Click Me"
-								whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 100, ease: easeInOut, duration: 0.5 }}
-								className={`absolute w-40 transform translate-x-3/5 -translate-y-1/4 cursor-pointer ${isNewCardAlert ? "opacity-100" : "opacity-0 invisible"}`}
+								className="absolute w-40 transform translate-x-3/5 -translate-y-1/4 cursor-pointer"
 
 							/>}
 						<img src={sofaSvg} alt="Sofa" />

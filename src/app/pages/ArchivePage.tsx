@@ -57,9 +57,10 @@ const ArchivePage = () => {
 	const [showNoCardsModal, setShowNoCardsModal] = useState(false);
 
 	// new card alert state
-	const [isNewCardAlert, setIsNewCardAlert] = useState(true);
+	const [isNewCardAlert, setIsNewCardAlert] = useState(false);
 	const [showCardAnimation, setShowCardAnimation] = useState(false);
 	const [triggerCardLanding, setTriggerCardLanding] = useState(false);
+	const [latestCard, setLatestCard] = useState<FlowerCard | null>(null);
 
 	// FriendsListModal ref
 	const friendsModalRef = useRef<FriendsListModalRef>(null);
@@ -100,6 +101,33 @@ const ArchivePage = () => {
 		sender: "지은",
 		receiver: "정원",
 	};
+
+	// newFriend API 호출하여 unreadCardCount 확인
+	useEffect(() => {
+		const checkNewCards = async () => {
+			try {
+				const response = await friendAPI.newFriend();
+				if (response.unreadCardCount >= 1) {
+					setIsNewCardAlert(true);
+					// 최신 카드 가져오기 (첫 번째 페이지의 첫 번째 카드)
+					const latestResponse = await cardAPI.getAllCards(0, 1);
+					if (latestResponse.items && latestResponse.items.length > 0) {
+						const latestCardData = latestResponse.items[0];
+						setLatestCard({
+							...latestCardData.card,
+							message: latestCardData.note,
+							sender: latestCardData.fromName,
+							receiver: latestCardData.toName,
+						});
+					}
+				}
+			} catch (error) {
+				console.error("새 카드 확인 실패:", error);
+			}
+		};
+
+		checkNewCards();
+	}, []);
 
 	// 카드 데이터 가져오기
 	useEffect(() => {
@@ -429,7 +457,7 @@ const ArchivePage = () => {
 							}}
 							className="pointer-events-auto"
 						>
-							<AnimatedFlowerCard flowerCard={dummyCard} />
+							<AnimatedFlowerCard flowerCard={latestCard || dummyCard} />
 						</motion.div>
 					</div>
 				</>

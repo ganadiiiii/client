@@ -4,9 +4,6 @@ import { cardAPI } from "../../api";
 import FlowerGrid from "../../features/archive/components/FlowerGrid";
 import PageButton from "../../features/archive/components/PageButton";
 import type { FlowerCard } from "../../types/FlowerCard";
-import { AnimatePresence, easeInOut, motion } from "framer-motion";
-import AnimatedFlowerCard from "../../features/archive/components/AnimatedFlowerCard";
-import cardAlertPng from "../../assets/archive/card-alert.png";
 import sofaSvg from "../../assets/archive/sofa.svg";
 import characterPng from "../../assets/archive/character.png";
 import homeLight from "../../assets/archive/home-light.png";
@@ -18,9 +15,6 @@ import lampOffHover from "../../assets/archive/lamp-off-hover.svg";
 import bgDaySvg from "../../assets/archive/bg.svg";
 import bgSunsetSvg from "../../assets/archive/bg-sunset.svg";
 import bgNightSvg from "../../assets/archive/bg-dark.svg";
-import bouquetPinkPng from "../../assets/generate/bouquet-pink.png";
-import flower1Png from "../../assets/generate/flower-1.png";
-import flower2Png from "../../assets/generate/flower-2.png";
 import SimpleIconButton from "../../components/button/SimpleIconButton";
 import iconBack from "../../assets/generate/result/icon-back.svg";
 
@@ -37,48 +31,6 @@ const FriendArchivePage = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState(0);
 	const [totalPages, setTotalPages] = useState(0);
-
-	// new card alert state
-	const [isNewCardAlert, setIsNewCardAlert] = useState(true);
-	const [showCardAnimation, setShowCardAnimation] = useState(false);
-	const [triggerCardLanding, setTriggerCardLanding] = useState(false);
-
-	// Dummy FlowerCard data
-	const dummyCard: FlowerCard = {
-		cardId: 999,
-		title: "축하의 마음을 전해요",
-		imageUrl: bouquetPinkPng,
-		imageSource: "custom",
-		floriography: "사랑과 감사의 마음을 담아",
-		whoType: "friend",
-		whoLabel: "친구",
-		whenType: "birthday",
-		whenLabel: "생일",
-		emotionTypes: ["joy", "love"],
-		emotionLabels: ["기쁨", "사랑"],
-		bouquetSize: "medium",
-		bouquetLabel: "중간",
-		wrappingType: "ribbon",
-		wrappingLabel: "리본",
-		price: 35000,
-		designAssetId: 1,
-		backgroundColors: ["#FFB6C1", "#FFC0CB"],
-		mainFlower: {
-			flowerId: 1,
-			koreanName: "장미",
-			englishName: "Rose",
-			imageUrl: flower1Png,
-		},
-		subFlower: {
-			flowerId: 2,
-			koreanName: "카네이션",
-			englishName: "Carnation",
-			imageUrl: flower2Png,
-		},
-		message: "생일 축하해! 항상 행복하고 건강하길 바랄게. 우리 앞으로도 오래오래 좋은 친구로 지내자!",
-		sender: "지은",
-		receiver: "정원",
-	};
 
 	// 카드 데이터 가져오기
 	useEffect(() => {
@@ -127,25 +79,6 @@ const FriendArchivePage = () => {
 		setLightState((prev) =>
 			prev === "day" ? "sunset" : prev === "sunset" ? "night" : "day"
 		);
-	};
-
-	// New Card Alert 클릭 핸들러
-	const handleNewCardAlertClick = () => {
-		setShowCardAnimation(true);
-		setIsNewCardAlert(false);
-	};
-
-	// Card Animation 닫기 핸들러
-	const handleCloseCardAnimation = () => {
-		setShowCardAnimation(false);
-		// 0.6초 후에 카드 착지 애니메이션 트리거
-		setTimeout(() => {
-			setTriggerCardLanding(true);
-			// 애니메이션이 진행될 시간을 준 후 리셋 (spring 애니메이션이 완료될 시간)
-			setTimeout(() => {
-				setTriggerCardLanding(false);
-			}, 100);
-		}, 500);
 	};
 
 	// 페이지네이션 핸들러
@@ -239,7 +172,6 @@ const FriendArchivePage = () => {
 							<FlowerGrid
 								cards={cards || []}
 								isLoading={isLoading}
-								triggerCardLanding={triggerCardLanding}
 							/>
 						)}
 					</div>

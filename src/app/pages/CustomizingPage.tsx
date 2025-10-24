@@ -89,7 +89,10 @@ const CustomizingPage: React.FC = () => {
 		} else {
 			// 마지막 질문 완료 시 결과 페이지로 이동하거나 다른 처리
 			setIsLoading(true);
-			const result = await createCardFromAnswers({ answers, bouquetTitle });
+			const [result] = await Promise.all([
+				createCardFromAnswers({ answers, bouquetTitle }),
+				new Promise(resolve => setTimeout(resolve, 2500)) // 2.5초 대기
+			]);
 			setIsLoading(false);
 			if (result) {
 				navigate("/customizing/result", { 

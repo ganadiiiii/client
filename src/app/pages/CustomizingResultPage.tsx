@@ -181,7 +181,10 @@ const CustomizingResultPage: React.FC = () => {
 	const handleRecreate = async (cardDataToRecreate: CardData) => {
 		try {
 			setIsRecreating(true);
-			const newFlowerCard = await createCardFromData({ cardData: cardDataToRecreate });
+			const [newFlowerCard] = await Promise.all([
+				createCardFromData({ cardData: cardDataToRecreate }),
+				new Promise(resolve => setTimeout(resolve, 2500)) // 2.5초 대기
+			]);
 			setIsRecreating(false);
 			
 			if (newFlowerCard) {

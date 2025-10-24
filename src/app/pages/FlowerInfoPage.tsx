@@ -84,18 +84,136 @@ const FlowerInfoPage = () => {
 	}
 
 	const handleDownload = async () => {
-	if (!divRef.current) return;
+		if (!divRef.current || !flower) return;
 
-	try {
-		const dataUrl = await domToPng(divRef.current);
-		const link = document.createElement("a");
-		link.download = "flower-card.png";
-		link.href = dataUrl;
-		link.click();
-	} catch (error) {
-		console.error("다운로드 실패:", error);
-	}
-};
+		try {
+			// Front result card만을 위한 임시 div 생성
+			const tempDiv = document.createElement("div");
+			tempDiv.style.position = "absolute";
+			tempDiv.style.left = "-9999px";
+			tempDiv.style.top = "0";
+			tempDiv.style.width = "24em";
+			tempDiv.style.height = "37.0625em";
+			tempDiv.style.fontSize = "16px";
+			tempDiv.style.visibility = "visible";
+			tempDiv.style.opacity = "1";
+
+			// Front result card HTML 직접 생성 (3D transform 없이)
+			tempDiv.innerHTML = `
+				<div style="width: 24em; height: 37.0625em;">
+					<div style="
+						position: relative;
+						width: 100%;
+						height: 100%;
+						border-radius: 2.5rem;
+						background-image: url(/assets/generate/card.png);
+						background-repeat: no-repeat;
+						background-size: 100% 100%;
+						background-position: center;
+					">
+						<!-- 날짜 -->
+						<div style="
+							position: absolute;
+							left: 2.8em;
+							top: 2.5em;
+							color: black;
+							z-index: 20;
+							font-size: 1.175rem;
+							font-family: Yidstreet;
+						">
+							${new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\. /g, '.').replace(/\.$/, '')}
+						</div>
+	
+						<!-- 꽃 이미지 -->
+						<div style="
+							position: absolute;
+							left: 45%;
+							top: 13.75em;
+							transform: translate(-50%, -50%);
+							z-index: 10;
+						">
+							<img src="${flower.imageUrl}" alt="flower" style="height: 20em; object-fit: contain;" />
+						</div>
+	
+						<!-- 제목 -->
+						<div style="
+							position: absolute;
+							left: 1.6em;
+							top: 16em;
+							color: black;
+							z-index: 20;
+							font-weight: bold;
+							font-size: 2rem;
+							font-family: Yidstreet;
+						">
+							${flower.title}
+						</div>
+	
+						<!-- 메인/서브 꽃 -->
+						<div style="
+							position: absolute;
+							left: 2.8em;
+							top: 31.5em;
+							color: black;
+							font-size: 1.175rem;
+						">
+							<div style="display: flex; flex-direction: row; gap: 10px; margin-bottom: 5px;">
+								<span style="font-family: Yidstreet; font-weight: 600;">Main</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.mainFlower?.koreanName || ""}</span>
+								<span style="font-family: Yidstreet; font-weight: 600;">Sub</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.subFlower?.koreanName || ""}</span>
+							</div>
+							<div style="display: flex; flex-direction: row; gap: 10px;">
+								<span style="font-family: Yidstreet; font-weight: 600;">Floriography</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.floriography}</span>
+							</div>
+						</div>
+	
+						<!-- Size & Price -->
+						<div style="
+							position: absolute;
+							left: 2.8em;
+							top: 36.75em;
+							display: flex;
+							flex-direction: row;
+							gap: 5rem;
+							color: black;
+							font-size: 1.175rem;
+						">
+							<div style="display: flex; gap: 0.75rem; align-items: baseline;">
+								<span style="font-family: Yidstreet; font-weight: 600;">Size</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.bouquetSize}</span>
+							</div>
+							<div style="display: flex; gap: 0.75rem; align-items: baseline;">
+								<span style="font-family: Yidstreet; font-weight: 600;">Price</span>
+								<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.price}원</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			`;
+
+			document.body.appendChild(tempDiv);
+
+			await new Promise((resolve) => setTimeout(resolve, 100));
+
+			// modern-screenshot을 사용하여 이미지 생성
+			const dataUrl = await domToPng(tempDiv, {
+				width: 384,
+				height: 593,
+			});
+
+			document.body.removeChild(tempDiv);
+
+			// 간단한 다운로드 방식
+			const link = document.createElement('a');
+			link.download = `${flower.title}.png`;
+			link.href = dataUrl;
+			link.click();
+		} catch (error) {
+			console.error("Error converting div to image:", error);
+		}
+	};
 
 	const handleDelete = async () => {
 		if (!flower) return;

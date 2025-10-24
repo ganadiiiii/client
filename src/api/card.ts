@@ -92,6 +92,19 @@ export const cardAPI = {
 		return response.data;
 	},
 
+	// 특정 사용자의 카드 조회 API
+	getUserCards: async (userId: string, page = 0, size = 15) => {
+		const accessToken = localStorage.getItem("accessToken");
+		const response = await axios.get(`${API_BASE_URL}/archive`, {
+			params: { userId, page, size },
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+				"Content-Type": "application/json",
+			},
+		});
+		return response.data;
+	},
+
 	// 카드 상세 조회 API
 	getCardDetail: async (cardId: string) => {
 		const accessToken = localStorage.getItem("accessToken");

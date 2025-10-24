@@ -12,6 +12,7 @@ interface FriendsListModalProps {
 	onDeleteFriend?: (friend: Friend) => void;
 	onSendFriendRequest?: (user: Friend) => void;
 	onSelectFriend?: (friend: Friend) => void;
+	onVisitFriend?: (friend: Friend) => void;
 }
 
 export interface FriendsListModalRef {
@@ -20,7 +21,7 @@ export interface FriendsListModalRef {
 
 const FriendsListModal = forwardRef<FriendsListModalRef, FriendsListModalProps>(
 	(
-		{ isOpen, onClose, onDeleteFriend, onSendFriendRequest, onSelectFriend },
+		{ isOpen, onClose, onDeleteFriend, onSendFriendRequest, onSelectFriend, onVisitFriend },
 		ref,
 	) => {
 		const {
@@ -154,6 +155,7 @@ const FriendsListModal = forwardRef<FriendsListModalRef, FriendsListModalProps>(
 														handleSendFriendRequest(u, onSendFriendRequest);
 													}}
 													onRequestReceived={handleRequestReceived}
+													onVisitFriend={onVisitFriend}
 												/>
 											</div>
 										))}

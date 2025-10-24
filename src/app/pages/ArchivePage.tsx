@@ -8,6 +8,7 @@ import FriendsListModal, {
 import Mailbox from "../../features/archive/components/Mailbox";
 import SuccessModal from "../../features/archive/components/SuccessModal";
 import PageButton from "../../features/archive/components/PageButton";
+import NoCardsModal from "../../features/archive/components/NoCardsModal";
 import type { FlowerCard } from "../../types/FlowerCard";
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
 import AnimatedFlowerCard from "../../features/archive/components/AnimatedFlowerCard";
@@ -51,6 +52,7 @@ const ArchivePage = () => {
 	const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 	const [friendToDelete, setFriendToDelete] = useState<Friend | null>(null);
 	const [successMessage, setSuccessMessage] = useState("");
+	const [showNoCardsModal, setShowNoCardsModal] = useState(false);
 
 	// new card alert state
 	const [isNewCardAlert, setIsNewCardAlert] = useState(true);
@@ -123,6 +125,18 @@ const ArchivePage = () => {
 
 		fetchCards();
 	}, [currentPage]);
+
+	// 카드가 없을 때 모달을 보여주고 2초 후 자동으로 닫기
+	useEffect(() => {
+		if (!isLoading && cards.length === 0) {
+			setShowNoCardsModal(true);
+			const timer = setTimeout(() => {
+				setShowNoCardsModal(false);
+			}, 2000);
+			
+			return () => clearTimeout(timer);
+		}
+	}, [isLoading, cards.length]);
 
 	const toggleLight = () => {
 		setLightState((prev) =>
@@ -429,6 +443,11 @@ const ArchivePage = () => {
 				isOpen={isSuccessModalOpen}
 				message={successMessage}
 				onClose={handleCloseSuccessModal}
+			/>
+
+			<NoCardsModal
+				isVisible={showNoCardsModal}
+				onClose={() => setShowNoCardsModal(false)}
 			/>
 		</main>
 	);

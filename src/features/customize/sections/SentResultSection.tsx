@@ -44,7 +44,7 @@ const SentResultSection: React.FC<SentResultSectionProps> = ({
                     width: 100%;
                     height: 100%;
                     border-radius: 2.5rem;
-                    background-image: url(/src/assets/generate/result/card.png);
+                    background-image: url(/assets/generate/card.png);
                     background-repeat: no-repeat;
                     background-size: 100% 100%;
                     background-position: center;

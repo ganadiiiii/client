@@ -34,12 +34,24 @@ const Talk: React.FC = () => {
 		messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
 	}, [messages]);
 
+	const generateUUID = () => {
+		if (typeof crypto !== "undefined" && crypto.randomUUID) {
+		  return crypto.randomUUID();
+		}
+		// fallback (RFC4122 버전 4 compliant)
+		return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+		  const r = (Math.random() * 16) | 0;
+		  const v = c === "x" ? r : (r & 0x3) | 0x8;
+		  return v.toString(16);
+		});
+	};
+	
 	// 빠른 버튼 클릭
 	const handleQuickReply = (_text: string) => {
 		setMessages((prev) => [
 			...prev,
 			{
-				id: crypto.randomUUID(),
+				id: generateUUID(),
 				sender: "other",
 				text: `플로리스트가 답변을 준비중입니다.`,
 			},
@@ -51,7 +63,7 @@ const Talk: React.FC = () => {
 		if (input.trim()) {
 			setMessages((prev) => [
 				...prev,
-				{ id: crypto.randomUUID(), sender: "me", text: input.trim() },
+				{ id: generateUUID(), sender: "me", text: input.trim() },
 			]);
 			setInput("");
 		}
@@ -64,7 +76,7 @@ const Talk: React.FC = () => {
 			const url = URL.createObjectURL(file);
 			setMessages((prev) => [
 				...prev,
-				{ id: crypto.randomUUID(), sender: "me", image: url },
+				{ id: generateUUID(), sender: "me", image: url },
 			]);
 		}
 	};
@@ -77,12 +89,12 @@ const Talk: React.FC = () => {
     const handleEndChatConfirm = () => {
         //로딩중 애니메이션 띄우기
         setIsEndChatConfirmModalOpen(false);
-        navigate("/");
+        navigate("/main");
     };
 
     const handleCloseSuccessModal = () => {
         setIsSuccessModalOpen(false);
-        navigate("/");
+        navigate("/main");
     };
 
 	return (

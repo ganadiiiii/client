@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useId, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authAPI } from "../../../api";
 import footerPng from "../../../assets/footer.png";
@@ -9,6 +9,11 @@ const LoginForm: React.FC = () => {
 	const passwordId = useId();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+
+	// 페이지 로드 시 스크롤을 맨 위로 리셋
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -26,7 +31,7 @@ const LoginForm: React.FC = () => {
 			localStorage.setItem("userId", userId);
 			localStorage.setItem("name", name);
 			// 로그인 성공 후 메인 페이지로 이동
-			navigate("/");
+			navigate("/main");
 		} catch (error) {
 			console.error("Login failed:", error);
 		}

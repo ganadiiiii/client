@@ -1,5 +1,4 @@
-import saveAs from "file-saver";
-import html2canvas from "html2canvas";
+import { domToPng } from "modern-screenshot";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import iconShare from "../../assets/archive/icon-share.svg";
@@ -85,7 +84,7 @@ const FlowerInfoPage = () => {
 	}
 
 	const handleDownload = async () => {
-		if (!divRef.current) return;
+		if (!divRef.current || !flower) return;
 
 		try {
 			// Front result card만을 위한 임시 div 생성
@@ -96,6 +95,8 @@ const FlowerInfoPage = () => {
 			tempDiv.style.width = "24em";
 			tempDiv.style.height = "37.0625em";
 			tempDiv.style.fontSize = "16px";
+			tempDiv.style.visibility = "visible";
+			tempDiv.style.opacity = "1";
 
 			// Front result card HTML 직접 생성 (3D transform 없이)
 			tempDiv.innerHTML = `
@@ -105,7 +106,7 @@ const FlowerInfoPage = () => {
 						width: 100%;
 						height: 100%;
 						border-radius: 2.5rem;
-						background-image: url(/src/assets/generate/result/card.png);
+						background-image: url(/assets/generate/card.png);
 						background-repeat: no-repeat;
 						background-size: 100% 100%;
 						background-position: center;
@@ -196,22 +197,19 @@ const FlowerInfoPage = () => {
 
 			await new Promise((resolve) => setTimeout(resolve, 100));
 
-			const canvas = await html2canvas(tempDiv, {
-				scale: 2,
-				useCORS: true,
-				allowTaint: true,
-				backgroundColor: null,
+			// modern-screenshot을 사용하여 이미지 생성
+			const dataUrl = await domToPng(tempDiv, {
 				width: 384,
 				height: 593,
 			});
 
 			document.body.removeChild(tempDiv);
 
-			canvas.toBlob((blob) => {
-				if (blob !== null) {
-					saveAs(blob, `${flower.title}.png`);
-				}
-			});
+			// 간단한 다운로드 방식
+			const link = document.createElement('a');
+			link.download = `${flower.title}.png`;
+			link.href = dataUrl;
+			link.click();
 		} catch (error) {
 			console.error("Error converting div to image:", error);
 		}

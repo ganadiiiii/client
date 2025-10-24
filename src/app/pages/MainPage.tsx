@@ -244,9 +244,10 @@ function MainPage() {
 					src={isStartHovered ? startButtonHover : startButton}
 					onMouseEnter={() => setIsStartHovered(true)}
 					onMouseLeave={() => setIsStartHovered(false)}
-					onClick={() =>
-						navigate('/customizing')
-					}
+					onClick={() => {
+						window.scrollTo(0, 0);
+						navigate('/login');
+					}}
 					className="absolute cursor-pointer left-[50%] top-[50%] transform -translate-x-1/2 -translate-y-1/2 
 							   w-60"
 				/>

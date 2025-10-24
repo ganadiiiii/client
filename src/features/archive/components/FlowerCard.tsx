@@ -18,6 +18,11 @@ const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 		e.currentTarget.src = "/src/assets/generate/result/temp-flower.png"; // 기본 이미지
 	};
 
+	// 안전한 backgroundColors 처리
+	const backgroundColors = flower.backgroundColors || ["#FFB6C1", "#FFC0CB"];
+	const color1 = backgroundColors[0] || "#FFB6C1";
+	const color2 = backgroundColors[1] || "#FFC0CB";
+
 	return (
 		<div
 			className="relative cursor-pointer rounded-[0.7em] shadow-sm transition-colors duration-300 bg-white"
@@ -33,7 +38,7 @@ const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 						top: "0.56em",
 						width: "5.625em",
 						height: "7.6875em",
-						backgroundImage: `conic-gradient(from 0deg in oklab, ${flower.backgroundColors[0]} 28%, ${flower.backgroundColors[1]}33 46%, ${flower.backgroundColors[1]} 83%, ${flower.backgroundColors[0]} 100%)`,
+						backgroundImage: `conic-gradient(from 0deg in oklab, ${color1} 28%, ${color2}33 46%, ${color2} 83%, ${color1} 100%)`,
 					}}
 				/>
 				{/* 중앙 흰색 반투명 원 */}

@@ -89,23 +89,32 @@ const FriendArchivePage = () => {
 				setIsLoading(true);
 				const response = await cardAPI.getUserCards(userId, currentPage, 15);
 				
-				// SharedCardDetail 배열을 FlowerCard 배열로 변환
-				const flowerCards = response.items?.map((sharedCard: {
-					card: FlowerCard;
-					note: string;
-					fromName: string;
-					toName: string;
-				}) => ({
-					...sharedCard.card,
-					message: sharedCard.note,
-					sender: sharedCard.fromName,
-					receiver: sharedCard.toName,
-				})) || [];
-				
-				setCards(flowerCards);
-				setTotalPages(response.totalPages || 0);
-			} catch (error) {
-				console.error("친구 카드 목록 조회 실패:", error);
+				// 응답 데이터 구조 안전하게 처리
+				if (response && response.items && Array.isArray(response.items) && response.items.length > 0) {
+					// SharedCardDetail 배열을 FlowerCard 배열로 변환
+					const flowerCards = response.items.map((sharedCard: {
+						card: FlowerCard;
+						note: string;
+						fromName: string;
+						toName: string;
+					}) => ({
+						...sharedCard.card,
+						message: sharedCard.note,
+						sender: sharedCard.fromName,
+						receiver: sharedCard.toName,
+					}));
+					
+					setCards(flowerCards);
+					setTotalPages(response.totalPages || 0);
+				} else {
+					// 응답이 비어있거나 구조가 다른 경우
+					setCards([]);
+					setTotalPages(0);
+				}
+			} catch {
+				// 에러 발생 시 빈 배열로 설정
+				setCards([]);
+				setTotalPages(0);
 			} finally {
 				setIsLoading(false);
 			}
@@ -220,11 +229,19 @@ const FriendArchivePage = () => {
 					</div>
 					{/* --- 그리드 및 네비게이션을 포함하는 컨테이너 --- */}
 					<div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-3em]">
-						<FlowerGrid
-							cards={cards}
-							isLoading={isLoading}
-							triggerCardLanding={triggerCardLanding}
-						/>
+						{!isLoading && (!cards || cards.length === 0) ? (
+							<div className="text-center text-gray text-lg">
+								<p style={{ fontFamily: "NexonLv1Gothic" }}>
+									이 친구는 아직 카드를 만들지 않았습니다.
+								</p>
+							</div>
+						) : (
+							<FlowerGrid
+								cards={cards || []}
+								isLoading={isLoading}
+								triggerCardLanding={triggerCardLanding}
+							/>
+						)}
 					</div>
 
 					{/* 페이지네이션 */}

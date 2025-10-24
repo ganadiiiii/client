@@ -100,7 +100,7 @@ const CustomizingResultPage: React.FC = () => {
 					email: string;
 				}) => ({
 					id: item.userId,
-					name: `${item.firstName} ${item.lastName}`.trim(),
+					name: `${item.lastName}${item.firstName}`.trim(),
 					email: item.email,
 				}),
 			);

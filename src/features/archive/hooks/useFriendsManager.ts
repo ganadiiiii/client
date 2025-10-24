@@ -67,7 +67,7 @@ export function useFriendsManager() {
 				email: string;
 			}) => ({
 				id: item.userId,
-				name: `${item.firstName} ${item.lastName}`.trim(),
+				name: `${item.lastName}${item.firstName}`.trim(),
 				email: item.email,
 				isFriend: true,
 				requestStatus: "none",
@@ -90,7 +90,7 @@ export function useFriendsManager() {
 				const existing = idToRequestUser.get(userInfo.userId);
 				const candidate: Friend = {
 					id: userInfo.userId,
-					name: `${userInfo.firstName} ${userInfo.lastName}`.trim(),
+					name: `${userInfo.lastName}${userInfo.firstName}`.trim(),
 					email: userInfo.email,
 					isFriend: false,
 					requestStatus: isReceived ? "received" : "sent",
@@ -181,7 +181,7 @@ export function useFriendsManager() {
 						isFriend: boolean;
 					}) => ({
 						id: item.userId,
-						name: `${item.firstName} ${item.lastName}`.trim(),
+						name: `${item.lastName}${item.firstName}`.trim(),
 						email: item.email,
 						isFriend: item.isFriend,
 						requestStatus: "none",

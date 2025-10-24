@@ -29,6 +29,11 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 		subFlower,
 	} = flowerCard;
 
+	// 안전한 backgroundColors 처리
+	const backgroundColors = flowerCard.backgroundColors || ["#FFB6C1", "#FFC0CB"];
+	const color1 = backgroundColors[0] || "#FFB6C1";
+	const color2 = backgroundColors[1] || "#FFC0CB";
+
 	// 날짜는 현재 날짜로 표시 (API 응답에 없음)
 	const date = new Date().toLocaleDateString('ko-KR', {
 		year: 'numeric',
@@ -103,7 +108,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 								left: "50%",
 								top: "50%",
 								transform: "translate(-50%, -50%) translateX(-0.3em) translateY(-5.6em)",
-								backgroundImage: `conic-gradient(from 0deg in oklab, ${flowerCard.backgroundColors[0]} 28%, ${flowerCard.backgroundColors[1]}33 46%, ${flowerCard.backgroundColors[1]} 83%, ${flowerCard.backgroundColors[0]} 100%)`,
+								backgroundImage: `conic-gradient(from 0deg in oklab, ${color1} 28%, ${color2}33 46%, ${color2} 83%, ${color1} 100%)`,
 							}}
 						/>
 						{/* 중앙 흰색 반투명 원 */}

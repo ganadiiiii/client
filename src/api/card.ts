@@ -95,14 +95,24 @@ export const cardAPI = {
 	// 특정 사용자의 카드 조회 API
 	getUserCards: async (userId: string, page = 0, size = 15) => {
 		const accessToken = localStorage.getItem("accessToken");
-		const response = await axios.get(`${API_BASE_URL}/archive`, {
-			params: { userId, page, size },
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-				"Content-Type": "application/json",
-			},
-		});
-		return response.data;
+		try {
+			const response = await axios.get(`${API_BASE_URL}/archive`, {
+				params: { userId, page, size },
+				headers: {
+					Authorization: `Bearer ${accessToken}`,
+					"Content-Type": "application/json",
+				},
+			});
+			return response.data;
+		} catch (error) {
+			// 404 에러인 경우 빈 응답 반환
+			if (error && typeof error === 'object' && 'response' in error && 
+				error.response && typeof error.response === 'object' && 'status' in error.response &&
+				error.response.status === 404) {
+				return { items: [], page: 0, size: 15, totalElements: 0, totalPages: 0 };
+			}
+			throw error;
+		}
 	},
 
 	// 카드 상세 조회 API

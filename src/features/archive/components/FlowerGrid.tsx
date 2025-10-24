@@ -16,7 +16,7 @@ export default function FlowerGrid({
 }: FlowerGridProps) {
 	const [hoveredCard, setHoveredCard] = useState<{ rowIdx: number; colIdx: number } | null>(null);
 
-	const currentCards = cards;
+	const currentCards = cards || [];
 
 	// 거리에 따른 영향도 계산 함수
 	const calculateInfluence = (hoveredColIdx: number, currentColIdx: number) => {

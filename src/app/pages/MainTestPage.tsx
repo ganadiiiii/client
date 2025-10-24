@@ -93,7 +93,7 @@ const MainTestPage = () => {
 					{hoveredButton === "archive" &&
 						<Bubble
 							text="Archive"
-							className="absolute bottom-[22.5em] left-1/2 translate-x-[calc(-50%-10em)] w-[13.75em] h-[7.5em]"
+							className="absolute bottom-[28em] left-1/2 translate-x-[calc(-50%-10em)] w-[13.75em] h-[7.5em]"
 							backgroundImage={functionBubblePng}
 							backgroundSize="contain"
 							backgroundPosition="center"

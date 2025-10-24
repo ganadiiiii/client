@@ -94,7 +94,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 				<div>
 					{/* 날짜 */}
 					<div
-						className="absolute left-[3.2em] top-[3em] text-black z-20 text-sm"
+						className="absolute left-[3em] 3xl:left-[2.6em] top-[2.5em] 3xl:top-[2.5em] text-black z-30 text-sm"
 						style={{ fontFamily: "Yidstreet" }}
 					>
 						{date}
@@ -111,6 +111,17 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 								backgroundImage: `conic-gradient(from 0deg in oklab, ${color1} 28%, ${color2}33 46%, ${color2} 83%, ${color1} 100%)`,
 							}}
 						/>
+						{/* SVG를 그라데이션 영역 왼쪽 위에 위치 */}
+						<svg 
+							xmlns="http://www.w3.org/2000/svg" 
+							width="160" 
+							height="45" 
+							viewBox="0 0 160 45" 
+							fill="none"
+							className="absolute z-20 left-[-0.3em] top-[1em] scale-70 3xl:left-[1.8em] 3xl:top-[1.75em] 3xl:scale-100"
+						>
+							<path d="M122.824 44H0V0H160L122.824 44Z" fill="#ffffff"/>
+						</svg>
 						{/* 중앙 흰색 반투명 원 */}
 						<div
 							className="absolute z-15 w-64 h-64"

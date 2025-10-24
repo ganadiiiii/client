@@ -41,17 +41,6 @@ const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 						backgroundImage: `conic-gradient(from 0deg in oklab, ${color1} 28%, ${color2}33 46%, ${color2} 83%, ${color1} 100%)`,
 					}}
 				/>
-				{/* SVG를 그라데이션 영역 왼쪽 위에 위치 */}
-				<svg 
-					xmlns="http://www.w3.org/2000/svg" 
-					width="46" 
-					height="22" 
-					viewBox="0 0 46 22" 
-					fill="none"
-					className="absolute z-20 left-[-0.3em] top-[1em] scale-70 3xl:left-[1.8em] 3xl:top-[1.75em] 3xl:scale-100"
-				>
-					<path d="M35.3393 19.2825H0V0H46.0359L35.3393 19.2825Z" fill="#ffffff"/>
-				</svg>
 				{/* 중앙 흰색 반투명 원 */}
 				<div
 					className="absolute z-15"

@@ -61,6 +61,9 @@ const ArchivePage = () => {
 	const [showCardAnimation, setShowCardAnimation] = useState(false);
 	const [triggerCardLanding, setTriggerCardLanding] = useState(false);
 	const [latestCard, setLatestCard] = useState<FlowerCard | null>(null);
+	const [unreadCards, setUnreadCards] = useState<FlowerCard[]>([]);
+	const [currentUnreadIndex, setCurrentUnreadIndex] = useState(0);
+	const [unreadCardCount, setUnreadCardCount] = useState(0);
 
 	// FriendsListModal ref
 	const friendsModalRef = useRef<FriendsListModalRef>(null);
@@ -107,18 +110,27 @@ const ArchivePage = () => {
 		const checkNewCards = async () => {
 			try {
 				const response = await friendAPI.newFriend();
+				setUnreadCardCount(response.unreadCardCount || 0);
+				
 				if (response.unreadCardCount >= 1) {
 					setIsNewCardAlert(true);
-					// 최신 카드 가져오기 (첫 번째 페이지의 첫 번째 카드)
-					const latestResponse = await cardAPI.getAllCards(0, 1);
+					// 안 읽은 카드 수만큼 최신 카드들 가져오기
+					const latestResponse = await cardAPI.getAllCards(0, response.unreadCardCount);
 					if (latestResponse.items && latestResponse.items.length > 0) {
-						const latestCardData = latestResponse.items[0];
-						setLatestCard({
-							...latestCardData.card,
-							message: latestCardData.note,
-							sender: latestCardData.fromName,
-							receiver: latestCardData.toName,
-						});
+						const unreadCardsData = latestResponse.items.map((sharedCard: {
+							card: FlowerCard;
+							note: string;
+							fromName: string;
+							toName: string;
+						}) => ({
+							...sharedCard.card,
+							message: sharedCard.note,
+							sender: sharedCard.fromName,
+							receiver: sharedCard.toName,
+						}));
+						
+						setUnreadCards(unreadCardsData);
+						setLatestCard(unreadCardsData[0]); // 첫 번째 카드를 latestCard로 설정
 					}
 				}
 			} catch (error) {
@@ -249,6 +261,18 @@ const ArchivePage = () => {
 				setTriggerCardLanding(false);
 			}, 100);
 		}, 500);
+	};
+
+	// 다음 안 읽은 카드로 넘어가는 핸들러
+	const handleNextUnreadCard = () => {
+		if (currentUnreadIndex < unreadCards.length - 1) {
+			const nextIndex = currentUnreadIndex + 1;
+			setCurrentUnreadIndex(nextIndex);
+			setLatestCard(unreadCards[nextIndex]);
+		} else {
+			// 마지막 카드인 경우 애니메이션 종료
+			handleCloseCardAnimation();
+		}
 	};
 
 	// 페이지네이션 핸들러
@@ -421,6 +445,14 @@ const ArchivePage = () => {
 							justifyContent: "center",
 						}}
 					>
+						{/* 카드 카운터 표시 */}
+						{unreadCardCount > 1 && (
+							<div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-60">
+								<div className="bg-black/50 text-white px-4 py-2 rounded-full text-sm font-medium">
+									{currentUnreadIndex + 1} / {unreadCardCount}
+								</div>
+							</div>
+						)}
 						<motion.div
 							initial={{
 								scale: 0.3,
@@ -457,7 +489,10 @@ const ArchivePage = () => {
 							}}
 							className="pointer-events-auto"
 						>
-							<AnimatedFlowerCard flowerCard={latestCard || dummyCard} />
+							<AnimatedFlowerCard 
+								flowerCard={latestCard || dummyCard} 
+								onClick={handleNextUnreadCard}
+							/>
 						</motion.div>
 					</div>
 				</>

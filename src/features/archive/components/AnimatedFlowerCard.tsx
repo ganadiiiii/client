@@ -5,15 +5,17 @@ import messageCardBg from "../../../assets/generate/result/card-message.png";
 
 type AnimatedFlowerCardProps = {
 	flowerCard: FlowerCard;
+	onClick?: () => void;
 };
 
-const AnimatedFlowerCard: React.FC<AnimatedFlowerCardProps> = ({ flowerCard }) => {
+const AnimatedFlowerCard: React.FC<AnimatedFlowerCardProps> = ({ flowerCard, onClick }) => {
 	return (
 		<div
-			className="relative w-[28em] h-[43.24em]"
+			className="relative w-[28em] h-[43.24em] cursor-pointer"
 			style={{
 				transformStyle: "preserve-3d" as React.CSSProperties["transformStyle"],
 			}}
+			onClick={onClick}
 		>
 			{/* Front: ResultCard */}
 			<div

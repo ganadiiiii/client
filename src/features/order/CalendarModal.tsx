@@ -43,7 +43,7 @@ export function CalendarModal({ onSelectDate, onClose }: CalendarModalProps) {
 		>
 			<div
 				ref={modalRef}
-				className="bg-white p-6 rounded-[1.25em] w-[25.4em] h-[30em]"
+				className="bg-white p-6 rounded-[1.25em] w-[27em] h-[32em]"
 				onClick={(e) => e.stopPropagation()} // 모달 내부 클릭 시 닫히지 않게
 			>
 				<Calendar

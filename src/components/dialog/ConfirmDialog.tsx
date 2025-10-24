@@ -34,7 +34,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
 			}`}
 		>
 			<div
-				className={`bg-white rounded-3xl min-w-[320px] px-8 py-6 shadow-lg transform transition-all duration-300 whitespace-nowrap ${
+				className={`bg-white rounded-3xl min-w-[20em] px-8 py-6 shadow-lg transform transition-all duration-300 whitespace-nowrap ${
 					show ? "scale-100 translate-y-0" : "scale-95 translate-y-2"
 				}`}
 				style={{
@@ -48,7 +48,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
 				<div className="flex justify-center gap-4 mt-4">
 					<button
 						onClick={onConfirm}
-						className="flex-1 py-4.5 text-white bg-primary rounded-full hover:bg-primary/90 transition-colors cursor-pointer"
+						className="flex-1 py-4.5 px-2 text-white bg-primary rounded-full hover:bg-primary/90 transition-colors cursor-pointer"
 					>
 						{confirmText}
 					</button>
@@ -57,7 +57,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
 							setShow(false);
 							setTimeout(onClose, 300);
 						}}
-						className="flex-1 py-4.5 text-dark-gray bg-gray/20 rounded-full hover:bg-gray/30 transition-colors cursor-pointer"
+						className="flex-1 py-4.5 px-2 text-dark-gray bg-gray/20 rounded-full hover:bg-gray/30 transition-colors cursor-pointer"
 					>
 						{cancelText}
 					</button>

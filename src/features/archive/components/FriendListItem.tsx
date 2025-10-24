@@ -23,7 +23,7 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
 				<p>{friend.email}</p>
 			</span>
 
-			{friend.isFriend && (
+			{friend.isFriend && (!friend.requestStatus || friend.requestStatus === "none") && (
 				<>
 					{onDeleteFriend && (
 						<button
@@ -46,7 +46,7 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
 				</>
 			)}
 
-			{!friend.isFriend && friend.requestStatus === "sent" && (
+			{friend.requestStatus === "sent" && (
 				<button
 					disabled
 					className="px-5 py-2 bg-white text-primary border-3 border-primary cursor-not-allowed rounded-[30px]"
@@ -56,7 +56,7 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
 				</button>
 			)}
 
-			{!friend.isFriend && friend.requestStatus === "received" && (
+			{friend.requestStatus === "received" && (
 				<button
 					onClick={() => onRequestReceived?.(friend)}
 					className="px-5 py-2 bg-white text-primary border-3 border-primary rounded-[30px]"

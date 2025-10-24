@@ -112,4 +112,16 @@ export const friendAPI = {
 		});
 		return response.data;
 	},
+
+	// 친구 아카이브
+	friendArchive: async () => {
+		const accessToken = localStorage.getItem("accessToken");
+		const response = await axios.get(`${API_BASE_URL}/archive/meta`, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+				"Content-Type": "application/json",
+			},
+		});
+		return response.data;
+	},
 };

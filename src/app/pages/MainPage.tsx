@@ -40,6 +40,9 @@ function MainPage() {
 	const path6Ref = useRef<SVGPathElement>(null);
 
 	useGSAP(() => {
+		gsap.set([obfRef.current, offRef.current, ybfRef.current, yffRef.current, blfRef.current, brfRef.current], {
+			willChange: 'transform',
+		});
 		// 스크롤 타임라인 (scrub 있음)
 		const scrollTl = gsap.timeline({
 			scrollTrigger: {

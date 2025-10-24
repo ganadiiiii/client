@@ -137,7 +137,7 @@ const FriendsListModal = forwardRef<FriendsListModalRef, FriendsListModalProps>(
 									(filteredFriends.length > 0 ||
 										filteredSearchResults.length > 0))) && (
 								<div
-									className="w-full px-6 overflow-y-auto select-friends-scroll"
+									className="w-full px-1 overflow-y-auto select-friends-scroll"
 									style={{ fontFamily: "NexonLv1Gothic" }}
 								>
 									<div className="overflow-y-auto">

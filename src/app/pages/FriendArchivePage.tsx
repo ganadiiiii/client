@@ -27,7 +27,7 @@ import iconBack from "../../assets/generate/result/icon-back.svg";
 const FriendArchivePage = () => {
 	const { userId } = useParams<{ userId: string }>();
 	const navigate = useNavigate();
-	
+
 	type LightState = "day" | "sunset" | "night";
 	const [lightState, setLightState] = useState<LightState>("day");
 	const [isLampHovered, setIsLampHovered] = useState(false);
@@ -84,11 +84,11 @@ const FriendArchivePage = () => {
 	useEffect(() => {
 		const fetchCards = async () => {
 			if (!userId) return;
-			
+
 			try {
 				setIsLoading(true);
 				const response = await cardAPI.getUserCards(userId, currentPage, 15);
-				
+
 				// 응답 데이터 구조 안전하게 처리
 				if (response && response.items && Array.isArray(response.items) && response.items.length > 0) {
 					// SharedCardDetail 배열을 FlowerCard 배열로 변환
@@ -103,7 +103,7 @@ const FriendArchivePage = () => {
 						sender: sharedCard.fromName,
 						receiver: sharedCard.toName,
 					}));
-					
+
 					setCards(flowerCards);
 					setTotalPages(response.totalPages || 0);
 				} else {
@@ -196,7 +196,7 @@ const FriendArchivePage = () => {
 				/>
 				{/* 배경 역할을 하는 home 이미지 */}
 				<div className="relative w-full h-[calc(100vh-10em-80px)] 3xl:h-[calc(100vh-8em-102px)]">
-					<img src={{day: homeLight, sunset: homeLight, night: homeDark}[lightState]}
+					<img src={{ day: homeLight, sunset: homeLight, night: homeDark }[lightState]}
 						alt="Home background"
 						className="absolute bottom-0 left-1/2 transform -translate-x-1/2"
 						style={{
@@ -271,11 +271,11 @@ const FriendArchivePage = () => {
 
 					{/* 뒤로가기 버튼 */}
 					<SimpleIconButton
-                        onClick={handleGoBack}
-                        icon={iconBack}
-                        label="뒤로가기"
-                        className="absolute left-1/10 top-6"
-				    />
+						onClick={handleGoBack}
+						icon={iconBack}
+						label="돌아가기"
+						className="absolute left-1/10 top-6"
+					/>
 
 					<div
 						className="absolute left-1/2 bottom-0 z-10"
@@ -285,13 +285,6 @@ const FriendArchivePage = () => {
 							transform: "translate(calc(-50% + 33.75em), calc(-50% + 15em))",
 						}}
 					>
-					<motion.img
-						src={cardAlertPng}
-						alt="New Card Alert"
-						whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 100, ease: easeInOut, duration: 0.5 }}
-						className={`absolute w-40 transform translate-x-3/5 -translate-y-1/4 cursor-pointer ${isNewCardAlert ? "opacity-100" : "opacity-0 invisible"}`}
-						onClick={handleNewCardAlertClick}
-					/>
 						<img src={sofaSvg} alt="Sofa" />
 						<img
 							src={characterPng}
@@ -303,76 +296,8 @@ const FriendArchivePage = () => {
 							}}
 						/>
 					</div>
+				</div>
 			</div>
-		</div>
-
-		{/* Card Animation */}
-		<AnimatePresence>
-			{showCardAnimation && (
-				<>
-					{/* Overlay */}
-					<motion.div
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-						transition={{ duration: 0.8 }}
-						className="fixed inset-0 bg-black/30 z-50"
-						onClick={handleCloseCardAnimation}
-					/>
-
-					{/* Card Container with perspective */}
-					<div
-						className="fixed inset-0 z-50 pointer-events-none"
-						style={{ 
-							perspective: "2000px",
-							perspectiveOrigin: "center center",
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center",
-						}}
-					>
-						<motion.div
-							initial={{
-								scale: 0.3,
-								rotateY: 0,
-								rotateX: 40,
-								x: "100vw",
-								y: "100vh",
-							}}
-							animate={{
-								scale: 1,
-								rotateY: 720,
-								rotateX: 0,
-								x: 0,
-								y: 0,
-								transition: {
-									duration: 1.5,
-									ease: [0.33, 1, 0.68, 1],
-								},
-							}}
-							exit={{
-								scale: 0.1,
-								rotateY: 360,
-								rotateX: 25,
-								x: "-15vw",
-								y: "-10vh",
-								opacity: 0.05,
-								transition: {
-									duration: 1,
-									ease: [0.33, 1, 0.68, 1],
-								},
-							}}
-							style={{
-								transformStyle: "preserve-3d" as React.CSSProperties["transformStyle"],
-							}}
-							className="pointer-events-auto"
-						>
-							<AnimatedFlowerCard flowerCard={dummyCard} />
-						</motion.div>
-					</div>
-				</>
-			)}
-		</AnimatePresence>
 		</main>
 	);
 };

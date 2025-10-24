@@ -1,7 +1,7 @@
 import React from "react";
 import type { Friend } from "../hooks/useFriendsManager";
-import visit from "../../../assets/archive/visit.svg";
-
+import iconHome from "../../../assets/generate/result/icon-home-hover.svg";
+import iconTrash from "../../../assets/archive/icon-trash.svg";
 interface FriendListItemProps {
 	friend: Friend;
 	onDeleteFriend?: (friend: Friend) => void;
@@ -21,28 +21,27 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
 }) => {
 	return (
 		<div className="flex items-center justify-between py-5">
-			<div className="flex flex-row items-center gap-5">
-				<button 
-					className="w-5.4 h-5"
-					onClick={() => onVisitFriend?.(friend)}
-				>
-					<img src={visit} alt="visit" className="w-full h-full" />
-				</button>
+			<div className="flex flex-row items-center justify-between w-full gap-5">
 				<span className="flex flex-col">
 					<p className="font-bold text-start">{friend.name}</p>
 					<p>{friend.email}</p>
 				</span>
+				<button
+					className="w-11 h-11 rounded-lg bg-gray/20 p-2 cursor-pointer hover:bg-gray/40 transition-all duration-200 mr-2"
+					onClick={() => onVisitFriend?.(friend)}
+				>
+					<img src={iconHome} alt="visit" className="w-full h-full cursor-pointer" />
+				</button>
 			</div>
 
 			{friend.isFriend && (!friend.requestStatus || friend.requestStatus === "none") && (
 				<>
 					{onDeleteFriend && (
 						<button
+							className="w-11 h-11 rounded-lg bg-gray/20 p-2 cursor-pointer hover:bg-gray/40 transition-all duration-200"
 							onClick={() => onDeleteFriend(friend)}
-							className="px-7 py-3 bg-gray/20 text-dark-gray rounded-[30px] hover:bg-gray/40 transition-colors duration-100"
-							style={{ fontFamily: "NexonLv1Gothic" }}
 						>
-							삭제
+							<img src={iconTrash} alt="delete" className="w-full h-full cursor-pointer" />
 						</button>
 					)}
 					{onSelectFriend && (

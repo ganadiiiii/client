@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import logo from "../assets/logo.png";
 import bg from "../assets/nav_bg.png";
 import logoWhite from "../assets/logo-white.png";
-import logoBlack from "../assets/logo-black.png";
+// import logoBlack from "../assets/logo-black.png";
 
 const Navbar: React.FC = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
 	const isAuthPage =
 		location.pathname === "/login" || location.pathname === "/signup";
 	const isMainPage = location.pathname === "/";
-	const isShopPage = location.pathname === "/shop";
+	// const isShopPage = location.pathname === "/shop";
 
 	useEffect(() => {
 		const handleScroll = () => {

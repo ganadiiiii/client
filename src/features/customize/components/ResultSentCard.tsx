@@ -126,8 +126,8 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 									</div>
 
 									{/* To & From at bottom */}
-									<div className="absolute left-[2.7em] bottom-[3.4em] flex flex-row gap-20 text-black text-sm">
-										<div className="flex gap-3 items-baseline">
+									<div className="absolute left-[2.7em] bottom-[3.4em] flex flex-row gap-12 text-black text-sm">
+										<div className="flex gap-2 items-baseline">
 											<span
 												style={{
 													fontFamily: "Yidstreet",
@@ -145,7 +145,7 @@ const ResultSentCard: React.FC<ResultSentCardProps> = ({ flowerCard }) => {
 												{flowerCard.receiver}
 											</span>
 										</div>
-										<div className="flex gap-3 items-baseline text-sm">
+										<div className="flex gap-2 items-baseline text-sm">
 											<span
 												style={{
 													fontFamily: "Yidstreet",

@@ -13,6 +13,7 @@ import NoCardsModal from "../../features/archive/components/NoCardsModal";
 import type { FlowerCard } from "../../types/FlowerCard";
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
 import AnimatedFlowerCard from "../../features/archive/components/AnimatedFlowerCard";
+import CircleTransition from "../../components/CircleTransition";
 import cardAlertPng from "../../assets/archive/card-alert.png";
 import sofaSvg from "../../assets/archive/sofa.svg";
 import characterPng from "../../assets/archive/character.png";
@@ -28,6 +29,7 @@ import bgNightSvg from "../../assets/archive/bg-dark.svg";
 import bouquetPinkPng from "../../assets/generate/bouquet-pink.png";
 import flower1Png from "../../assets/generate/flower-1.png";
 import flower2Png from "../../assets/generate/flower-2.png";
+import clickMePng from "../../assets/archive/click-me.png";
 
 interface Friend {
 	id: string;
@@ -61,6 +63,13 @@ const ArchivePage = () => {
 	const [showCardAnimation, setShowCardAnimation] = useState(false);
 	const [triggerCardLanding, setTriggerCardLanding] = useState(false);
 	const [latestCard, setLatestCard] = useState<FlowerCard | null>(null);
+
+	// Circle transition state
+	const [showCircleTransition, setShowCircleTransition] = useState(false);
+	const [transitionOrigin, setTransitionOrigin] = useState({ x: 0, y: 0 });
+
+	// click me state
+	const [isClickMeHovered, setIsClickMeHovered] = useState(false);
 
 	// FriendsListModal ref
 	const friendsModalRef = useRef<FriendsListModalRef>(null);
@@ -168,7 +177,7 @@ const ArchivePage = () => {
 			const timer = setTimeout(() => {
 				setShowNoCardsModal(false);
 			}, 2000);
-			
+
 			return () => clearTimeout(timer);
 		}
 	}, [isLoading, cards.length]);
@@ -262,6 +271,20 @@ const ArchivePage = () => {
 		if (currentPage > 0) {
 			setCurrentPage(currentPage - 1);
 		}
+	};
+
+	// Handle character click for Miyeonsi page navigation
+	const handleCharacterClick = (event: React.MouseEvent<HTMLImageElement>) => {
+		const rect = event.currentTarget.getBoundingClientRect();
+		const x = rect.left + rect.width / 2;
+		const y = rect.top + rect.height / 2;
+
+		setTransitionOrigin({ x, y });
+		setShowCircleTransition(true);
+	};
+
+	const handleTransitionComplete = () => {
+		navigate("/miyeonsi");
 	};
 
 	return (
@@ -375,40 +398,51 @@ const ArchivePage = () => {
 							transform: "translate(calc(-50% + 33.75em), calc(-50% + 15em))",
 						}}
 					>
-					<motion.img
-						src={cardAlertPng}
-						alt="New Card Alert"
-						whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 100, ease: easeInOut, duration: 0.5 }}
-						className={`absolute w-40 transform translate-x-3/5 -translate-y-1/4 cursor-pointer ${isNewCardAlert ? "opacity-100" : "opacity-0 invisible"}`}
-						onClick={handleNewCardAlertClick}
-					/>
+						{isClickMeHovered ?
+							<motion.img
+								src={cardAlertPng}
+								alt="New Card Alert"
+								whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 100, ease: easeInOut, duration: 0.5 }}
+								className={`absolute w-40 transform translate-x-3/5 -translate-y-1/4 cursor-pointer ${isNewCardAlert ? "opacity-100" : "opacity-0 invisible"}`}
+								onClick={handleNewCardAlertClick}
+							/> :
+							<motion.img
+								src={clickMePng}
+								alt="Click Me"
+								whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 100, ease: easeInOut, duration: 0.5 }}
+								className={`absolute w-40 transform translate-x-3/5 -translate-y-1/4 cursor-pointer ${isNewCardAlert ? "opacity-100" : "opacity-0 invisible"}`}
+
+							/>}
 						<img src={sofaSvg} alt="Sofa" />
 						<img
 							src={characterPng}
 							alt="Character"
-							className="absolute top-1/2 left-1/2 transform -translate-x-2/3 -translate-y-1/2"
+							className="absolute top-1/2 left-1/2 transform -translate-x-2/3 -translate-y-1/2 cursor-pointer hover:scale-105 transition-transform"
 							style={{
 								width: "14em",
 								height: "14em",
 							}}
+							onClick={handleCharacterClick}
+							onMouseEnter={() => setIsClickMeHovered(false)}
+							onMouseLeave={() => setIsClickMeHovered(true)}
 						/>
 					</div>
+				</div>
 			</div>
-		</div>
 
-		{/* Card Animation */}
-		<AnimatePresence>
-			{showCardAnimation && (
-				<>
-					{/* Overlay */}
-					<motion.div
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-						transition={{ duration: 0.8 }}
-						className="fixed inset-0 bg-black/30 z-50"
-						onClick={handleCloseCardAnimation}
-					/>
+			{/* Card Animation */}
+			<AnimatePresence>
+				{showCardAnimation && (
+					<>
+						{/* Overlay */}
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.8 }}
+							className="fixed inset-0 bg-black/30 z-50"
+							onClick={handleCloseCardAnimation}
+						/>
 
 					{/* Card Container with perspective */}
 					<div
@@ -464,8 +498,8 @@ const ArchivePage = () => {
 			)}
 		</AnimatePresence>
 
-		{/* 모달들 */}
-		<FriendsListModal
+			{/* 모달들 */}
+			<FriendsListModal
 				ref={friendsModalRef}
 				isOpen={isFriendsModalOpen}
 				onClose={() => setIsFriendsModalOpen(false)}
@@ -490,6 +524,14 @@ const ArchivePage = () => {
 			<NoCardsModal
 				isVisible={showNoCardsModal}
 				onClose={() => setShowNoCardsModal(false)}
+			/>
+
+			{/* Circle Transition */}
+			<CircleTransition
+				isActive={showCircleTransition}
+				onComplete={handleTransitionComplete}
+				originX={transitionOrigin.x}
+				originY={transitionOrigin.y}
 			/>
 		</main>
 	);

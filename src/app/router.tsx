@@ -17,6 +17,7 @@ import ShopPage from "./pages/ShopPage";
 import PageNotFound from "./pages/404";
 import MainTestPage from "./pages/MainTestPage";
 import FriendArchivePage from "./pages/FriendArchivePage";
+import MiyeonsiPage from "./pages/MiyeonsiPage";
 
 export const AppRoutes = () => {
 	return (
@@ -28,6 +29,7 @@ export const AppRoutes = () => {
 			<Route path="/archive" element={<ArchivePage />} />
 			<Route path="/archive/:flowerId" element={<FlowerInfoPage />} />
 			<Route path="/archive/user/:userId" element={<FriendArchivePage />} />
+			<Route path="/miyeonsi" element={<MiyeonsiPage />} />
 			<Route path="/login" element={<LoginForm />} />
 			<Route path="/signup" element={<SignUpForm />} />
 			<Route path="/order" element={<OrderPage />} />

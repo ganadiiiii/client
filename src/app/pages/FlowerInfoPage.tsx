@@ -12,6 +12,7 @@ import iconTrash from "../../assets/archive/icon-trash.svg";
 import iconTrashHover from "../../assets/archive/icon-trash-hover.svg";
 import iconSend from "../../assets/archive/icon-send.svg";
 import iconSendHover from "../../assets/archive/icon-send-hover.svg";
+import iconRestart from "../../assets/generate/result/icon-restart.svg";
 import { cardAPI } from "../../api";
 import type { FlowerCard } from "../../types/FlowerCard";
 import LoadingPage from "../../components/LoadingPage";
@@ -24,6 +25,9 @@ const FlowerInfoPage = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 	const divRef = useRef<HTMLDivElement | null>(null);
+
+	// message와 receiver가 모두 있을 때 카드를 뒤집을 수 있음
+	const isMessageCard = Boolean(flower?.message && flower?.receiver);
 
 	// API에서 카드 상세 정보 가져오기
 	useEffect(() => {
@@ -259,53 +263,51 @@ const FlowerInfoPage = () => {
 
 					{/* Action button */}
 
-					<div className="mt-4 w-full flex justify-center">
-						<div className="grid grid-cols-3 gap-4">
-							<SimpleIconButton onClick={handleDelete} icon={iconTrashHover} hoverIcon={iconTrash} label="삭제하기" />
+					<div className="mt-4 w-full flex justify-center gap-6">
+						{!isMessageCard ? <SimpleIconButton onClick={handleDelete} icon={iconTrashHover} hoverIcon={iconTrash} label="삭제하기" /> : <div className="w-16 h-16" />}
 
-							<GradientIconButton
-								onClick={() => navigate('/customizing')}
-								icon={iconSend}
-								hoverIcon={iconSendHover}
-								label="나도 보내기"
-								disabled={false}
-							/>
-							<div
-								className="relative flex items-center justify-center"
-							>
-								<SimpleIconButton onClick={() => setShowSharePopup(!showSharePopup)} icon={iconShare} hoverIcon={iconShareHover} label="공유하기" />
-								{showSharePopup && (
-									<div
-										className="absolute bottom-full mb-2 rounded-2xl bg-white text-sm text-dark-gray z-50 border border-gray/40 overflow-hidden whitespace-nowrap"
+						<GradientIconButton
+							onClick={() => navigate('/customizing')}
+							icon={isMessageCard ? iconSend : iconRestart}
+							hoverIcon={isMessageCard ? iconSendHover : iconRestart}
+							label={isMessageCard ? "나도 만들기" : "다시 만들기"}
+							disabled={false}
+						/>
+						<div
+							className="relative flex items-center justify-center"
+						>
+							<SimpleIconButton onClick={() => setShowSharePopup(!showSharePopup)} icon={iconShare} hoverIcon={iconShareHover} label="공유하기" />
+							{showSharePopup && (
+								<div
+									className="absolute bottom-full mb-2 rounded-2xl bg-white text-sm text-dark-gray z-50 border border-gray/40 overflow-hidden whitespace-nowrap"
+									style={{ fontFamily: "NexonLv1Gothic" }}
+									role="menu"
+									aria-label="send options"
+								>
+									<button
+										onClick={() => {
+											setShowSharePopup(false);
+											navigate("/order", { state: { flowerCard: flower } });
+										}}
+										className="block w-full text-center text-base py-5 px-12 hover:bg-gray/20"
 										style={{ fontFamily: "NexonLv1Gothic" }}
-										role="menu"
-										aria-label="send options"
+										role="menuitem"
 									>
-										<button
-											onClick={() => {
-												setShowSharePopup(false);
-												navigate("/order", { state: { flowerCard: flower } });
-											}}
-											className="block w-full text-center text-base py-5 px-12 hover:bg-gray/20"
-											style={{ fontFamily: "NexonLv1Gothic" }}
-											role="menuitem"
-										>
-											실물 보내기
-										</button>
-										<button
-											onClick={() => {
-												setShowSharePopup(false);
-												handleDownload();
-											}}
-											className="block w-full text-center text-base py-5 px-12 hover:bg-gray/20 border-t border-gray/40"
-											style={{ fontFamily: "NexonLv1Gothic" }}
-											role="menuitem"
-										>
-											저장하기
-										</button>
-									</div>
-								)}
-							</div>
+										실물 보내기
+									</button>
+									<button
+										onClick={() => {
+											setShowSharePopup(false);
+											handleDownload();
+										}}
+										className="block w-full text-center text-base py-5 px-12 hover:bg-gray/20 border-t border-gray/40"
+										style={{ fontFamily: "NexonLv1Gothic" }}
+										role="menuitem"
+									>
+										저장하기
+									</button>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>

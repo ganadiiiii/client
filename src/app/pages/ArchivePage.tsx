@@ -119,12 +119,14 @@ const ArchivePage = () => {
 		const checkNewCards = async () => {
 			try {
 				const response = await friendAPI.newFriend();
-				setUnreadCardCount(response.unreadCardCount || 0);
+				// unreadCardCount를 최소 1로 보장
+				const guaranteedCount = Math.max(response.unreadCardCount || 0, 1);
+				setUnreadCardCount(guaranteedCount);
 				
-				if (response.unreadCardCount >= 1) {
+				if (guaranteedCount >= 1) {
 					setIsNewCardAlert(true);
 					// 안 읽은 카드 수만큼 최신 카드들 가져오기
-					const latestResponse = await cardAPI.getAllCards(0, response.unreadCardCount);
+					const latestResponse = await cardAPI.getAllCards(0, guaranteedCount);
 					if (latestResponse.items && latestResponse.items.length > 0) {
 						const unreadCardsData = latestResponse.items.map((sharedCard: {
 							card: FlowerCard;

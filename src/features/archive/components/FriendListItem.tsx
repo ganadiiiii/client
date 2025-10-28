@@ -69,7 +69,7 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
 			{friend.requestStatus === "received" && (
 				<button
 					onClick={() => onRequestReceived?.(friend)}
-					className="px-5 py-2 bg-white text-primary border-3 border-primary cursor-not-allowed rounded-xl text-nowrap font-semibold"
+					className="px-5 py-2 bg-white text-primary border-3 border-primary rounded-xl text-nowrap font-semibold"
 					style={{ fontFamily: "NexonLv1Gothic" }}
 				>
 					요청받기

@@ -47,7 +47,7 @@ const FriendListItem: React.FC<FriendListItemProps> = ({
 					{onSelectFriend && (
 						<button
 							onClick={() => onSelectFriend(friend)}
-							className="px-7 py-3 bg-primary text-white rounded-[30px]"
+							className="px-7 py-3 bg-primary text-white rounded-xl text-nowrap cursor-pointer"
 							style={{ fontFamily: "NexonLv1Gothic" }}
 						>
 							선택

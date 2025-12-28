@@ -22,6 +22,8 @@ const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 	const backgroundColors = flower.backgroundColors || ["#FFB6C1", "#FFC0CB"];
 	const color1 = backgroundColors[0] || "#FFB6C1";
 	const color2 = backgroundColors[1] || "#FFC0CB";
+	const color3 = backgroundColors[2] || "#FFC0CB";
+	const color4 = backgroundColors[3] || "#FFC0CB";
 
 	return (
 		<div
@@ -38,7 +40,7 @@ const FlowerCard = ({ flower, style }: FlowerCardProps) => {
 						top: "0.56em",
 						width: "5.625em",
 						height: "7.6875em",
-						backgroundImage: `conic-gradient(from 0deg in oklab, ${color1} 28%, ${color2}33 46%, ${color2} 83%, ${color1} 100%)`,
+						backgroundImage: `conic-gradient(from 0deg in oklab, ${color1}66 28%, ${color2} 46%, ${color3} 83%, ${color4}25 100%)`,
 					}}
 				/>
 				{/* 중앙 흰색 반투명 원 */}

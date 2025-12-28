@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { authAPI, friendAPI } from "../../../api";
+import { demoFriends, demoUsers, allDemoUsers } from "../../../demo/user";
 
 export type RequestStatus = "sent" | "received" | "none";
 
@@ -8,6 +8,8 @@ export interface Friend {
 	name: string;
 	email: string;
 	isFriend: boolean;
+	status: string;
+	profileImage: string;
 	requestStatus?: RequestStatus;
 	requestId?: number;
 }
@@ -52,61 +54,28 @@ export function useFriendsManager() {
 	const previousSearchResultsRef = useRef<Friend[] | null>(null);
 
 	const getCurrentUser = useCallback(async () => {
-		const response = await authAPI.me();
-		setCurrentUser(response);
-		return response as User;
+		// 데모용 현재 유저
+		const demoCurrentUser: User = {
+			userId: "current-user",
+			email: "me@example.com",
+			firstName: "현재",
+			lastName: "유저",
+		};
+		setCurrentUser(demoCurrentUser);
+		return demoCurrentUser;
 	}, []);
 
 	const getFriends = useCallback(async () => {
-		const response = await friendAPI.getFriends();
-		const friendsData: Friend[] = (response.items || []).map(
-			(item: {
-				userId: string;
-				firstName: string;
-				lastName: string;
-				email: string;
-			}) => ({
-				id: item.userId,
-				name: `${item.lastName}${item.firstName}`.trim(),
-				email: item.email,
-				isFriend: true,
-				requestStatus: "none",
-			}),
-		);
-		return friendsData;
+		// 데모용 친구 목록 반환
+		return demoFriends.map(friend => ({
+			...friend,
+			requestStatus: "none" as RequestStatus,
+		}));
 	}, []);
 
 	const getFriendRequests = useCallback(async (user: User | null) => {
-		if (!user)
-			return { requestUsers: [] as Friend[], requests: [] as FriendRequest[] };
-		const response = await friendAPI.getFriendsRequest("all");
-		const requests: FriendRequest[] = response.items || [];
-
-		const idToRequestUser = new Map<string, Friend>();
-		requests.forEach((request: FriendRequest) => {
-			if (request.status === "PENDING") {
-				const isReceived = request.receiver.userId === user.userId;
-				const userInfo = isReceived ? request.sender : request.receiver;
-				const existing = idToRequestUser.get(userInfo.userId);
-				const candidate: Friend = {
-					id: userInfo.userId,
-					name: `${userInfo.lastName}${userInfo.firstName}`.trim(),
-					email: userInfo.email,
-					isFriend: false,
-					requestStatus: isReceived ? "received" : "sent",
-					requestId: request.requestId,
-				};
-				
-				// received 상태를 우선시 (요청받은 사람이 더 중요한 상태)
-				if (!existing || candidate.requestStatus === "received") {
-					idToRequestUser.set(userInfo.userId, candidate);
-				}
-			}
-			// ACCEPTED 상태는 getFriends() API에서만 처리하므로 여기서는 제외
-		});
-
-		const requestUsers = Array.from(idToRequestUser.values());
-		return { requestUsers, requests };
+		// 데모용: 빈 요청 목록 반환
+		return { requestUsers: [] as Friend[], requests: [] as FriendRequest[] };
 	}, []);
 
 	const refreshFriends = useCallback(async () => {
@@ -170,23 +139,20 @@ export function useFriendsManager() {
 				return;
 			}
 			setLoading(true);
+			
+			// 데모용: 로딩 시뮬레이션
+			await new Promise(resolve => setTimeout(resolve, 500));
+			
 			try {
-				const response = await friendAPI.search(term);
-				const searchData: Friend[] = (response.items || []).map(
-					(item: {
-						userId: string;
-						firstName: string;
-						lastName: string;
-						email: string;
-						isFriend: boolean;
-					}) => ({
-						id: item.userId,
-						name: `${item.lastName}${item.firstName}`.trim(),
-						email: item.email,
-						isFriend: item.isFriend,
-						requestStatus: "none",
-					}),
-				);
+				// 데모용: 전체 유저에서 검색
+				const searchData: Friend[] = allDemoUsers.filter(user => 
+					user.name.toLowerCase().includes(term.toLowerCase()) ||
+					user.email.toLowerCase().includes(term.toLowerCase())
+				).map(user => ({
+					...user,
+					requestStatus: "none" as RequestStatus,
+				}));
+				
 				setSearchResults(mapSearchWithStatuses(searchData));
 			} catch {
 				setSearchResults([]);
@@ -199,10 +165,9 @@ export function useFriendsManager() {
 
 	const handleSendFriendRequest = useCallback(
 		async (user: Friend, onSuccess?: (user: Friend) => void) => {
-			// Optimistic update
-			previousFriendsRef.current = friends;
-			previousSearchResultsRef.current = searchResults;
-
+			// 데모용: 친구 요청 시뮬레이션
+			console.log("데모: 친구 요청 전송 -", user.name);
+			
 			const updateToSent = (u: Friend): Friend => ({
 				...u,
 				isFriend: false,
@@ -233,47 +198,30 @@ export function useFriendsManager() {
 				return Array.from(uniqueById.values());
 			});
 
-			try {
-				await friendAPI.sendFriendRequest(user.id);
-				onSuccess?.(user);
-				// refresh to get requestId
-				await refreshFriends();
-			} catch {
-				// revert on failure
-				if (previousFriendsRef.current) setFriends(previousFriendsRef.current);
-				if (previousSearchResultsRef.current)
-					setSearchResults(previousSearchResultsRef.current);
-			}
+			// 데모용: 항상 성공
+			onSuccess?.(user);
 		},
-		[friends, searchResults, refreshFriends],
+		[friends, searchResults],
 	);
 
 	const handleAcceptRequest = useCallback(
 		async (friend: Friend) => {
-			if (!friend.requestId) return;
-			try {
-				await friendAPI.acceptFriendRequest(friend.requestId);
-				setIsRequestModalOpen(false);
-				setSelectedRequest(null);
-				await refreshFriends();
-			} catch {
-				// no-op; modal state remains until next refresh
-			}
+			// 데모용: 친구 요청 수락 시뮬레이션
+			console.log("데모: 친구 요청 수락 -", friend.name);
+			setIsRequestModalOpen(false);
+			setSelectedRequest(null);
+			await refreshFriends();
 		},
 		[refreshFriends],
 	);
 
 	const handleRejectRequest = useCallback(
 		async (friend: Friend) => {
-			if (!friend.requestId) return;
-			try {
-				await friendAPI.rejectFriendRequest(friend.requestId);
-				setIsRequestModalOpen(false);
-				setSelectedRequest(null);
-				await refreshFriends();
-			} catch {
-				// no-op; modal state remains until next refresh
-			}
+			// 데모용: 친구 요청 거절 시뮬레이션
+			console.log("데모: 친구 요청 거절 -", friend.name);
+			setIsRequestModalOpen(false);
+			setSelectedRequest(null);
+			await refreshFriends();
 		},
 		[refreshFriends],
 	);

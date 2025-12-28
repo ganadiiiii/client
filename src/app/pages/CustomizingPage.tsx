@@ -4,7 +4,6 @@ import { customizingQuestions } from "../../data/customizingQuestions";
 import QuestionStep from "../../features/customize/components/QuestionStep";
 import TitleInputStep from "../../features/customize/components/TitleInputStep";
 import LoadingPage from "../../components/LoadingPage";
-import { createCardFromAnswers } from "../../features/customize/api/cardCreation";
 
 const CustomizingPage: React.FC = () => {
 	const navigate = useNavigate();
@@ -50,18 +49,11 @@ const CustomizingPage: React.FC = () => {
 
 		// Question 8에서 "None" 선택 시 바로 결과 페이지로 이동 (currentStep 8 = 실제 질문 7)
 		if (currentStep === 8 && currentAnswers.includes("None")) {
-			// 카드 생성 호출 후 결과 페이지로 이동
+			// 데모용: 로딩 후 바로 결과 페이지로 이동
 			setIsLoading(true);
-			const result = await createCardFromAnswers({ answers, bouquetTitle });
+			await new Promise(resolve => setTimeout(resolve, 2500)); // 2.5초 대기
 			setIsLoading(false);
-			if (result) {
-				navigate("/customizing/result", { 
-					state: { 
-						flowerCard: result.flowerCard, 
-						cardData: result.cardData 
-					} 
-				});
-			}
+			navigate("/customizing/result");
 			return;
 		}
 
@@ -87,21 +79,11 @@ const CustomizingPage: React.FC = () => {
 			}));
 			setCurrentStep(currentStep + 1);
 		} else {
-			// 마지막 질문 완료 시 결과 페이지로 이동하거나 다른 처리
+			// 마지막 질문 완료 시 결과 페이지로 이동
 			setIsLoading(true);
-			const [result] = await Promise.all([
-				createCardFromAnswers({ answers, bouquetTitle }),
-				new Promise(resolve => setTimeout(resolve, 2500)) // 2.5초 대기
-			]);
+			await new Promise(resolve => setTimeout(resolve, 2500)); // 2.5초 대기
 			setIsLoading(false);
-			if (result) {
-				navigate("/customizing/result", { 
-					state: { 
-						flowerCard: result.flowerCard, 
-						cardData: result.cardData 
-					} 
-				});
-			}
+			navigate("/customizing/result");
 		}
 	};
 

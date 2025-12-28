@@ -33,6 +33,8 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 	const backgroundColors = flowerCard.backgroundColors || ["#FFB6C1", "#FFC0CB"];
 	const color1 = backgroundColors[0] || "#FFB6C1";
 	const color2 = backgroundColors[1] || "#FFC0CB";
+	const color3 = backgroundColors[2] || "#FFC0CB";
+	const color4 = backgroundColors[3] || "#FFC0CB";
 
 	// 날짜는 현재 날짜로 표시 (API 응답에 없음)
 	const date = new Date().toLocaleDateString('ko-KR', {
@@ -108,7 +110,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 								left: "50%",
 								top: "50%",
 								transform: "translate(-50%, -50%) translateX(-0.3em) translateY(-5.6em)",
-								backgroundImage: `conic-gradient(from 0deg in oklab, ${color1} 28%, ${color2}33 46%, ${color2} 83%, ${color1} 100%)`,
+								backgroundImage: `conic-gradient(from 0deg in oklab, ${color1}40 28%, ${color2} 46%, ${color3} 83%, ${color4}25 100%)`,
 							}}
 						/>
 						{/* SVG를 그라데이션 영역 왼쪽 위에 위치 */}
@@ -116,9 +118,9 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 							xmlns="http://www.w3.org/2000/svg" 
 							width="160" 
 							height="45" 
-							viewBox="0 0 160 45" 
+							viewBox="0 0 160 46" 
 							fill="none"
-							className="absolute z-20 left-[-0.3em] top-[1em] scale-70 3xl:left-[1.8em] 3xl:top-[1.75em] 3xl:scale-100"
+							className="absolute z-20 left-[-0.8em] top-[0.8em] scale-70 3xl:left-[1.8em] 3xl:top-[1.75em] 3xl:scale-100"
 						>
 							<path d="M122.824 44H0V0H160L122.824 44Z" fill="#ffffff"/>
 						</svg>
@@ -136,11 +138,11 @@ const ResultCard: React.FC<ResultCardProps> = ({ flowerCard }) => {
 					</div>
 
 					{/* 꽃 이미지 */}
-					<div className="absolute left-1/2 top-[13.75em] transform -translate-x-1/2 -translate-y-1/2 z-20">
+					<div className="absolute left-1/2 top-[13em] transform -translate-x-1/2 -translate-y-1/2 z-20">
 						<img
 							src={imageUrl}
 							alt="flower"
-							className="h-[20em] object-contain"
+							className="h-[21em] object-cover"
 						/>
 					</div>
 					{/* 제목 */}

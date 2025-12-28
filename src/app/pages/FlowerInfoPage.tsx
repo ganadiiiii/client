@@ -16,6 +16,7 @@ import iconRestart from "../../assets/generate/result/icon-restart.svg";
 import { cardAPI } from "../../api";
 import type { FlowerCard } from "../../types/FlowerCard";
 import LoadingPage from "../../components/LoadingPage";
+import { demoCards } from "../../demo/const";
 
 const FlowerInfoPage = () => {
 	const { flowerId } = useParams();
@@ -40,21 +41,18 @@ const FlowerInfoPage = () => {
 
 			try {
 				setIsLoading(true);
-				const response = await cardAPI.getCardDetail(flowerId);
+				const response = demoCards.find((card) => card.cardId === Number(flowerId));
 
 				// API 응답이 SharedCardDetail 형태인 경우 처리
-				if (response.card) {
+				if (response) {
 					// SharedCardDetail 응답
 					const flowerCardWithMessage: FlowerCard = {
-						...response.card,
-						message: response.note || undefined,
-						sender: response.fromName || undefined,
-						receiver: response.toName || undefined,
+						...response,
+						message: response.message || undefined,
+						sender: response.sender || undefined,
+						receiver: response.receiver || undefined,
 					};
 					setFlower(flowerCardWithMessage);
-				} else {
-					// 직접 FlowerCard 응답
-					setFlower(response);
 				}
 			} catch (error) {
 				console.error("카드 상세 조회 실패:", error);
@@ -127,7 +125,7 @@ const FlowerInfoPage = () => {
 	// 					">
 	// 						${new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\. /g, '.').replace(/\.$/, '')}
 	// 					</div>
-	
+
 	// 					<!-- 꽃 이미지 -->
 	// 					<div style="
 	// 						position: absolute;
@@ -138,7 +136,7 @@ const FlowerInfoPage = () => {
 	// 					">
 	// 						<img src="${flower.imageUrl}" alt="flower" style="height: 20em; object-fit: contain;" />
 	// 					</div>
-	
+
 	// 					<!-- 제목 -->
 	// 					<div style="
 	// 						position: absolute;
@@ -152,7 +150,7 @@ const FlowerInfoPage = () => {
 	// 					">
 	// 						${flower.title}
 	// 					</div>
-	
+
 	// 					<!-- 메인/서브 꽃 -->
 	// 					<div style="
 	// 						position: absolute;
@@ -172,7 +170,7 @@ const FlowerInfoPage = () => {
 	// 							<span style="font-family: NexonLv1Gothic; font-weight: 400;">${flower.floriography}</span>
 	// 						</div>
 	// 					</div>
-	
+
 	// 					<!-- Size & Price -->
 	// 					<div style="
 	// 						position: absolute;
@@ -296,7 +294,7 @@ const FlowerInfoPage = () => {
 										실물 보내기
 									</button>
 									<button
-										onClick={() => {}}
+										onClick={() => { }}
 										className="block w-full text-center text-base py-5 px-12 hover:bg-gray/20 border-t border-gray/40"
 										style={{ fontFamily: "NexonLv1Gothic" }}
 										role="menuitem"

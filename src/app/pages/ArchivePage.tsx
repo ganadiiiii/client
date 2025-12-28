@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { cardAPI, friendAPI } from "../../api";
 import DeleteConfirmModal from "../../features/archive/components/DeleteConfirmModal";
 import FlowerGrid from "../../features/archive/components/FlowerGrid";
 import FriendsListModal, {
@@ -26,10 +25,8 @@ import lampOffHover from "../../assets/archive/lamp-off-hover.svg";
 import bgDaySvg from "../../assets/archive/bg.svg";
 import bgSunsetSvg from "../../assets/archive/bg-sunset.svg";
 import bgNightSvg from "../../assets/archive/bg-dark.svg";
-import bouquetPinkPng from "../../assets/generate/bouquet-pink.png";
-import flower1Png from "../../assets/generate/flower-1.png";
-import flower2Png from "../../assets/generate/flower-2.png";
 import clickMePng from "../../assets/archive/click-me.png";
+import { demoCards } from "../../demo/const";
 
 interface Friend {
 	id: string;
@@ -45,10 +42,10 @@ const ArchivePage = () => {
 	const [isLampHovered, setIsLampHovered] = useState(false);
 
 	// 카드 데이터 상태
-	const [cards, setCards] = useState<FlowerCard[]>([]);
-	const [isLoading, setIsLoading] = useState(true);
+	const [cards] = useState<FlowerCard[]>(demoCards);
+	const [isLoading] = useState(false);
 	const [currentPage, setCurrentPage] = useState(0);
-	const [totalPages, setTotalPages] = useState(0);
+	const [totalPages] = useState(Math.max(1, Math.ceil(demoCards.length / 15)));
 
 	// 모달 상태 관리
 	const [isFriendsModalOpen, setIsFriendsModalOpen] = useState(false);
@@ -79,12 +76,12 @@ const ArchivePage = () => {
 
 	// Dummy FlowerCard data
 	const dummyCard: FlowerCard = {
-		cardId: 999,
+		cardId: 1,
 		title: "축하의 마음을 전해요",
-		imageUrl: bouquetPinkPng,
+		imageUrl: "/assets/demo/flowers/flower1.png",
 		imageSource: "custom",
 		floriography: "사랑과 감사의 마음을 담아",
-		whoType: "friend",
+		whoType: "myself",
 		whoLabel: "친구",
 		whenType: "birthday",
 		whenLabel: "생일",
@@ -96,91 +93,29 @@ const ArchivePage = () => {
 		wrappingLabel: "리본",
 		price: 35000,
 		designAssetId: 1,
-		backgroundColors: ["#FFB6C1", "#FFC0CB"],
+		backgroundColors: ["#F4B086", "#FBD3B1", "#F0816F", "#F0816F"],
 		mainFlower: {
 			flowerId: 1,
 			koreanName: "장미",
 			englishName: "Rose",
-			imageUrl: flower1Png,
+			imageUrl: "/assets/demo/flowers/flower1.png",
 		},
 		subFlower: {
 			flowerId: 2,
 			koreanName: "카네이션",
 			englishName: "Carnation",
-			imageUrl: flower2Png,
+			imageUrl: "/assets/demo/flowers/flower2.png",
 		},
-		message: "생일 축하해! 항상 행복하고 건강하길 바랄게. 우리 앞으로도 오래오래 좋은 친구로 지내자!",
-		sender: "지은",
-		receiver: "정원",
 	};
 
 	// newFriend API 호출하여 unreadCardCount 확인
 	useEffect(() => {
-		const checkNewCards = async () => {
-			try {
-				const response = await friendAPI.newFriend();
-				setUnreadCardCount(response.unreadCardCount || 0);
-				
-				if (response.unreadCardCount >= 1) {
-					setIsNewCardAlert(true);
-					// 안 읽은 카드 수만큼 최신 카드들 가져오기
-					const latestResponse = await cardAPI.getAllCards(0, response.unreadCardCount);
-					if (latestResponse.items && latestResponse.items.length > 0) {
-						const unreadCardsData = latestResponse.items.map((sharedCard: {
-							card: FlowerCard;
-							note: string;
-							fromName: string;
-							toName: string;
-						}) => ({
-							...sharedCard.card,
-							message: sharedCard.note,
-							sender: sharedCard.fromName,
-							receiver: sharedCard.toName,
-						}));
-						
-						setUnreadCards(unreadCardsData);
-						setLatestCard(unreadCardsData[0]); // 첫 번째 카드를 latestCard로 설정
-					}
-				}
-			} catch (error) {
-				console.error("새 카드 확인 실패:", error);
-			}
-		};
-
-		checkNewCards();
+		// 데모 모드: unread 카드 알림을 위해 demo 데이터만 사용
+		setUnreadCardCount(demoCards.length);
+		setUnreadCards(demoCards);
+		setLatestCard(demoCards[0]);
+		setIsNewCardAlert(demoCards.length > 0);
 	}, []);
-
-	// 카드 데이터 가져오기
-	useEffect(() => {
-		const fetchCards = async () => {
-		try {
-			setIsLoading(true);
-			const response = await cardAPI.getAllCards(currentPage, 15);
-			
-			// SharedCardDetail 배열을 FlowerCard 배열로 변환
-			const flowerCards = response.items?.map((sharedCard: {
-				card: FlowerCard;
-				note: string;
-				fromName: string;
-				toName: string;
-			}) => ({
-				...sharedCard.card,
-				message: sharedCard.note,
-				sender: sharedCard.fromName,
-				receiver: sharedCard.toName,
-			})) || [];
-			
-			setCards(flowerCards);
-			setTotalPages(response.totalPages || 0);
-		} catch (error) {
-			console.error("카드 목록 조회 실패:", error);
-		} finally {
-			setIsLoading(false);
-		}
-		};
-
-		fetchCards();
-	}, [currentPage]);
 
 	// 카드가 없을 때 모달을 보여주고 2초 후 자동으로 닫기
 	useEffect(() => {
@@ -214,18 +149,13 @@ const ArchivePage = () => {
 	// 친구 삭제 확인 핸들러
 	const handleConfirmDelete = async () => {
 		if (friendToDelete) {
-			try {
-				await friendAPI.deleteFriend(friendToDelete.id);
-				setIsDeleteConfirmOpen(false);
-				setSuccessMessage("삭제되었습니다.");
-				setIsSuccessModalOpen(true);
-				setFriendToDelete(null);
+			setIsDeleteConfirmOpen(false);
+			setSuccessMessage("삭제되었습니다.");
+			setIsSuccessModalOpen(true);
+			setFriendToDelete(null);
 
-				// 친구 목록 즉시 새로고침
-				friendsModalRef.current?.refreshFriends();
-			} catch (error) {
-				console.error("친구 삭제 실패:", error);
-			}
+			// 친구 목록 즉시 새로고침 (demo에서는 로컬 상태만 갱신)
+			friendsModalRef.current?.refreshFriends();
 		}
 	};
 
@@ -341,7 +271,7 @@ const ArchivePage = () => {
 				/>
 				{/* 배경 역할을 하는 home 이미지 */}
 				<div className="relative w-full h-[calc(100vh-10em-80px)] 3xl:h-[calc(100vh-8em-102px)]">
-					<img src={{day: homeLight, sunset: homeLight, night: homeDark}[lightState]}
+					<img src={{ day: homeLight, sunset: homeLight, night: homeDark }[lightState]}
 						alt="Home background"
 						className="absolute bottom-0 left-1/2 transform -translate-x-1/2"
 						style={{
@@ -467,70 +397,70 @@ const ArchivePage = () => {
 							onClick={handleCloseCardAnimation}
 						/>
 
-					{/* Card Container with perspective */}
-					<div
-						className="fixed inset-0 z-50 pointer-events-none"
-						style={{ 
-							perspective: "2000px",
-							perspectiveOrigin: "center center",
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center",
-						}}
-					>
-						{/* 카드 카운터 표시 */}
-						{unreadCardCount > 1 && (
-							<div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-60">
-								<div className="bg-black/50 text-white px-4 py-2 rounded-full text-sm font-medium">
-									{currentUnreadIndex + 1} / {unreadCardCount}
-								</div>
-							</div>
-						)}
-						<motion.div
-							initial={{
-								scale: 0.3,
-								rotateY: 0,
-								rotateX: 40,
-								x: "100vw",
-								y: "100vh",
-							}}
-							animate={{
-								scale: 1,
-								rotateY: 720,
-								rotateX: 0,
-								x: 0,
-								y: 0,
-								transition: {
-									duration: 1.5,
-									ease: [0.33, 1, 0.68, 1],
-								},
-							}}
-							exit={{
-								scale: 0.1,
-								rotateY: 360,
-								rotateX: 25,
-								x: "-15vw",
-								y: "-10vh",
-								opacity: 0.05,
-								transition: {
-									duration: 1,
-									ease: [0.33, 1, 0.68, 1],
-								},
-							}}
+						{/* Card Container with perspective */}
+						<div
+							className="fixed inset-0 z-50 pointer-events-none"
 							style={{
-								transformStyle: "preserve-3d" as React.CSSProperties["transformStyle"],
+								perspective: "2000px",
+								perspectiveOrigin: "center center",
+								display: "flex",
+								alignItems: "center",
+								justifyContent: "center",
 							}}
-							className="pointer-events-auto"
 						>
-							<AnimatedFlowerCard 
-								flowerCard={latestCard || dummyCard} 
-								onClick={handleNextUnreadCard}
-							/>
-						</motion.div>
-					</div>
-				</>
-			)}
-		</AnimatePresence>
+							{/* 카드 카운터 표시 */}
+							{unreadCardCount > 1 && (
+								<div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-60">
+									<div className="bg-black/50 text-white px-4 py-2 rounded-full text-sm font-medium">
+										{currentUnreadIndex + 1} / {unreadCardCount}
+									</div>
+								</div>
+							)}
+							<motion.div
+								initial={{
+									scale: 0.3,
+									rotateY: 0,
+									rotateX: 40,
+									x: "100vw",
+									y: "100vh",
+								}}
+								animate={{
+									scale: 1,
+									rotateY: 720,
+									rotateX: 0,
+									x: 0,
+									y: 0,
+									transition: {
+										duration: 1.5,
+										ease: [0.33, 1, 0.68, 1],
+									},
+								}}
+								exit={{
+									scale: 0.1,
+									rotateY: 360,
+									rotateX: 25,
+									x: "-15vw",
+									y: "-10vh",
+									opacity: 0.05,
+									transition: {
+										duration: 1,
+										ease: [0.33, 1, 0.68, 1],
+									},
+								}}
+								style={{
+									transformStyle: "preserve-3d" as React.CSSProperties["transformStyle"],
+								}}
+								className="pointer-events-auto"
+							>
+								<AnimatedFlowerCard
+									flowerCard={latestCard || dummyCard}
+									onClick={handleNextUnreadCard}
+								/>
+							</motion.div>
+						</div>
+					</>
+				)}
+			</AnimatePresence>
 
 			{/* 모달들 */}
 			<FriendsListModal

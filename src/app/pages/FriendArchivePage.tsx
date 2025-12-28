@@ -161,7 +161,7 @@ const FriendArchivePage = () => {
 						)}
 					</div>
 					{/* --- 그리드 및 네비게이션을 포함하는 컨테이너 --- */}
-					<div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-3em]">
+					<div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-3em] cursor-not-allowed">
 						{!isLoading && (!cards || cards.length === 0) ? (
 							<div className="text-center text-gray text-lg">
 								<p style={{ fontFamily: "NexonLv1Gothic" }}>

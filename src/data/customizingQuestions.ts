@@ -15,7 +15,7 @@ export const customizingQuestions: Question[] = [
 	{
 		id: 2,
 		title: "어떤 순간을 함께 나누고 싶으신가요?",
-		options: ["추억", "사랑", "생일", "졸업", "추모", "개업"],
+		options: ["연회", "고백", "생일", "기념일", "추모", "개업"],
 		isMultipleChoice: false,
 	},
 	{

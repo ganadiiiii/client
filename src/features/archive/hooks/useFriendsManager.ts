@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { demoFriends, demoUsers, allDemoUsers } from "../../../demo/user";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { demoFriends, allDemoUsers } from "../../../demo/user";
 
 export type RequestStatus = "sent" | "received" | "none";
 
@@ -50,8 +50,6 @@ export function useFriendsManager() {
 	const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
 	const [selectedRequest, setSelectedRequest] = useState<Friend | null>(null);
 
-	const previousFriendsRef = useRef<Friend[] | null>(null);
-	const previousSearchResultsRef = useRef<Friend[] | null>(null);
 
 	const getCurrentUser = useCallback(async () => {
 		// 데모용 현재 유저
@@ -73,16 +71,16 @@ export function useFriendsManager() {
 		}));
 	}, []);
 
-	const getFriendRequests = useCallback(async (user: User | null) => {
+	const getFriendRequests = useCallback(async () => {
 		// 데모용: 빈 요청 목록 반환
 		return { requestUsers: [] as Friend[], requests: [] as FriendRequest[] };
 	}, []);
 
 	const refreshFriends = useCallback(async () => {
-		const user = await getCurrentUser();
+		await getCurrentUser();
 		const [friendList, { requestUsers, requests }] = await Promise.all([
 			getFriends(),
-			getFriendRequests(user),
+			getFriendRequests(),
 		]);
 
 
@@ -93,7 +91,12 @@ export function useFriendsManager() {
 		requestUsers.forEach((reqUser) => {
 			if (!idToFriend.has(reqUser.id)) {
 				// 친구가 아닌 경우, 요청 상태와 함께 추가
-				idToFriend.set(reqUser.id, reqUser);
+				if (reqUser.requestStatus) {
+					idToFriend.set(reqUser.id, {
+						...reqUser,
+						requestStatus: reqUser.requestStatus
+					});
+				}
 			} else {
 				// 이미 친구인 경우, PENDING 요청 상태만 업데이트
 				const existingFriend = idToFriend.get(reqUser.id)!;
@@ -201,7 +204,7 @@ export function useFriendsManager() {
 			// 데모용: 항상 성공
 			onSuccess?.(user);
 		},
-		[friends, searchResults],
+		[],
 	);
 
 	const handleAcceptRequest = useCallback(
